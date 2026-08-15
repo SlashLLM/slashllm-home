@@ -1,0 +1,39 @@
+# robots.txt for slashllm.com
+# Allow all standard search engines full access
+User-agent: *
+Allow: /
+
+# Keep duplicate/in-progress landing page drafts out of the index
+Disallow: /Landing%20Page.html
+Disallow: /Landing%20Page%20v2.html
+Disallow: /Landing%20Page%20v3.html
+Disallow: /uploads/slashllm_carousel_full_series.html
+Disallow: /screenshots/
+
+# AI / Answer-Engine crawlers — explicitly allowed for AEO visibility.
+# (Remove or set Disallow: / for any you do NOT want training on your content.)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://slashllm.com/sitemap.xml

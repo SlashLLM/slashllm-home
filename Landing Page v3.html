@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SlashLLM — From prompt to production</title>
+  <meta name="description" content="SlashLLM is the AI agency that goes from prompt to production. We build AI products, agents, and infrastructure for startups and enterprises.">
+  <meta property="og:title" content="SlashLLM — From prompt to production">
+  <meta property="og:description" content="We build AI products, agents, and infrastructure that ship to production — not slide decks.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind = { config: { theme: { extend: { fontFamily: { sans: ['Inter','system-ui','sans-serif'], display: ['"Space Grotesk"','sans-serif'], mono: ['"JetBrains Mono"','monospace'] } } } } };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: #0c0a21; color: #fafafa; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: inherit; text-decoration: none; }
+
+    :root {
+      --bg: #0c0a21;
+      --surface: #1a1740;
+      --card: #1e1b4b;
+      --border: #33306e;
+      --border-subtle: #2c2860;
+      --text: #fafafa;
+      --muted: #7265a8;
+      --accent: #a855f7;
+      --accent2: #7c3aed;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #a855f7 0%, #be38de 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .cursor-blink { animation: blink 1s step-end infinite; }
+
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .logo-marquee { display:flex; animation: marquee 28s linear infinite; }
+    .logo-marquee:hover { animation-play-state: paused; }
+
+    .svc-card { transition: background 0.18s, transform 0.18s; cursor: pointer; }
+    .svc-card:hover { background: #241f58 !important; transform: translateY(-2px); }
+
+    .ind-card { transition: border-color 0.18s, background 0.18s; cursor: pointer; }
+    .ind-card:hover { border-color: rgba(168,85,247,0.4) !important; background: rgba(168,85,247,0.05) !important; }
+
+
+
+    .ghost-btn { transition: border-color 0.18s, color 0.18s; }
+    .ghost-btn:hover { border-color: #7265a8 !important; color: #fafafa !important; }
+
+    .cta-link { transition: opacity 0.15s; }
+    .cta-link:hover { opacity: 0.82 !important; }
+
+    .text-link { transition: color 0.15s; }
+    .text-link:hover { color: #bbb !important; }
+
+    .process-num { transition: border-color 0.18s; }
+    .process-step:hover .process-num { border-color: var(--accent) !important; }
+
+
+    /* ── Scroll reveal ── */
+    .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.in { opacity:1; transform:none; }
+    .reveal[data-d="1"] { transition-delay:0.1s; }
+    .reveal[data-d="2"] { transition-delay:0.2s; }
+    .reveal[data-d="3"] { transition-delay:0.3s; }
+
+    /* ── Status badge pulse ── */
+    @keyframes badge-pulse { 0%,100%{box-shadow:0 0 0 2px rgba(74,222,128,0.3)} 50%{box-shadow:0 0 0 7px rgba(74,222,128,0.07)} }
+    .status-dot { animation: badge-pulse 2s ease infinite; }
+
+    /* ── Service index rows ── */
+    .svc-row { display:flex; align-items:center; gap:32px; padding:22px 0; border-bottom:1px solid #2c2860; text-decoration:none; transition:background 0.18s, padding 0.18s; position:relative; cursor:pointer; }
+    .svc-row:hover { background:rgba(168,85,247,0.04); padding-left:12px; padding-right:12px; margin:0 -12px; border-radius:8px; border-bottom-color:rgba(168,85,247,0.3); }
+    .svc-row-num { font-family:"JetBrains Mono",monospace; font-size:11px; color:#3d3875; letter-spacing:0.1em; width:28px; flex-shrink:0; transition:color 0.18s; }
+    .svc-row:hover .svc-row-num { color:#a855f7; }
+    .svc-row-title { font-family:"Space Grotesk",sans-serif; font-size:clamp(18px,1.8vw,26px); font-weight:600; color:#9d93c8; letter-spacing:-0.02em; flex:1; transition:color 0.18s; }
+    .svc-row:hover .svc-row-title { color:#fafafa; }
+    .svc-row-desc { font-size:13.5px; color:#6258a0; max-width:300px; line-height:1.6; opacity:0; transition:opacity 0.22s; flex-shrink:0; }
+    .svc-row:hover .svc-row-desc { opacity:1; }
+    .svc-row-arrow { width:38px; height:38px; border-radius:50%; border:1px solid #2c2860; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all 0.18s; }
+    .svc-row:hover .svc-row-arrow { background:#a855f7; border-color:#a855f7; }
+    .svc-row-arrow svg { transition:transform 0.18s; }
+    .svc-row:hover .svc-row-arrow svg { transform:rotate(-45deg); }
+    @media(max-width:768px){ .svc-row-desc{display:none;} }
+
+    /* ── Light process section ── */
+    .light-proc .process-num { border-color:#E5E3EB !important; background:#FAFAFA !important; }
+    .light-proc .process-step:hover .process-num { border-color:#7C3AED !important; }
+
+    @media (max-width: 900px) {
+      section[style*="grid-template-columns: 52%"] { grid-template-columns: 1fr !important; }
+      section[style*="grid-template-columns: 52%"] > div:last-child { height: 320px !important; }
+      .hero-grid { grid-template-columns: 1fr !important; }
+      .terminal-col { display: none !important; }
+      .svc-grid { grid-template-columns: repeat(2,1fr) !important; }
+      .why-grid { grid-template-columns: 1fr !important; }
+      .ind-grid { grid-template-columns: repeat(2,1fr) !important; }
+      .case-grid { grid-template-columns: 1fr !important; }
+      .proc-grid { grid-template-columns: repeat(2,1fr) !important; row-gap: 48px !important; }
+      .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 40px !important; }
+    }
+    @media (max-width: 540px) {
+      .svc-grid { grid-template-columns: 1fr !important; }
+      .ind-grid { grid-template-columns: 1fr !important; }
+      .proc-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- ═══ SCRIPT 1: Icons · Terminal · Nav · Footer ═══ -->
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const SvcIcon = ({ name }) => {
+      const d = {
+        roadmap:  <><path d="M3 17l4-10 5 8 4-5 5 7"/><circle cx="19" cy="5" r="2.5" fill="#a855f7" stroke="none"/></>,
+        product:  <><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></>,
+        agents:   <><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a6 6 0 0112 0v2"/><path d="M12 11v3M10 14h4"/></>,
+        features: <path d="M12 2l3 6.5L22 9l-5 5 1.2 6.5L12 18l-6.2 2.5L7 14 2 9l7-.5z"/>,
+        software: <><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></>,
+        devops:   <><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></>,
+        cost:     <><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></>,
+        branding: <><circle cx="12" cy="12" r="10"/><path d="M8.5 14s1.5 2 3.5 2 3.5-2 3.5-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></>,
+        content:  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10"/>,
+      };
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          {d[name]}
+        </svg>
+      );
+    };
+
+    
+    const LogoMark = ({ size=26 }) => (
+      <svg width={size} height={size} viewBox="0 0 674 662" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink:0 }}>
+        <path d="M0 0 C30.03 0 60.06 0 91 0 C92.62 1.62 92.13 3.39 92.13 5.63 C92.13 6.64 92.13 7.64 92.13 8.68 C92.13 9.81 92.13 10.93 92.13 12.08 C92.13 13.86 92.13 13.86 92.13 15.67 C92.14 18.98 92.13 22.29 92.13 25.59 C92.13 29.17 92.13 32.74 92.13 36.32 C92.14 43.38 92.14 50.44 92.14 57.51 C92.13 63.32 92.13 69.14 92.13 74.96 C92.13 76.21 92.13 76.21 92.13 77.48 C92.14 79.18 92.14 80.87 92.14 82.57 C92.14 99.62 92.14 116.66 92.13 133.71 C92.13 145.79 92.12 157.87 92.12 169.95 C92.11 262.25 92.01 354.55 91 517 C91.68 516.99 92.36 516.99 93.06 516.98 C117.25 516.8 141.44 516.64 165.63 516.5 C166.61 516.49 167.6 516.49 168.62 516.48 C261.56 515.92 354.5 515.91 453.06 515.94 C455.88 515.94 458.71 515.94 461.53 515.94 C495.07 515.95 528.61 515.96 562.15 515.97 C562.87 515.97 563.59 515.98 564.33 515.98 C578.55 515.98 592.78 515.99 607 516 C607.33 546.36 607.66 576.72 608 608 C407.36 608 206.72 608 0 608 C0 407.36 0 206.72 0 0 Z" fill="#5297F0" transform="translate(34,25)"/>
+        <path d="M0 0 C30.03 0.33 60.06 0.66 91 1 C91.33 120.79 91.66 240.58 92 364 C174.8 363.96 174.8 363.96 257.6 363.91 C268.22 363.91 278.84 363.9 289.46 363.9 C290.15 363.9 290.83 363.9 291.54 363.9 C346.03 363.9 400.51 364.27 455 365 C455 367.07 455.01 369.14 455.01 371.21 C455.01 373.06 455.01 374.91 455.02 376.76 C455.02 381.88 455.03 387.01 455.04 392.13 C455.05 401.8 455.06 411.47 455.08 421.14 C455.09 424.93 455.09 428.73 455.1 432.53 C455.1 434.4 455.1 436.27 455.11 438.14 C455.11 440.97 455.11 443.8 455.11 446.62 C455.12 447.88 455.12 447.88 455.12 449.17 C455.11 454.89 455.11 454.89 454 456 C451.85 456.1 449.69 456.13 447.54 456.13 C446.51 456.13 446.51 456.13 445.46 456.13 C443.13 456.13 440.81 456.13 438.48 456.13 C436.8 456.13 435.13 456.13 433.45 456.13 C428.82 456.14 424.2 456.13 419.57 456.13 C414.58 456.13 409.6 456.13 404.62 456.13 C394.83 456.14 385.05 456.14 375.27 456.14 C367.29 456.13 359.32 456.13 351.35 456.13 C350.22 456.13 349.08 456.13 347.91 456.13 C345.61 456.13 343.3 456.13 341 456.14 C319.34 456.14 297.68 456.13 276.02 456.13 C257.51 456.13 239 456.13 220.49 456.13 C198.97 456.14 177.45 456.14 155.93 456.13 C153.62 456.13 151.31 456.13 149 456.13 C147.87 456.13 146.73 456.13 145.56 456.13 C137.64 456.13 129.71 456.13 121.79 456.14 C112.08 456.14 102.36 456.14 92.65 456.13 C87.71 456.13 82.77 456.13 77.83 456.13 C51.87 456.15 25.95 455.75 0 455 C-0.8 404.16 -1.15 353.34 -1.14 302.5 C-1.13 295.88 -1.13 289.27 -1.13 282.65 C-1.13 281.69 -1.13 280.72 -1.13 279.73 C-1.13 277.78 -1.13 275.82 -1.14 273.86 C-1.14 255.81 -1.13 237.75 -1.13 219.7 C-1.12 204.29 -1.13 188.88 -1.13 173.47 C-1.14 155.38 -1.14 137.28 -1.13 119.19 C-1.13 117.26 -1.13 115.33 -1.13 113.39 C-1.13 112.44 -1.13 111.49 -1.13 110.52 C-1.13 103.9 -1.13 97.28 -1.14 90.66 C-1.14 82.61 -1.14 74.57 -1.13 66.52 C-1.13 62.43 -1.13 58.34 -1.13 54.26 C-1.14 50.5 -1.13 46.74 -1.13 42.98 C-1.13 41.02 -1.13 39.06 -1.13 37.11 C-1.11 24.7 -0.5 12.43 0 0 Z" fill="#836CE8" transform="translate(186,25)"/>
+        <path d="M0 0 C0.33 0 0.66 0 1 0 C1 22.11 1 44.22 1 67 C13.22 67.9 25.33 68.65 37.56 68.94 C38.46 68.96 39.35 68.98 40.27 69 C61.29 69.42 79.49 69.32 95.69 54.66 C103.68 46.72 110.73 37.86 116.92 28.47 C117.28 27.99 117.63 27.5 118 27 C118.33 27 118.66 27 119 27 C119 40.2 119 53.4 119 67 C129.89 67 140.78 67 152 67 C152 67.33 152 67.66 152 68 C141.11 68 130.22 68 119 68 C119 87.8 119 107.6 119 128 C129.89 128 140.78 128 152 128 C152 128.33 152 128.66 152 129 C141.11 129 130.22 129 119 129 C119 158.7 119 188.4 119 219 C129.89 219 140.78 219 152 219 C152 219.33 152 219.66 152 220 C141.11 220 130.22 220 119 220 C119 255.97 119 291.94 119 329 C18.68 329 -81.64 329 -185 329 C-185 154.57 -185 154.57 -184.54 97.17 C-184.48 89.82 -184.43 82.48 -184.37 75.13 C-184.26 58.76 -184.13 42.38 -184 26 C-182.9 26.94 -181.79 27.88 -180.69 28.81 C-179.77 29.6 -179.77 29.6 -178.83 30.4 C-176.05 32.83 -173.45 35.43 -170.85 38.05 C-170.36 38.54 -169.88 39.03 -169.38 39.53 C-167.6 41.31 -165.83 43.09 -164.06 44.88 C-160.08 48.88 -156.1 52.88 -152 57 C-151.67 44.46 -151.34 31.92 -151 19 C-150.67 19 -150.34 19 -150 19 C-150.18 20.03 -150.37 21.05 -150.56 22.11 C-152.68 35.32 -154.5 51.12 -147.16 62.97 C-136.72 76.84 -122.87 88.46 -109.55 99.48 C-109.04 99.98 -108.53 100.48 -108 101 C-108 101.66 -108 102.32 -108 103 C-106.02 103.99 -106.02 103.99 -104 105 C-104 105.66 -104 106.32 -104 107 C-102.02 107.99 -102.02 107.99 -100 109 C-100 109.66 -100 110.32 -100 111 C-98.52 111.5 -98.52 111.5 -97 112 C-95.81 113.42 -94.62 114.85 -93.47 116.31 C-91.35 118.75 -88.89 120.7 -86.36 122.7 C-85.91 123.13 -85.46 123.56 -85 124 C-85 124.66 -85 125.32 -85 126 C-83.02 126.99 -83.02 126.99 -81 128 C-81 128.66 -81 129.32 -81 130 C-79.02 130.99 -79.02 130.99 -77 132 C-77 132.66 -77 133.32 -77 134 C-76.01 134.33 -75.02 134.66 -74 135 C-72.81 136.42 -71.62 137.85 -70.47 139.31 C-68.35 141.75 -65.89 143.7 -63.36 145.7 C-62.91 146.13 -62.46 146.56 -62 147 C-62 147.66 -62 148.32 -62 149 C-60.02 149.99 -60.02 149.99 -58 151 C-58 151.66 -58 152.32 -58 153 C-56.68 153.66 -55.36 154.32 -54 155 C-54 155.66 -54 156.32 -54 157 C-53.01 157.33 -52.02 157.66 -51 158 C-49.31 159.98 -47.65 161.98 -46 164 C-45.01 164.66 -44.02 165.32 -43 166 C-43 166.66 -43 167.32 -43 168 C-41.68 168.66 -40.36 169.32 -39 170 C-39 170.66 -39 171.32 -39 172 C-37.68 172.66 -36.36 173.32 -35 174 C-35 174.66 -35 175.32 -35 176 C-30.5 175.51 -28.55 174.04 -25.39 170.86 C-24.51 169.99 -23.63 169.11 -22.73 168.2 C-21.78 167.24 -20.83 166.28 -19.89 165.31 C-18.91 164.33 -17.93 163.35 -16.95 162.36 C-14.9 160.31 -12.86 158.25 -10.82 156.18 C-8.21 153.53 -5.58 150.88 -2.95 148.24 C-0.45 145.73 2.05 143.21 4.55 140.69 C5.03 140.2 5.51 139.72 6 139.22 C7.35 137.86 8.7 136.5 10.04 135.14 C10.81 134.36 11.57 133.58 12.36 132.78 C14.11 131.28 14.11 131.28 14 130 C-3.16 129.67 -20.32 129.34 -38 129 C-38 128.67 -38 128.34 -38 128 C-37.43 128.11 -36.85 128.23 -36.26 128.35 C-17.96 131.77 5.6 135.34 22.13 124.46 C32.46 117.01 41.34 107.78 50 98.5 C50.63 97.82 51.27 97.14 51.92 96.44 C65.87 83.65 65.87 83.65 75 69 C50.25 68.67 25.5 68.34 0 68 C0 45.56 0 23.12 0 0 Z" fill="#BE38DE" transform="translate(522,0)"/>
+        <path d="M0 0 C0.33 0 0.66 0 1 0 C1 35.97 1 71.94 1 109 C0.67 109 0.34 109 0 109 C0 73.03 0 37.06 0 0 Z" fill="#6BA8CC" transform="translate(462,0)"/>
+      </svg>
+    );
+
+    const TerminalWindow = () => {
+      const [step, setStep] = useState(0);
+      const lines = [
+        { t:'cmd',     s:'$ slashllm audit --stack react,postgres,aws' },
+        { t:'info',    s:'  scanning 847 files across 12 modules...' },
+        { t:'success', s:'  ✓ 4 high-impact AI vectors identified' },
+        { t:'blank',   s:'' },
+        { t:'cmd',     s:'$ slashllm scaffold --model gpt-4o --rag pgvector' },
+        { t:'success', s:'  ✓ AI service layer configured' },
+        { t:'success', s:'  ✓ Embeddings pipeline ready' },
+        { t:'success', s:'  ✓ API routes scaffolded' },
+        { t:'blank',   s:'' },
+        { t:'cmd',     s:'$ slashllm deploy --env production' },
+        { t:'success', s:'  ✓ Build complete  23.4s' },
+        { t:'success', s:'  ✓ Deployed → ai.yourapp.com' },
+      ];
+      useEffect(() => {
+        if (step < lines.length) {
+          const delay = lines[step].t === 'cmd' ? 900 : lines[step].t === 'blank' ? 180 : 380;
+          const t = setTimeout(() => setStep(s => s + 1), delay);
+          return () => clearTimeout(t);
+        }
+      }, [step]);
+
+      const col = { cmd:'#e2e8f0', success:'#4ade80', info:'#5c5490', blank:'transparent' };
+      return (
+        <div style={{ fontFamily:'"JetBrains Mono",monospace', background:'rgba(14,11,33,0.96)', border:'1px solid #2c2860', borderRadius:14, overflow:'hidden', boxShadow:'0 32px 72px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.03)' }}>
+          <div style={{ padding:'10px 16px', borderBottom:'1px solid #2c2860', background:'#1a1740', display:'flex', alignItems:'center', gap:6 }}>
+            {['#FF5F57','#FFBD2E','#28C840'].map((c,i)=><div key={i} style={{ width:10, height:10, borderRadius:'50%', background:c }}></div>)}
+            <span style={{ marginLeft:'auto', fontSize:11, color:'#3d3875', letterSpacing:'0.04em' }}>slashllm — zsh</span>
+          </div>
+          <div style={{ padding:'18px 20px', minHeight:268, fontSize:12.5, lineHeight:'21px' }}>
+            {lines.slice(0, step).map((l,i) => (
+              <div key={i} style={{ color: col[l.t] || '#888', marginBottom: l.t === 'blank' ? 6 : 1 }}>{l.s}</div>
+            ))}
+            {step < lines.length && (
+              <span className="cursor-blink" style={{ display:'inline-block', width:7, height:13, background:'#a855f7', verticalAlign:'middle', marginTop:2 }}></span>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    const Nav = () => {
+      const [resOpen, setResOpen] = React.useState(false);
+      const [scrolled, setScrolled] = React.useState(false);
+      React.useEffect(() => {
+        const fn = () => setScrolled(window.scrollY > 40);
+        window.addEventListener('scroll', fn);
+        return () => window.removeEventListener('scroll', fn);
+      }, []);
+      const lk = { color:'rgba(255,255,255,0.48)', fontSize:13.5, fontWeight:400, padding:'5px 12px', borderRadius:6, textDecoration:'none', transition:'all 0.15s', background:'transparent', display:'inline-flex', alignItems:'center', gap:3, border:'none', cursor:'pointer', fontFamily:'Inter,sans-serif' };
+      const hi = e => { e.currentTarget.style.color='#fafafa'; e.currentTarget.style.background='rgba(255,255,255,0.07)'; };
+      const ho = e => { e.currentTarget.style.color='rgba(255,255,255,0.48)'; e.currentTarget.style.background='transparent'; };
+      return (
+        <div style={{ position:'fixed', top:16, left:0, right:0, zIndex:1000, display:'flex', justifyContent:'center', pointerEvents:'none' }}>
+          <nav style={{ pointerEvents:'auto', width:'calc(100% - 48px)', maxWidth:920, height:52, background: scrolled ? 'rgba(12,10,33,0.90)' : 'rgba(12,10,33,0.55)', backdropFilter:'blur(22px)', WebkitBackdropFilter:'blur(22px)', border: scrolled ? '1px solid rgba(168,85,247,0.24)' : '1px solid rgba(168,85,247,0.10)', borderRadius:100, boxShadow: scrolled ? '0 8px 48px rgba(0,0,0,0.52), 0 0 0 1px rgba(255,255,255,0.04)' : 'none', transition:'all 0.35s cubic-bezier(0.16,1,0.3,1)', display:'flex', alignItems:'center', padding:'0 18px', gap:4 }}>
+            <a href="/" style={{ display:'flex', alignItems:'center', gap:7, textDecoration:'none', flexShrink:0, marginRight:8 }}>
+              <LogoMark size={22} />
+              <span style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:700, fontSize:15, letterSpacing:'-0.03em', color:'#fafafa' }}>SlashLLM</span>
+            </a>
+            <div style={{ flex:1, display:'flex', alignItems:'center', justifyContent:'center', gap:2 }}>
+              {['Services','Industries'].map(n => (
+                <a key={n} href={"/" + n.toLowerCase()} style={lk} onMouseEnter={hi} onMouseLeave={ho}>{n}</a>
+              ))}
+              <div style={{ position:'relative' }} onMouseEnter={() => setResOpen(true)} onMouseLeave={() => setResOpen(false)}>
+                <button style={lk} onMouseEnter={hi} onMouseLeave={ho}>
+                  Resources
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                {resOpen && (
+                  <div style={{ position:'absolute', top:'calc(100% + 12px)', left:'50%', transform:'translateX(-50%)', background:'rgba(10,8,28,0.96)', border:'1px solid rgba(168,85,247,0.18)', borderRadius:14, padding:6, minWidth:176, boxShadow:'0 24px 56px rgba(0,0,0,0.5)', backdropFilter:'blur(24px)', zIndex:10 }}>
+                    {[['Case studies','/resources/case-studies'],['Blog','/resources/blog']].map(([label,href])=>(
+                      <a key={href} href={href} style={{ display:'block', padding:'9px 14px', color:'rgba(255,255,255,0.48)', fontSize:13, borderRadius:8, transition:'all 0.14s', textDecoration:'none' }}
+                         onMouseEnter={e=>{e.currentTarget.style.background='rgba(255,255,255,0.07)';e.currentTarget.style.color='#fafafa'}}
+                         onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.color='rgba(255,255,255,0.48)'}}>
+                        {label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <a href="About.html" style={lk} onMouseEnter={hi} onMouseLeave={ho}>About</a>
+            </div>
+            <a href="/contact" style={{ background:'#fafafa', color:'#0c0a21', padding:'7px 18px', borderRadius:100, fontSize:12.5, fontWeight:600, letterSpacing:'-0.01em', whiteSpace:'nowrap', flexShrink:0, textDecoration:'none', transition:'all 0.2s', boxShadow:'none' }}
+               onMouseEnter={e=>{e.currentTarget.style.boxShadow='0 0 0 2px rgba(168,85,247,0.45), 0 8px 28px rgba(168,85,247,0.22)';e.currentTarget.style.opacity='0.9'}}
+               onMouseLeave={e=>{e.currentTarget.style.boxShadow='none';e.currentTarget.style.opacity='1'}}>
+              Let's talk
+            </a>
+          </nav>
+        </div>
+      );
+    };
+
+    const Footer = () => {
+      const cols = [
+        { label:'Services', links:['AI roadmap & consulting','AI product development','AI agents','AI product features','Software development','DevOps & cloud','AI cost observability','Branding & design','Autopilot content engine'], href:'/services' },
+        { label:'Industries', links:['SaaS & technology','Fintech & financial services','Healthcare & life sciences','HR tech'], href:'/industries' },
+        { label:'Resources', links:['Case studies','Blog','Contact us'], href:'#' },
+        { label:'Company', links:['About','Careers','Privacy policy','Terms of service'], href:'#' },
+      ];
+      return (
+        <footer style={{ borderTop:'1px solid #2c2860', background:'#0c0a21', paddingTop:64, paddingBottom:40 }}>
+          <div style={{ maxWidth:1280, margin:'0 auto', padding:'0 28px' }}>
+            <div className="footer-grid" style={{ display:'grid', gridTemplateColumns:'180px 1fr 1fr 1fr 1fr', gap:52, marginBottom:64 }}>
+              <div>
+                <a href="/" style={{ display:'flex', alignItems:'center', gap:8, textDecoration:'none', marginBottom:14 }}>
+                  <LogoMark size={26} />
+                  <span style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:700, fontSize:16, letterSpacing:'-0.03em', color:'#fafafa' }}>SlashLLM</span>
+                </a>
+                <p style={{ color:'#3d3875', fontSize:13, lineHeight:1.6, marginBottom:20 }}>From prompt to production.</p>
+                <div style={{ display:'flex', gap:14 }}>
+                  {[
+                    { label:'LinkedIn', path:'M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 4m-2 0a2 2 0 104 0 2 2 0 10-4 0' },
+                    { label:'X', path:'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z' },
+                    { label:'GitHub', path:'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22' },
+                  ].map(({ label, path }) => (
+                    <a key={label} href="#" style={{ color:'#4d468a', transition:'color 0.15s' }}
+                       onMouseEnter={e=>e.currentTarget.style.color='#c084fc'}
+                       onMouseLeave={e=>e.currentTarget.style.color='#4d468a'}>
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill={label==='X'?'currentColor':'none'} stroke={label==='X'?'none':'currentColor'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d={path}/>
+                      </svg>
+                    </a>
+                  ))}
+                </div>
+              </div>
+              {cols.map(({ label, links, href }) => (
+                <div key={label}>
+                  <p style={{ fontSize:11, fontWeight:600, color:'#5a5295', letterSpacing:'0.12em', textTransform:'uppercase', fontFamily:'"JetBrains Mono",monospace', marginBottom:18 }}>{label}</p>
+                  <div style={{ display:'flex', flexDirection:'column', gap:11 }}>
+                    {links.map(item => (
+                      <a key={item} href={href} className="text-link" style={{ color:'#6258a0', fontSize:13.5 }}>{item}</a>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ borderTop:'1px solid #2c2860', paddingTop:24 }}>
+              <p style={{ color:'#3d3875', fontSize:13 }}>© 2026 SlashLLM. All rights reserved.</p>
+            </div>
+          </div>
+        </footer>
+      );
+    };
+
+    Object.assign(window, { SvcIcon, TerminalWindow, Nav, Footer });
+  </script>
+
+  <!-- ═══ SCRIPT 2: Hero · LogoBar · Services · Why ═══ -->
+  <script type="text/babel">
+    const { useState: useS2, useEffect: useE2, useRef: useR2 } = React;
+
+    const NeuralCanvas = () => {
+      const canvasRef = useR2(null);
+      useE2(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let W, H, frame;
+        const resize = () => {
+          W = canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+          H = canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+          canvas.style.width = canvas.offsetWidth + 'px';
+          canvas.style.height = canvas.offsetHeight + 'px';
+          ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        };
+        resize();
+        window.addEventListener('resize', resize);
+
+        const N = 62;
+        const nodes = Array.from({length: N}, () => ({
+          x: Math.random() * (W / window.devicePixelRatio),
+          y: Math.random() * (H / window.devicePixelRatio),
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          r: Math.random() * 2 + 1,
+          pulse: Math.random() * Math.PI * 2,
+          hue: Math.random() > 0.6 ? 280 : Math.random() > 0.5 ? 300 : 260,
+        }));
+
+        const draw = () => {
+          const pw = W / window.devicePixelRatio;
+          const ph = H / window.devicePixelRatio;
+          ctx.clearRect(0, 0, pw, ph);
+
+          /* big radial glow centre-right */
+          const cx = pw * 0.54, cy = ph * 0.46;
+          const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, pw * 0.52);
+          g.addColorStop(0,   'rgba(168,85,247,0.22)');
+          g.addColorStop(0.35,'rgba(190,56,222,0.10)');
+          g.addColorStop(0.7, 'rgba(82,151,240,0.04)');
+          g.addColorStop(1,   'transparent');
+          ctx.fillStyle = g;
+          ctx.fillRect(0, 0, pw, ph);
+
+          /* secondary magenta bloom */
+          const g2 = ctx.createRadialGradient(pw*0.75, ph*0.75, 0, pw*0.75, ph*0.75, pw*0.32);
+          g2.addColorStop(0, 'rgba(190,56,222,0.12)');
+          g2.addColorStop(1, 'transparent');
+          ctx.fillStyle = g2;
+          ctx.fillRect(0, 0, pw, ph);
+
+          /* blue bloom top right */
+          const g3 = ctx.createRadialGradient(pw*0.9, ph*0.12, 0, pw*0.9, ph*0.12, pw*0.28);
+          g3.addColorStop(0, 'rgba(82,151,240,0.09)');
+          g3.addColorStop(1, 'transparent');
+          ctx.fillStyle = g3;
+          ctx.fillRect(0, 0, pw, ph);
+
+          /* update nodes */
+          nodes.forEach(n => {
+            n.x += n.vx; n.y += n.vy;
+            if (n.x < 0 || n.x > pw) n.vx *= -1;
+            if (n.y < 0 || n.y > ph) n.vy *= -1;
+            n.pulse += 0.018;
+          });
+
+          /* connections */
+          for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+              const dx = nodes[i].x - nodes[j].x;
+              const dy = nodes[i].y - nodes[j].y;
+              const d = Math.sqrt(dx*dx + dy*dy);
+              if (d < 140) {
+                const a = (1 - d/140) * 0.28;
+                const midHue = (nodes[i].hue + nodes[j].hue) / 2;
+                ctx.strokeStyle = `hsla(${midHue},80%,65%,${a})`;
+                ctx.lineWidth = 0.65;
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.stroke();
+              }
+            }
+          }
+
+          /* nodes */
+          nodes.forEach(n => {
+            const p = 0.55 + Math.sin(n.pulse) * 0.45;
+            /* glow halo */
+            const ng = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 5);
+            ng.addColorStop(0, `hsla(${n.hue},80%,68%,${0.45 * p})`);
+            ng.addColorStop(1, 'transparent');
+            ctx.fillStyle = ng;
+            ctx.beginPath(); ctx.arc(n.x, n.y, n.r * 5, 0, Math.PI*2); ctx.fill();
+            /* core dot */
+            ctx.fillStyle = `hsla(${n.hue},90%,80%,${0.75 * p})`;
+            ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2); ctx.fill();
+          });
+
+          /* ghosted slash watermark */
+          ctx.save();
+          ctx.font = `800 ${pw * 0.58}px "Space Grotesk", sans-serif`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.strokeStyle = 'rgba(168,85,247,0.055)';
+          ctx.lineWidth = 1.5;
+          ctx.strokeText('/', cx + pw * 0.04, cy + ph * 0.04);
+          ctx.restore();
+
+          frame = requestAnimationFrame(draw);
+        };
+        draw();
+        return () => { cancelAnimationFrame(frame); window.removeEventListener('resize', resize); };
+      }, []);
+      return <canvas ref={canvasRef} style={{ width:'100%', height:'100%', display:'block' }} />;
+    };
+
+    const Hero = () => (
+      <section style={{ minHeight:'100vh', background:'var(--bg)', position:'relative', overflow:'hidden', display:'grid', gridTemplateColumns:'52% 48%', paddingTop:88 }}>
+
+        {/* ── LEFT: copy ── */}
+        <div style={{ display:'flex', flexDirection:'column', justifyContent:'center', padding:'80px 0 72px 80px', position:'relative', zIndex:2 }}>
+          {/* label */}
+          <div style={{ display:'flex', alignItems:'center', gap:14, marginBottom:38 }}>
+            <div style={{ width:36, height:1.5, background:'linear-gradient(90deg,#a855f7,#be38de)', borderRadius:2 }}></div>
+            <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', letterSpacing:'0.16em', textTransform:'uppercase' }}>AI Agency. Real Results.</span>
+          </div>
+
+          {/* H1 */}
+          <h1 style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, lineHeight:0.94, letterSpacing:'-0.05em', marginBottom:30 }}>
+            <span style={{ display:'block', fontSize:'clamp(54px,5.2vw,86px)', color:'#fafafa' }}>From prompt</span>
+            <span style={{ display:'block', fontSize:'clamp(54px,5.2vw,86px)', color:'#fafafa' }}>to</span>
+            <span className="gradient-text" style={{ display:'block', fontSize:'clamp(56px,5.6vw,92px)' }}>production.</span>
+          </h1>
+
+          <p style={{ fontSize:17, color:'#6258a0', lineHeight:1.8, maxWidth:430, marginBottom:44 }}>
+            We build AI products, agents, and infrastructure that ship.
+          </p>
+
+          {/* CTAs */}
+          <div style={{ display:'flex', alignItems:'center', gap:22, marginBottom:72, flexWrap:'wrap' }}>
+            <a href="/contact" style={{ display:'inline-flex', alignItems:'center', gap:9, background:'#fafafa', color:'#0c0a21', padding:'13px 26px', borderRadius:100, fontSize:13.5, fontWeight:700, letterSpacing:'0.04em', textTransform:'uppercase', whiteSpace:'nowrap', transition:'opacity 0.15s' }}
+               onMouseEnter={e=>e.currentTarget.style.opacity='0.88'} onMouseLeave={e=>e.currentTarget.style.opacity='1'}>
+              Start a project
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="/resources/case-studies" style={{ display:'inline-flex', alignItems:'center', gap:10, color:'#6258a0', fontSize:13.5, letterSpacing:'0.04em', textTransform:'uppercase', transition:'color 0.15s' }}
+               onMouseEnter={e=>e.currentTarget.style.color='#fafafa'} onMouseLeave={e=>e.currentTarget.style.color='#6258a0'}>
+              <span style={{ width:28, height:28, borderRadius:'50%', border:'1px solid rgba(168,85,247,0.35)', display:'inline-flex', alignItems:'center', justifyContent:'center' }}>
+                <svg width="10" height="10" viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z" fill="#a855f7"/></svg>
+              </span>
+              See our work
+            </a>
+          </div>
+
+          {/* Stats bar */}
+          <div style={{ display:'flex', gap:44, paddingTop:28, borderTop:'1px solid #2c2860' }}>
+            {[{val:'40+',lbl:'AI products shipped'},{val:'4.9/5',lbl:'client score'},{val:'3 wks',lbl:'avg. to production'}].map(({val,lbl})=>(
+              <div key={lbl}>
+                <p style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:28, fontWeight:800, color:'#fafafa', letterSpacing:'-0.04em', lineHeight:1 }}>{val}</p>
+                <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'#4a4480', letterSpacing:'0.12em', textTransform:'uppercase', marginTop:6 }}>{lbl}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── RIGHT: neural canvas ── */}
+        <div style={{ position:'relative', overflow:'hidden' }}>
+          {/* left fade */}
+          <div style={{ position:'absolute', left:0, top:0, bottom:0, width:220, background:'linear-gradient(90deg,var(--bg),transparent)', zIndex:2, pointerEvents:'none' }}></div>
+          {/* top fade */}
+          <div style={{ position:'absolute', top:0, left:0, right:0, height:100, background:'linear-gradient(180deg,var(--bg),transparent)', zIndex:2, pointerEvents:'none' }}></div>
+          {/* bottom fade */}
+          <div style={{ position:'absolute', bottom:0, left:0, right:0, height:120, background:'linear-gradient(0deg,var(--bg),transparent)', zIndex:2, pointerEvents:'none' }}></div>
+
+          <NeuralCanvas />
+
+          {/* floating metric card */}
+          <div style={{ position:'absolute', bottom:96, right:44, background:'rgba(14,11,33,0.82)', backdropFilter:'blur(24px)', border:'1px solid rgba(168,85,247,0.22)', borderRadius:18, padding:'18px 22px', display:'flex', alignItems:'center', gap:14, zIndex:4, boxShadow:'0 28px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.03)' }}>
+            <div style={{ width:38, height:38, borderRadius:10, background:'rgba(168,85,247,0.16)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="2" strokeLinecap="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <div>
+              <p style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:26, fontWeight:800, color:'#fafafa', letterSpacing:'-0.04em', lineHeight:1 }}>87%</p>
+              <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9.5, color:'#7265a8', letterSpacing:'0.1em', textTransform:'uppercase', marginTop:4 }}>avg. cost reduction</p>
+            </div>
+          </div>
+
+          {/* second floating card — top right */}
+          <div style={{ position:'absolute', top:110, right:52, background:'rgba(14,11,33,0.75)', backdropFilter:'blur(18px)', border:'1px solid rgba(168,85,247,0.15)', borderRadius:12, padding:'12px 18px', zIndex:4, boxShadow:'0 16px 40px rgba(0,0,0,0.4)' }}>
+            <div style={{ display:'flex', alignItems:'center', gap:8 }}>
+              <span className="status-dot" style={{ width:7, height:7, borderRadius:'50%', background:'#4ade80', display:'block', flexShrink:0 }}></span>
+              <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10.5, color:'#a855f7', letterSpacing:'0.07em' }}>Available for new projects — 2026</span>
+            </div>
+          </div>
+        </div>
+
+        {/* mobile bg glow */}
+        <div style={{ position:'absolute', inset:0, backgroundImage:'linear-gradient(rgba(168,85,247,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,0.03) 1px,transparent 1px)', backgroundSize:'64px 64px', pointerEvents:'none', zIndex:0 }}></div>
+      </section>
+    )
+    const LogoBar = () => {
+      const logos = ['Meridian','Corestack','Vantix','NexLabs','PulsarAI','Apexio','Strata','OmniBase','Finloop','CloudScale'];
+      const all = [...logos, ...logos];
+      return (
+        <section className="reveal" style={{ borderTop:'1px solid #2c2860', borderBottom:'1px solid #2c2860', padding:'32px 0', overflow:'hidden' }}>
+          <p style={{ textAlign:'center', fontSize:11, color:'#3d3875', letterSpacing:'0.13em', textTransform:'uppercase', fontFamily:'"JetBrains Mono",monospace', marginBottom:22 }}>
+            Trusted by teams building the future
+          </p>
+          <div style={{ overflow:'hidden', position:'relative' }}>
+            <div style={{ position:'absolute', left:0, top:0, bottom:0, width:120, background:'linear-gradient(90deg, #0c0a21, transparent)', zIndex:1, pointerEvents:'none' }}></div>
+            <div style={{ position:'absolute', right:0, top:0, bottom:0, width:120, background:'linear-gradient(270deg, #0c0a21, transparent)', zIndex:1, pointerEvents:'none' }}></div>
+            <div className="logo-marquee">
+              {all.map((name, i) => (
+                <div key={i} style={{ padding:'0 44px', flexShrink:0, fontFamily:'"Space Grotesk",sans-serif', fontWeight:600, fontSize:15, color:'#33306e', letterSpacing:'-0.02em', whiteSpace:'nowrap', transition:'color 0.25s', cursor:'default' }}
+                  onMouseEnter={e=>e.currentTarget.style.color='#7265a8'}
+                  onMouseLeave={e=>e.currentTarget.style.color='#33306e'}>
+                  {name}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    const svcs = [
+      { key:'roadmap',  title:'AI roadmap & consulting',    desc:'Figure out where AI fits, what to build first, and how to get there.' },
+      { key:'product',  title:'AI product development',     desc:'Build AI-native products from zero, or add AI to what you already have.' },
+      { key:'agents',   title:'AI agents',                  desc:'Autonomous agents that handle support, ops, knowledge retrieval, and more.' },
+      { key:'features', title:'AI product features',        desc:'Bolt on smart search, summarization, or copilots to your existing product.' },
+      { key:'software', title:'Software development',       desc:'Full-stack engineering for the systems around your AI.' },
+      { key:'devops',   title:'DevOps & cloud',             desc:'AWS, Google Cloud, Kubernetes, CI/CD — infrastructure that scales.' },
+      { key:'cost',     title:'AI cost observability',      desc:'See exactly what your AI is costing you. Optimize spend with Slashboard.' },
+      { key:'branding', title:'Branding & design',          desc:'Brand identity, visual systems, and collateral that match your ambition.' },
+      { key:'content',  title:'Autopilot content engine',   desc:'Your brand on autopilot. AI-generated social content, published automatically.' },
+    ];
+
+    const Services = () => {
+      const [hov, setHov] = React.useState(null);
+      return (
+        <section style={{ padding:'120px 0', background:'var(--bg)', borderTop:'1px solid #2c2860' }}>
+          <div className="reveal" style={{ maxWidth:1280, margin:'0 auto', padding:'0 28px' }}>
+            {/* Header */}
+            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:60, flexWrap:'wrap', gap:24 }}>
+              <div>
+                <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', letterSpacing:'0.15em', textTransform:'uppercase', marginBottom:14 }}>Services</p>
+                <h2 style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:'clamp(32px,3vw,48px)', fontWeight:700, letterSpacing:'-0.035em', color:'#fafafa', maxWidth:480 }}>
+                  Everything you need,<br />end to end
+                </h2>
+              </div>
+              <div style={{ textAlign:'right' }}>
+                <p style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:'clamp(56px,6vw,88px)', fontWeight:800, letterSpacing:'-0.05em', color:'transparent', WebkitTextStroke:'1px rgba(168,85,247,0.18)', lineHeight:1 }}>09</p>
+                <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10.5, color:'#4a4480', letterSpacing:'0.12em', textTransform:'uppercase', marginTop:-6 }}>services</p>
+              </div>
+            </div>
+
+            {/* Index list */}
+            <div style={{ borderTop:'1px solid #2c2860' }}>
+              {svcs.map(({ key, title, desc }, i) => (
+                <a key={key} href="Services.html" className="svc-row"
+                   onMouseEnter={() => setHov(i)}
+                   onMouseLeave={() => setHov(null)}>
+                  <span className="svc-row-num">{String(i+1).padStart(2,'0')}</span>
+                  <span className="svc-row-title">{title}</span>
+                  <span className="svc-row-desc">{desc}</span>
+                  <div className="svc-row-arrow">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={hov===i ? '#fff' : '#4a4480'} strokeWidth="2.5" strokeLinecap="round">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            <div style={{ marginTop:44, display:'flex', justifyContent:'flex-end' }}>
+              <a href="Services.html" className="ghost-btn" style={{ display:'inline-flex', alignItems:'center', gap:6, color:'#7265a8', fontSize:13.5, border:'1px solid #33306e', borderRadius:7, padding:'10px 20px' }}>
+                View all services
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </section>
+      );
+    }
+    const WhySection = () => {
+      const pillars = [
+        { n:'01', title:'We build fast', body:"Small team, no staffing delays, no procurement cycles. We start building in days, not weeks. Your project doesn't wait for headcount." },
+        { n:'02', title:'We own the outcome', body:'Strategy, build, deploy, optimize — one team, one relationship. No handoffs between consultants and engineers. The people who plan it are the people who build it.' },
+        { n:'03', title:'We go full-stack', body:"AI, infrastructure, product engineering, branding — you don't need a second vendor. From model selection to Kubernetes config to your logo, we cover the entire stack." },
+      ];
+      return (
+        <section style={{ padding:'120px 28px', borderTop:'1px solid #2c2860', background:'var(--bg)' }}>
+          <div className="reveal" style={{ maxWidth:1280, margin:'0 auto' }}>
+            <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', letterSpacing:'0.15em', textTransform:'uppercase', marginBottom:16 }}>Why SlashLLM</p>
+            <h2 style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:'clamp(34px,3vw,50px)', fontWeight:700, letterSpacing:'-0.035em', color:'#fafafa', marginBottom:56 }}>
+              Why teams choose SlashLLM
+            </h2>
+            <div className="why-grid" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:1, background:'#2c2860', borderRadius:16, overflow:'hidden', border:'1px solid #2c2860' }}>
+              {pillars.map(({ n, title, body }, i) => (
+                <div key={n} style={{ background:'var(--bg)', padding:'40px 36px', borderRadius: i===0?'15px 0 0 15px': i===2?'0 15px 15px 0':0 }}>
+                  <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#3d3875', letterSpacing:'0.1em', marginBottom:20 }}>{n}</p>
+                  <h3 style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:22, fontWeight:700, color:'#fafafa', letterSpacing:'-0.03em', marginBottom:14 }}>{title}</h3>
+                  <p style={{ fontSize:15, color:'#6258a0', lineHeight:1.78 }}>{body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    Object.assign(window, { Hero, LogoBar, Services, WhySection });
+  </script>
+
+  <!-- ═══ SCRIPT 3: Industries · CaseStudy · HowWeWork · BottomCTA ═══ -->
+  <script type="text/babel">
+
+    const industries = [
+      { tag:'Product AI',   title:'SaaS & technology',           desc:'Ship AI features faster. Copilots, smart search, automated workflows — built into your product, not bolted on.' },
+      { tag:'Regulated AI', title:'Fintech & financial services', desc:'Fraud detection, document processing, compliance automation — AI that understands regulated environments.' },
+      { tag:'Clinical AI',  title:'Healthcare & life sciences',   desc:'Clinical decision support, medical document processing, patient engagement — AI built for sensitivity and compliance.' },
+      { tag:'Workforce AI', title:'HR tech',                      desc:'Resume screening, employee engagement analysis, onboarding automation — AI that makes hiring and retention smarter.' },
+    ];
+
+    const Industries = () => {
+      const [active, setActive] = React.useState(0);
+      const [paused, setPaused] = React.useState(false);
+
+      React.useEffect(() => {
+        if (paused) return;
+        const t = setInterval(() => setActive(a => (a + 1) % industries.length), 3400);
+        return () => clearInterval(t);
+      }, [paused]);
+
+      const indTags = [
+        ['Copilots','Smart Search','Automation'],
+        ['Fraud Detection','Compliance','Doc AI'],
+        ['Clinical AI','EHR Sync','HIPAA'],
+        ['Hiring AI','Retention','Onboarding'],
+      ];
+      const indIcons = [
+        <><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></>,
+        <><path d="M12 2l3 6.5L22 9l-5 5 1.2 6.5L12 18l-6.2 2.5L7 14 2 9l7-.5z"/></>,
+        <><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></>,
+        <><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a6 6 0 0112 0v2"/></>,
+      ];
+
+      const front = active;
+      const back  = (active - 1 + industries.length) % industries.length;
+
+      const renderCard = (idx, isFront) => {
+        const ind = industries[idx];
+        const cardTags = indTags[idx];
+        return (
+          <div key={idx} style={{
+            position:'absolute',
+            width:292,
+            background:'var(--card)',
+            border:'1px solid var(--border)',
+            borderRadius:20,
+            padding:'32px 26px',
+            top: isFront ? 0 : 24,
+            right: isFront ? 0 : 'auto',
+            left: isFront ? 'auto' : 0,
+            zIndex: isFront ? 2 : 1,
+            transform: isFront
+              ? 'rotateY(-8deg) translateZ(20px)'
+              : 'rotateY(-28deg) translateZ(-80px) scale(0.85)',
+            transition:'all 0.7s cubic-bezier(0.34,1.56,0.64,1)',
+            opacity: isFront ? 1 : 0.52,
+            boxShadow: isFront
+              ? '0 40px 90px rgba(168,85,247,0.18), 0 0 0 1px rgba(168,85,247,0.12)'
+              : 'none',
+            willChange:'transform',
+          }}>
+            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:22 }}>
+              <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:12, color:'var(--accent)', fontWeight:500, letterSpacing:'0.06em' }}>
+                {String(idx+1).padStart(2,'0')}
+              </span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                {indIcons[idx]}
+              </svg>
+            </div>
+            <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'var(--accent)', letterSpacing:'0.14em', textTransform:'uppercase', marginBottom:10, opacity:0.8 }}>
+              {ind.tag}
+            </p>
+            <h3 style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:22, fontWeight:700, color:'var(--text)', letterSpacing:'-0.03em', lineHeight:1.18, marginBottom:16 }}>
+              {ind.title}
+            </h3>
+            <p style={{ fontSize:13.5, color:'var(--muted)', lineHeight:1.72, marginBottom:28 }}>
+              {ind.desc}
+            </p>
+            <div style={{ display:'flex', gap:7, flexWrap:'wrap' }}>
+              {cardTags.map(ct => (
+                <span key={ct} style={{ padding:'5px 11px', borderRadius:100, border:'1px solid var(--border)', fontSize:10.5, fontFamily:'"JetBrains Mono",monospace', color:'var(--muted)', letterSpacing:'0.04em', whiteSpace:'nowrap' }}>
+                  {ct}
+                </span>
+              ))}
+            </div>
+          </div>
+        );
+      };
+
+      return (
+        <section style={{ padding:'120px 28px', borderTop:'1px solid var(--border)', background:'var(--bg)' }}>
+          <div className="reveal" style={{ maxWidth:1280, margin:'0 auto' }}>
+            <div style={{ display:'grid', gridTemplateColumns:'42% 58%', gap:60, alignItems:'center', minHeight:480 }}>
+
+              {/* Left: copy */}
+              <div>
+                <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'var(--accent)', letterSpacing:'0.15em', textTransform:'uppercase', marginBottom:16 }}>Industries</p>
+                <h2 style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:'clamp(34px,3vw,52px)', fontWeight:700, letterSpacing:'-0.035em', color:'var(--text)', lineHeight:1.08, marginBottom:20 }}>
+                  AI built for<br />your industry
+                </h2>
+                <p style={{ fontSize:15.5, color:'var(--muted)', lineHeight:1.78, maxWidth:380, marginBottom:40 }}>
+                  Deep domain expertise across regulated and high-growth sectors. We know your stack, your compliance needs, and your users.
+                </p>
+                {/* Dot nav */}
+                <div style={{ display:'flex', gap:10, marginBottom:36 }}>
+                  {industries.map((_, i) => (
+                    <button key={i} onClick={() => { setActive(i); setPaused(true); setTimeout(()=>setPaused(false),4000); }}
+                      style={{ width:i===active?28:8, height:8, borderRadius:100, background:i===active?'var(--accent)':'var(--border)', border:'none', cursor:'pointer', transition:'all 0.3s', padding:0 }} />
+                  ))}
+                </div>
+                <a href="Industries.html" style={{ display:'inline-flex', alignItems:'center', gap:6, color:'var(--muted)', fontSize:13.5, border:'1px solid var(--border)', borderRadius:7, padding:'10px 20px', textDecoration:'none', transition:'all 0.18s' }}
+                   onMouseEnter={e=>{e.currentTarget.style.borderColor='#a855f7';e.currentTarget.style.color='#a855f7'}}
+                   onMouseLeave={e=>{e.currentTarget.style.borderColor='var(--border)';e.currentTarget.style.color='var(--muted)'}}>
+                  Explore all industries
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+
+              {/* Right: 3D cards */}
+              <div
+                style={{ position:'relative', height:440, perspective:'1100px', perspectiveOrigin:'50% 40%' }}
+                onMouseEnter={() => setPaused(true)}
+                onMouseLeave={() => setPaused(false)}>
+                <div style={{ position:'relative', width:'100%', height:'100%', transformStyle:'preserve-3d' }}>
+                  {renderCard(back, false)}
+                  {renderCard(front, true)}
+                </div>
+                <p style={{ position:'absolute', bottom:-28, right:0, fontFamily:'"JetBrains Mono",monospace', fontSize:9.5, color:'var(--muted)', opacity:0.4, letterSpacing:'0.14em', textTransform:'uppercase' }}>
+                  Hover to pause · Click dots to navigate
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    const CaseStudy = () => (
+      <section style={{ padding:'140px 28px', background:'#07061a', borderTop:'1px solid rgba(168,85,247,0.12)', borderBottom:'1px solid rgba(168,85,247,0.1)', position:'relative', overflow:'hidden' }}>
+        {/* Ambient glows */}
+        <div style={{ position:'absolute', top:'10%', right:'-5%', width:'55%', height:'80%', background:'radial-gradient(ellipse at 80% 40%, rgba(168,85,247,0.09) 0%, transparent 60%)', pointerEvents:'none' }}></div>
+        <div style={{ position:'absolute', bottom:0, left:'15%', width:'45%', height:'50%', background:'radial-gradient(ellipse at 50% 100%, rgba(190,56,222,0.07) 0%, transparent 70%)', pointerEvents:'none' }}></div>
+
+        <div className="reveal" style={{ maxWidth:1280, margin:'0 auto', position:'relative', zIndex:1 }}>
+          {/* Header row */}
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:56, flexWrap:'wrap', gap:20 }}>
+            <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', letterSpacing:'0.15em', textTransform:'uppercase' }}>Featured case study</p>
+            <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(168,85,247,0.08)', border:'1px solid rgba(168,85,247,0.15)', borderRadius:100, padding:'6px 16px' }}>
+              <div style={{ width:6, height:6, borderRadius:'50%', background:'#4ade80' }}></div>
+              <span style={{ fontSize:11, color:'#7265a8', fontFamily:'"JetBrains Mono",monospace', letterSpacing:'0.04em' }}>HealthSync AI — Healthcare</span>
+            </div>
+          </div>
+
+          {/* Giant quote */}
+          <blockquote style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:'clamp(28px,3vw,48px)', fontWeight:700, color:'#fafafa', lineHeight:1.2, letterSpacing:'-0.04em', maxWidth:820, marginBottom:72, fontStyle:'italic', borderLeft:'3px solid #a855f7', paddingLeft:28 }}>
+            "From 8 hours of manual review to 6 minutes — in production."
+          </blockquote>
+
+          {/* Main grid: story left + mockup right */}
+          <div style={{ display:'grid', gridTemplateColumns:'34% 66%', gap:80, alignItems:'start' }}>
+
+            {/* Left: story + metrics */}
+            <div>
+              <div style={{ marginBottom:28 }}>
+                <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'rgba(168,85,247,0.55)', textTransform:'uppercase', letterSpacing:'0.12em', marginBottom:10 }}>The challenge</p>
+                <p style={{ fontSize:14.5, color:'rgba(255,255,255,0.42)', lineHeight:1.8 }}>Manual clinical document review took 6–8 hours per patient record, creating critical bottlenecks in care delivery.</p>
+              </div>
+              <div style={{ marginBottom:40 }}>
+                <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'rgba(168,85,247,0.55)', textTransform:'uppercase', letterSpacing:'0.12em', marginBottom:10 }}>What we built</p>
+                <p style={{ fontSize:14.5, color:'rgba(255,255,255,0.42)', lineHeight:1.8 }}>GPT-4 + custom fine-tuning pipeline integrated directly with the existing EHR infrastructure. Zero workflow disruption.</p>
+              </div>
+              <div style={{ display:'flex', flexDirection:'column', gap:10, marginBottom:44 }}>
+                {[{v:'87%',l:'reduction in review time'},{v:'99.2%',l:'accuracy across 40K records'},{v:'3 wks',l:'kickoff to production'}].map(({v,l}) => (
+                  <div key={l} style={{ display:'flex', alignItems:'center', gap:14, padding:'12px 16px', background:'rgba(168,85,247,0.06)', border:'1px solid rgba(168,85,247,0.11)', borderRadius:10 }}>
+                    <span style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:20, fontWeight:800, color:'#fafafa', letterSpacing:'-0.03em', flexShrink:0, minWidth:56 }}>{v}</span>
+                    <span style={{ fontSize:13, color:'rgba(255,255,255,0.35)', lineHeight:1.4 }}>{l}</span>
+                  </div>
+                ))}
+              </div>
+              <a href="/resources/case-studies" style={{ color:'rgba(255,255,255,0.75)', fontSize:14, fontWeight:500, display:'inline-flex', alignItems:'center', gap:7, textDecoration:'none', transition:'color 0.15s' }}
+                 onMouseEnter={e=>e.currentTarget.style.color='#fafafa'} onMouseLeave={e=>e.currentTarget.style.color='rgba(255,255,255,0.75)'}>
+                Read the full story
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+
+            {/* Right: browser mockup */}
+            <div style={{ position:'relative' }}>
+              {/* Screen glow */}
+              <div style={{ position:'absolute', top:'5%', left:'5%', right:'5%', bottom:'5%', background:'radial-gradient(ellipse at 50% 50%, rgba(168,85,247,0.18) 0%, transparent 65%)', filter:'blur(32px)', pointerEvents:'none' }}></div>
+
+              {/* Browser window */}
+              <div style={{ position:'relative', background:'#0d0b25', borderRadius:16, overflow:'hidden', border:'1px solid rgba(168,85,247,0.18)', boxShadow:'0 0 0 1px rgba(255,255,255,0.04), 0 48px 120px rgba(0,0,0,0.65)', transform:'perspective(1400px) rotateY(-4deg) rotateX(2deg)' }}>
+                {/* Chrome */}
+                <div style={{ background:'#131130', padding:'11px 16px', borderBottom:'1px solid rgba(168,85,247,0.1)', display:'flex', alignItems:'center', gap:10 }}>
+                  <div style={{ display:'flex', gap:5 }}>
+                    {['#FF5F57','#FFBD2E','#28C840'].map((c,i)=><div key={i} style={{ width:9, height:9, borderRadius:'50%', background:c }}/>)}
+                  </div>
+                  <div style={{ flex:1, background:'rgba(255,255,255,0.05)', borderRadius:6, padding:'5px 12px', display:'flex', alignItems:'center', gap:7, maxWidth:320, margin:'0 auto' }}>
+                    <div style={{ width:6, height:6, borderRadius:'50%', background:'#4ade80', flexShrink:0 }}></div>
+                    <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'rgba(255,255,255,0.22)', overflow:'hidden', whiteSpace:'nowrap' }}>ai.healthsync.com/dashboard</span>
+                  </div>
+                </div>
+                {/* App screen */}
+                <div style={{ padding:'20px 22px', background:'#09071f' }}>
+                  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:16, paddingBottom:14, borderBottom:'1px solid rgba(255,255,255,0.05)' }}>
+                    <div>
+                      <div style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:14, fontWeight:600, color:'rgba(255,255,255,0.8)', letterSpacing:'-0.02em', marginBottom:3 }}>Document Analysis</div>
+                      <div style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9.5, color:'rgba(168,85,247,0.55)', letterSpacing:'0.07em' }}>1,247 records processed today</div>
+                    </div>
+                    <div style={{ background:'rgba(74,222,128,0.1)', border:'1px solid rgba(74,222,128,0.25)', borderRadius:20, padding:'5px 11px', display:'flex', alignItems:'center', gap:5 }}>
+                      <div style={{ width:5, height:5, borderRadius:'50%', background:'#4ade80' }}></div>
+                      <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9.5, color:'#4ade80', letterSpacing:'0.06em' }}>AI Active</span>
+                    </div>
+                  </div>
+                  {[
+                    { name:'Patient_Record_4821.pdf', type:'Discharge Summary', pct:100, done:true },
+                    { name:'Clinical_Notes_0934.pdf', type:'Progress Notes', pct:78, done:false },
+                    { name:'Lab_Results_2201.pdf', type:'Diagnostic Report', pct:100, done:true },
+                    { name:'Imaging_Report_0571.pdf', type:'Radiology Notes', pct:45, done:false },
+                  ].map(({ name, type, pct, done }, i) => (
+                    <div key={i} style={{ display:'flex', alignItems:'center', gap:11, padding:'9px 11px', marginBottom:5, background:'rgba(255,255,255,0.025)', borderRadius:8, border:'1px solid rgba(255,255,255,0.04)' }}>
+                      <div style={{ width:28, height:28, borderRadius:6, background:'rgba(168,85,247,0.1)', border:'1px solid rgba(168,85,247,0.18)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(168,85,247,0.65)" strokeWidth="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                      </div>
+                      <div style={{ flex:1, minWidth:0 }}>
+                        <div style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'rgba(255,255,255,0.55)', marginBottom:2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{name}</div>
+                        <div style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:8.5, color:'rgba(255,255,255,0.18)', letterSpacing:'0.04em' }}>{type}</div>
+                      </div>
+                      <div style={{ flexShrink:0 }}>
+                        {done ? (
+                          <div style={{ width:22, height:22, borderRadius:'50%', background:'rgba(74,222,128,0.12)', border:'1px solid rgba(74,222,128,0.28)', display:'flex', alignItems:'center', justifyContent:'center' }}>
+                            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="3" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                          </div>
+                        ) : (
+                          <div style={{ position:'relative', width:28, height:28 }}>
+                            <svg width="28" height="28" viewBox="0 0 28 28">
+                              <circle cx="14" cy="14" r="10" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="2.5"/>
+                              <circle cx="14" cy="14" r="10" fill="none" stroke="#a855f7" strokeWidth="2.5"
+                                strokeDasharray={String(pct * 0.628) + ' 62.8'} strokeLinecap="round"
+                                transform="rotate(-90 14 14)"/>
+                            </svg>
+                            <span style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', fontFamily:'"JetBrains Mono",monospace', fontSize:7, color:'rgba(168,85,247,0.8)' }}>{pct}%</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                  <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:8, marginTop:12 }}>
+                    {[{l:'Processed',v:'1,247'},{l:'Accuracy',v:'99.2%'},{l:'Avg. Time',v:'6 min'}].map(({l,v})=>(
+                      <div key={l} style={{ background:'rgba(168,85,247,0.07)', border:'1px solid rgba(168,85,247,0.12)', borderRadius:8, padding:'9px 11px' }}>
+                        <div style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:16, fontWeight:700, color:'rgba(255,255,255,0.82)', letterSpacing:'-0.02em', marginBottom:3 }}>{v}</div>
+                        <div style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:8, color:'rgba(168,85,247,0.5)', textTransform:'uppercase', letterSpacing:'0.1em' }}>{l}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating card — top right */}
+              <div style={{ position:'absolute', top:-22, right:-24, background:'rgba(10,8,28,0.94)', backdropFilter:'blur(20px)', border:'1px solid rgba(168,85,247,0.22)', borderRadius:14, padding:'14px 20px', boxShadow:'0 24px 60px rgba(0,0,0,0.55)', zIndex:10 }}>
+                <div style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:30, fontWeight:800, color:'#fafafa', letterSpacing:'-0.04em', lineHeight:1 }}>87%</div>
+                <div style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9, color:'rgba(168,85,247,0.65)', textTransform:'uppercase', letterSpacing:'0.1em', marginTop:5 }}>avg. cost reduction</div>
+              </div>
+
+              {/* Floating card — bottom left */}
+              <div style={{ position:'absolute', bottom:-18, left:-22, background:'rgba(10,8,28,0.94)', backdropFilter:'blur(20px)', border:'1px solid rgba(74,222,128,0.2)', borderRadius:14, padding:'14px 20px', boxShadow:'0 24px 60px rgba(0,0,0,0.55)', zIndex:10 }}>
+                <div style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:30, fontWeight:800, color:'#fafafa', letterSpacing:'-0.04em', lineHeight:1 }}>3 wks</div>
+                <div style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9, color:'rgba(74,222,128,0.6)', textTransform:'uppercase', letterSpacing:'0.1em', marginTop:5 }}>kickoff to production</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    const HowWeWork = () => {
+      const steps = [
+        { n:'01', title:'Discover',  body:'We learn your business, data, and goals. Free discovery call or paid AI audit — your choice.' },
+        { n:'02', title:'Design',    body:'We scope the solution, pick the right models and architecture, and align on deliverables and timeline.' },
+        { n:'03', title:'Build',     body:'We ship iteratively. Weekly demos, transparent progress, production-ready code. No surprises at the end.' },
+        { n:'04', title:'Optimize',  body:'We deploy, monitor, and improve. Slashboard tracks costs. Retainer support keeps things running.' },
+      ];
+      return (
+        <section style={{ padding:'120px 28px', background:'#FAFAFA', position:'relative' }}>
+          {/* Top edge accent */}
+          <div style={{ position:'absolute', top:0, left:0, right:0, height:1, background:'linear-gradient(90deg, transparent, #a855f7, #be38de, transparent)' }}></div>
+          <div className="reveal" style={{ maxWidth:1280, margin:'0 auto' }}>
+            <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#7C3AED', letterSpacing:'0.15em', textTransform:'uppercase', marginBottom:16 }}>Process</p>
+            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:72, flexWrap:'wrap', gap:24 }}>
+              <h2 style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:'clamp(34px,3vw,52px)', fontWeight:700, letterSpacing:'-0.035em', color:'#1E1B4B', lineHeight:1.08 }}>
+                How we work
+              </h2>
+              <a href="/contact" style={{ display:'inline-flex', alignItems:'center', gap:8, background:'#1E1B4B', color:'#FAFAFA', padding:'11px 22px', borderRadius:8, fontSize:13.5, fontWeight:600, textDecoration:'none', letterSpacing:'-0.01em', whiteSpace:'nowrap', transition:'opacity 0.15s' }}
+                 onMouseEnter={e => e.currentTarget.style.opacity = '0.82'}
+                 onMouseLeave={e => e.currentTarget.style.opacity = '1'}>
+                Start with a free call
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+
+            <div className="proc-grid light-proc" style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:0, position:'relative' }}>
+              <div style={{ position:'absolute', top:17, left:'4.5%', right:'4.5%', height:1, background:'linear-gradient(90deg, #a855f7, #be38de)', opacity:0.2, pointerEvents:'none' }}></div>
+              {steps.map(({ n, title, body }, i) => (
+                <div key={n} className="process-step" style={{ paddingRight: i < 3 ? 40 : 0 }}>
+                  <div className="process-num" style={{ width:34, height:34, borderRadius:'50%', border:'1px solid #E5E3EB', background:'#FAFAFA', display:'flex', alignItems:'center', justifyContent:'center', marginBottom:28, position:'relative', zIndex:1 }}>
+                    <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10.5, color:'#7C3AED', fontWeight:500 }}>{n}</span>
+                  </div>
+                  <h3 style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:20, fontWeight:700, color:'#1E1B4B', letterSpacing:'-0.025em', marginBottom:12 }}>{title}</h3>
+                  <p style={{ fontSize:14, color:'rgba(30,27,75,0.5)', lineHeight:1.78 }}>{body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+    const BottomCTA = () => (
+      <section style={{ padding:'0 28px 120px', background:'var(--bg)' }}>
+        <div style={{ maxWidth:1280, margin:'0 auto' }}>
+          <div style={{ background:'linear-gradient(135deg, #090912 0%, #0d0d1a 50%, #09090f 100%)', border:'1px solid rgba(168,85,247,0.2)', borderRadius:24, padding:'88px 80px', textAlign:'center', position:'relative', overflow:'hidden' }}>
+            {/* Glow */}
+            <div style={{ position:'absolute', top:-120, left:'50%', transform:'translateX(-50%)', width:700, height:350, borderRadius:'50%', background:'radial-gradient(circle, rgba(168,85,247,0.16) 0%, transparent 70%)', pointerEvents:'none' }}></div>
+            <div style={{ position:'absolute', bottom:-80, left:'20%', width:400, height:200, borderRadius:'50%', background:'radial-gradient(circle, rgba(190,56,222,0.1) 0%, transparent 70%)', pointerEvents:'none' }}></div>
+
+            <h2 style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:'clamp(38px,3.5vw,58px)', fontWeight:800, letterSpacing:'-0.04em', color:'#fafafa', marginBottom:20, position:'relative', lineHeight:1.1 }}>
+              Ready to build something<br />extraordinary?
+            </h2>
+            <p style={{ fontSize:17, color:'rgba(255,255,255,0.55)', maxWidth:480, margin:'0 auto 48px', lineHeight:1.78, position:'relative' }}>
+              Let's collaborate to bring your digital vision to life. Fast sprints, clear communication, and measurable results.
+            </p>
+            <a href="/contact" className="cta-link" style={{ display:'inline-flex', alignItems:'center', gap:8, background:'#fafafa', color:'#1E1B4B', padding:'14px 28px', borderRadius:9, fontSize:15, fontWeight:600, letterSpacing:'-0.01em', position:'relative' }}>
+              Start Your Project
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    );
+
+    Object.assign(window, { Industries, CaseStudy, HowWeWork, BottomCTA });
+  
+</script>
+
+  <!-- ═══ SCRIPT 4: App Mount ═══ -->
+  <script type="text/babel">
+    function App() {
+      React.useEffect(() => {
+        const els = document.querySelectorAll('.reveal');
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08 });
+        els.forEach(el => obs.observe(el));
+        return () => obs.disconnect();
+      }, []);
+      return (
+        <React.Fragment>
+          <Nav />
+          <main>
+            <Hero />
+            <LogoBar />
+            <Services />
+            <WhySection />
+            <Industries />
+            <CaseStudy />
+            <HowWeWork />
+            <BottomCTA />
+          </main>
+          <Footer />
+        </React.Fragment>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

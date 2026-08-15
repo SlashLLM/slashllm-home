@@ -1,0 +1,26 @@
+# SlashLLM
+
+> SlashLLM is an AI agency that goes from prompt to production. We build AI
+> products, agents, and infrastructure for startups and enterprises — shipping
+> working software, not slide decks.
+
+SlashLLM offers AI strategy, AI product development, AI agent development,
+production infrastructure / DevOps for AI, cost optimization, and AI-focused
+branding and content. The team has shipped projects across HR tech, healthcare,
+fintech, and foodtech.
+
+## Pages
+
+- [Home](https://slashllm.com/): Overview of SlashLLM — from prompt to production.
+- [Services](https://slashllm.com/services): Full service catalog — AI strategy through production infrastructure.
+- [Industries](https://slashllm.com/industries): Sectors served — HR tech, healthcare, fintech, foodtech.
+- [About](https://slashllm.com/about): Who SlashLLM is and how the team works.
+- [Blog](https://slashllm.com/blog): Practical writing on shipping AI products, agents, and infrastructure from prompt to production.
+
+## Articles
+
+- [From prompt to production: what it actually takes](https://slashllm.com/blog/from-prompt-to-production-what-it-actually-takes): The evaluation, infrastructure, cost control, and engineering needed to turn an AI prototype into a real product.
+
+## Contact
+
+- Website: https://slashllm.com

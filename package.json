@@ -1,0 +1,12 @@
+{
+  "name": "slashllm-home",
+  "private": true,
+  "version": "1.0.0",
+  "description": "SlashLLM marketing site. Pages render React in-browser; prerender bakes rendered HTML into the static files for SEO/AEO crawlers.",
+  "scripts": {
+    "prerender": "node prerender.mjs"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^22.0.0"
+  }
+}
