@@ -3,12 +3,34 @@
 // are left intact so React re-mounts and interactivity still works.
 import http from 'node:http';
 import { readFile, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { extname, join } from 'node:path';
 import puppeteer from 'puppeteer-core';
 
 const ROOT = process.cwd();
-const CHROME = '/Users/mridhul/.cache/puppeteer/chrome/mac_arm-149.0.7827.22/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing';
-const PAGES = ['index.html', 'services/index.html', 'industries/index.html', 'about/index.html'];
+const CHROME_CANDIDATES = [
+  process.env.CHROME_PATH,
+  '/Users/mridhul/.cache/puppeteer/chrome/mac_arm-149.0.7827.22/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
+  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+  'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+  'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
+  '/usr/bin/google-chrome',
+  '/usr/bin/chromium-browser',
+].filter(Boolean);
+
+const CHROME = CHROME_CANDIDATES.find(p => existsSync(p));
+const PAGES = [
+  'index.html',
+  'Services.html',
+  'Industries.html',
+  'About.html',
+  'services/index.html',
+  'industries/index.html',
+  'about/index.html',
+  'blog/index.html',
+  'blog/from-prompt-to-production-what-it-actually-takes/index.html',
+];
 
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
   '.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml',
@@ -39,10 +61,10 @@ for (const file of PAGES) {
   const errors = [];
   page.on('pageerror', e => errors.push(e.message));
   await page.goto(`http://localhost:${port}/${file}`,
-    { waitUntil: 'networkidle0', timeout: 60000 });
+    { waitUntil: 'domcontentloaded', timeout: 30000 });
   // Wait until React has actually populated #root
   await page.waitForFunction(
-    () => { const r = document.getElementById('root'); return r && r.children.length > 0 && r.innerText.trim().length > 50; },
+    () => { const r = document.getElementById('root'); return r && r.children.length > 0 && r.innerText.trim().length > 10; },
     { timeout: 60000 });
   const rendered = await page.$eval('#root', el => el.innerHTML);
 
