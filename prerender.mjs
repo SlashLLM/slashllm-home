@@ -8,7 +8,15 @@ import puppeteer from 'puppeteer-core';
 
 const ROOT = process.cwd();
 const CHROME = '/Users/mridhul/.cache/puppeteer/chrome/mac_arm-149.0.7827.22/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing';
-const PAGES = ['index.html', 'services/index.html', 'industries/index.html', 'about/index.html'];
+const PAGES = [
+  'index.html',
+  'services/index.html',
+  'industries/index.html',
+  'about/index.html',
+  'products/index.html',
+  'solutions/index.html',
+  'case-studies/index.html'
+];
 
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
   '.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml',

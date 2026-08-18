@@ -3,657 +3,394 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Industries — SlashLLM</title>
-  <link rel="icon" type="image/png" href="uploads/LOGO 2.png">
-  <meta name="description" content="SlashLLM — AI built for your world. Shipped projects across HR tech, healthcare, fintech, and foodtech.">
+  <title>Industries — SlashLLM Enterprise AI Engineering</title>
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/uploads/favicon-32.png?v=2" sizes="32x32">
+  <link rel="icon" type="image/png" href="/uploads/favicon-16.png?v=2" sizes="16x16">
+  <link rel="apple-touch-icon" href="/uploads/favicon-180.png?v=2">
+  <meta name="description" content="SlashLLM Enterprise AI across 6 core industry verticals: Financial Services, Healthcare, SaaS, Retail, Manufacturing, and Professional Services.">
   <link rel="canonical" href="https://slashllm.com/Industries.html">
-  <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://slashllm.com/Industries.html">
-  <meta property="og:site_name" content="SlashLLM">
-  <meta property="og:title" content="Industries — SlashLLM">
-  <meta property="og:description" content="SlashLLM — AI built for your world. Shipped projects across HR tech, healthcare, fintech, and foodtech.">
+  <meta property="og:title" content="Industries — SlashLLM Enterprise AI Engineering">
+  <meta property="og:description" content="Domain-tailored enterprise AI engineering across 6 core industry verticals.">
   <meta property="og:image" content="https://slashllm.com/uploads/LOGO%202.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Industries — SlashLLM">
-  <meta name="twitter:description" content="SlashLLM — AI built for your world. Shipped projects across HR tech, healthcare, fintech, and foodtech.">
-  <meta name="twitter:image" content="https://slashllm.com/uploads/LOGO%202.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <script>tailwind={config:{theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif'],display:['"Space Grotesk"','sans-serif'],mono:['"JetBrains Mono"','monospace']}}}}};</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind = { config: { theme: { extend: { fontFamily: { sans: ['Inter','system-ui','sans-serif'], display: ['"Space Grotesk"','sans-serif'], mono: ['"JetBrains Mono"','monospace'] } } } } };
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { background: #FAFAFA; color: #1E1B4B; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
     a { color: inherit; text-decoration: none; }
-    :root { --bg:#FAFAFA; --surface:#F3F0FF; --border:#DDD8F0; --text:#1E1B4B; --accent:#a855f7; }
 
-    .gradient-text { background: linear-gradient(135deg, #a855f7 0%, #be38de 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-
-    .reveal { opacity:0; transform:translateY(24px); transition: opacity .75s cubic-bezier(.16,1,.3,1), transform .75s cubic-bezier(.16,1,.3,1); }
-    .reveal.in { opacity:1; transform:none; }
-    .reveal[data-d="1"]{transition-delay:.08s} .reveal[data-d="2"]{transition-delay:.16s}
-    .reveal[data-d="3"]{transition-delay:.24s} .reveal[data-d="4"]{transition-delay:.32s}
-    .reveal[data-d="5"]{transition-delay:.4s}  .reveal[data-d="6"]{transition-delay:.48s}
-
-    @keyframes card-float {
-      0%,100% { box-shadow:0 40px 80px rgba(30,27,75,.2),0 0 0 1px rgba(168,85,247,.08); transform:perspective(1400px) rotateY(-6deg) rotateX(2deg) translateY(0); }
-      50%      { box-shadow:0 48px 96px rgba(30,27,75,.24),0 0 0 1px rgba(168,85,247,.14); transform:perspective(1400px) rotateY(-6deg) rotateX(2deg) translateY(-6px); }
+    :root {
+      --bg: #FAFAFA; --surface: #F3F0FF; --card: #EDE9FF;
+      --border: #DDD8F0; --text: #1E1B4B; --muted: rgba(30,27,75,0.6);
+      --accent: #a855f7; --accent2: #7c3aed;
     }
-    .hero-card { animation: card-float 6s ease-in-out infinite; }
 
-    .ind-tab { transition:all .2s; white-space:nowrap; border:none; }
-    .ind-tab:hover { color:#1E1B4B !important; background:rgba(30,27,75,.06) !important; }
-    .ind-tab.is-active { background:#1E1B4B !important; color:#FAFAFA !important; }
-    .ind-nav-scroll::-webkit-scrollbar { display:none; }
-    .ind-nav-scroll { -ms-overflow-style:none; scrollbar-width:none; }
-
-    .proj-card { transition: transform .22s cubic-bezier(.16,1,.3,1), box-shadow .22s; }
-    .proj-light:hover { transform:translateY(-3px); box-shadow:0 20px 56px rgba(168,85,247,.09),0 0 0 1px rgba(168,85,247,.14); }
-    .proj-dark:hover  { transform:translateY(-3px); box-shadow:0 24px 64px rgba(0,0,0,.38),0 0 0 1px rgba(168,85,247,.28); }
-
-    .expand-btn { transition:color .18s; border:none; background:none; cursor:pointer; font-family:Inter,sans-serif; display:inline-flex; align-items:center; gap:7px; }
-
-    .ind-row { transition:background .15s; cursor:pointer; }
-    .ind-row:hover { background:rgba(168,85,247,.08) !important; }
-
-    .txt-lnk { transition:color .15s; }
-    .txt-lnk:hover { color:#1E1B4B !important; }
-
-    @keyframes badge-pulse { 0%,100%{box-shadow:0 0 0 2px rgba(74,222,128,.3)} 50%{box-shadow:0 0 0 7px rgba(74,222,128,.07)} }
-    .status-dot { animation:badge-pulse 2s ease infinite; }
-
-    @media (max-width:1000px) {
-      .hero-right  { display:none !important; }
-      .hero-left   { max-width:100% !important; }
-      .projects-grid { grid-template-columns:1fr !important; }
+    .gradient-text {
+      background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #be38de 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    @media (max-width:700px) { .footer-grid { grid-template-columns:1fr 1fr !important; gap:40px !important; } }
-    @media (max-width:480px) { .footer-grid { grid-template-columns:1fr !important; } .hero-stats { gap:24px !important; } }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(30,27,75,0.12);
+      border-radius: 16px;
+      box-shadow: 0 24px 64px rgba(30,27,75,0.12);
+      padding: 12px;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+    }
+    .nav-item-wrap:hover .nav-dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .ind-tab { transition: all 0.2s; white-space: nowrap; border: none; }
+    .ind-tab:hover { color: #1E1B4B !important; background: rgba(30,27,75,0.06) !important; }
+    .ind-tab.is-active { background: #1E1B4B !important; color: #FAFAFA !important; }
+
+    @media (max-width: 1000px) {
+      .ind-grid { grid-template-columns: 1fr !important; }
+      .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 36px !important; }
+    }
+    @media (max-width: 640px) {
+      .footer-grid { grid-template-columns: 1fr !important; }
+    }
   </style>
 </head>
 <body>
-<div id="root"></div>
+  <div id="root"></div>
 
-<!-- ═══ SCRIPT 1 · Nav + Footer ═══ -->
-<script type="text/babel">
-  const { useState, useEffect } = React;
+  <script type="text/babel">
+    const { useState, useEffect } = React;
 
-  const Nav = () => {
-    const [resOpen, setResOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-    useEffect(() => {
-      const fn = () => setScrolled(window.scrollY > 40);
-      window.addEventListener('scroll', fn);
-      return () => window.removeEventListener('scroll', fn);
-    }, []);
-    const lk = { color:'rgba(30,27,75,0.5)', fontSize:13.5, fontWeight:400, padding:'5px 12px', borderRadius:6, textDecoration:'none', transition:'all 0.15s', background:'transparent', display:'inline-flex', alignItems:'center', gap:3, border:'none', cursor:'pointer', fontFamily:'Inter,sans-serif' };
-    const hi = e => { e.currentTarget.style.color='#1E1B4B'; e.currentTarget.style.background='rgba(30,27,75,0.06)'; };
-    const ho = e => { e.currentTarget.style.color='rgba(30,27,75,0.5)'; e.currentTarget.style.background='transparent'; };
-    return (
-      <div style={{ position:'fixed', top:16, left:0, right:0, zIndex:1000, display:'flex', justifyContent:'center', pointerEvents:'none' }}>
-        <nav style={{ pointerEvents:'auto', width:'calc(100% - 48px)', maxWidth:920, height:52, background:scrolled?'rgba(250,250,250,0.96)':'rgba(250,250,250,0.75)', backdropFilter:'blur(22px)', WebkitBackdropFilter:'blur(22px)', border:scrolled?'1px solid rgba(30,27,75,0.14)':'1px solid rgba(30,27,75,0.08)', borderRadius:100, boxShadow:scrolled?'0 8px 40px rgba(0,0,0,0.09)':'none', transition:'all 0.35s cubic-bezier(0.16,1,0.3,1)', display:'flex', alignItems:'center', padding:'0 18px', gap:4 }}>
-          <a href="index.html" style={{ display:'flex', alignItems:'center', gap:7, textDecoration:'none', flexShrink:0, marginRight:8 }}>
-            <img src="uploads/LOGO 2.png" alt="SlashLLM" style={{ width:26, height:26, objectFit:'contain' }} />
-            <span style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:700, fontSize:15, letterSpacing:'-0.03em', color:'#1E1B4B' }}>SlashLLM</span>
-          </a>
-          <div style={{ flex:1, display:'flex', alignItems:'center', justifyContent:'center', gap:2 }}>
-            <a href="Services.html" style={lk} onMouseEnter={hi} onMouseLeave={ho}>Services</a>
-            <a href="Industries.html" style={{ ...lk, color:'#1E1B4B', background:'rgba(30,27,75,0.06)' }}>Industries</a>
-            <div style={{ position:'relative' }} onMouseEnter={()=>setResOpen(true)} onMouseLeave={()=>setResOpen(false)}>
-              <button style={lk} onMouseEnter={hi} onMouseLeave={ho}>
-                Resources <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M6 9l6 6 6-6"/></svg>
-              </button>
-              {resOpen && (
-                <div style={{ position:'absolute', top:'calc(100% + 12px)', left:'50%', transform:'translateX(-50%)', background:'rgba(250,250,250,0.97)', border:'1px solid rgba(30,27,75,0.1)', borderRadius:14, padding:6, minWidth:176, boxShadow:'0 24px 56px rgba(0,0,0,0.1)', backdropFilter:'blur(24px)', zIndex:10 }}>
-                  {[['Case studies','#'],['Blog','#']].map(([l,h])=>(
-                    <a key={l} href={h} style={{ display:'block', padding:'9px 14px', color:'rgba(30,27,75,0.5)', fontSize:13, borderRadius:8, transition:'all 0.14s' }}
-                       onMouseEnter={e=>{e.currentTarget.style.background='rgba(30,27,75,0.06)';e.currentTarget.style.color='#1E1B4B'}}
-                       onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.color='rgba(30,27,75,0.5)'}}>{l}</a>
-                  ))}
-                </div>
-              )}
+    const Icon = ({ name, size=20, color='currentColor' }) => {
+      const paths = {
+        arrowRight: <path d="M5 12h14M12 5l7 7-7 7"/>,
+        chevronDown: <path d="M6 9l6 6 6-6"/>,
+        sparkles: <><path d="M12 3l1.9 4.9L19 10l-4.1 3.1L16 18l-4-2.8L8 18l1.1-4.9L5 10l5.1-2.1z"/><path d="M19 3l.8 2.2L22 6l-1.8 1.4.5 2.2-1.7-1.3L17.3 9.6l.5-2.2L16 6l2.2-.8z"/></>,
+        agent: <><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="11"/><circle cx="8.5" cy="16" r="1" fill={color}/><circle cx="15.5" cy="16" r="1" fill={color}/></>,
+        engineering: <><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></>,
+        infra: <><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></>,
+        observability: <><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></>,
+        data: <><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></>,
+        gateway: <><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></>,
+        shield: <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></>,
+        finance: <><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></>,
+        health: <><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></>,
+        saas: <><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></>,
+        retail: <><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></>,
+        mfg: <><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></>,
+        prof: <><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></>,
+        cost: <><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></>,
+        check: <polyline points="20 6 9 17 4 12"/>
+      };
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+          {paths[name] || <circle cx="12" cy="12" r="9"/>}
+        </svg>
+      );
+    };
+
+    const GlobalNav = () => {
+      const [scrolled, setScrolled] = useState(false);
+      useEffect(() => {
+        const fn = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', fn);
+        return () => window.removeEventListener('scroll', fn);
+      }, []);
+
+      const navBtnStyle = {
+        color: 'rgba(30,27,75,0.68)', fontSize: 13.5, fontWeight: 500, padding: '8px 12px', borderRadius: 8,
+        display: 'inline-flex', alignItems: 'center', gap: 4, background: 'transparent', border: 'none', cursor: 'pointer'
+      };
+
+      return (
+        <div style={{ position: 'fixed', top: 12, left: 0, right: 0, zIndex: 1000, display: 'flex', justifyContent: 'center', padding: '0 16px' }}>
+          <nav style={{
+            width: '100%', maxWidth: 1240, height: 56, background: scrolled ? 'rgba(255,255,255,0.96)' : 'rgba(255,255,255,0.85)',
+            backdropFilter: 'blur(20px)', border: '1px solid rgba(30,27,75,0.1)', borderRadius: 100, display: 'flex',
+            alignItems: 'center', justifyContent: 'space-between', padding: '0 18px'
+          }}>
+            <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
+              <img src="/uploads/LOGO 2.png" alt="SlashLLM" style={{ width: 28, height: 28 }} />
+              <span style={{ fontFamily: '"Space Grotesk",sans-serif', fontWeight: 800, fontSize: 16, color: '#1E1B4B' }}>SlashLLM</span>
+            </a>
+
+            <div className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <a href="/Services.html" style={navBtnStyle}>What We Do</a>
+              <a href="/Industries.html" style={{ ...navBtnStyle, color: '#7c3aed', fontWeight: 600 }}>Industries</a>
+              <a href="/Products.html" style={navBtnStyle}>Products & Platforms</a>
+              <a href="/Solutions.html" style={navBtnStyle}>Solutions</a>
+              <a href="/CaseStudies.html" style={navBtnStyle}>Customer Stories</a>
+              <a href="/blog" style={navBtnStyle}>Insights</a>
+              <a href="/About.html" style={navBtnStyle}>Company</a>
             </div>
-            <a href="About.html" style={lk} onMouseEnter={hi} onMouseLeave={ho}>About</a>
-          </div>
-          <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" style={{ background:'#1E1B4B', color:'#FAFAFA', padding:'7px 18px', borderRadius:100, fontSize:12.5, fontWeight:600, letterSpacing:'-0.01em', whiteSpace:'nowrap', flexShrink:0, transition:'all 0.2s' }}
-             onMouseEnter={e=>{e.currentTarget.style.boxShadow='0 0 0 2px rgba(168,85,247,0.4),0 8px 28px rgba(30,27,75,0.15)';e.currentTarget.style.opacity='0.9'}}
-             onMouseLeave={e=>{e.currentTarget.style.boxShadow='none';e.currentTarget.style.opacity='1'}}>Let's talk</a>
-        </nav>
-      </div>
-    );
-  };
 
-  const Footer = () => {
-    const cols = [
-      { label:'Services', links:['AI roadmap & consulting','AI product development','AI agents','AI product features','Software development','DevOps & cloud','AI cost observability','Branding & design','Autopilot content engine'] },
-      { label:'Industries', links:['SaaS & technology','Fintech & financial services','Healthcare & life sciences','HR tech'] },
-      { label:'Resources', links:['Case studies','Blog','Contact us'] },
-      { label:'Company', links:['About','Careers','Privacy policy','Terms of service'] },
-    ];
-    return (
-      <footer style={{ borderTop:'1px solid #DDD8F0', background:'#F3F0FF', paddingTop:64, paddingBottom:40 }}>
-        <div style={{ maxWidth:1280, margin:'0 auto', padding:'0 28px' }}>
-          <div className="footer-grid" style={{ display:'grid', gridTemplateColumns:'180px 1fr 1fr 1fr 1fr', gap:52, marginBottom:64 }}>
-            <div>
-              <a href="index.html" style={{ display:'flex', alignItems:'center', gap:8, marginBottom:14 }}>
-                <img src="uploads/LOGO 2.png" alt="SlashLLM" style={{ width:28, height:28, objectFit:'contain' }} />
-                <span style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:700, fontSize:16, letterSpacing:'-0.03em', color:'#1E1B4B' }}>SlashLLM</span>
-              </a>
-              <p style={{ color:'rgba(30,27,75,0.45)', fontSize:13, lineHeight:1.6, marginBottom:20 }}>From prompt to production.</p>
-              <div style={{ display:'flex', gap:14 }}>
-                {[{l:'LinkedIn',fill:'none',sw:'1.5',p:'M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 4m-2 0a2 2 0 104 0 2 2 0 10-4 0'},{l:'X',fill:'currentColor',sw:'0',p:'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'},{l:'GitHub',fill:'none',sw:'1.5',p:'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22'}].map(({l,fill,sw,p})=>(
-                  <a key={l} href="#" style={{ color:'rgba(30,27,75,0.3)', transition:'color 0.15s' }} onMouseEnter={e=>e.currentTarget.style.color='#a855f7'} onMouseLeave={e=>e.currentTarget.style.color='rgba(30,27,75,0.3)'}>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill={fill} stroke={fill==='none'?'currentColor':'none'} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round"><path d={p}/></svg>
-                  </a>
-                ))}
-              </div>
-            </div>
-            {cols.map(({ label, links }) => (
-              <div key={label}>
-                <p style={{ fontSize:11, fontWeight:600, color:'rgba(30,27,75,0.35)', letterSpacing:'0.12em', textTransform:'uppercase', fontFamily:'"JetBrains Mono",monospace', marginBottom:18 }}>{label}</p>
-                <div style={{ display:'flex', flexDirection:'column', gap:11 }}>
-                  {links.map(item => <a key={item} href="#" className="txt-lnk" style={{ color:'rgba(30,27,75,0.5)', fontSize:13.5 }}>{item}</a>)}
-                </div>
-              </div>
-            ))}
+            <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer"
+               style={{ background: '#1E1B4B', color: '#fff', padding: '8px 18px', borderRadius: 100, fontSize: 13, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+              Talk to an AI Expert <Icon name="arrowRight" size={13} />
+            </a>
+          </nav>
+        </div>
+      );
+    };
+
+    const GlobalFooter = () => (
+      <footer style={{ borderTop: '1px solid #DDD8F0', background: '#F4F1FA', paddingTop: 64, paddingBottom: 44 }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px', textAlign: 'center' }}>
+          <span style={{ fontFamily: '"Space Grotesk",sans-serif', fontWeight: 800, fontSize: 20, color: '#1E1B4B' }}>SlashLLM Industry Verticals</span>
+          <p style={{ fontSize: 13, color: 'rgba(30,27,75,0.6)', marginTop: 6, marginBottom: 24 }}>Deep regulatory, operational, and data engineering expertise across key market sectors.</p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 20, marginBottom: 28 }}>
+            <a href="/Services.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Services</a>
+            <a href="/Products.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Products</a>
+            <a href="/Solutions.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Solutions</a>
+            <a href="/CaseStudies.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Case Studies</a>
           </div>
-          <div style={{ borderTop:'1px solid #DDD8F0', paddingTop:24 }}>
-            <p style={{ color:'rgba(30,27,75,0.35)', fontSize:13 }}>© 2026 SlashLLM. All rights reserved.</p>
-          </div>
+          <p style={{ color: 'rgba(30,27,75,0.45)', fontSize: 12.5 }}>© 2026 SlashLLM Inc. All rights reserved.</p>
         </div>
       </footer>
     );
-  };
 
-  Object.assign(window, { Nav, Footer });
-</script>
-
-<!-- ═══ SCRIPT 2 · Data + Components ═══ -->
-<script type="text/babel">
-
-  const INDUSTRIES = [
-    {
-      id:'hr', num:'01', short:'HR Tech', title:'HR tech & talent',
-      headline:['Smarter hiring. Faster ops.', 'Zero busywork.'],
-      body:"Recruiting and workforce management are drowning in manual processes — resume screening, interview scheduling, candidate assessment, timesheet approvals, payroll reconciliation. We've built AI systems that automate the repetitive work, surface the insights that matter, and scale operations without scaling headcount. From computer-vision interview analysis to GPS-verified workforce platforms, we build for the full talent lifecycle.",
-      useCases:['AI video interview analysis','Automated applicant profiling','AI job matching & scheduling','GPS-verified attendance & payroll','Interactive educational assessment'],
-      bg:'#FAFAFA',
-      projects:[
-        { id:'impress-ai', tags:['AI product','Computer vision','Shipped'],
-          title:'Impress AI', subtitle:'AI video interview analysis system',
-          oneliner:"Combines real-time transcription and computer vision to assess candidates across 7 dimensions — communication, emotional expression, body language, content relevance, problem-solving, professionalism, and interview integrity.",
-          metrics:['100% local-to-cloud','7-dimension scoring','Real AWS integration'],
-          built:['Iris-based gaze detection using MediaPipe landmarks (468–477) to distinguish reading from eye contact','7-dimensional competency scoring via AWS Bedrock (Claude 3 Haiku)','Proctoring & integrity detection: candidate absence, multiple faces, reading behaviour','Multi-interview batch summarisation with AI-synthesised executive reports','Async architecture with S3 persistence for unlimited concurrent interviews'],
-          stack:'Python · FastAPI · AWS Bedrock · AWS Transcribe · MediaPipe · OpenCV · S3 · Docker' },
-        { id:'workforce', tags:['Full-stack platform','AI matching','Shipped'],
-          title:'Unified Workforce Platform', subtitle:'Mobile-first recruitment & workforce management',
-          oneliner:"Replaced 5+ disconnected tools — CRM, spreadsheets, messaging apps, job boards — with a single-source-of-truth system for on-demand worker operations.",
-          metrics:['−50% recruitment costs','−50% operational time','+50% worker retention'],
-          note:'6-week sprint to production',
-          built:['3-tier platform: Worker PWA + Admin Dashboard + Employer Client Portal','5-factor AI matching engine (proximity, performance, job type, completion rate, tier)','GPS-verified attendance with geofence validation and no-show auto-detection','Multi-tier timesheet approval workflow to automated payroll export','Bilingual support, AES-256 encrypted PII, privacy-compliant architecture'],
-          stack:'React 18 · TypeScript · FastAPI · PostgreSQL · Redis · AWS (EC2, RDS, S3) · Docker · GitHub Actions' },
-        { id:'savos', tags:['Data platform','In production'],
-          title:'Impress AI SIT-SAVOS', subtitle:'Applicant assessment & bulk profiling',
-          oneliner:"Secure web platform consolidating applicant data from multiple CSV sources with OAuth2-protected external assessment API integration — enabling bulk-scale profiling for educational institutions.",
-          metrics:['100+ applicants per batch','Zero duplicate records','OAuth2 + KMS secured'],
-          built:['Secure multi-part S3 uploads with AWS KMS encryption','Streaming CSV parser with automated header mapping via synonym engine','Idempotent data consolidation with MD5 checksums (zero duplicate records)','Bulk ingest API (100+ applicants per batch) with async webhook callbacks'],
-          stack:'React 18 · TypeScript · FastAPI · AWS (S3, DynamoDB, Cognito) · Docker' },
-        { id:'dot-in-space', tags:['EdTech','PWA','Shipped'],
-          title:'Dot in Space', subtitle:'Interactive science education platform',
-          oneliner:"Mission-based educational PWA for children aged 8–14, QR-activated at physical science centre exhibits. Transforms visits into interactive space adventures with station-based quizzes and progress tracking.",
-          metrics:['Mobile-first PWA','6 interactive stations','Offline-capable'],
-          built:['6-station sequential mission with animated intros and 80/20 visual-to-assessment ratio','QR-activated exhibits with offline-friendly PWA architecture','Admin dashboard for player tracking, score monitoring, and content management','Child-safe design: no ads, no social features, no public profiles'],
-          stack:'React · TypeScript · Tailwind CSS · Supabase' },
-      ]
-    },
-    {
-      id:'healthcare', num:'02', short:'Healthcare', title:'Healthcare',
-      headline:['Digital systems for the care sector —', 'built for compliance from day one.'],
-      body:"Healthcare operations run on paper trails, fragmented records, and manual compliance tracking. We build digital platforms that unify patient and staff data, automate regulatory workflows, and provide real-time audit trails — all designed around the compliance requirements (HIPAA, NHS standards, PDPA) that make healthcare software different from everything else.",
-      useCases:['Student rotation & teaching hours','Resident records & medication (MAR)','Healthcare-compliant audit trails','Multi-discipline role-based access control'],
-      bg:'#F3F0FF',
-      projects:[
-        { id:'clinedops', tags:['Healthcare','Full-stack platform','In production'],
-          title:'ClinEdOps', subtitle:'Clinical education operations platform',
-          oneliner:"Unified student/tutor lifecycle and teaching hours tracking system for four healthcare disciplines at a leading teaching hospital — Medicine, Allied Health, Nursing, and Training Programmes.",
-          metrics:['4 healthcare disciplines','80%+ test coverage','5-month build'],
-          note:'Real-time audit trails',
-          built:['Batch student/tutor import (Excel/CSV) with field mapping and duplicate detection','Teaching hours logging with multi-level approval (supervisor to programme admin)','Survey engine with custom JSONB questions and response analytics','Four-tier RBAC: super_admin, programme_admin, supervisor, tutor, student','Full audit logging on every CREATE, UPDATE, DELETE with before/after JSONB state'],
-          stack:'React 18 · Ant Design · FastAPI · PostgreSQL 16 · TimescaleDB · Celery · Redis · AWS S3/SES · Docker' },
-        { id:'careo', tags:['Healthcare','Care home software','In production'],
-          title:'CareO', subtitle:'UK care home management system',
-          oneliner:"Replaces paper records with structured digital workflows for resident care, medication administration, incident reporting, and NHS compliance documentation.",
-          metrics:['NHS-compliant workflows','Real-time team sync','Full audit logging'],
-          built:['Resident profiles with comprehensive care records and document tracking','Medication Administration Records (MAR) with scheduling and audit trails','NHS Trust incident reporting with automated form generation','Manager audit system with before/after state tracking and approval workflows','Real-time sync across care teams via Convex backend'],
-          stack:'Next.js 15 · React 19 · TypeScript · shadcn/ui · Convex · Better Auth · Recharts' },
-      ]
-    },
-    {
-      id:'fintech', num:'03', short:'Fintech', title:'Fintech & enterprise',
-      headline:['Financial data is sensitive.', 'We build like it matters.'],
-      body:"Financial services demand accuracy, encryption, and audit trails that hold up under scrutiny. We build systems that process financial data with real security — client-side encryption, row-level access control, and compliance-ready infrastructure. From personal wealth management to enterprise payroll auditing, our fintech work is defined by one principle: the system should be trustworthy enough that people put real numbers in it.",
-      useCases:['Encrypted personal wealth management','AI payroll comparison & discrepancy detection','Real-time LLM cost attribution','Compliance-ready financial data pipelines'],
-      bg:'#FAFAFA',
-      projects:[
-        { id:'wealthyhood', tags:['Fintech','Encrypted platform','Active MVP'],
-          title:'Wealthyhood', subtitle:'Encrypted personal wealth management',
-          oneliner:"Users track assets, liabilities, insurance, and dependents — then safely share their financial portfolio with trusted family, beneficiaries, or advisors. The server never sees plaintext financial data.",
-          metrics:['AES-256 client-side','Zero-knowledge architecture','Dead-man\'s switch'],
-          built:['Client-side AES-256 encryption with PBKDF2 key derivation (server-zero-knowledge)','Net worth dashboard with wealth distribution charts and financial health scoring','Granular portfolio sharing with revocable view/edit access control','Dead-man\'s switch: configurable inactivity trigger grants access to beneficiaries','Advisor dashboard with multi-client portfolio management and risk assessment'],
-          stack:'React 18 · TypeScript · Supabase · crypto-js · Recharts · Framer Motion · Edge Functions (Deno)' },
-        { id:'payrolliq', tags:['Enterprise','Local AI','Built'],
-          title:'PayrollIQ', subtitle:'AI payroll file comparison',
-          oneliner:"AI-powered payroll file analysis using locally-hosted Ollama (Gemma 3). Zero data leaves the network — payroll teams get instant discrepancy detection, compliance auditing, and custom queries.",
-          metrics:['100% local processing','Zero data egress','4 analysis modes'],
-          built:['Drag-drop file upload with side-by-side preview (CSV, XLSX)','Streaming LLM analysis via local Ollama instance (Gemma 3 7B)','4 analysis modes: discrepancy detection, summarisation, compliance check, custom query','100% local processing — zero data egress, enterprise-grade privacy'],
-          stack:'Next.js 14 · TypeScript · Ollama (Gemma 3) · PapaParse · XLSX · Tailwind CSS' },
-        { id:'slashboard', tags:['Our product','AI observability','Live'],
-          title:'Slashboard', subtitle:'AI cost observatory',
-          oneliner:"Real-time LLM cost tracking and spend attribution dashboard powered by LiteLLM webhooks and TimescaleDB. We deploy it for clients running LLM APIs in production to give them visibility into every API call, every model, every dollar.",
-          metrics:['Sub-100ms dashboard updates','90K+ log capacity tested','20–40% cost savings typical'],
-          built:['Real-time ingestion via LiteLLM webhooks with Redis Stream processing','Cost attribution by team, project, model, and feature','Interactive KPI dashboard: spend trends, cost heatmaps, prompt logs','Roadmap: anomaly detection, budget enforcement, forecasting'],
-          stack:'Next.js 15 · React 19 · FastAPI · PostgreSQL 16 · TimescaleDB · Redis 7 · Tremor · Recharts · Docker',
-          isOurProduct:true },
-      ]
-    },
-    {
-      id:'foodtech', num:'04', short:'FoodTech', title:'FoodTech & compliance',
-      headline:['From kitchen to shelf —', 'AI that handles the paperwork.'],
-      body:"Food businesses face a mountain of regulatory requirements before their first product hits a shelf — nutrition labelling, food safety plans, traceability, certification. We build AI-powered compliance tools and supply chain systems that turn weeks of manual paperwork into minutes of guided automation — especially for the small producers who need it most.",
-      useCases:['AI-generated FDA-compliant nutrition labels','Automated HACCP food safety plans','Blockchain-based farm-to-fork traceability','QR-verified supply chain transparency'],
-      bg:'#F3F0FF',
-      projects:[
-        { id:'smobler', tags:['FoodTech','AI compliance','Shipped'],
-          title:'Smobler', subtitle:'AI-powered food compliance platform',
-          oneliner:"Transforms complex FDA regulatory requirements into an intuitive wizard-based experience — first-time food makers generate professional nutrition labels and HACCP plans in minutes, not weeks.",
-          metrics:['FDA/USDA compliant','Minutes vs. weeks','12-week MVP'],
-          built:['AI-generated FDA-compliant nutrition labels with USDA nutritional database integration','Automated HACCP plan builder with hazard analysis, CCPs, and corrective actions','Real-time compliance validation against FDA/USDA standards','Multi-format export: PDF, Word (DOCX), and high-resolution PNG','Contextual AI food safety assistant with step-aware guidance'],
-          stack:'React · TypeScript · Supabase · GPT-4 · Tailwind CSS' },
-        { id:'halalchain', tags:['Supply chain','Blockchain','Prototype'],
-          title:'HalalChain', subtitle:'Blockchain-based Halal traceability',
-          oneliner:"Decentralised farm-to-fork traceability platform. Five Solidity smart contracts record every stage of a product's lifecycle on-chain — consumers verify the full journey via QR code.",
-          metrics:['5 smart contracts','6 role-based portals','On-chain verification'],
-          built:['5 interlocking Solidity contracts: AnimalRegistry, SlaughterProcess, ProcessingBatch, SupplyChain, HalalCertification','6 role-specific dashboards (Farmer, Slaughterhouse, Processor, Distributor, Retailer, Consumer)','Mobile-first QR scanning suite with offline queue + sync','Real-time compliance monitor: temperature, certification expiry, cross-contamination, segregation'],
-          stack:'Solidity · Hardhat · ethers.js · React 18 · TypeScript · shadcn/ui · MetaMask' },
-      ]
-    },
-  ];
-
-  const jumpTo = (id) => {
-    const el = document.getElementById('ind-' + id);
-    if (!el) return;
-    const top = el.getBoundingClientRect().top + window.pageYOffset - 145;
-    window.scrollTo({ top, behavior:'smooth' });
-  };
-
-  const tagPill = (tag) => {
-    const t = tag.toLowerCase();
-    if (['shipped','in production','built','live'].includes(t))
-      return { background:'rgba(74,222,128,0.1)', color:'#15803d', border:'1px solid rgba(74,222,128,0.22)' };
-    if (t === 'our product')
-      return { background:'rgba(168,85,247,0.12)', color:'#a855f7', border:'1px solid rgba(168,85,247,0.28)' };
-    if (t.includes('active') || t.includes('mvp'))
-      return { background:'rgba(251,191,36,0.1)', color:'#b45309', border:'1px solid rgba(251,191,36,0.22)' };
-    if (t === 'prototype')
-      return { background:'rgba(30,27,75,0.05)', color:'rgba(30,27,75,0.4)', border:'1px solid rgba(30,27,75,0.1)' };
-    return { background:'rgba(30,27,75,0.04)', color:'rgba(30,27,75,0.46)', border:'1px solid #DDD8F0' };
-  };
-
-  /* ── Project Card ── */
-  const ProjectCard = ({ project, sectionBg }) => {
-    const [open, setOpen] = React.useState(false);
-    const dark = false;
-    const cardBg = sectionBg === '#FAFAFA' ? '#F3F0FF' : '#FAFAFA';
-
-    const c = dark
-      ? { title:'rgba(255,255,255,0.9)', sub:'rgba(255,255,255,0.28)', body:'rgba(255,255,255,0.5)', metric:'rgba(168,85,247,0.88)', sep:'rgba(255,255,255,0.14)', expand:'rgba(168,85,247,0.6)', cardBorder:'rgba(168,85,247,0.22)', divider:'rgba(255,255,255,0.07)', listNum:'rgba(168,85,247,0.42)', listText:'rgba(255,255,255,0.5)', stkBg:'rgba(0,0,0,0.28)', stkBorder:'rgba(255,255,255,0.06)', stkLbl:'rgba(255,255,255,0.2)', stkTxt:'rgba(168,85,247,0.65)' }
-      : { title:'#1E1B4B', sub:'rgba(30,27,75,0.36)', body:'rgba(30,27,75,0.58)', metric:'#a855f7', sep:'rgba(30,27,75,0.18)', expand:'rgba(30,27,75,0.38)', cardBorder:'#DDD8F0', divider:'rgba(168,85,247,0.1)', listNum:'rgba(168,85,247,0.45)', listText:'rgba(30,27,75,0.65)', stkBg:'rgba(168,85,247,0.04)', stkBorder:'rgba(168,85,247,0.09)', stkLbl:'rgba(30,27,75,0.28)', stkTxt:'rgba(30,27,75,0.5)' };
-
-    return (
-      <div className={'proj-card ' + (dark ? 'proj-dark' : 'proj-light')}
-           style={{ background:cardBg, border:'1px solid ' + c.cardBorder, borderRadius:20, overflow:'hidden', height:'fit-content' }}>
-
-        {/* Our product banner */}
-        {project.isOurProduct && (
-          <div style={{ background:'rgba(168,85,247,0.06)', borderBottom:'1px solid rgba(168,85,247,0.12)', padding:'9px 28px', display:'flex', alignItems:'center', gap:10 }}>
-            <div style={{ width:6, height:6, borderRadius:'50%', background:'#a855f7' }}></div>
-            <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'rgba(168,85,247,0.7)', letterSpacing:'0.16em', textTransform:'uppercase' }}>Our own product · used in client deployments</span>
-          </div>
-        )}
-
-        <div style={{ padding:'28px 28px 0' }}>
-          {/* Tags */}
-          <div style={{ display:'flex', gap:6, flexWrap:'wrap', marginBottom:16 }}>
-            {project.tags.map(tag => (
-              <span key={tag} style={{ ...tagPill(tag), padding:'4px 11px', borderRadius:100, fontSize:11, fontWeight:500, fontFamily:'"JetBrains Mono",monospace', letterSpacing:'0.04em' }}>{tag}</span>
-            ))}
-          </div>
-
-          {/* Title + subtitle */}
-          <h3 style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:'clamp(19px,1.5vw,24px)', fontWeight:700, letterSpacing:'-0.04em', color:c.title, lineHeight:1.2, marginBottom:5 }}>{project.title}</h3>
-          <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10.5, color:c.sub, letterSpacing:'0.06em', marginBottom:14 }}>{project.subtitle}</p>
-
-          {/* One-liner */}
-          <p style={{ fontSize:14.5, color:c.body, lineHeight:1.74, marginBottom:20, textWrap:'pretty' }}>{project.oneliner}</p>
-
-          {/* Metrics */}
-          <div style={{ display:'flex', flexWrap:'wrap', marginBottom:project.note ? 14 : 22 }}>
-            {project.metrics.map((m, i) => (
-              <React.Fragment key={m}>
-                <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:12, color:c.metric, fontWeight:500, letterSpacing:'0.02em' }}>{m}</span>
-                {i < project.metrics.length - 1 && <span style={{ color:c.sep, margin:'0 9px' }}>·</span>}
-              </React.Fragment>
-            ))}
-          </div>
-
-          {/* Note badge */}
-          {project.note && (
-            <div style={{ display:'inline-flex', alignItems:'center', gap:6, padding:'5px 12px', background:'rgba(74,222,128,0.08)', border:'1px solid rgba(74,222,128,0.2)', borderRadius:100, marginBottom:22 }}>
-              <div style={{ width:5, height:5, borderRadius:'50%', background:'#4ade80' }}></div>
-              <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10.5, color:'#15803d', letterSpacing:'0.06em' }}>{project.note}</span>
-            </div>
-          )}
-
-          {/* Expand toggle */}
-          <button className="expand-btn" onClick={() => setOpen(!open)}
-            style={{ padding:'0 0 28px', fontSize:13, fontWeight:500, color:c.expand }}
-            onMouseEnter={e => e.currentTarget.style.color = '#1E1B4B'}
-            onMouseLeave={e => e.currentTarget.style.color = c.expand}>
-            {open ? 'Collapse details' : 'View details'}
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"
-                 style={{ transform:open?'rotate(180deg)':'none', transition:'transform 0.35s cubic-bezier(.16,1,.3,1)', flexShrink:0 }}>
-              <path d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-        </div>
-
-        {/* Expandable detail */}
-        <div style={{ maxHeight:open ? 800 : 0, opacity:open ? 1 : 0, overflow:'hidden', transition:'max-height 0.55s cubic-bezier(.16,1,.3,1), opacity 0.3s ease' }}>
-          <div style={{ borderTop:'1px solid ' + c.divider, margin:'0 28px' }}></div>
-          <div style={{ padding:'24px 28px 28px' }}>
-            <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9.5, color:c.stkLbl, letterSpacing:'0.18em', textTransform:'uppercase', marginBottom:16 }}>What we built</p>
-            <div style={{ marginBottom:24 }}>
-              {project.built.map((item, i) => (
-                <div key={i} style={{ display:'flex', gap:14, paddingBottom: i < project.built.length - 1 ? 11 : 0, borderBottom: i < project.built.length - 1 ? '1px solid ' + c.divider : 'none', marginBottom: i < project.built.length - 1 ? 11 : 0, alignItems:'flex-start' }}>
-                  <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:c.listNum, flexShrink:0, paddingTop:2, minWidth:20 }}>{String(i + 1).padStart(2, '0')}</span>
-                  <span style={{ fontSize:13.5, color:c.listText, lineHeight:1.62 }}>{item}</span>
-                </div>
-              ))}
-            </div>
-            <div style={{ padding:'13px 16px', background:c.stkBg, borderRadius:10, border:'1px solid ' + c.stkBorder }}>
-              <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9.5, color:c.stkLbl, letterSpacing:'0.16em', textTransform:'uppercase', marginBottom:7 }}>Tech stack</p>
-              <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11.5, color:c.stkTxt, lineHeight:1.72 }}>{project.stack}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  /* ── Hero overview card ── */
-  const IndustryOverviewCard = () => (
-    <div className="hero-card" style={{ background:'#100D2E', border:'1px solid rgba(255,255,255,0.06)', borderRadius:20, overflow:'hidden', width:'100%', maxWidth:440 }}>
-      <div style={{ padding:'12px 18px', borderBottom:'1px solid rgba(255,255,255,0.05)', display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-        <div style={{ display:'flex', gap:5 }}>
-          {['#FF5F57','#FFBD2E','#28C840'].map((c,i) => <div key={i} style={{ width:8, height:8, borderRadius:'50%', background:c }} />)}
-        </div>
-        <div style={{ display:'flex', alignItems:'center', gap:8 }}>
-          <span className="status-dot" style={{ width:6, height:6, borderRadius:'50%', background:'#4ade80', display:'block' }}></span>
-          <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'rgba(255,255,255,0.25)', letterSpacing:'0.08em' }}>4 industries · 11 projects</span>
-        </div>
-      </div>
-      <div style={{ padding:'20px 20px 8px' }}>
-        <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9.5, color:'rgba(168,85,247,0.55)', letterSpacing:'0.16em', textTransform:'uppercase', marginBottom:4 }}>Industry coverage</p>
-        <p style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:13.5, color:'rgba(255,255,255,0.5)', fontWeight:600, letterSpacing:'-0.02em' }}>Domain-specific AI — shipped in production</p>
-      </div>
-      <div style={{ padding:'4px 0 10px' }}>
-        {[
-          { num:'01', id:'hr',         label:'HR Tech & Talent',      count:4, pct:100, tags:['computer vision','AI matching','EdTech'] },
-          { num:'02', id:'healthcare', label:'Healthcare',             count:2, pct:50,  tags:['HIPAA','NHS compliance','audit trails'] },
-          { num:'03', id:'fintech',    label:'Fintech & Enterprise',   count:3, pct:75,  tags:['encryption','local AI','observability'] },
-          { num:'04', id:'foodtech',   label:'FoodTech & Compliance',  count:2, pct:50,  tags:['FDA','blockchain','traceability'] },
-        ].map(({ num, id, label, count, pct, tags }) => (
-          <div key={num} className="ind-row" onClick={() => jumpTo(id)} style={{ padding:'11px 20px', background:'transparent' }}>
-            <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:6 }}>
-              <div style={{ display:'flex', gap:10, alignItems:'baseline' }}>
-                <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9.5, color:'rgba(168,85,247,0.45)', letterSpacing:'0.1em' }}>{num}</span>
-                <span style={{ fontSize:13, color:'rgba(255,255,255,0.6)', fontWeight:500 }}>{label}</span>
-              </div>
-              <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'rgba(255,255,255,0.2)' }}>{count} {count === 1 ? 'project' : 'projects'}</span>
-            </div>
-            <div style={{ height:3, borderRadius:2, background:'rgba(255,255,255,0.05)', overflow:'hidden', marginBottom:7 }}>
-              <div style={{ height:'100%', width:pct + '%', background:'linear-gradient(90deg,#a855f7,#be38de)', borderRadius:2 }}></div>
-            </div>
-            <div style={{ display:'flex' }}>
-              {tags.map((t, i) => (
-                <React.Fragment key={t}>
-                  <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9, color:'rgba(255,255,255,0.2)', letterSpacing:'0.05em' }}>{t}</span>
-                  {i < tags.length - 1 && <span style={{ color:'rgba(255,255,255,0.1)', margin:'0 5px' }}>·</span>}
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div style={{ padding:'12px 20px', borderTop:'1px solid rgba(255,255,255,0.05)', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-        <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9.5, color:'rgba(255,255,255,0.18)', letterSpacing:'0.08em' }}>slashllm.com/industries</span>
-        <div style={{ display:'flex', alignItems:'center', gap:6 }}>
-          <div style={{ width:6, height:6, borderRadius:'50%', background:'rgba(74,222,128,0.7)' }}></div>
-          <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9.5, color:'rgba(74,222,128,0.45)', letterSpacing:'0.06em' }}>click to jump</span>
-        </div>
-      </div>
-    </div>
-  );
-
-  /* ── Hero ── */
-  const IndustriesHero = () => (
-    <section style={{ background:'#FAFAFA', borderBottom:'1px solid #DDD8F0', position:'relative', overflow:'hidden' }}>
-      <div style={{ position:'absolute', inset:0, backgroundImage:'linear-gradient(rgba(168,85,247,0.032) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,0.032) 1px,transparent 1px)', backgroundSize:'64px 64px', pointerEvents:'none' }}></div>
-      <div style={{ position:'absolute', right:'-4%', top:'-8%', fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, fontSize:'30vw', color:'transparent', WebkitTextStroke:'1px rgba(168,85,247,0.032)', lineHeight:1, pointerEvents:'none', userSelect:'none', letterSpacing:'-0.06em' }}>/</div>
-      <div style={{ position:'absolute', left:'28%', top:'5%', width:520, height:520, background:'radial-gradient(circle,rgba(168,85,247,0.05) 0%,transparent 65%)', pointerEvents:'none' }}></div>
-
-      <div style={{ maxWidth:1280, margin:'0 auto', padding:'148px 28px 88px', display:'grid', gridTemplateColumns:'54% 46%', gap:'0 64px', alignItems:'center', position:'relative', zIndex:1 }}>
-        <div className="hero-left" style={{ maxWidth:580 }}>
-          <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:36 }}>
-            <a href="index.html" style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'rgba(30,27,75,0.32)', letterSpacing:'0.1em', transition:'color 0.15s' }} onMouseEnter={e=>e.currentTarget.style.color='#a855f7'} onMouseLeave={e=>e.currentTarget.style.color='rgba(30,27,75,0.32)'}>slashllm.com</a>
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(30,27,75,0.22)" strokeWidth="2.5" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
-            <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', letterSpacing:'0.1em' }}>industries</span>
-          </div>
-          <div style={{ display:'flex', alignItems:'center', gap:14, marginBottom:28 }}>
-            <div style={{ width:32, height:1.5, background:'linear-gradient(90deg,#a855f7,#be38de)', borderRadius:2 }}></div>
-            <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', letterSpacing:'0.16em', textTransform:'uppercase' }}>Where we've shipped</span>
-          </div>
-          <h1 style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, letterSpacing:'-0.05em', marginBottom:28 }}>
-            <span style={{ display:'block', fontSize:'clamp(30px,3.4vw,50px)', color:'rgba(30,27,75,0.6)', lineHeight:1.18, fontWeight:700 }}>AI built for</span>
-            <span className="gradient-text" style={{ display:'block', fontSize:'clamp(54px,6.2vw,92px)', lineHeight:1.0 }}>your world.</span>
-          </h1>
-          <p style={{ fontSize:17.5, color:'rgba(30,27,75,0.52)', lineHeight:1.78, maxWidth:500, marginBottom:44, textWrap:'pretty' }}>
-            Every industry has its own data, regulations, and edge cases. We don't force generic AI into your business — we build solutions shaped by real projects in your domain.
-          </p>
-          <div className="hero-stats" style={{ display:'flex', gap:36, paddingTop:32, borderTop:'1px solid #DDD8F0' }}>
-            {[{v:'4',l:'industries served'},{v:'20+',l:'projects shipped'},{v:'Real',l:'production deployments'}].map(({v,l}) => (
-              <div key={l}>
-                <p style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:22, fontWeight:800, color:'#1E1B4B', letterSpacing:'-0.04em', lineHeight:1 }}>{v}</p>
-                <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'rgba(30,27,75,0.4)', letterSpacing:'0.1em', textTransform:'uppercase', marginTop:5 }}>{l}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="hero-right" style={{ display:'flex', justifyContent:'flex-end', alignItems:'center', paddingBottom:16 }}>
-          <IndustryOverviewCard />
-        </div>
-      </div>
-    </section>
-  );
-
-  /* ── Sticky nav ── */
-  const StickyIndustryNav = ({ activeId }) => {
-    const innerRef = React.useRef(null);
-    React.useEffect(() => {
-      if (!innerRef.current) return;
-      const active = innerRef.current.querySelector('.is-active');
-      if (active) {
-        const c = innerRef.current;
-        c.scrollTo({ left: active.offsetLeft - c.offsetWidth / 2 + active.offsetWidth / 2, behavior:'smooth' });
+    const INDUSTRIES = [
+      {
+        id: 'financial-services',
+        num: '01',
+        icon: 'finance',
+        short: 'Financial Services',
+        title: 'Financial Services & Banking',
+        headline: ['Secure AI for Capital Markets,', 'Banking & Wealth Operations.'],
+        desc: 'Financial data demands zero-data retention, air-gapped VPC deployments, and deterministic compliance guardrails. We engineer automated risk underwriting, fraud detection, and regulatory compliance intelligence engines.',
+        useCases: [
+          'Automated Loan Underwriting & Risk Scoring Workflows',
+          'Regulatory Compliance Intelligence & SEC/FINRA Filing Synthesis',
+          'Client-Side Zero-Knowledge Wealth Management Dashboards',
+          'Real-Time Transaction Anomaly & Fraud Detection'
+        ],
+        metric: '38%',
+        metricDesc: 'Lower API Inference Costs'
+      },
+      {
+        id: 'healthcare',
+        num: '02',
+        icon: 'health',
+        short: 'Healthcare & Life Sciences',
+        title: 'Healthcare & Life Sciences',
+        headline: ['HIPAA & NHS-Compliant AI Systems', 'for Patient Care & Education.'],
+        desc: 'Healthcare operations are burdened by unstructured clinical notes and stringent regulatory audits. We build HIPAA/NHS-compliant digital assistants that automate clinical transcription, resident care logging, and clinical education tracking.',
+        useCases: [
+          'Voice-Enabled Clinical Shift Handoff & Ambient EHR Documentation',
+          'Medication Administration Records (MAR) & Care Audit Verification',
+          'Clinical Education Operations & Resident Milestone Tracking',
+          'Biomedical Research Document Extraction & Trial Matching'
+        ],
+        metric: '72%',
+        metricDesc: 'Documentation Time Saved'
+      },
+      {
+        id: 'saas',
+        num: '03',
+        icon: 'saas',
+        short: 'SaaS & Technology',
+        title: 'SaaS & Enterprise Technology',
+        headline: ['Embedded AI Copilots &', 'Multi-Tenant Agent Infrastructure.'],
+        desc: 'We partner with B2B SaaS engineering teams to design and scale intelligent copilot features, multi-tenant vector search, and unified LLM gateway proxies that protect margins.',
+        useCases: [
+          'Context-Aware In-App AI Copilots & Natural Language Querying',
+          'Multi-Tenant RAG Systems with Dynamic Tenant Isolation',
+          'SlashLLM Gateway Dynamic Routing for 30–60% Spend Reduction',
+          'CI/CD Prompt Evaluation Suites & Production Rollout Monitors'
+        ],
+        metric: '4.2x',
+        metricDesc: 'Inference Latency Speedup'
+      },
+      {
+        id: 'retail',
+        num: '04',
+        icon: 'retail',
+        short: 'Retail & E-Commerce',
+        title: 'Retail, Consumer & E-Commerce',
+        headline: ['Personalized Commerce Agents &', 'High-Converting Catalog Search.'],
+        desc: 'Transform shopping experiences with multimodal search, conversational shopping assistants, and autonomous inventory reconciliation engines that boost conversion rates.',
+        useCases: [
+          'Conversational Product Recommenders & Personal Shopper Agents',
+          'Visual Search & Automated Product Catalog Tagging Pipelines',
+          'Autonomous Post-Purchase Support & Return Resolution Bots',
+          'Dynamic Price & Margin Optimization Intelligence'
+        ],
+        metric: '+28%',
+        metricDesc: 'Conversion Rate Uplift'
+      },
+      {
+        id: 'manufacturing',
+        num: '05',
+        icon: 'mfg',
+        short: 'Manufacturing & Logistics',
+        title: 'Manufacturing & Supply Chain',
+        headline: ['Industrial Intelligence for', 'Supply Chains & Equipment Ops.'],
+        desc: 'Unify telemetry from IoT sensors, maintenance manuals, and ERP systems to enable predictive maintenance agents, automated supplier auditing, and logistics route optimization.',
+        useCases: [
+          'Multimodal Equipment Troubleshooting & Maintenance Copilots',
+          'Automated Supplier Quality Auditing & Compliance Tracking',
+          'Supply Chain Disruption Forecasting & Dynamic Routing',
+          'Warehouse Inventory Computer Vision & Safety Monitoring'
+        ],
+        metric: '85%',
+        metricDesc: 'Manual Audit Reduction'
+      },
+      {
+        id: 'professional-services',
+        num: '06',
+        icon: 'prof',
+        short: 'Professional Services',
+        title: 'Professional & Legal Services',
+        headline: ['Cognitive Automation for Legal,', 'Consulting & Talent Advisory.'],
+        desc: 'Accelerate billable throughput. We build contract analysis agents, due diligence synthesis engines, and 7-dimension video interview competency scoring systems.',
+        useCases: [
+          '7-Dimension Video Interview Competency Scoring (Impress AI)',
+          'Automated Contract Risk Analysis & Redlining Copilots',
+          'Due Diligence Knowledge Graph Synthesis for M&A',
+          'Automated Executive Memo & Proposal Drafting Engines'
+        ],
+        metric: '100%',
+        metricDesc: 'Candidate Backlog Eliminated'
       }
-    }, [activeId]);
-    const activeIdx = INDUSTRIES.findIndex(i => i.id === activeId);
-    const progress = ((activeIdx + 1) / INDUSTRIES.length) * 100;
-    return (
-      <div style={{ position:'sticky', top:76, zIndex:900, background:'rgba(250,250,250,0.96)', backdropFilter:'blur(20px)', WebkitBackdropFilter:'blur(20px)', borderBottom:'1px solid #DDD8F0' }}>
-        <div style={{ position:'absolute', top:0, left:0, height:2, background:'linear-gradient(90deg,#a855f7,#be38de)', width:progress + '%', transition:'width 0.5s cubic-bezier(.16,1,.3,1)', borderRadius:'0 1px 1px 0' }}></div>
-        <div style={{ maxWidth:1280, margin:'0 auto', padding:'0 28px' }}>
-          <div ref={innerRef} className="ind-nav-scroll" style={{ display:'flex', gap:2, overflowX:'auto', padding:'9px 0', alignItems:'center' }}>
-            {INDUSTRIES.map(({ id, num, short }) => (
-              <button key={id} onClick={() => jumpTo(id)}
-                className={'ind-tab' + (activeId === id ? ' is-active' : '')}
-                style={{ display:'inline-flex', alignItems:'center', gap:6, padding:'6px 14px', borderRadius:100, fontSize:12.5, fontWeight:500, background:activeId===id?'#1E1B4B':'transparent', color:activeId===id?'#FAFAFA':'rgba(30,27,75,0.5)', cursor:'pointer', fontFamily:'Inter,sans-serif', flexShrink:0 }}>
-                <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9, opacity:0.55, letterSpacing:'0.06em' }}>{num}</span>
-                {short}
-              </button>
-            ))}
-            <span style={{ marginLeft:'auto', fontFamily:'"JetBrains Mono",monospace', fontSize:9.5, color:'rgba(30,27,75,0.28)', letterSpacing:'0.1em', flexShrink:0, paddingLeft:20 }}>{activeIdx + 1}/4</span>
-          </div>
-        </div>
-      </div>
-    );
-  };
+    ];
 
-  /* ── Chapter divider ── */
-  const ChapterLine = ({ num, bg }) => (
-    <div style={{ background:bg, padding:'0 28px' }}>
-      <div style={{ maxWidth:1280, margin:'0 auto', display:'flex', alignItems:'center', paddingTop:72 }}>
-        <div style={{ flex:1, height:1, background:'linear-gradient(90deg,transparent,#DDD8F0)' }}></div>
-        <div style={{ padding:'5px 16px', border:'1px solid #DDD8F0', borderRadius:100, fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'rgba(30,27,75,0.3)', letterSpacing:'0.14em', margin:'0 4px', background:bg }}>{num}</div>
-        <div style={{ flex:1, height:1, background:'linear-gradient(90deg,#DDD8F0,transparent)' }}></div>
-      </div>
-    </div>
-  );
+    const jumpTo = (id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - 100;
+      window.scrollTo({ top, behavior: 'smooth' });
+    };
 
-  /* ── Industry Section ── */
-  const IndustrySection = ({ ind }) => {
-    const even = parseInt(ind.num) % 2 === 0;
-    return (
-      <section id={'ind-' + ind.id} data-ind-id={ind.id} data-screen-label={'Industry ' + ind.num + ' — ' + ind.title}
-               style={{ background:ind.bg, padding:'0 28px 100px', position:'relative', overflow:'hidden' }}>
-        <div style={{ position:'absolute', [even?'left':'right']:'-1%', top:'8%', fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, fontSize:'clamp(160px,22vw,300px)', color:'transparent', WebkitTextStroke:'1px rgba(168,85,247,0.04)', lineHeight:1, pointerEvents:'none', userSelect:'none', letterSpacing:'-0.06em', zIndex:0 }}>{ind.num}</div>
-        <div style={{ position:'absolute', [even?'right':'left']:'5%', top:'20%', width:'42%', height:'65%', background:'radial-gradient(ellipse,rgba(168,85,247,0.03) 0%,transparent 70%)', pointerEvents:'none', zIndex:0 }}></div>
+    function IndustriesPage() {
+      const [activeId, setActiveId] = useState('financial-services');
 
-        <div style={{ maxWidth:1280, margin:'0 auto', position:'relative', zIndex:1, paddingTop:64 }}>
-
-          {/* Header */}
-          <div className="reveal" style={{ marginBottom:36 }}>
-            <div style={{ display:'flex', alignItems:'center', gap:14, marginBottom:20 }}>
-              <div style={{ width:32, height:1.5, background:'linear-gradient(90deg,#a855f7,#be38de)', borderRadius:2 }}></div>
-              <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', letterSpacing:'0.16em', textTransform:'uppercase' }}>Industry {ind.num} · {ind.title}</span>
-            </div>
-            <h2 style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, letterSpacing:'-0.048em', lineHeight:1.04, marginBottom:22 }}>
-              <span style={{ display:'block', fontSize:'clamp(28px,3vw,46px)', color:'#1E1B4B' }}>{ind.headline[0]}</span>
-              <span className="gradient-text" style={{ display:'block', fontSize:'clamp(30px,3.2vw,50px)' }}>{ind.headline[1]}</span>
-            </h2>
-            <p style={{ fontSize:16.5, color:'rgba(30,27,75,0.55)', lineHeight:1.84, maxWidth:720, textWrap:'pretty' }}>{ind.body}</p>
-          </div>
-
-          {/* Use cases */}
-          <div className="reveal" style={{ display:'flex', gap:8, flexWrap:'wrap', alignItems:'center', marginBottom:52, paddingBottom:52, borderBottom:'1px solid #DDD8F0' }}>
-            <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9.5, color:'rgba(30,27,75,0.28)', letterSpacing:'0.14em', textTransform:'uppercase', flexShrink:0, marginRight:4 }}>Use cases</span>
-            {ind.useCases.map(uc => (
-              <span key={uc} style={{ padding:'6px 14px', background:'rgba(168,85,247,0.07)', border:'1px solid rgba(168,85,247,0.16)', borderRadius:100, fontSize:12.5, color:'rgba(30,27,75,0.6)', fontWeight:450 }}>{uc}</span>
-            ))}
-          </div>
-
-          {/* Project cards grid */}
-          <div className="projects-grid" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:24 }}>
-            {ind.projects.map((project, i) => (
-              <div key={project.id} className="reveal" data-d={String((i % 4) + 1)}
-                   style={{ gridColumn: project.isOurProduct ? '1 / -1' : 'auto' }}>
-                <ProjectCard project={project} sectionBg={ind.bg} />
+      return (
+        <React.Fragment>
+          <GlobalNav />
+          <main style={{ paddingTop: 90 }}>
+            
+            {/* Hero */}
+            <section style={{ padding: '80px 28px 60px', textAlign: 'center', background: 'linear-gradient(180deg, #F3F0FF 0%, #FAFAFA 100%)' }}>
+              <div style={{ maxWidth: 840, margin: '0 auto' }}>
+                <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11.5, color: '#7c3aed', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 600 }}>
+                  Industry Expertise · 6 Verticals
+                </span>
+                <h1 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 'clamp(38px, 4vw, 62px)', fontWeight: 800, letterSpacing: '-0.04em', color: '#1E1B4B', margin: '16px 0 20px' }}>
+                  Domain-Specific Enterprise AI
+                </h1>
+                <p style={{ fontSize: 17, color: 'rgba(30,27,75,0.65)', lineHeight: 1.65 }}>
+                  Every industry has unique data schemas, compliance boundaries, and operational bottlenecks. We engineer AI solutions customized for your exact market reality.
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  };
+            </section>
 
-  /* ── Bottom CTA ── */
-  const IndustriesCTA = () => (
-    <section style={{ padding:'20px 28px 100px', background:'#FAFAFA' }}>
-      <div style={{ maxWidth:1280, margin:'0 auto' }}>
-        <div style={{ background:'linear-gradient(135deg,#14112E 0%,#1E1B4B 45%,#16133A 100%)', border:'1px solid rgba(255,255,255,0.06)', borderRadius:24, padding:'90px 80px', textAlign:'center', position:'relative', overflow:'hidden' }}>
-          <div style={{ position:'absolute', top:-120, left:'50%', transform:'translateX(-50%)', width:800, height:360, borderRadius:'50%', background:'radial-gradient(circle,rgba(168,85,247,0.18) 0%,transparent 68%)', pointerEvents:'none' }}></div>
-          <div style={{ position:'absolute', bottom:-80, right:'10%', width:400, height:220, borderRadius:'50%', background:'radial-gradient(circle,rgba(190,56,222,0.12) 0%,transparent 68%)', pointerEvents:'none' }}></div>
-          <div style={{ position:'absolute', inset:0, backgroundImage:'linear-gradient(rgba(168,85,247,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,0.05) 1px,transparent 1px)', backgroundSize:'48px 48px', pointerEvents:'none', borderRadius:24 }}></div>
-          <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'rgba(168,85,247,0.6)', letterSpacing:'0.18em', textTransform:'uppercase', marginBottom:22, position:'relative' }}>Don't see your industry?</p>
-          <h2 style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:'clamp(28px,3.2vw,50px)', fontWeight:800, letterSpacing:'-0.048em', color:'#FAFAFA', marginBottom:20, position:'relative', lineHeight:1.1 }}>
-            We've built across verticals.
-          </h2>
-          <p style={{ fontSize:17, color:'rgba(255,255,255,0.44)', maxWidth:460, margin:'0 auto 52px', lineHeight:1.8, position:'relative', textWrap:'pretty' }}>
-            From education to supply chain — if you've got a business problem and data, we can probably help.
-          </p>
-          <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" style={{ display:'inline-flex', alignItems:'center', gap:9, background:'#FAFAFA', color:'#1E1B4B', padding:'14px 28px', borderRadius:9, fontSize:15, fontWeight:700, letterSpacing:'-0.01em', position:'relative', transition:'all 0.2s' }}
-             onMouseEnter={e=>{e.currentTarget.style.boxShadow='0 0 0 3px rgba(168,85,247,0.35)';e.currentTarget.style.opacity='0.92'}}
-             onMouseLeave={e=>{e.currentTarget.style.boxShadow='none';e.currentTarget.style.opacity='1'}}>
-            Let's talk
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-  );
+            {/* Sticky Subnav */}
+            <div style={{ position: 'sticky', top: 68, zIndex: 900, background: 'rgba(250,250,250,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid #DDD8F0' }}>
+              <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px', display: 'flex', gap: 6, overflowX: 'auto', padding: '10px 0' }}>
+                {INDUSTRIES.map(ind => (
+                  <button key={ind.id} onClick={() => { setActiveId(ind.id); jumpTo(ind.id); }}
+                          className={`ind-tab ${activeId === ind.id ? 'is-active' : ''}`}
+                          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 16px', borderRadius: 100, fontSize: 12.5, fontWeight: 500, background: activeId === ind.id ? '#1E1B4B' : 'transparent', color: activeId === ind.id ? '#FAFAFA' : 'rgba(30,27,75,0.6)', cursor: 'pointer' }}>
+                    <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 9.5 }}>{ind.num}</span>
+                    {ind.short}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-  Object.assign(window, { INDUSTRIES, jumpTo, tagPill, ProjectCard, IndustryOverviewCard, IndustriesHero, StickyIndustryNav, ChapterLine, IndustrySection, IndustriesCTA });
-</script>
+            {/* Industry Sections */}
+            <section style={{ maxWidth: 1280, margin: '0 auto', padding: '40px 28px 100px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
+                {INDUSTRIES.map((ind, idx) => (
+                  <div key={ind.id} id={ind.id} style={{ background: idx % 2 === 0 ? '#FAFAFA' : '#F3F0FF', border: '1px solid #DDD8F0', borderRadius: 24, padding: '48px 44px', boxShadow: '0 12px 32px rgba(124,58,237,0.04)' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '52% 48%', gap: 48, alignItems: 'center' }} className="ind-grid">
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+                          <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(124,58,237,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#7c3aed' }}>
+                            <Icon name={ind.icon} size={22} />
+                          </div>
+                          <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#7c3aed', fontWeight: 600 }}>Sector 0{idx+1}</span>
+                        </div>
 
-<!-- ═══ SCRIPT 3 · App Mount ═══ -->
-<script type="text/babel">
-  function App() {
-    const [activeId, setActiveId] = React.useState('hr');
+                        <h2 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 28, fontWeight: 800, color: '#1E1B4B', letterSpacing: '-0.03em', marginBottom: 12 }}>
+                          {ind.title}
+                        </h2>
 
-    React.useEffect(() => {
-      const sections = document.querySelectorAll('[data-ind-id]');
-      const spyObs = new IntersectionObserver(
-        entries => entries.forEach(e => { if (e.isIntersecting) setActiveId(e.target.getAttribute('data-ind-id')); }),
-        { rootMargin:'-22% 0px -68% 0px', threshold:0 }
+                        <p style={{ fontSize: 16, fontWeight: 600, color: '#7c3aed', marginBottom: 16 }}>
+                          {ind.headline[0]} {ind.headline[1]}
+                        </p>
+
+                        <p style={{ fontSize: 14.5, color: 'rgba(30,27,75,0.7)', lineHeight: 1.7, marginBottom: 28 }}>
+                          {ind.desc}
+                        </p>
+
+                        <div>
+                          <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer"
+                             style={{ background: '#1E1B4B', color: '#fff', padding: '10px 22px', borderRadius: 8, fontSize: 13.5, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                            Discuss Industry Solutions <Icon name="arrowRight" size={13} />
+                          </a>
+                        </div>
+                      </div>
+
+                      {/* Right Use Cases & Metric */}
+                      <div style={{ background: '#fff', border: '1px solid #E5DFFA', borderRadius: 20, padding: '32px 30px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, borderBottom: '1px solid rgba(30,27,75,0.06)', paddingBottom: 14 }}>
+                          <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#7c3aed', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                            Core Enterprise Use Cases
+                          </span>
+                          <div style={{ textAlign: 'right' }}>
+                            <span style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 20, fontWeight: 800, color: '#15803d' }}>{ind.metric}</span>
+                            <span style={{ display: 'block', fontFamily: '"JetBrains Mono",monospace', fontSize: 9, color: 'rgba(30,27,75,0.5)' }}>{ind.metricDesc}</span>
+                          </div>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                          {ind.useCases.map((uc, uIdx) => (
+                            <div key={uIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13.5, color: '#1E1B4B', lineHeight: 1.5 }}>
+                              <span style={{ color: '#7c3aed', flexShrink: 0, marginTop: 2 }}><Icon name="check" size={15} /></span>
+                              <span>{uc}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </main>
+          <GlobalFooter />
+        </React.Fragment>
       );
-      sections.forEach(s => spyObs.observe(s));
+    }
 
-      const revEls = document.querySelectorAll('.reveal');
-      const revObs = new IntersectionObserver(
-        entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revObs.unobserve(e.target); } }),
-        { threshold:0.04 }
-      );
-      revEls.forEach(el => revObs.observe(el));
-
-      return () => { spyObs.disconnect(); revObs.disconnect(); };
-    }, []);
-
-    return (
-      <React.Fragment>
-        <Nav />
-        <main>
-          <IndustriesHero />
-          <StickyIndustryNav activeId={activeId} />
-          {INDUSTRIES.map(ind => (
-            <React.Fragment key={ind.id}>
-              <ChapterLine num={ind.num} bg={ind.bg} />
-              <IndustrySection ind={ind} />
-            </React.Fragment>
-          ))}
-          <IndustriesCTA />
-        </main>
-        <Footer />
-      </React.Fragment>
-    );
-  }
-  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-</script>
+    ReactDOM.createRoot(document.getElementById('root')).render(<IndustriesPage />);
+  </script>
 </body>
 </html>

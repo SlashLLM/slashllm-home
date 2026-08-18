@@ -3,44 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-site-verification" content="REPLACE_WITH_YOUR_GOOGLE_VERIFICATION_CODE">
-  <title>About — SlashLLM</title>
+  <title>About Us — SlashLLM Enterprise AI Engineering</title>
   <link rel="icon" href="/favicon.ico?v=2" sizes="any">
   <link rel="icon" type="image/png" href="/uploads/favicon-32.png?v=2" sizes="32x32">
   <link rel="icon" type="image/png" href="/uploads/favicon-16.png?v=2" sizes="16x16">
   <link rel="apple-touch-icon" href="/uploads/favicon-180.png?v=2">
-  <meta name="description" content="SlashLLM — the team companies call when they need AI that actually ships.">
+  <meta name="description" content="About SlashLLM — The enterprise AI engineering and transformation company helping organizations build, deploy, optimize and operate AI systems at scale.">
   <link rel="canonical" href="https://slashllm.com/about">
-  <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://slashllm.com/about">
-  <meta property="og:site_name" content="SlashLLM">
-  <meta property="og:title" content="About — SlashLLM">
-  <meta property="og:description" content="SlashLLM — the team companies call when they need AI that actually ships.">
+  <meta property="og:title" content="About Us — SlashLLM Enterprise AI Engineering">
+  <meta property="og:description" content="We help enterprises build, deploy, optimize and operate AI systems at scale.">
   <meta property="og:image" content="https://slashllm.com/uploads/LOGO%202.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="About — SlashLLM">
-  <meta name="twitter:description" content="SlashLLM — the team companies call when they need AI that actually ships.">
-  <meta name="twitter:image" content="https://slashllm.com/uploads/LOGO%202.png">
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://slashllm.com/" },
-      { "@type": "ListItem", "position": 2, "name": "About", "item": "https://slashllm.com/about" }
-    ]
-  }
-  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <script>tailwind={config:{theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif'],display:['"Space Grotesk"','sans-serif'],mono:['"JetBrains Mono"','monospace']}}}}};</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind = { config: { theme: { extend: { fontFamily: { sans: ['Inter','system-ui','sans-serif'], display: ['"Space Grotesk"','sans-serif'], mono: ['"JetBrains Mono"','monospace'] } } } } };
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,462 +34,229 @@
 
     :root {
       --bg: #FAFAFA; --surface: #F3F0FF; --card: #EDE9FF;
-      --border: #DDD8F0; --text: #1E1B4B; --muted: rgba(30,27,75,0.5);
+      --border: #DDD8F0; --text: #1E1B4B; --muted: rgba(30,27,75,0.6);
       --accent: #a855f7; --accent2: #7c3aed;
     }
 
     .gradient-text {
-      background: linear-gradient(135deg, #a855f7 0%, #be38de 100%);
+      background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #be38de 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
-    /* ── Reveal ── */
-    .reveal { opacity:0; transform:translateY(24px); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
-    .reveal.in { opacity:1; transform:none; }
-    .reveal[data-d="1"]{ transition-delay:0.08s; } .reveal[data-d="2"]{ transition-delay:0.16s; }
-    .reveal[data-d="3"]{ transition-delay:0.24s; } .reveal[data-d="4"]{ transition-delay:0.32s; }
-    .reveal[data-d="5"]{ transition-delay:0.4s; }  .reveal[data-d="6"]{ transition-delay:0.48s; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
 
-    /* ── Hero card float ── */
-    @keyframes card-float {
-      0%,100% { box-shadow: 0 40px 80px rgba(30,27,75,0.2), 0 0 0 1px rgba(168,85,247,0.08), 0 0 60px rgba(168,85,247,0.04); transform: perspective(1400px) rotateY(-6deg) rotateX(2deg) translateY(0px); }
-      50%      { box-shadow: 0 48px 96px rgba(30,27,75,0.24), 0 0 0 1px rgba(168,85,247,0.14), 0 0 80px rgba(168,85,247,0.06); transform: perspective(1400px) rotateY(-6deg) rotateX(2deg) translateY(-6px); }
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(30,27,75,0.12);
+      border-radius: 16px;
+      box-shadow: 0 24px 64px rgba(30,27,75,0.12);
+      padding: 12px;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
     }
-    .hero-card { animation: card-float 6s ease-in-out infinite; }
+    .nav-item-wrap:hover .nav-dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
 
-    /* ── Progress bar ── */
-    @keyframes bar-fill { from { width: 0; } }
-
-    /* ── Belief card hover ── */
-    .belief-card { transition: transform 0.22s cubic-bezier(0.16,1,0.3,1), box-shadow 0.22s cubic-bezier(0.16,1,0.3,1); cursor: default; }
-
-    /* ── Misc shared ── */
-    .txt-lnk { transition: color 0.15s; }
-    .txt-lnk:hover { color: #1E1B4B !important; }
-
-    @keyframes badge-pulse { 0%,100%{box-shadow:0 0 0 2px rgba(74,222,128,0.3)} 50%{box-shadow:0 0 0 7px rgba(74,222,128,0.07)} }
-    .status-dot { animation: badge-pulse 2s ease infinite; }
-
-    /* ── Responsive ── */
     @media (max-width: 1000px) {
-      .hero-right { display: none !important; }
-      .hero-left { max-width: 100% !important; }
-      .story-grid { grid-template-columns: 1fr !important; }
-      .beliefs-grid { grid-template-columns: 1fr !important; }
+      .grid-2col { grid-template-columns: 1fr !important; }
+      .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 36px !important; }
     }
-    @media (max-width: 700px) {
-      .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 40px !important; }
-    }
-    @media (max-width: 480px) {
+    @media (max-width: 640px) {
       .footer-grid { grid-template-columns: 1fr !important; }
-      .hero-stats { gap: 24px !important; }
     }
   </style>
 </head>
 <body>
-<div id="root"><div style="position: fixed; top: 16px; left: 0px; right: 0px; z-index: 1000; display: flex; justify-content: center; pointer-events: none;"><nav style="pointer-events: auto; width: calc(100% - 48px); max-width: 920px; height: 52px; background: rgba(250, 250, 250, 0.75); backdrop-filter: blur(22px); border: 1px solid rgba(30, 27, 75, 0.08); border-radius: 100px; box-shadow: none; transition: 0.35s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; padding: 0px 18px; gap: 4px;"><a href="/" style="display: flex; align-items: center; gap: 7px; text-decoration: none; flex-shrink: 0; margin-right: 8px;"><img src="/uploads/LOGO 2.png" alt="SlashLLM" style="width: 26px; height: 26px; object-fit: contain;"><span style="font-family: &quot;Space Grotesk&quot;, sans-serif; font-weight: 700; font-size: 15px; letter-spacing: -0.03em; color: rgb(30, 27, 75);">SlashLLM</span></a><div style="flex: 1 1 0%; display: flex; align-items: center; justify-content: center; gap: 2px;"><a href="Services.html" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px; font-weight: 400; padding: 5px 12px; border-radius: 6px; text-decoration: none; transition: 0.15s; background: transparent; display: inline-flex; align-items: center; gap: 3px; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; font-family: Inter, sans-serif;">Services</a><a href="Industries.html" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px; font-weight: 400; padding: 5px 12px; border-radius: 6px; text-decoration: none; transition: 0.15s; background: transparent; display: inline-flex; align-items: center; gap: 3px; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; font-family: Inter, sans-serif;">Industries</a><div style="position: relative;"><button style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px; font-weight: 400; padding: 5px 12px; border-radius: 6px; text-decoration: none; transition: 0.15s; background: transparent; display: inline-flex; align-items: center; gap: 3px; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; font-family: Inter, sans-serif;">Resources <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"></path></svg></button></div><a href="/blog" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px; font-weight: 400; padding: 5px 12px; border-radius: 6px; text-decoration: none; transition: 0.15s; background: transparent; display: inline-flex; align-items: center; gap: 3px; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; font-family: Inter, sans-serif;">Blog</a><a href="About.html" style="color: rgb(30, 27, 75); font-size: 13.5px; font-weight: 400; padding: 5px 12px; border-radius: 6px; text-decoration: none; transition: 0.15s; background: rgba(30, 27, 75, 0.06); display: inline-flex; align-items: center; gap: 3px; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; font-family: Inter, sans-serif;">About</a></div><a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" style="background: rgb(30, 27, 75); color: rgb(250, 250, 250); padding: 7px 18px; border-radius: 100px; font-size: 12.5px; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; flex-shrink: 0; transition: 0.2s;">Let's talk</a></nav></div><main><section style="background: rgb(250, 250, 250); border-bottom: 1px solid rgb(221, 216, 240); position: relative; overflow: hidden;"><div style="position: absolute; inset: 0px; background-image: linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px); background-size: 64px 64px; pointer-events: none;"></div><div style="position: absolute; right: -4%; top: -8%; font-family: &quot;Space Grotesk&quot;, sans-serif; font-weight: 800; font-size: 30vw; color: transparent; -webkit-text-stroke: 1px rgba(168, 85, 247, 0.03); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -0.06em;">/</div><div style="position: absolute; left: 28%; top: 8%; width: 520px; height: 520px; background: radial-gradient(circle, rgba(168, 85, 247, 0.05) 0%, transparent 65%); pointer-events: none;"></div><div style="max-width: 1280px; margin: 0px auto; padding: 148px 28px 88px; display: grid; grid-template-columns: 54% 46%; gap: 0px 64px; align-items: center; position: relative; z-index: 1;"><div class="hero-left" style="max-width: 580px;"><div style="display: flex; align-items: center; gap: 8px; margin-bottom: 36px;"><a href="/" style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 11px; color: rgba(30, 27, 75, 0.32); letter-spacing: 0.1em; transition: color 0.15s;">slashllm.com</a><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(30,27,75,0.22)" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"></path></svg><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 11px; color: rgb(168, 85, 247); letter-spacing: 0.1em;">about</span></div><div style="display: flex; align-items: center; gap: 14px; margin-bottom: 28px;"><div style="width: 32px; height: 1.5px; background: linear-gradient(90deg, rgb(168, 85, 247), rgb(190, 56, 222)); border-radius: 2px;"></div><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 11px; color: rgb(168, 85, 247); letter-spacing: 0.16em; text-transform: uppercase;">About us</span></div><h1 style="font-family: &quot;Space Grotesk&quot;, sans-serif; font-weight: 800; letter-spacing: -0.048em; margin-bottom: 28px;"><span style="display: block; font-size: clamp(30px, 3.4vw, 50px); color: rgba(30, 27, 75, 0.62); line-height: 1.18; font-weight: 700;">We're the team companies call</span><span style="display: block; font-size: clamp(30px, 3.4vw, 50px); color: rgba(30, 27, 75, 0.62); line-height: 1.18; font-weight: 700;">when they need</span><span class="gradient-text" style="display: block; font-size: clamp(34px, 3.8vw, 56px); line-height: 1.1;">AI that actually ships.</span></h1><p style="font-size: 17.5px; color: rgba(30, 27, 75, 0.52); line-height: 1.78; max-width: 500px; margin-bottom: 44px; text-wrap: pretty;">A small, fast, technical team. No talent marketplace. No layers of project managers. Just builders who go from prompt to production.</p><div class="hero-stats" style="display: flex; gap: 36px; padding-top: 32px; border-top: 1px solid rgb(221, 216, 240);"><div><p style="font-family: &quot;Space Grotesk&quot;, sans-serif; font-size: 22px; font-weight: 800; color: rgb(30, 27, 75); letter-spacing: -0.04em; line-height: 1;">Small</p><p style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 10px; color: rgba(30, 27, 75, 0.4); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 5px;">by design</p></div><div><p style="font-family: &quot;Space Grotesk&quot;, sans-serif; font-size: 22px; font-weight: 800; color: rgb(30, 27, 75); letter-spacing: -0.04em; line-height: 1;">4 wks</p><p style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 10px; color: rgba(30, 27, 75, 0.4); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 5px;">to production</p></div><div><p style="font-family: &quot;Space Grotesk&quot;, sans-serif; font-size: 22px; font-weight: 800; color: rgb(30, 27, 75); letter-spacing: -0.04em; line-height: 1;">4</p><p style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 10px; color: rgba(30, 27, 75, 0.4); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 5px;">industries served</p></div></div></div><div class="hero-right" style="display: flex; justify-content: flex-end; align-items: center; padding-bottom: 16px;"><div class="hero-card" style="background: rgb(16, 13, 46); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 20px; overflow: hidden; width: 100%; max-width: 460px;"><div style="padding: 12px 18px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: space-between;"><div style="display: flex; gap: 5px;"><div style="width: 8px; height: 8px; border-radius: 50%; background: rgb(255, 95, 87);"></div><div style="width: 8px; height: 8px; border-radius: 50%; background: rgb(255, 189, 46);"></div><div style="width: 8px; height: 8px; border-radius: 50%; background: rgb(40, 200, 64);"></div></div><div style="display: flex; align-items: center; gap: 8px;"><span class="status-dot" style="width: 6px; height: 6px; border-radius: 50%; background: rgb(74, 222, 128); display: block;"></span><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 10px; color: rgba(255, 255, 255, 0.25); letter-spacing: 0.08em;">sprint → production</span></div></div><div style="padding: 22px 20px 10px;"><p style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 9.5px; color: rgba(168, 85, 247, 0.55); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 4px;">Project timeline</p><p style="font-family: &quot;Space Grotesk&quot;, sans-serif; font-size: 14px; color: rgba(255, 255, 255, 0.6); font-weight: 600; letter-spacing: -0.02em;">From first call to production</p></div><div style="padding: 10px 20px 20px;"><div style="margin-bottom: 18px;"><div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;"><div style="display: flex; gap: 10px; align-items: baseline;"><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 9px; color: rgba(168, 85, 247, 0.5); letter-spacing: 0.1em; flex-shrink: 0;">Week 01</span><span style="font-size: 12px; color: rgba(255, 255, 255, 0.42);">Discovery &amp; architecture</span></div><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 9px; color: rgba(255, 255, 255, 0.28); letter-spacing: 0.06em;">25%</span></div><div style="height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.05); overflow: hidden;"><div style="height: 100%; border-radius: 2px; background: linear-gradient(90deg, rgb(168, 85, 247) 0%, rgb(190, 56, 222) 100%); width: 25%; animation-name: bar-fill; animation-duration: 0.7s; animation-delay: 0.25s; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); animation-fill-mode: both;"></div></div></div><div style="margin-bottom: 18px;"><div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;"><div style="display: flex; gap: 10px; align-items: baseline;"><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 9px; color: rgba(168, 85, 247, 0.5); letter-spacing: 0.1em; flex-shrink: 0;">Week 02</span><span style="font-size: 12px; color: rgba(255, 255, 255, 0.42);">Build &amp; iteration</span></div><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 9px; color: rgba(255, 255, 255, 0.28); letter-spacing: 0.06em;">50%</span></div><div style="height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.05); overflow: hidden;"><div style="height: 100%; border-radius: 2px; background: linear-gradient(90deg, rgb(168, 85, 247) 0%, rgb(190, 56, 222) 100%); width: 50%; animation-name: bar-fill; animation-duration: 0.9s; animation-delay: 0.55s; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); animation-fill-mode: both;"></div></div></div><div style="margin-bottom: 18px;"><div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;"><div style="display: flex; gap: 10px; align-items: baseline;"><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 9px; color: rgba(168, 85, 247, 0.5); letter-spacing: 0.1em; flex-shrink: 0;">Week 03</span><span style="font-size: 12px; color: rgba(255, 255, 255, 0.42);">Testing &amp; integration</span></div><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 9px; color: rgba(255, 255, 255, 0.28); letter-spacing: 0.06em;">75%</span></div><div style="height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.05); overflow: hidden;"><div style="height: 100%; border-radius: 2px; background: linear-gradient(90deg, rgb(168, 85, 247) 0%, rgb(190, 56, 222) 100%); width: 75%; animation-name: bar-fill; animation-duration: 1.1s; animation-delay: 0.85s; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); animation-fill-mode: both;"></div></div></div><div style="margin-bottom: 18px;"><div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;"><div style="display: flex; gap: 10px; align-items: baseline;"><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 9px; color: rgba(168, 85, 247, 0.5); letter-spacing: 0.1em; flex-shrink: 0;">Week 04</span><span style="font-size: 12px; color: rgba(255, 255, 255, 0.42);">Deploy to production</span></div><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 9px; color: rgb(74, 222, 128); letter-spacing: 0.06em;">100%</span></div><div style="height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.05); overflow: hidden;"><div style="height: 100%; border-radius: 2px; background: linear-gradient(90deg, rgb(168, 85, 247) 0%, rgb(74, 222, 128) 100%); width: 100%; animation-name: bar-fill; animation-duration: 1.3s; animation-delay: 1.15s; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); animation-fill-mode: both;"></div></div></div></div><div style="padding: 14px 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); background: rgba(0, 0, 0, 0.18); display: flex; flex-direction: column; gap: 7px;"><div style="display: flex; gap: 8px; align-items: center;"><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 10px; color: rgba(168, 85, 247, 0.45); flex-shrink: 0;">/commit</span><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 10px; color: rgba(255, 255, 255, 0.28);">d4e92f1 "ship it"</span></div><div style="display: flex; gap: 8px; align-items: center;"><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 10px; color: rgba(168, 85, 247, 0.45); flex-shrink: 0;">/deploy</span><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 10px; color: rgb(74, 222, 128);">✓ live · production</span></div><div style="display: flex; gap: 8px; align-items: center;"><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 10px; color: rgba(168, 85, 247, 0.45); flex-shrink: 0;">/monitor</span><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 10px; color: rgba(168, 85, 247, 0.7);">● 99.98% uptime</span></div></div></div></div></div></section><section style="background: rgb(243, 240, 255); padding: 120px 28px 128px; position: relative; overflow: hidden;"><div style="position: absolute; right: -2%; top: 5%; font-family: &quot;Space Grotesk&quot;, sans-serif; font-weight: 800; font-size: 28vw; color: transparent; -webkit-text-stroke: 1px rgba(168, 85, 247, 0.04); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -0.06em;">S</div><div style="position: absolute; left: -5%; bottom: 10%; width: 480px; height: 480px; background: radial-gradient(circle, rgba(168, 85, 247, 0.04) 0%, transparent 65%); pointer-events: none;"></div><div style="max-width: 1280px; margin: 0px auto; position: relative; z-index: 1;"><div class="reveal" style="display: flex; align-items: center; gap: 14px; margin-bottom: 72px;"><div style="width: 32px; height: 1.5px; background: linear-gradient(90deg, rgb(168, 85, 247), rgb(190, 56, 222)); border-radius: 2px;"></div><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 11px; color: rgb(168, 85, 247); letter-spacing: 0.16em; text-transform: uppercase;">Our story</span></div><div class="reveal" style="margin-bottom: 80px; max-width: 900px;"><blockquote style="font-family: &quot;Space Grotesk&quot;, sans-serif; font-weight: 800; letter-spacing: -0.048em; line-height: 1.08;"><span style="display: block; font-size: clamp(32px, 4vw, 58px); color: rgb(30, 27, 75);">The gap wasn't in ideas —</span><span class="gradient-text" style="display: block; font-size: clamp(34px, 4.2vw, 62px);">it was in execution.</span></blockquote></div><div class="story-grid reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0px 80px; align-items: start;"><div><p style="font-size: 16.5px; color: rgba(30, 27, 75, 0.58); line-height: 1.86; margin-bottom: 28px; text-wrap: pretty;">SlashLLM started with a frustration: too many companies spending months on AI "strategy" with nothing to show for it. Decks. Roadmaps. Proof-of-concepts that never left the sandbox.</p><p style="font-size: 16.5px; color: rgba(30, 27, 75, 0.58); line-height: 1.86; text-wrap: pretty;">The world had plenty of AI consultants who could tell you what to build. It had very few teams that could build it, deploy it, and make it work at scale.</p></div><div><p style="font-size: 16.5px; color: rgba(30, 27, 75, 0.58); line-height: 1.86; margin-bottom: 28px; text-wrap: pretty;">So we built SlashLLM as the agency we wished existed: a small, fast, technical team that goes from prompt to production. No talent marketplace. No layers of project managers. Just builders who understand both the technology and the business problem — and who ship real systems into real production environments.</p><p style="font-size: 16.5px; color: rgba(30, 27, 75, 0.58); line-height: 1.86; margin-bottom: 36px; text-wrap: pretty;">Today, we work with growth-stage startups, SMBs, and mid-market enterprises across SaaS, fintech, healthcare, and HR tech — helping them build AI products, deploy intelligent agents, and optimize their AI infrastructure.</p><div style="display: flex; gap: 8px; flex-wrap: wrap;"><span style="padding: 6px 14px; background: rgba(168, 85, 247, 0.07); border: 1px solid rgba(168, 85, 247, 0.18); border-radius: 100px; font-size: 12px; color: rgb(168, 85, 247); font-weight: 500; font-family: &quot;JetBrains Mono&quot;, monospace; letter-spacing: 0.04em;">SaaS</span><span style="padding: 6px 14px; background: rgba(168, 85, 247, 0.07); border: 1px solid rgba(168, 85, 247, 0.18); border-radius: 100px; font-size: 12px; color: rgb(168, 85, 247); font-weight: 500; font-family: &quot;JetBrains Mono&quot;, monospace; letter-spacing: 0.04em;">Fintech</span><span style="padding: 6px 14px; background: rgba(168, 85, 247, 0.07); border: 1px solid rgba(168, 85, 247, 0.18); border-radius: 100px; font-size: 12px; color: rgb(168, 85, 247); font-weight: 500; font-family: &quot;JetBrains Mono&quot;, monospace; letter-spacing: 0.04em;">Healthcare</span><span style="padding: 6px 14px; background: rgba(168, 85, 247, 0.07); border: 1px solid rgba(168, 85, 247, 0.18); border-radius: 100px; font-size: 12px; color: rgb(168, 85, 247); font-weight: 500; font-family: &quot;JetBrains Mono&quot;, monospace; letter-spacing: 0.04em;">HR tech</span></div></div></div></div></section><section style="background: rgb(250, 250, 250); padding: 120px 28px 128px; position: relative; overflow: hidden;"><div style="position: absolute; left: -1%; bottom: -4%; font-family: &quot;Space Grotesk&quot;, sans-serif; font-weight: 800; font-size: 17vw; color: transparent; -webkit-text-stroke: 1px rgba(168, 85, 247, 0.03); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -0.06em;">believe</div><div style="max-width: 1280px; margin: 0px auto; position: relative; z-index: 1;"><div class="reveal" style="display: flex; align-items: center; gap: 14px; margin-bottom: 24px;"><div style="width: 32px; height: 1.5px; background: linear-gradient(90deg, rgb(168, 85, 247), rgb(190, 56, 222)); border-radius: 2px;"></div><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 11px; color: rgb(168, 85, 247); letter-spacing: 0.16em; text-transform: uppercase;">What we believe</span></div><h2 class="reveal" style="font-family: &quot;Space Grotesk&quot;, sans-serif; font-weight: 800; font-size: clamp(38px, 4.2vw, 64px); letter-spacing: -0.048em; color: rgb(30, 27, 75); line-height: 1.04; margin-bottom: 72px;">Four principles.<br><span class="gradient-text">No exceptions.</span></h2><div class="beliefs-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;"><div class="belief-card reveal" data-d="1" style="background: rgb(243, 240, 255); border: 1px solid rgb(221, 216, 240); border-radius: 20px; padding: 52px 52px 56px; position: relative; overflow: hidden;"><div style="position: absolute; right: -10px; bottom: -20px; font-family: &quot;Space Grotesk&quot;, sans-serif; font-weight: 800; font-size: 160px; color: transparent; -webkit-text-stroke: 1px rgba(168, 85, 247, 0.07); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -0.06em;">01</div><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 11px; color: rgb(168, 85, 247); opacity: 0.65; letter-spacing: 0.14em; display: block; margin-bottom: 20px;">01</span><h3 style="font-family: &quot;Space Grotesk&quot;, sans-serif; font-size: clamp(22px, 1.8vw, 28px); font-weight: 700; letter-spacing: -0.04em; color: rgb(30, 27, 75); line-height: 1.18; margin-bottom: 18px;">Ship, don't slide</h3><p style="font-size: 15.5px; color: rgba(30, 27, 75, 0.56); line-height: 1.84; text-wrap: pretty; position: relative;">The best strategy is a working prototype. We'd rather show you a production system in 4 weeks than a 60-page deck in 6.</p></div><div class="belief-card reveal" data-d="2" style="background: rgb(250, 250, 250); border: 1px solid rgb(221, 216, 240); border-radius: 20px; padding: 52px 52px 56px; position: relative; overflow: hidden;"><div style="position: absolute; right: -10px; bottom: -20px; font-family: &quot;Space Grotesk&quot;, sans-serif; font-weight: 800; font-size: 160px; color: transparent; -webkit-text-stroke: 1px rgba(168, 85, 247, 0.07); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -0.06em;">02</div><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 11px; color: rgb(168, 85, 247); opacity: 0.65; letter-spacing: 0.14em; display: block; margin-bottom: 20px;">02</span><h3 style="font-family: &quot;Space Grotesk&quot;, sans-serif; font-size: clamp(22px, 1.8vw, 28px); font-weight: 700; letter-spacing: -0.04em; color: rgb(30, 27, 75); line-height: 1.18; margin-bottom: 18px;">Own the outcome</h3><p style="font-size: 15.5px; color: rgba(30, 27, 75, 0.56); line-height: 1.84; text-wrap: pretty; position: relative;">We don't disappear after delivery. We build it, we deploy it, we monitor it, we optimize it. If it breaks at 3am, we're already looking at it.</p></div><div class="belief-card reveal" data-d="3" style="background: rgb(250, 250, 250); border: 1px solid rgb(221, 216, 240); border-radius: 20px; padding: 52px 52px 56px; position: relative; overflow: hidden;"><div style="position: absolute; right: -10px; bottom: -20px; font-family: &quot;Space Grotesk&quot;, sans-serif; font-weight: 800; font-size: 160px; color: transparent; -webkit-text-stroke: 1px rgba(168, 85, 247, 0.07); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -0.06em;">03</div><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 11px; color: rgb(168, 85, 247); opacity: 0.65; letter-spacing: 0.14em; display: block; margin-bottom: 20px;">03</span><h3 style="font-family: &quot;Space Grotesk&quot;, sans-serif; font-size: clamp(22px, 1.8vw, 28px); font-weight: 700; letter-spacing: -0.04em; color: rgb(30, 27, 75); line-height: 1.18; margin-bottom: 18px;">Stay small, go deep</h3><p style="font-size: 15.5px; color: rgba(30, 27, 75, 0.56); line-height: 1.84; text-wrap: pretty; position: relative;">We're not trying to be a 500-person agency. We'd rather do 15 things brilliantly than 50 things adequately.</p></div><div class="belief-card reveal" data-d="4" style="background: rgb(243, 240, 255); border: 1px solid rgb(221, 216, 240); border-radius: 20px; padding: 52px 52px 56px; position: relative; overflow: hidden;"><div style="position: absolute; right: -10px; bottom: -20px; font-family: &quot;Space Grotesk&quot;, sans-serif; font-weight: 800; font-size: 160px; color: transparent; -webkit-text-stroke: 1px rgba(168, 85, 247, 0.07); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -0.06em;">04</div><span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 11px; color: rgb(168, 85, 247); opacity: 0.65; letter-spacing: 0.14em; display: block; margin-bottom: 20px;">04</span><h3 style="font-family: &quot;Space Grotesk&quot;, sans-serif; font-size: clamp(22px, 1.8vw, 28px); font-weight: 700; letter-spacing: -0.04em; color: rgb(30, 27, 75); line-height: 1.18; margin-bottom: 18px;">Be honest about what works</h3><p style="font-size: 15.5px; color: rgba(30, 27, 75, 0.56); line-height: 1.84; text-wrap: pretty; position: relative;">If AI isn't the right answer, we'll tell you. If a simpler solution exists, we'll build that instead. Our job is results, not billable hours.</p></div></div></div></section><section style="padding: 0px 28px 100px; background: rgb(250, 250, 250);"><div style="max-width: 1280px; margin: 0px auto;"><div style="background: linear-gradient(135deg, rgb(20, 17, 46) 0%, rgb(30, 27, 75) 45%, rgb(22, 19, 58) 100%); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 24px; padding: 90px 80px; text-align: center; position: relative; overflow: hidden;"><div style="position: absolute; top: -120px; left: 50%; transform: translateX(-50%); width: 800px; height: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(168, 85, 247, 0.18) 0%, transparent 68%); pointer-events: none;"></div><div style="position: absolute; bottom: -80px; right: 10%; width: 400px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(190, 56, 222, 0.12) 0%, transparent 68%); pointer-events: none;"></div><div style="position: absolute; inset: 0px; background-image: linear-gradient(rgba(168, 85, 247, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.05) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; border-radius: 24px;"></div><p style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 11px; color: rgba(168, 85, 247, 0.6); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 22px; position: relative;">Want to work with us?</p><h2 style="font-family: &quot;Space Grotesk&quot;, sans-serif; font-size: clamp(28px, 3.2vw, 50px); font-weight: 800; letter-spacing: -0.048em; color: rgb(250, 250, 250); margin-bottom: 20px; position: relative; line-height: 1.1;">Whether you've got a project in mind<br>or just want to explore what's possible.</h2><p style="font-size: 17px; color: rgba(255, 255, 255, 0.44); max-width: 400px; margin: 0px auto 52px; line-height: 1.8; position: relative; text-wrap: pretty;">We'd love to hear from you.</p><a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 9px; background: rgb(250, 250, 250); color: rgb(30, 27, 75); padding: 14px 28px; border-radius: 9px; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; position: relative; transition: 0.2s;">Let's talk<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a></div></div></section></main><footer style="border-top: 1px solid rgb(221, 216, 240); background: rgb(243, 240, 255); padding-top: 64px; padding-bottom: 40px;"><div style="max-width: 1280px; margin: 0px auto; padding: 0px 28px;"><div class="footer-grid" style="display: grid; grid-template-columns: 180px 1fr 1fr 1fr 1fr; gap: 52px; margin-bottom: 64px;"><div><a href="/" style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;"><img src="/uploads/LOGO 2.png" alt="SlashLLM" style="width: 28px; height: 28px; object-fit: contain;"><span style="font-family: &quot;Space Grotesk&quot;, sans-serif; font-weight: 700; font-size: 16px; letter-spacing: -0.03em; color: rgb(30, 27, 75);">SlashLLM</span></a><p style="color: rgba(30, 27, 75, 0.45); font-size: 13px; line-height: 1.6; margin-bottom: 20px;">From prompt to production.</p><div style="display: flex; gap: 14px;"><a href="#" style="color: rgba(30, 27, 75, 0.3); transition: color 0.15s;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 4m-2 0a2 2 0 104 0 2 2 0 10-4 0"></path></svg></a><a href="#" style="color: rgba(30, 27, 75, 0.3); transition: color 0.15s;"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a><a href="#" style="color: rgba(30, 27, 75, 0.3); transition: color 0.15s;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"></path></svg></a></div></div><div><p style="font-size: 11px; font-weight: 600; color: rgba(30, 27, 75, 0.35); letter-spacing: 0.12em; text-transform: uppercase; font-family: &quot;JetBrains Mono&quot;, monospace; margin-bottom: 18px;">Services</p><div style="display: flex; flex-direction: column; gap: 11px;"><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">AI roadmap &amp; consulting</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">AI product development</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">AI agents</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">AI product features</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">Software development</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">DevOps &amp; cloud</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">AI cost observability</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">Branding &amp; design</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">Autopilot content engine</a></div></div><div><p style="font-size: 11px; font-weight: 600; color: rgba(30, 27, 75, 0.35); letter-spacing: 0.12em; text-transform: uppercase; font-family: &quot;JetBrains Mono&quot;, monospace; margin-bottom: 18px;">Industries</p><div style="display: flex; flex-direction: column; gap: 11px;"><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">SaaS &amp; technology</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">Fintech &amp; financial services</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">Healthcare &amp; life sciences</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">HR tech</a></div></div><div><p style="font-size: 11px; font-weight: 600; color: rgba(30, 27, 75, 0.35); letter-spacing: 0.12em; text-transform: uppercase; font-family: &quot;JetBrains Mono&quot;, monospace; margin-bottom: 18px;">Resources</p><div style="display: flex; flex-direction: column; gap: 11px;"><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">Case studies</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">Blog</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">Contact us</a></div></div><div><p style="font-size: 11px; font-weight: 600; color: rgba(30, 27, 75, 0.35); letter-spacing: 0.12em; text-transform: uppercase; font-family: &quot;JetBrains Mono&quot;, monospace; margin-bottom: 18px;">Company</p><div style="display: flex; flex-direction: column; gap: 11px;"><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">About</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">Careers</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">Privacy policy</a><a href="#" class="txt-lnk" style="color: rgba(30, 27, 75, 0.5); font-size: 13.5px;">Terms of service</a></div></div></div><div style="border-top: 1px solid rgb(221, 216, 240); padding-top: 24px;"><p style="color: rgba(30, 27, 75, 0.35); font-size: 13px;">© 2026 SlashLLM. All rights reserved.</p></div></div></footer></div>
-  <!-- ═══ SCRIPT 1 · Nav + Footer ═══ -->
-<script type="text/babel">
-  const { useState, useEffect } = React;
+  <div id="root"></div>
 
-  const Nav = () => {
-    const [resOpen, setResOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-    useEffect(() => {
-      const fn = () => setScrolled(window.scrollY > 40);
-      window.addEventListener('scroll', fn);
-      return () => window.removeEventListener('scroll', fn);
-    }, []);
-    const lk = { color:'rgba(30,27,75,0.5)', fontSize:13.5, fontWeight:400, padding:'5px 12px', borderRadius:6, textDecoration:'none', transition:'all 0.15s', background:'transparent', display:'inline-flex', alignItems:'center', gap:3, border:'none', cursor:'pointer', fontFamily:'Inter,sans-serif' };
-    const hi = e => { e.currentTarget.style.color='#1E1B4B'; e.currentTarget.style.background='rgba(30,27,75,0.06)'; };
-    const ho = e => { e.currentTarget.style.color='rgba(30,27,75,0.5)'; e.currentTarget.style.background='transparent'; };
-    return (
-      <div style={{ position:'fixed', top:16, left:0, right:0, zIndex:1000, display:'flex', justifyContent:'center', pointerEvents:'none' }}>
-        <nav style={{ pointerEvents:'auto', width:'calc(100% - 48px)', maxWidth:920, height:52, background:scrolled?'rgba(250,250,250,0.96)':'rgba(250,250,250,0.75)', backdropFilter:'blur(22px)', WebkitBackdropFilter:'blur(22px)', border:scrolled?'1px solid rgba(30,27,75,0.14)':'1px solid rgba(30,27,75,0.08)', borderRadius:100, boxShadow:scrolled?'0 8px 40px rgba(0,0,0,0.09)':'none', transition:'all 0.35s cubic-bezier(0.16,1,0.3,1)', display:'flex', alignItems:'center', padding:'0 18px', gap:4 }}>
-          <a href="/" style={{ display:'flex', alignItems:'center', gap:7, textDecoration:'none', flexShrink:0, marginRight:8 }}>
-            <img src="/uploads/LOGO 2.png" alt="SlashLLM" style={{ width:26, height:26, objectFit:'contain' }} />
-            <span style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:700, fontSize:15, letterSpacing:'-0.03em', color:'#1E1B4B' }}>SlashLLM</span>
-          </a>
-          <div style={{ flex:1, display:'flex', alignItems:'center', justifyContent:'center', gap:2 }}>
-            <a href="Services.html" style={lk} onMouseEnter={hi} onMouseLeave={ho}>Services</a>
-            <a href="Industries.html" style={lk} onMouseEnter={hi} onMouseLeave={ho}>Industries</a>
-            <div style={{ position:'relative' }} onMouseEnter={()=>setResOpen(true)} onMouseLeave={()=>setResOpen(false)}>
-              <button style={lk} onMouseEnter={hi} onMouseLeave={ho}>
-                Resources <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M6 9l6 6 6-6"/></svg>
-              </button>
-              {resOpen && (
-                <div style={{ position:'absolute', top:'calc(100% + 12px)', left:'50%', transform:'translateX(-50%)', background:'rgba(250,250,250,0.97)', border:'1px solid rgba(30,27,75,0.1)', borderRadius:14, padding:6, minWidth:176, boxShadow:'0 24px 56px rgba(0,0,0,0.1)', backdropFilter:'blur(24px)', zIndex:10 }}>
-                  {[['Case studies','#'],['Blog','#']].map(([l,h])=>(
-                    <a key={l} href={h} style={{ display:'block', padding:'9px 14px', color:'rgba(30,27,75,0.5)', fontSize:13, borderRadius:8, transition:'all 0.14s' }}
-                       onMouseEnter={e=>{e.currentTarget.style.background='rgba(30,27,75,0.06)';e.currentTarget.style.color='#1E1B4B'}}
-                       onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.color='rgba(30,27,75,0.5)'}}>{l}</a>
-                  ))}
-                </div>
-              )}
-            </div>
-            <a href="/blog" style={lk} onMouseEnter={hi} onMouseLeave={ho}>Blog</a>
-            <a href="About.html" style={{ ...lk, color:'#1E1B4B', background:'rgba(30,27,75,0.06)' }}>About</a>
-          </div>
-          <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" style={{ background:'#1E1B4B', color:'#FAFAFA', padding:'7px 18px', borderRadius:100, fontSize:12.5, fontWeight:600, letterSpacing:'-0.01em', whiteSpace:'nowrap', flexShrink:0, transition:'all 0.2s' }}
-             onMouseEnter={e=>{e.currentTarget.style.boxShadow='0 0 0 2px rgba(168,85,247,0.4), 0 8px 28px rgba(30,27,75,0.15)';e.currentTarget.style.opacity='0.9'}}
-             onMouseLeave={e=>{e.currentTarget.style.boxShadow='none';e.currentTarget.style.opacity='1'}}>Let's talk</a>
-        </nav>
-      </div>
-    );
-  };
+  <script type="text/babel">
+    const { useState, useEffect } = React;
 
-  const Footer = () => {
-    const cols = [
-      { label:'Services', links:['AI roadmap & consulting','AI product development','AI agents','AI product features','Software development','DevOps & cloud','AI cost observability','Branding & design','Autopilot content engine'] },
-      { label:'Industries', links:['SaaS & technology','Fintech & financial services','Healthcare & life sciences','HR tech'] },
-      { label:'Resources', links:['Case studies','Blog','Contact us'] },
-      { label:'Company', links:['About','Careers','Privacy policy','Terms of service'] },
-    ];
-    return (
-      <footer style={{ borderTop:'1px solid #DDD8F0', background:'#F3F0FF', paddingTop:64, paddingBottom:40 }}>
-        <div style={{ maxWidth:1280, margin:'0 auto', padding:'0 28px' }}>
-          <div className="footer-grid" style={{ display:'grid', gridTemplateColumns:'180px 1fr 1fr 1fr 1fr', gap:52, marginBottom:64 }}>
-            <div>
-              <a href="/" style={{ display:'flex', alignItems:'center', gap:8, marginBottom:14 }}>
-                <img src="/uploads/LOGO 2.png" alt="SlashLLM" style={{ width:28, height:28, objectFit:'contain' }} />
-                <span style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:700, fontSize:16, letterSpacing:'-0.03em', color:'#1E1B4B' }}>SlashLLM</span>
-              </a>
-              <p style={{ color:'rgba(30,27,75,0.45)', fontSize:13, lineHeight:1.6, marginBottom:20 }}>From prompt to production.</p>
-              <div style={{ display:'flex', gap:14 }}>
-                {[{l:'LinkedIn',fill:'none',sw:'1.5',p:'M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 4m-2 0a2 2 0 104 0 2 2 0 10-4 0'},{l:'X',fill:'currentColor',sw:'0',p:'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'},{l:'GitHub',fill:'none',sw:'1.5',p:'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22'}].map(({l,fill,sw,p})=>(
-                  <a key={l} href="#" style={{ color:'rgba(30,27,75,0.3)', transition:'color 0.15s' }} onMouseEnter={e=>e.currentTarget.style.color='#a855f7'} onMouseLeave={e=>e.currentTarget.style.color='rgba(30,27,75,0.3)'}>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill={fill} stroke={fill==='none'?'currentColor':'none'} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round"><path d={p}/></svg>
-                  </a>
-                ))}
-              </div>
+    const Icon = ({ name, size=20, color='currentColor' }) => {
+      const paths = {
+        arrowRight: <path d="M5 12h14M12 5l7 7-7 7"/>,
+        chevronDown: <path d="M6 9l6 6 6-6"/>,
+        sparkles: <><path d="M12 3l1.9 4.9L19 10l-4.1 3.1L16 18l-4-2.8L8 18l1.1-4.9L5 10l5.1-2.1z"/><path d="M19 3l.8 2.2L22 6l-1.8 1.4.5 2.2-1.7-1.3L17.3 9.6l.5-2.2L16 6l2.2-.8z"/></>,
+        check: <polyline points="20 6 9 17 4 12"/>,
+        shield: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>,
+        engineering: <><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></>
+      };
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+          {paths[name] || <circle cx="12" cy="12" r="9"/>}
+        </svg>
+      );
+    };
+
+    const GlobalNav = () => {
+      const [scrolled, setScrolled] = useState(false);
+      useEffect(() => {
+        const fn = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', fn);
+        return () => window.removeEventListener('scroll', fn);
+      }, []);
+
+      const navBtnStyle = {
+        color: 'rgba(30,27,75,0.68)', fontSize: 13.5, fontWeight: 500, padding: '8px 12px', borderRadius: 8,
+        display: 'inline-flex', alignItems: 'center', gap: 4, background: 'transparent', border: 'none', cursor: 'pointer'
+      };
+
+      return (
+        <div style={{ position: 'fixed', top: 12, left: 0, right: 0, zIndex: 1000, display: 'flex', justifyContent: 'center', padding: '0 16px' }}>
+          <nav style={{
+            width: '100%', maxWidth: 1240, height: 56, background: scrolled ? 'rgba(255,255,255,0.96)' : 'rgba(255,255,255,0.85)',
+            backdropFilter: 'blur(20px)', border: '1px solid rgba(30,27,75,0.1)', borderRadius: 100, display: 'flex',
+            alignItems: 'center', justifyContent: 'space-between', padding: '0 18px'
+          }}>
+            <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
+              <img src="/uploads/LOGO 2.png" alt="SlashLLM" style={{ width: 28, height: 28 }} />
+              <span style={{ fontFamily: '"Space Grotesk",sans-serif', fontWeight: 800, fontSize: 16, color: '#1E1B4B' }}>SlashLLM</span>
+            </a>
+
+            <div className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <a href="/Services.html" style={navBtnStyle}>What We Do</a>
+              <a href="/Industries.html" style={navBtnStyle}>Industries</a>
+              <a href="/Products.html" style={navBtnStyle}>Products & Platforms</a>
+              <a href="/Solutions.html" style={navBtnStyle}>Solutions</a>
+              <a href="/CaseStudies.html" style={navBtnStyle}>Customer Stories</a>
+              <a href="/blog" style={navBtnStyle}>Insights</a>
+              <a href="/About.html" style={{ ...navBtnStyle, color: '#7c3aed', fontWeight: 600 }}>Company</a>
             </div>
-            {cols.map(({ label, links }) => (
-              <div key={label}>
-                <p style={{ fontSize:11, fontWeight:600, color:'rgba(30,27,75,0.35)', letterSpacing:'0.12em', textTransform:'uppercase', fontFamily:'"JetBrains Mono",monospace', marginBottom:18 }}>{label}</p>
-                <div style={{ display:'flex', flexDirection:'column', gap:11 }}>
-                  {links.map(item => <a key={item} href="#" className="txt-lnk" style={{ color:'rgba(30,27,75,0.5)', fontSize:13.5 }}>{item}</a>)}
-                </div>
-              </div>
-            ))}
+
+            <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer"
+               style={{ background: '#1E1B4B', color: '#fff', padding: '8px 18px', borderRadius: 100, fontSize: 13, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+              Talk to an AI Expert <Icon name="arrowRight" size={13} />
+            </a>
+          </nav>
+        </div>
+      );
+    };
+
+    const GlobalFooter = () => (
+      <footer style={{ borderTop: '1px solid #DDD8F0', background: '#F4F1FA', paddingTop: 64, paddingBottom: 44 }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px', textAlign: 'center' }}>
+          <span style={{ fontFamily: '"Space Grotesk",sans-serif', fontWeight: 800, fontSize: 20, color: '#1E1B4B' }}>SlashLLM</span>
+          <p style={{ fontSize: 13, color: 'rgba(30,27,75,0.6)', marginTop: 6, marginBottom: 24 }}>Enterprise AI Engineering & Transformation.</p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 20, marginBottom: 28 }}>
+            <a href="/Services.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Services</a>
+            <a href="/Industries.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Industries</a>
+            <a href="/Products.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Products</a>
+            <a href="/Solutions.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Solutions</a>
+            <a href="/CaseStudies.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Case Studies</a>
           </div>
-          <div style={{ borderTop:'1px solid #DDD8F0', paddingTop:24 }}>
-            <p style={{ color:'rgba(30,27,75,0.35)', fontSize:13 }}>© 2026 SlashLLM. All rights reserved.</p>
-          </div>
+          <p style={{ color: 'rgba(30,27,75,0.45)', fontSize: 12.5 }}>© 2026 SlashLLM Inc. All rights reserved.</p>
         </div>
       </footer>
     );
-  };
 
-  Object.assign(window, { Nav, Footer });
-</script>
+    function AboutPage() {
+      const values = [
+        {
+          num: '01',
+          title: 'Engineering Rigor Over Slide Decks',
+          desc: 'The greatest strategy document is a resilient production system. We prioritize working code, automated test suites, and live benchmarks over theoretical frameworks.'
+        },
+        {
+          num: '02',
+          title: 'Total Production Ownership',
+          desc: 'We do not disappear after delivering initial code. We deploy, manage GPU scaling, monitor token costs, and fine-tune models to guarantee long-term operational success.'
+        },
+        {
+          num: '03',
+          title: 'Data Sovereignty & Enterprise Security',
+          desc: 'Enterprise AI must be secure by design. We build with client-side encryption, air-gapped private VPCs, and automated PII scrubbers that guarantee zero data leakage.'
+        },
+        {
+          num: '04',
+          title: 'Cost Transparency & Model Neutrality',
+          desc: 'We are vendor-agnostic. Whether OpenAI, Anthropic, AWS Bedrock, Google Vertex, or self-hosted open-weights on vLLM — we route workloads to the most cost-effective solution.'
+        }
+      ];
 
-<!-- ═══ SCRIPT 2 · Page Sections ═══ -->
-<script type="text/babel">
+      return (
+        <React.Fragment>
+          <GlobalNav />
+          <main style={{ paddingTop: 90 }}>
+            {/* Hero */}
+            <section style={{ padding: '80px 28px 60px', textAlign: 'center', background: 'linear-gradient(180deg, #F3F0FF 0%, #FAFAFA 100%)' }}>
+              <div style={{ maxWidth: 840, margin: '0 auto' }}>
+                <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11.5, color: '#7c3aed', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 600 }}>
+                  Company Profile
+                </span>
+                <h1 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 'clamp(38px, 4vw, 62px)', fontWeight: 800, letterSpacing: '-0.04em', color: '#1E1B4B', margin: '16px 0 20px' }}>
+                  Enterprise AI Engineering & Transformation
+                </h1>
+                <p style={{ fontSize: 17, color: 'rgba(30,27,75,0.65)', lineHeight: 1.65 }}>
+                  SlashLLM is the technology partner enterprises trust to build, deploy, optimize, and operate production AI systems at scale.
+                </p>
+              </div>
+            </section>
 
-  const BELIEFS = [
-    { num:'01', title:'Ship, don\'t slide', body:'The best strategy is a working prototype. We\'d rather show you a production system in 4 weeks than a 60-page deck in 6.' },
-    { num:'02', title:'Own the outcome', body:'We don\'t disappear after delivery. We build it, we deploy it, we monitor it, we optimize it. If it breaks at 3am, we\'re already looking at it.' },
-    { num:'03', title:'Stay small, go deep', body:'We\'re not trying to be a 500-person agency. We\'d rather do 15 things brilliantly than 50 things adequately.' },
-    { num:'04', title:'Be honest about what works', body:'If AI isn\'t the right answer, we\'ll tell you. If a simpler solution exists, we\'ll build that instead. Our job is results, not billable hours.' },
-  ];
-
-  /* ── Dark hero card: sprint → production timeline ── */
-  const ProjectCard = () => {
-    const phases = [
-      { week:'Week 01', label:'Discovery & architecture', pct:25,  delay:'0.25s', dur:'0.7s' },
-      { week:'Week 02', label:'Build & iteration',        pct:50,  delay:'0.55s', dur:'0.9s' },
-      { week:'Week 03', label:'Testing & integration',    pct:75,  delay:'0.85s', dur:'1.1s' },
-      { week:'Week 04', label:'Deploy to production',     pct:100, delay:'1.15s', dur:'1.3s' },
-    ];
-    return (
-      <div className="hero-card" style={{ background:'#100D2E', border:'1px solid rgba(255,255,255,0.06)', borderRadius:20, overflow:'hidden', width:'100%', maxWidth:460 }}>
-        {/* Chrome */}
-        <div style={{ padding:'12px 18px', borderBottom:'1px solid rgba(255,255,255,0.05)', display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-          <div style={{ display:'flex', gap:5 }}>
-            {['#FF5F57','#FFBD2E','#28C840'].map((c,i)=><div key={i} style={{ width:8, height:8, borderRadius:'50%', background:c }} />)}
-          </div>
-          <div style={{ display:'flex', alignItems:'center', gap:8 }}>
-            <span className="status-dot" style={{ width:6, height:6, borderRadius:'50%', background:'#4ade80', display:'block' }}></span>
-            <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'rgba(255,255,255,0.25)', letterSpacing:'0.08em' }}>sprint → production</span>
-          </div>
-        </div>
-
-        {/* Header */}
-        <div style={{ padding:'22px 20px 10px' }}>
-          <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9.5, color:'rgba(168,85,247,0.55)', letterSpacing:'0.16em', textTransform:'uppercase', marginBottom:4 }}>Project timeline</p>
-          <p style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:14, color:'rgba(255,255,255,0.6)', fontWeight:600, letterSpacing:'-0.02em' }}>From first call to production</p>
-        </div>
-
-        {/* Progress bars */}
-        <div style={{ padding:'10px 20px 20px' }}>
-          {phases.map(({ week, label, pct, delay, dur }) => (
-            <div key={week} style={{ marginBottom:18 }}>
-              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom:8 }}>
-                <div style={{ display:'flex', gap:10, alignItems:'baseline' }}>
-                  <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9, color:'rgba(168,85,247,0.5)', letterSpacing:'0.1em', flexShrink:0 }}>{week}</span>
-                  <span style={{ fontSize:12, color:'rgba(255,255,255,0.42)' }}>{label}</span>
+            {/* Story Grid */}
+            <section style={{ maxWidth: 1280, margin: '0 auto', padding: '40px 28px 80px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '50% 50%', gap: 48, alignItems: 'center' }} className="grid-2col">
+                <div>
+                  <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#7c3aed', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Our Mission</span>
+                  <h2 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 32, fontWeight: 800, color: '#1E1B4B', letterSpacing: '-0.03em', margin: '12px 0 20px' }}>
+                    Bridging the Gap Between AI Prototypes and Enterprise Operations
+                  </h2>
+                  <p style={{ fontSize: 15, color: 'rgba(30,27,75,0.72)', lineHeight: 1.75, marginBottom: 16 }}>
+                    Over 80% of enterprise AI proofs-of-concept stall before reaching production. Organizations struggle with unpredictable token bills, security concerns, brittle tool calling, and lack of specialized AI infrastructure expertise.
+                  </p>
+                  <p style={{ fontSize: 15, color: 'rgba(30,27,75,0.72)', lineHeight: 1.75, marginBottom: 28 }}>
+                    SlashLLM combines elite full-stack software engineering, deep machine learning research, and proprietary platforms (SlashLLM Gateway & Observability) to deliver deterministic business outcomes.
+                  </p>
+                  <div style={{ display: 'flex', gap: 32 }}>
+                    <div>
+                      <p style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 32, fontWeight: 800, color: '#1E1B4B' }}>99.98%</p>
+                      <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10, color: 'rgba(30,27,75,0.5)', textTransform: 'uppercase' }}>Production SLA</p>
+                    </div>
+                    <div>
+                      <p style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 32, fontWeight: 800, color: '#7c3aed' }}>&lt;90 Days</p>
+                      <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10, color: 'rgba(30,27,75,0.5)', textTransform: 'uppercase' }}>Time to Production</p>
+                    </div>
+                    <div>
+                      <p style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 32, fontWeight: 800, color: '#15803d' }}>30–60%</p>
+                      <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10, color: 'rgba(30,27,75,0.5)', textTransform: 'uppercase' }}>Inference Spend Saved</p>
+                    </div>
+                  </div>
                 </div>
-                <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9, color: pct===100 ? '#4ade80' : 'rgba(255,255,255,0.28)', letterSpacing:'0.06em' }}>{pct}%</span>
+
+                <div style={{ background: '#F8F6FC', border: '1px solid #DDD8F0', borderRadius: 24, padding: '40px 36px' }}>
+                  <h3 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 20, fontWeight: 800, color: '#1E1B4B', marginBottom: 24 }}>
+                    Our Engineering Principles
+                  </h3>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                    {values.map((v, i) => (
+                      <div key={i} style={{ borderBottom: i < values.length - 1 ? '1px solid rgba(30,27,75,0.06)' : 'none', paddingBottom: i < values.length - 1 ? 16 : 0 }}>
+                        <p style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 15, fontWeight: 700, color: '#1E1B4B', marginBottom: 4 }}>
+                          <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 12, color: '#7c3aed', marginRight: 8 }}>{v.num}.</span>
+                          {v.title}
+                        </p>
+                        <p style={{ fontSize: 13.5, color: 'rgba(30,27,75,0.65)', lineHeight: 1.6 }}>{v.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <div style={{ height:4, borderRadius:2, background:'rgba(255,255,255,0.05)', overflow:'hidden' }}>
-                <div style={{
-                  height:'100%', borderRadius:2,
-                  background: pct===100
-                    ? 'linear-gradient(90deg, #a855f7 0%, #4ade80 100%)'
-                    : 'linear-gradient(90deg, #a855f7 0%, #be38de 100%)',
-                  width:`${pct}%`,
-                  animationName:'bar-fill',
-                  animationDuration: dur,
-                  animationDelay: delay,
-                  animationTimingFunction:'cubic-bezier(0.16,1,0.3,1)',
-                  animationFillMode:'both',
-                }} />
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Terminal footer */}
-        <div style={{ padding:'14px 20px', borderTop:'1px solid rgba(255,255,255,0.05)', background:'rgba(0,0,0,0.18)', display:'flex', flexDirection:'column', gap:7 }}>
-          {[
-            { cmd:'/commit', val:'d4e92f1', msg:'"ship it"', c:'rgba(255,255,255,0.28)' },
-            { cmd:'/deploy', val:'✓',       msg:'live · production', c:'#4ade80' },
-            { cmd:'/monitor', val:'●',      msg:'99.98% uptime', c:'rgba(168,85,247,0.7)' },
-          ].map(({ cmd, val, msg, c }) => (
-            <div key={cmd} style={{ display:'flex', gap:8, alignItems:'center' }}>
-              <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'rgba(168,85,247,0.45)', flexShrink:0 }}>{cmd}</span>
-              <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:c }}>{val} {msg}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  /* ── Hero ── */
-  const AboutHero = () => (
-    <section style={{ background:'#FAFAFA', borderBottom:'1px solid #DDD8F0', position:'relative', overflow:'hidden' }}>
-      {/* BG grid */}
-      <div style={{ position:'absolute', inset:0, backgroundImage:'linear-gradient(rgba(168,85,247,0.032) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,0.032) 1px,transparent 1px)', backgroundSize:'64px 64px', pointerEvents:'none' }}></div>
-      {/* Ghost / */}
-      <div style={{ position:'absolute', right:'-4%', top:'-8%', fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, fontSize:'30vw', color:'transparent', WebkitTextStroke:'1px rgba(168,85,247,0.032)', lineHeight:1, pointerEvents:'none', userSelect:'none', letterSpacing:'-0.06em' }}>/</div>
-      {/* Bloom */}
-      <div style={{ position:'absolute', left:'28%', top:'8%', width:520, height:520, background:'radial-gradient(circle, rgba(168,85,247,0.05) 0%, transparent 65%)', pointerEvents:'none' }}></div>
-
-      <div style={{ maxWidth:1280, margin:'0 auto', padding:'148px 28px 88px', display:'grid', gridTemplateColumns:'54% 46%', gap:'0 64px', alignItems:'center', position:'relative', zIndex:1 }}>
-
-        {/* Left */}
-        <div className="hero-left" style={{ maxWidth:580 }}>
-          {/* Breadcrumb */}
-          <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:36 }}>
-            <a href="/" style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'rgba(30,27,75,0.32)', letterSpacing:'0.1em', transition:'color 0.15s' }} onMouseEnter={e=>e.currentTarget.style.color='#a855f7'} onMouseLeave={e=>e.currentTarget.style.color='rgba(30,27,75,0.32)'}>slashllm.com</a>
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(30,27,75,0.22)" strokeWidth="2.5" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
-            <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', letterSpacing:'0.1em' }}>about</span>
-          </div>
-
-          {/* Label */}
-          <div style={{ display:'flex', alignItems:'center', gap:14, marginBottom:28 }}>
-            <div style={{ width:32, height:1.5, background:'linear-gradient(90deg,#a855f7,#be38de)', borderRadius:2 }}></div>
-            <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', letterSpacing:'0.16em', textTransform:'uppercase' }}>About us</span>
-          </div>
-
-          {/* Headline */}
-          <h1 style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, letterSpacing:'-0.048em', marginBottom:28 }}>
-            <span style={{ display:'block', fontSize:'clamp(30px,3.4vw,50px)', color:'rgba(30,27,75,0.62)', lineHeight:1.18, fontWeight:700 }}>We're the team companies call</span>
-            <span style={{ display:'block', fontSize:'clamp(30px,3.4vw,50px)', color:'rgba(30,27,75,0.62)', lineHeight:1.18, fontWeight:700 }}>when they need</span>
-            <span className="gradient-text" style={{ display:'block', fontSize:'clamp(34px,3.8vw,56px)', lineHeight:1.1 }}>AI that actually ships.</span>
-          </h1>
-
-          <p style={{ fontSize:17.5, color:'rgba(30,27,75,0.52)', lineHeight:1.78, maxWidth:500, marginBottom:44, textWrap:'pretty' }}>
-            A small, fast, technical team. No talent marketplace. No layers of project managers. Just builders who go from prompt to production.
-          </p>
-
-          {/* Stat strip */}
-          <div className="hero-stats" style={{ display:'flex', gap:36, paddingTop:32, borderTop:'1px solid #DDD8F0' }}>
-            {[
-              { v:'Small', l:'by design' },
-              { v:'4 wks', l:'to production' },
-              { v:'4', l:'industries served' },
-            ].map(({ v, l }) => (
-              <div key={l}>
-                <p style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:22, fontWeight:800, color:'#1E1B4B', letterSpacing:'-0.04em', lineHeight:1 }}>{v}</p>
-                <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'rgba(30,27,75,0.4)', letterSpacing:'0.1em', textTransform:'uppercase', marginTop:5 }}>{l}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Right */}
-        <div className="hero-right" style={{ display:'flex', justifyContent:'flex-end', alignItems:'center', paddingBottom:16 }}>
-          <ProjectCard />
-        </div>
-      </div>
-    </section>
-  );
-
-  /* ── Our Story ── */
-  const OurStory = () => (
-    <section style={{ background:'#F3F0FF', padding:'120px 28px 128px', position:'relative', overflow:'hidden' }}>
-      {/* Ghost letter */}
-      <div style={{ position:'absolute', right:'-2%', top:'5%', fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, fontSize:'28vw', color:'transparent', WebkitTextStroke:'1px rgba(168,85,247,0.04)', lineHeight:1, pointerEvents:'none', userSelect:'none', letterSpacing:'-0.06em' }}>S</div>
-      {/* Bloom */}
-      <div style={{ position:'absolute', left:'-5%', bottom:'10%', width:480, height:480, background:'radial-gradient(circle, rgba(168,85,247,0.04) 0%, transparent 65%)', pointerEvents:'none' }}></div>
-
-      <div style={{ maxWidth:1280, margin:'0 auto', position:'relative', zIndex:1 }}>
-
-        {/* Section label */}
-        <div className="reveal" style={{ display:'flex', alignItems:'center', gap:14, marginBottom:72 }}>
-          <div style={{ width:32, height:1.5, background:'linear-gradient(90deg,#a855f7,#be38de)', borderRadius:2 }}></div>
-          <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', letterSpacing:'0.16em', textTransform:'uppercase' }}>Our story</span>
-        </div>
-
-        {/* Pull quote */}
-        <div className="reveal" style={{ marginBottom:80, maxWidth:900 }}>
-          <blockquote style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, letterSpacing:'-0.048em', lineHeight:1.08 }}>
-            <span style={{ display:'block', fontSize:'clamp(32px,4vw,58px)', color:'#1E1B4B' }}>The gap wasn't in ideas —</span>
-            <span className="gradient-text" style={{ display:'block', fontSize:'clamp(34px,4.2vw,62px)' }}>it was in execution.</span>
-          </blockquote>
-        </div>
-
-        {/* Two-column body */}
-        <div className="story-grid reveal" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'0 80px', alignItems:'start' }}>
-
-          {/* Left: origin */}
-          <div>
-            <p style={{ fontSize:16.5, color:'rgba(30,27,75,0.58)', lineHeight:1.86, marginBottom:28, textWrap:'pretty' }}>
-              SlashLLM started with a frustration: too many companies spending months on AI "strategy" with nothing to show for it. Decks. Roadmaps. Proof-of-concepts that never left the sandbox.
-            </p>
-            <p style={{ fontSize:16.5, color:'rgba(30,27,75,0.58)', lineHeight:1.86, textWrap:'pretty' }}>
-              The world had plenty of AI consultants who could tell you what to build. It had very few teams that could build it, deploy it, and make it work at scale.
-            </p>
-          </div>
-
-          {/* Right: what we built + today */}
-          <div>
-            <p style={{ fontSize:16.5, color:'rgba(30,27,75,0.58)', lineHeight:1.86, marginBottom:28, textWrap:'pretty' }}>
-              So we built SlashLLM as the agency we wished existed: a small, fast, technical team that goes from prompt to production. No talent marketplace. No layers of project managers. Just builders who understand both the technology and the business problem — and who ship real systems into real production environments.
-            </p>
-            <p style={{ fontSize:16.5, color:'rgba(30,27,75,0.58)', lineHeight:1.86, marginBottom:36, textWrap:'pretty' }}>
-              Today, we work with growth-stage startups, SMBs, and mid-market enterprises across SaaS, fintech, healthcare, and HR tech — helping them build AI products, deploy intelligent agents, and optimize their AI infrastructure.
-            </p>
-            {/* Industry tags */}
-            <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
-              {['SaaS','Fintech','Healthcare','HR tech'].map(ind => (
-                <span key={ind} style={{ padding:'6px 14px', background:'rgba(168,85,247,0.07)', border:'1px solid rgba(168,85,247,0.18)', borderRadius:100, fontSize:12, color:'#a855f7', fontWeight:500, fontFamily:'"JetBrains Mono",monospace', letterSpacing:'0.04em' }}>{ind}</span>
-              ))}
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-  );
-
-  /* ── What we believe ── */
-  const WhatWeBelieve = () => (
-    <section style={{ background:'#FAFAFA', padding:'120px 28px 128px', position:'relative', overflow:'hidden' }}>
-      {/* Ghost word */}
-      <div style={{ position:'absolute', left:'-1%', bottom:'-4%', fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, fontSize:'17vw', color:'transparent', WebkitTextStroke:'1px rgba(168,85,247,0.03)', lineHeight:1, pointerEvents:'none', userSelect:'none', letterSpacing:'-0.06em' }}>believe</div>
-
-      <div style={{ maxWidth:1280, margin:'0 auto', position:'relative', zIndex:1 }}>
-
-        {/* Section label */}
-        <div className="reveal" style={{ display:'flex', alignItems:'center', gap:14, marginBottom:24 }}>
-          <div style={{ width:32, height:1.5, background:'linear-gradient(90deg,#a855f7,#be38de)', borderRadius:2 }}></div>
-          <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', letterSpacing:'0.16em', textTransform:'uppercase' }}>What we believe</span>
-        </div>
-
-        {/* Heading */}
-        <h2 className="reveal" style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, fontSize:'clamp(38px,4.2vw,64px)', letterSpacing:'-0.048em', color:'#1E1B4B', lineHeight:1.04, marginBottom:72 }}>
-          Four principles.<br/>
-          <span className="gradient-text">No exceptions.</span>
-        </h2>
-
-        {/* 2×2 grid */}
-        <div className="beliefs-grid" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:24 }}>
-          {BELIEFS.map(({ num, title, body }, i) => (
-            <div key={num} className="belief-card reveal" data-d={String(i+1)}
-              style={{
-                background: i===0||i===3 ? '#F3F0FF' : '#FAFAFA',
-                border:'1px solid #DDD8F0',
-                borderRadius:20, padding:'52px 52px 56px',
-                position:'relative', overflow:'hidden',
-              }}
-              onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-4px)';e.currentTarget.style.boxShadow='0 24px 64px rgba(168,85,247,0.1), 0 0 0 1px rgba(168,85,247,0.18)';}}
-              onMouseLeave={e=>{e.currentTarget.style.transform='';e.currentTarget.style.boxShadow='';}}
-            >
-              {/* Ghost number */}
-              <div style={{ position:'absolute', right:-10, bottom:-20, fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, fontSize:160, color:'transparent', WebkitTextStroke:'1px rgba(168,85,247,0.07)', lineHeight:1, pointerEvents:'none', userSelect:'none', letterSpacing:'-0.06em' }}>{num}</div>
-              {/* Content */}
-              <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', opacity:0.65, letterSpacing:'0.14em', display:'block', marginBottom:20 }}>{num}</span>
-              <h3 style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:'clamp(22px,1.8vw,28px)', fontWeight:700, letterSpacing:'-0.04em', color:'#1E1B4B', lineHeight:1.18, marginBottom:18 }}>{title}</h3>
-              <p style={{ fontSize:15.5, color:'rgba(30,27,75,0.56)', lineHeight:1.84, textWrap:'pretty', position:'relative' }}>{body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-
-  /* ── CTA ── */
-  const AboutCTA = () => (
-    <section style={{ padding:'0 28px 100px', background:'#FAFAFA' }}>
-      <div style={{ maxWidth:1280, margin:'0 auto' }}>
-        <div style={{ background:'linear-gradient(135deg, #14112E 0%, #1E1B4B 45%, #16133A 100%)', border:'1px solid rgba(255,255,255,0.06)', borderRadius:24, padding:'90px 80px', textAlign:'center', position:'relative', overflow:'hidden' }}>
-          {/* Blooms */}
-          <div style={{ position:'absolute', top:-120, left:'50%', transform:'translateX(-50%)', width:800, height:360, borderRadius:'50%', background:'radial-gradient(circle, rgba(168,85,247,0.18) 0%, transparent 68%)', pointerEvents:'none' }}></div>
-          <div style={{ position:'absolute', bottom:-80, right:'10%', width:400, height:220, borderRadius:'50%', background:'radial-gradient(circle, rgba(190,56,222,0.12) 0%, transparent 68%)', pointerEvents:'none' }}></div>
-          {/* Grid */}
-          <div style={{ position:'absolute', inset:0, backgroundImage:'linear-gradient(rgba(168,85,247,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,0.05) 1px,transparent 1px)', backgroundSize:'48px 48px', pointerEvents:'none', borderRadius:24 }}></div>
-
-          <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'rgba(168,85,247,0.6)', letterSpacing:'0.18em', textTransform:'uppercase', marginBottom:22, position:'relative' }}>Want to work with us?</p>
-          <h2 style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:'clamp(28px,3.2vw,50px)', fontWeight:800, letterSpacing:'-0.048em', color:'#FAFAFA', marginBottom:20, position:'relative', lineHeight:1.1 }}>
-            Whether you've got a project in mind<br/>or just want to explore what's possible.
-          </h2>
-          <p style={{ fontSize:17, color:'rgba(255,255,255,0.44)', maxWidth:400, margin:'0 auto 52px', lineHeight:1.8, position:'relative', textWrap:'pretty' }}>
-            We'd love to hear from you.
-          </p>
-          <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" style={{ display:'inline-flex', alignItems:'center', gap:9, background:'#FAFAFA', color:'#1E1B4B', padding:'14px 28px', borderRadius:9, fontSize:15, fontWeight:700, letterSpacing:'-0.01em', position:'relative', transition:'all 0.2s' }}
-             onMouseEnter={e=>{e.currentTarget.style.boxShadow='0 0 0 3px rgba(168,85,247,0.35)';e.currentTarget.style.opacity='0.92';}}
-             onMouseLeave={e=>{e.currentTarget.style.boxShadow='none';e.currentTarget.style.opacity='1';}}>
-            Let's talk
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-
-  Object.assign(window, { BELIEFS, ProjectCard, AboutHero, OurStory, WhatWeBelieve, AboutCTA });
-</script>
-
-<!-- ═══ SCRIPT 3 · App Mount ═══ -->
-<script type="text/babel">
-  function App() {
-    React.useEffect(() => {
-      const els = document.querySelectorAll('.reveal');
-      const obs = new IntersectionObserver(
-        entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }),
-        { threshold: 0.04 }
+            </section>
+          </main>
+          <GlobalFooter />
+        </React.Fragment>
       );
-      els.forEach(el => obs.observe(el));
-      return () => obs.disconnect();
-    }, []);
+    }
 
-    return (
-      <React.Fragment>
-        <Nav />
-        <main>
-          <AboutHero />
-          <OurStory />
-          <WhatWeBelieve />
-          <AboutCTA />
-        </main>
-        <Footer />
-      </React.Fragment>
-    );
-  }
-  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-</script>
+    ReactDOM.createRoot(document.getElementById('root')).render(<AboutPage />);
+  </script>
 </body>
 </html>

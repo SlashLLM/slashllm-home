@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise AI Solutions — SlashLLM</title>
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/uploads/favicon-32.png?v=2" sizes="32x32">
+  <link rel="icon" type="image/png" href="/uploads/favicon-16.png?v=2" sizes="16x16">
+  <link rel="apple-touch-icon" href="/uploads/favicon-180.png?v=2">
+  <meta name="description" content="Outcome-driven enterprise AI solutions: Enterprise AI Transformation, Cost Optimization, LLM Governance, Private AI Infrastructure, and Intelligent Document AI.">
+  <link rel="canonical" href="https://slashllm.com/Solutions.html">
+  <meta property="og:title" content="Enterprise AI Solutions — SlashLLM">
+  <meta property="og:description" content="Outcome-driven enterprise AI solutions by SlashLLM.">
+  <meta property="og:image" content="https://slashllm.com/uploads/LOGO%202.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind = { config: { theme: { extend: { fontFamily: { sans: ['Inter','system-ui','sans-serif'], display: ['"Space Grotesk"','sans-serif'], mono: ['"JetBrains Mono"','monospace'] } } } } };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: #FAFAFA; color: #1E1B4B; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    :root {
+      --bg: #FAFAFA; --surface: #F3F0FF; --card: #EDE9FF;
+      --border: #DDD8F0; --text: #1E1B4B; --muted: rgba(30,27,75,0.6);
+      --accent: #a855f7; --accent2: #7c3aed;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #be38de 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(30,27,75,0.12);
+      border-radius: 16px;
+      box-shadow: 0 24px 64px rgba(30,27,75,0.12);
+      padding: 12px;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+    }
+    .nav-item-wrap:hover .nav-dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .card-hover {
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .card-hover:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(124,58,237,0.08);
+      border-color: rgba(168,85,247,0.4) !important;
+    }
+
+    @media (max-width: 1024px) {
+      .hide-mobile { display: none !important; }
+      .grid-2col { grid-template-columns: 1fr !important; }
+      .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 36px !important; }
+    }
+    @media (max-width: 640px) {
+      .footer-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const Icon = ({ name, size=20, color='currentColor' }) => {
+      const paths = {
+        arrowRight: <path d="M5 12h14M12 5l7 7-7 7"/>,
+        chevronDown: <path d="M6 9l6 6 6-6"/>,
+        sparkles: <><path d="M12 3l1.9 4.9L19 10l-4.1 3.1L16 18l-4-2.8L8 18l1.1-4.9L5 10l5.1-2.1z"/><path d="M19 3l.8 2.2L22 6l-1.8 1.4.5 2.2-1.7-1.3L17.3 9.6l.5-2.2L16 6l2.2-.8z"/></>,
+        agent: <><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="11"/><circle cx="8.5" cy="16" r="1" fill={color}/><circle cx="15.5" cy="16" r="1" fill={color}/></>,
+        engineering: <><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></>,
+        infra: <><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></>,
+        observability: <><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></>,
+        data: <><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></>,
+        gateway: <><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></>,
+        shield: <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></>,
+        finance: <><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></>,
+        health: <><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></>,
+        cost: <><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></>,
+        check: <polyline points="20 6 9 17 4 12"/>
+      };
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+          {paths[name] || <circle cx="12" cy="12" r="9"/>}
+        </svg>
+      );
+    };
+
+    const GlobalNav = () => {
+      const [scrolled, setScrolled] = useState(false);
+      useEffect(() => {
+        const fn = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', fn);
+        return () => window.removeEventListener('scroll', fn);
+      }, []);
+
+      const navBtnStyle = {
+        color: 'rgba(30,27,75,0.68)', fontSize: 13.5, fontWeight: 500, padding: '8px 12px', borderRadius: 8,
+        display: 'inline-flex', alignItems: 'center', gap: 4, background: 'transparent', border: 'none', cursor: 'pointer'
+      };
+
+      return (
+        <div style={{ position: 'fixed', top: 12, left: 0, right: 0, zIndex: 1000, display: 'flex', justifyContent: 'center', padding: '0 16px' }}>
+          <nav style={{
+            width: '100%', maxWidth: 1240, height: 56, background: scrolled ? 'rgba(255,255,255,0.96)' : 'rgba(255,255,255,0.85)',
+            backdropFilter: 'blur(20px)', border: '1px solid rgba(30,27,75,0.1)', borderRadius: 100, display: 'flex',
+            alignItems: 'center', justifyContent: 'space-between', padding: '0 18px'
+          }}>
+            <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
+              <img src="/uploads/LOGO 2.png" alt="SlashLLM" style={{ width: 28, height: 28 }} />
+              <span style={{ fontFamily: '"Space Grotesk",sans-serif', fontWeight: 800, fontSize: 16, color: '#1E1B4B' }}>SlashLLM</span>
+            </a>
+
+            <div className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <a href="/Services.html" style={navBtnStyle}>What We Do</a>
+              <a href="/Industries.html" style={navBtnStyle}>Industries</a>
+              <a href="/Products.html" style={navBtnStyle}>Products & Platforms</a>
+              <a href="/Solutions.html" style={{ ...navBtnStyle, color: '#7c3aed', fontWeight: 600 }}>Solutions</a>
+              <a href="/CaseStudies.html" style={navBtnStyle}>Customer Stories</a>
+              <a href="/blog" style={navBtnStyle}>Insights</a>
+              <a href="/About.html" style={navBtnStyle}>Company</a>
+            </div>
+
+            <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer"
+               style={{ background: '#1E1B4B', color: '#fff', padding: '8px 18px', borderRadius: 100, fontSize: 13, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+              Talk to an AI Expert <Icon name="arrowRight" size={13} />
+            </a>
+          </nav>
+        </div>
+      );
+    };
+
+    const GlobalFooter = () => (
+      <footer style={{ borderTop: '1px solid #DDD8F0', background: '#F4F1FA', paddingTop: 64, paddingBottom: 44 }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px', textAlign: 'center' }}>
+          <span style={{ fontFamily: '"Space Grotesk",sans-serif', fontWeight: 800, fontSize: 20, color: '#1E1B4B' }}>SlashLLM Enterprise Solutions</span>
+          <p style={{ fontSize: 13, color: 'rgba(30,27,75,0.6)', marginTop: 6, marginBottom: 24 }}>Strategic transformation and production engineering addressing core enterprise business challenges.</p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 20, marginBottom: 28 }}>
+            <a href="/Services.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Services</a>
+            <a href="/Industries.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Industries</a>
+            <a href="/Products.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Products</a>
+            <a href="/CaseStudies.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Case Studies</a>
+          </div>
+          <p style={{ color: 'rgba(30,27,75,0.45)', fontSize: 12.5 }}>© 2026 SlashLLM Inc. All rights reserved.</p>
+        </div>
+      </footer>
+    );
+
+    function SolutionsPage() {
+      const solutions = [
+        {
+          id: 'transformation',
+          icon: 'sparkles',
+          title: 'Enterprise AI Transformation',
+          subtitle: 'End-to-End Strategic Modernization & Production Delivery',
+          problem: 'Most Fortune 2000 organizations are stuck in proof-of-concept purgatory. Siloed experiments lack enterprise security, legacy API integration, and verifiable ROI.',
+          deliverables: [
+            'Enterprise AI Opportunity Matrix & ROI Business Case',
+            'Reference Architecture & Security Compliance Blueprint',
+            'Legacy ERP, CRM & Database API Integration Layer',
+            '4-to-16 Week Agile Production Delivery Sprints'
+          ],
+          impact: 'Accelerates AI time-to-market from 18+ months down to under 90 days with deterministic production rollouts.'
+        },
+        {
+          id: 'cost-optimization',
+          icon: 'cost',
+          title: 'AI Cost & Latency Optimization',
+          subtitle: 'Slashing Model Inference Bills by 30% to 60%',
+          problem: 'Commercial LLMs cause ballooning cloud expenditure, while multi-second API latency degrades user retention and conversion rates.',
+          deliverables: [
+            'SlashLLM Gateway Semantic Cache Integration',
+            'Dynamic Model Tiering & Automated Small Model Distillation',
+            'Prompt Compression & Token Payload Pruning',
+            'Granular Cost Allocation & Budget Guardrails'
+          ],
+          impact: 'Average client achieves a 38% to 60% reduction in monthly token spend and up to 4.2x latency improvements.'
+        },
+        {
+          id: 'governance',
+          icon: 'shield',
+          title: 'LLM Governance, Safety & Guardrails',
+          subtitle: 'Zero-Leakage Compliance, PII Redaction & Red-Teaming',
+          problem: 'Legal, risk, and security teams block AI initiatives due to fears of data leakage, toxic model hallucinations, and regulatory liability (EU AI Act, HIPAA, SOC 2).',
+          deliverables: [
+            'Real-Time PII & Sensitive Credential Scrubbing Layer',
+            'Deterministic Output Validation Harnesses',
+            'Automated Adversarial Red-Teaming & Jailbreak Tests',
+            'Immutable Audit Logs for Every Model Decision'
+          ],
+          impact: '100% auditability and deterministic safety compliance across all customer-facing AI interactions.'
+        },
+        {
+          id: 'private-ai',
+          icon: 'infra',
+          title: 'Private & Hybrid AI Infrastructure',
+          subtitle: 'Air-Gapped & VPC Deployments with Open-Weight Models',
+          problem: 'Strict data residency rules, IP sensitivity, or regulatory mandates prevent the use of third-party public cloud AI APIs.',
+          deliverables: [
+            'Self-Hosted vLLM & TensorRT Inference Clusters on Private VPC',
+            'Fine-Tuned Open-Weight Models (Llama 3, Mistral, Qwen)',
+            'Air-Gapped On-Premises Kubernetes GPU Orchestration',
+            'Custom Vector Database & Local Embedding Infrastructure'
+          ],
+          impact: 'Complete intellectual property sovereignty with zero external data egress and enterprise-grade SLA performance.'
+        },
+        {
+          id: 'document-ai',
+          icon: 'data',
+          title: 'Intelligent Document & Knowledge AI',
+          subtitle: 'Unlocking Unstructured Enterprise Data at Scale',
+          problem: 'Critical enterprise data is trapped in millions of PDFs, scanned contracts, clinical records, and spreadsheets.',
+          deliverables: [
+            'Multimodal Optical Character & Layout Recognition (OCR)',
+            'Domain-Specific Knowledge Graph Construction',
+            'Hybrid Semantic & Keyword Vector Retrieval (RAG)',
+            'Automated Structuring into Downstream Databases (SQL/JSON)'
+          ],
+          impact: 'Extracts tabular and textual data with 99.8% precision, cutting manual review time by 80%+.'
+        }
+      ];
+
+      return (
+        <React.Fragment>
+          <GlobalNav />
+          <main style={{ paddingTop: 100 }}>
+            {/* Header */}
+            <section style={{ padding: '80px 28px 60px', textAlign: 'center', background: 'linear-gradient(180deg, #F3F0FF 0%, #FAFAFA 100%)' }}>
+              <div style={{ maxWidth: 840, margin: '0 auto' }}>
+                <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11.5, color: '#7c3aed', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 600 }}>
+                  Business Solutions
+                </span>
+                <h1 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 'clamp(38px, 4vw, 62px)', fontWeight: 800, letterSpacing: '-0.04em', color: '#1E1B4B', margin: '16px 0 20px' }}>
+                  Enterprise AI Solutions
+                </h1>
+                <p style={{ fontSize: 17, color: 'rgba(30,27,75,0.65)', lineHeight: 1.65 }}>
+                  We don't sell generic slide decks. We solve specific enterprise operational bottlenecks through targeted AI architectures, proprietary technology, and disciplined engineering execution.
+                </p>
+              </div>
+            </section>
+
+            {/* Solutions List */}
+            <section style={{ maxWidth: 1280, margin: '0 auto', padding: '40px 28px 120px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
+                {solutions.map((sol, idx) => (
+                  <div key={sol.id} id={sol.id} style={{ background: '#fff', border: '1px solid #DDD8F0', borderRadius: 24, padding: '44px 40px', boxShadow: '0 12px 32px rgba(124,58,237,0.05)' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '50% 50%', gap: 48, alignItems: 'center' }} className="grid-2col">
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+                          <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(124,58,237,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#7c3aed' }}>
+                            <Icon name={sol.icon} size={18} />
+                          </div>
+                          <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#7c3aed', fontWeight: 600 }}>Solution Pillar 0{idx+1}</span>
+                        </div>
+
+                        <h2 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 26, fontWeight: 800, color: '#1E1B4B', letterSpacing: '-0.03em', marginBottom: 8 }}>
+                          {sol.title}
+                        </h2>
+                        <p style={{ fontSize: 15, fontWeight: 600, color: '#7c3aed', marginBottom: 20 }}>
+                          {sol.subtitle}
+                        </p>
+
+                        <div style={{ background: '#FAF9FD', border: '1px solid #EAE6F3', borderRadius: 12, padding: '16px 20px', marginBottom: 24 }}>
+                          <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10.5, color: '#ef4444', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>The Challenge We Solve</p>
+                          <p style={{ fontSize: 13.5, color: 'rgba(30,27,75,0.7)', lineHeight: 1.55 }}>{sol.problem}</p>
+                        </div>
+
+                        <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer"
+                           style={{ background: '#1E1B4B', color: '#fff', padding: '10px 22px', borderRadius: 8, fontSize: 13.5, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                          Discuss this Solution <Icon name="arrowRight" size={13} />
+                        </a>
+                      </div>
+
+                      {/* Right Deliverables & Impact */}
+                      <div style={{ background: '#F8F6FC', border: '1px solid #E5DFFA', borderRadius: 18, padding: '32px 30px' }}>
+                        <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#1E1B4B', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 16 }}>
+                          What SlashLLM Delivers
+                        </p>
+                        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 24 }}>
+                          {sol.deliverables.map((del, dIdx) => (
+                            <li key={dIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13.5, color: '#1E1B4B', lineHeight: 1.45 }}>
+                              <span style={{ color: '#7c3aed', flexShrink: 0, marginTop: 2 }}><Icon name="check" size={15} /></span>
+                              <span>{del}</span>
+                            </li>
+                          ))}
+                        </ul>
+
+                        <div style={{ borderTop: '1px solid #E5DFFA', paddingTop: 18 }}>
+                          <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10.5, color: '#22c55e', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>Measurable Business Impact</p>
+                          <p style={{ fontSize: 13.5, fontWeight: 600, color: '#1E1B4B', lineHeight: 1.5 }}>{sol.impact}</p>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </main>
+          <GlobalFooter />
+        </React.Fragment>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<SolutionsPage />);
+  </script>
+</body>
+</html>
