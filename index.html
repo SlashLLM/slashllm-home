@@ -46,68 +46,226 @@
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Single Unified Typography: Proxima Nova -->
+  <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin="anonymous">
+  <link href="https://fonts.cdnfonts.com/css/proxima-nova" rel="stylesheet">
 
-  <script>
-    tailwind = { config: { theme: { extend: { fontFamily: { sans: ['Inter','system-ui','sans-serif'], display: ['"Space Grotesk"','sans-serif'], mono: ['"JetBrains Mono"','monospace'] } } } } };
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { background: #FAFAFA; color: #1E1B4B; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    a { color: inherit; text-decoration: none; }
-
+    /* ════ Privy Design System Tokens ════ */
     :root {
-      --bg: #FAFAFA;
-      --surface: #F3F0FF;
-      --card: #EDE9FF;
-      --border: #DDD8F0;
-      --border-subtle: #EDE9FF;
-      --text: #1E1B4B;
-      --muted: rgba(30,27,75,0.6);
-      --accent: #a855f7;
-      --accent2: #7c3aed;
+      /* Colors */
+      --color-canvas: #ffffff;
+      --color-obsidian-ink: #010110;
+      --color-carbon: #111117;
+      --color-graphite: #22222a;
+      --color-fog: #73737c;
+      --color-ash: #d9d9d9;
+      --color-iris-pulse: #635bff;
+      --color-deep-teal: #072723;
+      --border-hairline: rgba(1, 1, 16, 0.1);
+      --border-dark-hairline: rgba(255, 255, 255, 0.08);
+
+      /* Typography Families (100% Proxima Nova Unified) */
+      --font-display: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-sans: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+      /* Spacing & Layout */
+      --page-max-width: 1200px;
+      --section-gap: 80px;
+      --card-padding: 24px;
+
+      /* Radii */
+      --radius-cards: 8px;
+      --radius-buttons: 100px;
+      --radius-tags: 9999px;
+      --radius-nav: 8px;
     }
 
-    .gradient-text {
-      background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #be38de 100%);
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--color-canvas);
+      color: var(--color-obsidian-ink);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.55;
+      letter-spacing: -0.015em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Typography Utilities */
+    .font-display {
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    .font-sans {
+      font-family: var(--font-sans);
+      letter-spacing: -0.015em;
+    }
+    .font-mono {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    /* Gradient Text Accents */
+    .gradient-text-purple {
+      background: linear-gradient(135deg, #010110 10%, #635bff 60%, #9333ea 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      display: inline;
+    }
+    .gradient-text-light {
+      background: linear-gradient(135deg, #ffffff 30%, #c4b5fd 75%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline;
     }
 
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
-    .reveal.in { opacity: 1; transform: translateY(0); }
+    /* Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, #0c0a21 0%, #1e134b 55%, #351c75 100%);
+      color: #ffffff !important;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+      padding: 12px 24px;
+      border-radius: var(--radius-buttons);
+      border: 1px solid rgba(99, 91, 255, 0.25);
+      box-shadow: 0 4px 14px rgba(30, 19, 75, 0.15);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #635bff 0%, #7c3aed 100%);
+      border-color: rgba(99, 91, 255, 0.5);
+      box-shadow: 0 6px 20px rgba(99, 91, 255, 0.3);
+      transform: translateY(-1px);
+    }
 
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-    .cursor-blink { animation: blink 1s step-end infinite; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--color-obsidian-ink) !important;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+      padding: 12px 24px;
+      border-radius: var(--radius-buttons);
+      border: 1px solid rgba(1, 1, 16, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-ghost:hover {
+      background: #f5f3ff;
+      border-color: var(--color-iris-pulse);
+      color: var(--color-iris-pulse) !important;
+    }
 
-    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-    .logo-marquee { display:flex; animation: marquee 28s linear infinite; }
-    .logo-marquee:hover { animation-play-state: paused; }
+    .btn-pill-header {
+      background: transparent;
+      border: 1px solid #ffffff;
+      color: #ffffff !important;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: var(--radius-buttons);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .btn-pill-header:hover {
+      background: #ffffff;
+      color: var(--color-iris-pulse) !important;
+    }
 
+    /* Cards & Hover Effects */
+    .card-editorial {
+      background: var(--color-canvas);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-cards);
+      padding: 28px;
+      transition: all 0.2s ease;
+    }
+    .card-editorial:hover {
+      border-color: rgba(99, 91, 255, 0.35);
+      box-shadow: 0 12px 32px rgba(99, 91, 255, 0.05);
+    }
+
+    .card-dark {
+      background: var(--color-graphite);
+      border: 1px solid var(--border-dark-hairline);
+      border-radius: var(--radius-cards);
+      padding: 28px;
+      transition: all 0.2s ease;
+    }
+    .card-dark:hover {
+      border-color: rgba(147, 51, 234, 0.4);
+      box-shadow: 0 12px 32px rgba(99, 91, 255, 0.08);
+    }
+
+    /* Links */
+    .link-editorial {
+      color: var(--color-obsidian-ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .link-editorial:hover {
+      color: var(--color-iris-pulse);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .link-muted {
+      color: var(--color-fog);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .link-muted:hover {
+      color: var(--color-obsidian-ink);
+    }
+
+    /* Dropdown Menu */
     .nav-dropdown {
       position: absolute;
-      top: calc(100% + 10px);
-      background: rgba(255,255,255,0.98);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(30,27,75,0.12);
-      border-radius: 16px;
-      box-shadow: 0 24px 64px rgba(30,27,75,0.12), 0 4px 16px rgba(0,0,0,0.04);
+      top: calc(100% + 8px);
+      background: #ffffff;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-cards);
+      box-shadow: 0 16px 36px rgba(1, 1, 16, 0.08);
       padding: 12px;
       z-index: 100;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(6px);
-      transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+      transform: translateY(4px);
+      transition: all 0.15s ease;
     }
     .nav-item-wrap:hover .nav-dropdown {
       opacity: 1;
@@ -115,26 +273,30 @@
       transform: translateY(0);
     }
 
-    .card-hover {
-      transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s cubic-bezier(0.16,1,0.3,1), border-color 0.2s ease;
-    }
-    .card-hover:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 36px rgba(124,58,237,0.08), 0 2px 8px rgba(0,0,0,0.04);
-      border-color: rgba(168,85,247,0.4) !important;
+    /* Dotted Halftone Pattern for Footer */
+    .halftone-pattern {
+      background-image: radial-gradient(var(--color-ash) 1px, transparent 1px);
+      background-size: 16px 16px;
     }
 
-    .tab-btn {
-      transition: all 0.2s ease;
+    /* Animations & Utilities */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
-    .tab-btn.active {
-      background: #1E1B4B;
-      color: #FAFAFA !important;
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
     }
+
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .logo-marquee { display: flex; animation: marquee 30s linear infinite; }
+    .logo-marquee:hover { animation-play-state: paused; }
 
     @media (max-width: 1024px) {
       .hide-mobile { display: none !important; }
-      .hero-grid { grid-template-columns: 1fr !important; }
+      .hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
       .grid-3col { grid-template-columns: 1fr 1fr !important; }
       .grid-4col { grid-template-columns: 1fr 1fr !important; }
       .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 36px !important; }
@@ -149,11 +311,11 @@
 <body>
   <div id="root"></div>
 
-  <!-- ═══ SCRIPT 1: Shared Icons, Navigation & Mega-Footer ═══ -->
+  <!-- ═══ SCRIPT 1: Shared Icons, Navigation & Editorial Footer ═══ -->
   <script type="text/babel">
     const { useState, useEffect, useRef } = React;
 
-    const Icon = ({ name, size=20, color='currentColor', className='' }) => {
+    const Icon = ({ name, size=18, color='currentColor', className='' }) => {
       const paths = {
         arrowRight: <path d="M5 12h14M12 5l7 7-7 7"/>,
         chevronDown: <path d="M6 9l6 6 6-6"/>,
@@ -171,26 +333,46 @@
         retail: <><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></>,
         mfg: <><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></>,
         prof: <><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></>,
-        cloud: <><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></>,
         cost: <><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></>,
         check: <polyline points="20 6 9 17 4 12"/>
       };
       return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0 }}>
           {paths[name] || <circle cx="12" cy="12" r="9"/>}
         </svg>
       );
     };
 
+    /* Top Announcement Bar (Full-bleed Iris Pulse #635bff) */
+    const AnnouncementBar = () => {
+      return (
+        <div style={{
+          background: 'var(--color-iris-pulse)',
+          color: '#ffffff',
+          padding: '10px 24px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'relative',
+          fontSize: 13,
+          fontWeight: 500,
+          letterSpacing: '-0.02em',
+          zIndex: 1100
+        }}>
+          <div style={{ maxWidth: 1200, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '0 auto' }}>
+              <span>Announcing SlashLLM Enterprise Cohort 2026 — Deploy dedicated autonomous agents & GPU clusters with SLA guarantees.</span>
+            </div>
+            <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-pill-header hide-mobile">
+              Schedule Briefing <Icon name="arrowRight" size={12} />
+            </a>
+          </div>
+        </div>
+      );
+    };
+
+    /* Header Navigation (White, 64px, Hairline Border) */
     const GlobalNav = () => {
-      const [scrolled, setScrolled] = useState(false);
-
-      useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 20);
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-      }, []);
-
       const servicesMenu = [
         { title: 'AI & Generative AI', desc: 'Enterprise LLMs, SLMs, multimodal & RAG architectures', href: '/Services.html#ai-genai', icon: 'sparkles' },
         { title: 'AI Agents & Workflows', desc: 'Autonomous & human-in-the-loop multi-agent systems', href: '/Services.html#ai-agents', icon: 'agent' },
@@ -224,72 +406,66 @@
         { title: 'Intelligent Document AI', desc: 'Automated extraction, structuring & synthesis of enterprise data', href: '/Solutions.html#document-ai', icon: 'data' }
       ];
 
-      const navBtnStyle = {
-        color: 'rgba(30,27,75,0.68)',
-        fontSize: 13.5,
-        fontWeight: 500,
+      const navLinkStyle = {
+        color: 'var(--color-obsidian-ink)',
+        fontSize: 14,
+        fontWeight: 400,
         padding: '8px 12px',
-        borderRadius: 8,
         display: 'inline-flex',
         alignItems: 'center',
         gap: 4,
         background: 'transparent',
         border: 'none',
         cursor: 'pointer',
-        transition: 'all 0.15s ease'
+        letterSpacing: '-0.02em',
+        transition: 'color 0.15s ease'
       };
 
       return (
-        <div style={{ position: 'fixed', top: 12, left: 0, right: 0, zIndex: 1000, display: 'flex', justifyContent: 'center', padding: '0 16px' }}>
-          <nav style={{
-            width: '100%',
-            maxWidth: 1240,
-            height: 56,
-            background: scrolled ? 'rgba(255,255,255,0.96)' : 'rgba(255,255,255,0.85)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            border: scrolled ? '1px solid rgba(30,27,75,0.14)' : '1px solid rgba(30,27,75,0.08)',
-            borderRadius: 100,
-            boxShadow: scrolled ? '0 12px 32px rgba(30,27,75,0.08)' : '0 4px 16px rgba(0,0,0,0.02)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '0 18px',
-            transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)'
-          }}>
-            {/* Logo */}
-            <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', flexShrink: 0 }}>
-              <img src="/uploads/LOGO 2.png" alt="SlashLLM" style={{ width: 28, height: 28, objectFit: 'contain' }} />
-              <div>
-                <span style={{ fontFamily: '"Space Grotesk",sans-serif', fontWeight: 800, fontSize: 16, letterSpacing: '-0.03em', color: '#1E1B4B', display: 'block', lineHeight: 1.1 }}>SlashLLM</span>
-                <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 8.5, color: '#7c3aed', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block' }}>Enterprise AI</span>
+        <header style={{
+          position: 'sticky',
+          top: 0,
+          background: 'var(--color-canvas)',
+          borderBottom: '1px solid var(--border-hairline)',
+          height: 64,
+          display: 'flex',
+          alignItems: 'center',
+          zIndex: 1000
+        }}>
+          <div style={{ maxWidth: 'var(--page-max-width)', width: '100%', margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            
+            {/* Logo Wordmark */}
+            <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+              <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 26, height: 26, objectFit: 'contain', display: 'block' }} />
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+                <span style={{ fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: 16, letterSpacing: '-0.02em', color: 'var(--color-obsidian-ink)' }}>slashllm</span>
+                <span style={{ fontFamily: 'var(--font-sans)', fontSize: 13, color: 'var(--color-fog)', fontWeight: 400 }}>/ enterprise ai</span>
               </div>
             </a>
 
-            {/* Desktop Navigation Links */}
-            <div className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+            {/* Nav Center Items */}
+            <nav className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
               
-              {/* What We Do / Services */}
+              {/* What We Do */}
               <div className="nav-item-wrap" style={{ position: 'relative' }}>
-                <button style={navBtnStyle}>
-                  What We Do
-                  <Icon name="chevronDown" size={12} color="rgba(30,27,75,0.4)" />
+                <button style={navLinkStyle}>
+                  What We Do <Icon name="chevronDown" size={11} color="var(--color-fog)" />
                 </button>
-                <div className="nav-dropdown" style={{ left: 0, width: 620, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-                  <div style={{ gridColumn: 'span 2', padding: '6px 10px 8px', borderBottom: '1px solid rgba(30,27,75,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10, color: '#7c3aed', letterSpacing: '0.1em', textTransform: 'uppercase' }}>AI Engineering & Services</span>
-                    <a href="/Services.html" style={{ fontSize: 11.5, color: '#7c3aed', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 3 }}>View All <Icon name="arrowRight" size={11} /></a>
+                <div className="nav-dropdown" style={{ left: 0, width: 560, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Capabilities & Services</span>
+                    <a href="/Services.html" className="link-editorial" style={{ fontSize: 12 }}>View All →</a>
                   </div>
                   {servicesMenu.map((item, idx) => (
-                    <a key={idx} href={item.href} style={{ display: 'flex', gap: 10, padding: '10px 12px', borderRadius: 10, textDecoration: 'none', transition: 'background 0.15s' }}
-                       onMouseEnter={e => e.currentTarget.style.background = 'rgba(124,58,237,0.06)'}
+                    <a key={idx} href={item.href} style={{ display: 'flex', gap: 10, padding: '8px 10px', borderRadius: 'var(--radius-cards)', textDecoration: 'none', transition: 'background 0.15s' }}
+                       onMouseEnter={e => e.currentTarget.style.background = '#f7f7f7'}
                        onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                      <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(124,58,237,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#7c3aed' }}>
-                        <Icon name={item.icon} size={16} />
+                      <div style={{ width: 28, height: 28, borderRadius: 4, background: '#f0f0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--color-obsidian-ink)' }}>
+                        <Icon name={item.icon} size={15} />
                       </div>
                       <div>
-                        <p style={{ fontSize: 13, fontWeight: 600, color: '#1E1B4B', marginBottom: 2 }}>{item.title}</p>
-                        <p style={{ fontSize: 11.5, color: 'rgba(30,27,75,0.55)', lineHeight: 1.35 }}>{item.desc}</p>
+                        <p style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-obsidian-ink)', marginBottom: 2 }}>{item.title}</p>
+                        <p style={{ fontSize: 11.5, color: 'var(--color-fog)', lineHeight: 1.3 }}>{item.desc}</p>
                       </div>
                     </a>
                   ))}
@@ -298,25 +474,24 @@
 
               {/* Industries */}
               <div className="nav-item-wrap" style={{ position: 'relative' }}>
-                <button style={navBtnStyle}>
-                  Industries
-                  <Icon name="chevronDown" size={12} color="rgba(30,27,75,0.4)" />
+                <button style={navLinkStyle}>
+                  Industries <Icon name="chevronDown" size={11} color="var(--color-fog)" />
                 </button>
-                <div className="nav-dropdown" style={{ left: '-50px', width: 600, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-                  <div style={{ gridColumn: 'span 2', padding: '6px 10px 8px', borderBottom: '1px solid rgba(30,27,75,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10, color: '#7c3aed', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Industry Specific AI</span>
-                    <a href="/Industries.html" style={{ fontSize: 11.5, color: '#7c3aed', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 3 }}>All Sectors <Icon name="arrowRight" size={11} /></a>
+                <div className="nav-dropdown" style={{ left: '-40px', width: 560, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Industry Verticals</span>
+                    <a href="/Industries.html" className="link-editorial" style={{ fontSize: 12 }}>All Sectors →</a>
                   </div>
                   {industriesMenu.map((item, idx) => (
-                    <a key={idx} href={item.href} style={{ display: 'flex', gap: 10, padding: '10px 12px', borderRadius: 10, textDecoration: 'none', transition: 'background 0.15s' }}
-                       onMouseEnter={e => e.currentTarget.style.background = 'rgba(124,58,237,0.06)'}
+                    <a key={idx} href={item.href} style={{ display: 'flex', gap: 10, padding: '8px 10px', borderRadius: 'var(--radius-cards)', textDecoration: 'none', transition: 'background 0.15s' }}
+                       onMouseEnter={e => e.currentTarget.style.background = '#f7f7f7'}
                        onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                      <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(124,58,237,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#7c3aed' }}>
-                        <Icon name={item.icon} size={16} />
+                      <div style={{ width: 28, height: 28, borderRadius: 4, background: '#f0f0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--color-obsidian-ink)' }}>
+                        <Icon name={item.icon} size={15} />
                       </div>
                       <div>
-                        <p style={{ fontSize: 13, fontWeight: 600, color: '#1E1B4B', marginBottom: 2 }}>{item.title}</p>
-                        <p style={{ fontSize: 11.5, color: 'rgba(30,27,75,0.55)', lineHeight: 1.35 }}>{item.desc}</p>
+                        <p style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-obsidian-ink)', marginBottom: 2 }}>{item.title}</p>
+                        <p style={{ fontSize: 11.5, color: 'var(--color-fog)', lineHeight: 1.3 }}>{item.desc}</p>
                       </div>
                     </a>
                   ))}
@@ -325,25 +500,24 @@
 
               {/* Products & Platforms */}
               <div className="nav-item-wrap" style={{ position: 'relative' }}>
-                <button style={navBtnStyle}>
-                  Products & Platforms
-                  <Icon name="chevronDown" size={12} color="rgba(30,27,75,0.4)" />
+                <button style={navLinkStyle}>
+                  Products <Icon name="chevronDown" size={11} color="var(--color-fog)" />
                 </button>
-                <div className="nav-dropdown" style={{ left: '-50px', width: 560, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-                  <div style={{ gridColumn: 'span 2', padding: '6px 10px 8px', borderBottom: '1px solid rgba(30,27,75,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10, color: '#7c3aed', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Proprietary Tech Suite</span>
-                    <a href="/Products.html" style={{ fontSize: 11.5, color: '#7c3aed', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 3 }}>Explore Platform <Icon name="arrowRight" size={11} /></a>
+                <div className="nav-dropdown" style={{ left: '-40px', width: 520, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Proprietary Platforms</span>
+                    <a href="/Products.html" className="link-editorial" style={{ fontSize: 12 }}>Explore Suite →</a>
                   </div>
                   {productsMenu.map((item, idx) => (
-                    <a key={idx} href={item.href} style={{ display: 'flex', gap: 10, padding: '10px 12px', borderRadius: 10, textDecoration: 'none', transition: 'background 0.15s' }}
-                       onMouseEnter={e => e.currentTarget.style.background = 'rgba(124,58,237,0.06)'}
+                    <a key={idx} href={item.href} style={{ display: 'flex', gap: 10, padding: '8px 10px', borderRadius: 'var(--radius-cards)', textDecoration: 'none', transition: 'background 0.15s' }}
+                       onMouseEnter={e => e.currentTarget.style.background = '#f7f7f7'}
                        onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                      <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(124,58,237,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#7c3aed' }}>
-                        <Icon name={item.icon} size={16} />
+                      <div style={{ width: 28, height: 28, borderRadius: 4, background: '#f0f0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--color-obsidian-ink)' }}>
+                        <Icon name={item.icon} size={15} />
                       </div>
                       <div>
-                        <p style={{ fontSize: 13, fontWeight: 600, color: '#1E1B4B', marginBottom: 2 }}>{item.title}</p>
-                        <p style={{ fontSize: 11.5, color: 'rgba(30,27,75,0.55)', lineHeight: 1.35 }}>{item.desc}</p>
+                        <p style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-obsidian-ink)', marginBottom: 2 }}>{item.title}</p>
+                        <p style={{ fontSize: 11.5, color: 'var(--color-fog)', lineHeight: 1.3 }}>{item.desc}</p>
                       </div>
                     </a>
                   ))}
@@ -352,90 +526,59 @@
 
               {/* Solutions */}
               <div className="nav-item-wrap" style={{ position: 'relative' }}>
-                <button style={navBtnStyle}>
-                  Solutions
-                  <Icon name="chevronDown" size={12} color="rgba(30,27,75,0.4)" />
+                <button style={navLinkStyle}>
+                  Solutions <Icon name="chevronDown" size={11} color="var(--color-fog)" />
                 </button>
-                <div className="nav-dropdown" style={{ left: '-50px', width: 560, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-                  <div style={{ gridColumn: 'span 2', padding: '6px 10px 8px', borderBottom: '1px solid rgba(30,27,75,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10, color: '#7c3aed', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Enterprise AI Solutions</span>
-                    <a href="/Solutions.html" style={{ fontSize: 11.5, color: '#7c3aed', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 3 }}>All Solutions <Icon name="arrowRight" size={11} /></a>
+                <div className="nav-dropdown" style={{ left: '-40px', width: 520, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Enterprise Solutions</span>
+                    <a href="/Solutions.html" className="link-editorial" style={{ fontSize: 12 }}>All Solutions →</a>
                   </div>
                   {solutionsMenu.map((item, idx) => (
-                    <a key={idx} href={item.href} style={{ display: 'flex', gap: 10, padding: '10px 12px', borderRadius: 10, textDecoration: 'none', transition: 'background 0.15s' }}
-                       onMouseEnter={e => e.currentTarget.style.background = 'rgba(124,58,237,0.06)'}
+                    <a key={idx} href={item.href} style={{ display: 'flex', gap: 10, padding: '8px 10px', borderRadius: 'var(--radius-cards)', textDecoration: 'none', transition: 'background 0.15s' }}
+                       onMouseEnter={e => e.currentTarget.style.background = '#f7f7f7'}
                        onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                      <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(124,58,237,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#7c3aed' }}>
-                        <Icon name={item.icon} size={16} />
+                      <div style={{ width: 28, height: 28, borderRadius: 4, background: '#f0f0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--color-obsidian-ink)' }}>
+                        <Icon name={item.icon} size={15} />
                       </div>
                       <div>
-                        <p style={{ fontSize: 13, fontWeight: 600, color: '#1E1B4B', marginBottom: 2 }}>{item.title}</p>
-                        <p style={{ fontSize: 11.5, color: 'rgba(30,27,75,0.55)', lineHeight: 1.35 }}>{item.desc}</p>
+                        <p style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-obsidian-ink)', marginBottom: 2 }}>{item.title}</p>
+                        <p style={{ fontSize: 11.5, color: 'var(--color-fog)', lineHeight: 1.3 }}>{item.desc}</p>
                       </div>
                     </a>
                   ))}
                 </div>
               </div>
 
-              {/* Direct links */}
-              <a href="/CaseStudies.html" style={navBtnStyle}
-                 onMouseEnter={e => { e.currentTarget.style.color = '#1E1B4B'; e.currentTarget.style.background = 'rgba(30,27,75,0.05)'; }}
-                 onMouseLeave={e => { e.currentTarget.style.color = 'rgba(30,27,75,0.68)'; e.currentTarget.style.background = 'transparent'; }}>
-                Customer Stories
-              </a>
-              <a href="/blog" style={navBtnStyle}
-                 onMouseEnter={e => { e.currentTarget.style.color = '#1E1B4B'; e.currentTarget.style.background = 'rgba(30,27,75,0.05)'; }}
-                 onMouseLeave={e => { e.currentTarget.style.color = 'rgba(30,27,75,0.68)'; e.currentTarget.style.background = 'transparent'; }}>
-                Insights
-              </a>
-              <a href="/About.html" style={navBtnStyle}
-                 onMouseEnter={e => { e.currentTarget.style.color = '#1E1B4B'; e.currentTarget.style.background = 'rgba(30,27,75,0.05)'; }}
-                 onMouseLeave={e => { e.currentTarget.style.color = 'rgba(30,27,75,0.68)'; e.currentTarget.style.background = 'transparent'; }}>
-                Company
+              <a href="/CaseStudies.html" style={navLinkStyle}>Stories</a>
+              <a href="/blog" style={navLinkStyle}>Insights</a>
+              <a href="/About.html" style={navLinkStyle}>Company</a>
+            </nav>
+
+            {/* Right CTAs */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '8px 18px', fontSize: 13.5 }}>
+                Talk to an AI Expert <Icon name="arrowRight" size={13} />
               </a>
             </div>
 
-            {/* Right Action CTA */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer"
-                 style={{
-                   background: '#1E1B4B',
-                   color: '#FAFAFA',
-                   padding: '8px 18px',
-                   borderRadius: 100,
-                   fontSize: 13,
-                   fontWeight: 600,
-                   letterSpacing: '-0.01em',
-                   textDecoration: 'none',
-                   display: 'inline-flex',
-                   alignItems: 'center',
-                   gap: 6,
-                   transition: 'all 0.2s cubic-bezier(0.16,1,0.3,1)',
-                   boxShadow: '0 4px 14px rgba(30,27,75,0.15)'
-                 }}
-                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(124,58,237,0.3)'; }}
-                 onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(30,27,75,0.15)'; }}>
-                Talk to an AI Expert
-                <Icon name="arrowRight" size={13} />
-              </a>
-            </div>
-          </nav>
-        </div>
+          </div>
+        </header>
       );
     };
 
+    /* Footer: White background with halftone dot pattern and clean 6-column matrix */
     const GlobalFooter = () => {
       const columns = [
         {
-          heading: 'WHAT WE DO',
+          heading: 'SERVICES',
           links: [
             { label: 'AI & Generative AI', href: '/Services.html#ai-genai' },
             { label: 'AI Agents & Workflows', href: '/Services.html#ai-agents' },
             { label: 'AI Engineering', href: '/Services.html#ai-engineering' },
             { label: 'AI Infrastructure', href: '/Services.html#ai-infrastructure' },
             { label: 'AI Observability & Ops', href: '/Services.html#ai-observability' },
-            { label: 'Data & Analytics', href: '/Services.html#data-analytics' },
-            { label: 'Cloud & DevOps', href: '/Services.html#cloud' }
+            { label: 'Data & Analytics', href: '/Services.html#data-analytics' }
           ]
         },
         {
@@ -450,7 +593,7 @@
           ]
         },
         {
-          heading: 'PRODUCTS & PLATFORMS',
+          heading: 'PLATFORMS',
           links: [
             { label: 'SlashLLM Gateway', href: '/Products.html#gateway' },
             { label: 'SlashLLM Observability', href: '/Products.html#observability' },
@@ -463,19 +606,18 @@
           heading: 'SOLUTIONS',
           links: [
             { label: 'Enterprise AI Transformation', href: '/Solutions.html#transformation' },
-            { label: 'AI Cost & Latency Optimization', href: '/Solutions.html#cost-optimization' },
-            { label: 'LLM Governance & Guardrails', href: '/Solutions.html#governance' },
+            { label: 'Cost & Latency Optimization', href: '/Solutions.html#cost-optimization' },
+            { label: 'Governance & Guardrails', href: '/Solutions.html#governance' },
             { label: 'Private AI Infrastructure', href: '/Solutions.html#private-ai' },
             { label: 'Intelligent Document AI', href: '/Solutions.html#document-ai' }
           ]
         },
         {
-          heading: 'INSIGHTS & PROOF',
+          heading: 'RESEARCH',
           links: [
             { label: 'Customer Stories', href: '/CaseStudies.html' },
-            { label: 'AI Research & Benchmarks', href: '/blog' },
-            { label: 'Engineering Architecture', href: '/blog' },
-            { label: 'AI Strategy & Cost Reports', href: '/blog' },
+            { label: 'Benchmarks & Reports', href: '/blog' },
+            { label: 'Architecture Guides', href: '/blog' },
             { label: 'Engineering Blog', href: '/blog' }
           ]
         },
@@ -485,66 +627,60 @@
             { label: 'About SlashLLM', href: '/About.html' },
             { label: 'Partners & Ecosystem', href: '/About.html#partners' },
             { label: 'Careers', href: '/About.html#careers' },
-            { label: 'Contact Us', href: 'https://cal.com/mridhul-pax-jjhwct/30min' },
-            { label: 'Privacy Policy', href: '#' },
-            { label: 'Terms of Service', href: '#' }
+            { label: 'Contact Technical Team', href: 'https://cal.com/mridhul-pax-jjhwct/30min' },
+            { label: 'Privacy Policy', href: '#' }
           ]
         }
       ];
 
       return (
-        <footer style={{ borderTop: '1px solid #DDD8F0', background: '#F4F1FA', paddingTop: 72, paddingBottom: 48 }}>
-          <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px' }}>
+        <footer style={{ background: 'var(--color-canvas)', borderTop: '1px solid var(--border-hairline)', paddingTop: 72, paddingBottom: 48, position: 'relative' }}>
+          
+          {/* Halftone dot pattern across top portion */}
+          <div className="halftone-pattern" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 180, opacity: 0.25, pointerEvents: 'none' }}></div>
+
+          <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
             
-            {/* Top row: Brand summary */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 32, marginBottom: 56, paddingBottom: 40, borderBottom: '1px solid rgba(30,27,75,0.08)' }}>
+            {/* Top Brand Spread */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 32, marginBottom: 56, paddingBottom: 40, borderBottom: '1px solid var(--border-hairline)' }}>
               <div style={{ maxWidth: 440 }}>
-                <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 9, textDecoration: 'none', marginBottom: 14 }}>
-                  <img src="/uploads/LOGO 2.png" alt="SlashLLM" style={{ width: 32, height: 32, objectFit: 'contain' }} />
-                  <span style={{ fontFamily: '"Space Grotesk",sans-serif', fontWeight: 800, fontSize: 20, letterSpacing: '-0.03em', color: '#1E1B4B' }}>SlashLLM</span>
-                </a>
-                <p style={{ color: 'rgba(30,27,75,0.65)', fontSize: 14, lineHeight: 1.65, marginBottom: 18 }}>
-                  <strong>Enterprise AI Engineering & Transformation.</strong> We help modern enterprises design, build, deploy, optimize, and operate production-grade AI systems at scale.
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                  <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 24, height: 24, objectFit: 'contain', display: 'block' }} />
+                  <span style={{ fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: 18, color: 'var(--color-obsidian-ink)', letterSpacing: '-0.02em' }}>slashllm</span>
+                </div>
+                <p style={{ color: 'var(--color-fog)', fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
+                  Editorial enterprise AI engineering: designing, building, deploying, optimizing, and operating production-grade AI systems at scale.
                 </p>
-                <div style={{ display: 'flex', gap: 14 }}>
-                  {[
-                    { label: 'LinkedIn', path: 'M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 4m-2 0a2 2 0 104 0 2 2 0 10-4 0' },
-                    { label: 'X', path: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z' },
-                    { label: 'GitHub', path: 'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22' }
-                  ].map(({ label, path }) => (
-                    <a key={label} href="#" style={{ width: 34, height: 34, borderRadius: 8, background: 'rgba(30,27,75,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1E1B4B', transition: 'all 0.15s' }}
-                       onMouseEnter={e => { e.currentTarget.style.background = '#7c3aed'; e.currentTarget.style.color = '#fff'; }}
-                       onMouseLeave={e => { e.currentTarget.style.background = 'rgba(30,27,75,0.06)'; e.currentTarget.style.color = '#1E1B4B'; }}>
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill={label==='X'?'currentColor':'none'} stroke={label==='X'?'none':'currentColor'} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                        <path d={path}/>
-                      </svg>
-                    </a>
+                <div style={{ display: 'flex', gap: 12 }}>
+                  {['LinkedIn', 'X (Twitter)', 'GitHub'].map(network => (
+                    <span key={network} style={{ fontSize: 13, color: 'var(--color-fog)', cursor: 'pointer' }}
+                          onMouseEnter={e => e.currentTarget.style.color = 'var(--color-obsidian-ink)'}
+                          onMouseLeave={e => e.currentTarget.style.color = 'var(--color-fog)'}>
+                      {network}
+                    </span>
                   ))}
                 </div>
               </div>
 
-              <div style={{ background: '#fff', border: '1px solid rgba(124,58,237,0.15)', borderRadius: 16, padding: '24px 28px', maxWidth: 420 }}>
-                <p style={{ fontFamily: '"Space Grotesk",sans-serif', fontWeight: 700, fontSize: 16, color: '#1E1B4B', marginBottom: 6 }}>Ready for an AI Architecture Review?</p>
-                <p style={{ fontSize: 13, color: 'rgba(30,27,75,0.6)', lineHeight: 1.5, marginBottom: 16 }}>Schedule a 30-minute technical evaluation with our AI principal engineers.</p>
-                <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer"
-                   style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#7c3aed', color: '#fff', padding: '9px 18px', borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}>
+              <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-cards)', padding: '24px 28px', maxWidth: 420 }}>
+                <p className="font-display" style={{ fontSize: 18, color: 'var(--color-obsidian-ink)', marginBottom: 6 }}>Ready for an Architecture Review?</p>
+                <p style={{ fontSize: 13, color: 'var(--color-fog)', lineHeight: 1.5, marginBottom: 16 }}>Schedule a 30-minute technical evaluation with our AI principal engineers.</p>
+                <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ fontSize: 13, padding: '8px 18px' }}>
                   Schedule Technical Review <Icon name="arrowRight" size={12} />
                 </a>
               </div>
             </div>
 
-            {/* 6-Column Deep Enterprise Link Matrix */}
+            {/* 6-Column Deep Link Matrix */}
             <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 24, marginBottom: 56 }}>
               {columns.map((col, idx) => (
                 <div key={idx}>
-                  <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, fontWeight: 600, color: '#7c3aed', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 16 }}>
+                  <p className="font-mono" style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-obsidian-ink)', marginBottom: 14 }}>
                     {col.heading}
                   </p>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
                     {col.links.map((link, lIdx) => (
-                      <a key={lIdx} href={link.href} style={{ color: 'rgba(30,27,75,0.62)', fontSize: 13, textDecoration: 'none', transition: 'color 0.15s ease' }}
-                         onMouseEnter={e => e.currentTarget.style.color = '#1E1B4B'}
-                         onMouseLeave={e => e.currentTarget.style.color = 'rgba(30,27,75,0.62)'}>
+                      <a key={lIdx} href={link.href} className="link-muted" style={{ fontSize: 13 }}>
                         {link.label}
                       </a>
                     ))}
@@ -553,14 +689,14 @@
               ))}
             </div>
 
-            {/* Bottom Bar */}
-            <div style={{ borderTop: '1px solid rgba(30,27,75,0.08)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14 }}>
-              <p style={{ color: 'rgba(30,27,75,0.45)', fontSize: 12.5 }}>
-                © 2026 SlashLLM Inc. All rights reserved. Enterprise AI Engineering & Transformation.
+            {/* Bottom Row */}
+            <div style={{ borderTop: '1px solid var(--border-hairline)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14 }}>
+              <p style={{ color: 'var(--color-fog)', fontSize: 12.5 }}>
+                © 2026 SlashLLM Inc. All rights reserved. Restraint as authority.
               </p>
-              <div style={{ display: 'flex', gap: 20 }}>
-                <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: 'rgba(30,27,75,0.45)' }}>Global Delivery · San Francisco · London · Singapore · Bengaluru</span>
-              </div>
+              <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)' }}>
+                San Francisco · London · Singapore · Bengaluru
+              </span>
             </div>
 
           </div>
@@ -568,219 +704,184 @@
       );
     };
 
-    Object.assign(window, { Icon, GlobalNav, GlobalFooter });
+    Object.assign(window, { Icon, AnnouncementBar, GlobalNav, GlobalFooter });
   </script>
 
-  <!-- ═══ SCRIPT 2: Neural Background & Hero Section ═══ -->
+  <!-- ═══ SCRIPT 2: Hero Section & Abstract Product Canvas ═══ -->
   <script type="text/babel">
-    const NeuralCanvas = () => {
-      const canvasRef = useRef(null);
-      useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        let W, H, frame;
-        const resize = () => {
-          W = canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-          H = canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-          canvas.style.width = canvas.offsetWidth + 'px';
-          canvas.style.height = canvas.offsetHeight + 'px';
-          ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-        };
-        resize();
-        window.addEventListener('resize', resize);
-
-        const N = 56;
-        const nodes = Array.from({length: N}, () => ({
-          x: Math.random() * (W / window.devicePixelRatio),
-          y: Math.random() * (H / window.devicePixelRatio),
-          vx: (Math.random() - 0.5) * 0.35,
-          vy: (Math.random() - 0.5) * 0.35,
-          r: Math.random() * 2 + 1,
-          pulse: Math.random() * Math.PI * 2,
-          hue: Math.random() > 0.6 ? 280 : Math.random() > 0.5 ? 300 : 260,
-        }));
-
-        const draw = () => {
-          const pw = W / window.devicePixelRatio;
-          const ph = H / window.devicePixelRatio;
-          ctx.clearRect(0, 0, pw, ph);
-
-          const cx = pw * 0.54, cy = ph * 0.46;
-          const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, pw * 0.52);
-          g.addColorStop(0,   'rgba(168,85,247,0.22)');
-          g.addColorStop(0.35,'rgba(190,56,222,0.11)');
-          g.addColorStop(0.7, 'rgba(82,151,240,0.05)');
-          g.addColorStop(1,   'transparent');
-          ctx.fillStyle = g;
-          ctx.fillRect(0, 0, pw, ph);
-
-          nodes.forEach(n => {
-            n.x += n.vx; n.y += n.vy;
-            if (n.x < 0 || n.x > pw) n.vx *= -1;
-            if (n.y < 0 || n.y > ph) n.vy *= -1;
-            n.pulse += 0.018;
-          });
-
-          for (let i = 0; i < nodes.length; i++) {
-            for (let j = i + 1; j < nodes.length; j++) {
-              const dx = nodes[i].x - nodes[j].x;
-              const dy = nodes[i].y - nodes[j].y;
-              const d = Math.sqrt(dx*dx + dy*dy);
-              if (d < 140) {
-                const a = (1 - d/140) * 0.24;
-                const midHue = (nodes[i].hue + nodes[j].hue) / 2;
-                ctx.strokeStyle = `hsla(${midHue},80%,65%,${a})`;
-                ctx.lineWidth = 0.65;
-                ctx.beginPath();
-                ctx.moveTo(nodes[i].x, nodes[i].y);
-                ctx.lineTo(nodes[j].x, nodes[j].y);
-                ctx.stroke();
-              }
-            }
-          }
-
-          nodes.forEach(n => {
-            const p = 0.55 + Math.sin(n.pulse) * 0.45;
-            const ng = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 5);
-            ng.addColorStop(0, `hsla(${n.hue},80%,68%,${0.45 * p})`);
-            ng.addColorStop(1, 'transparent');
-            ctx.fillStyle = ng;
-            ctx.beginPath(); ctx.arc(n.x, n.y, n.r * 5, 0, Math.PI*2); ctx.fill();
-            ctx.fillStyle = `hsla(${n.hue},90%,80%,${0.75 * p})`;
-            ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2); ctx.fill();
-          });
-
-          frame = requestAnimationFrame(draw);
-        };
-        draw();
-        return () => { cancelAnimationFrame(frame); window.removeEventListener('resize', resize); };
-      }, []);
-      return <canvas ref={canvasRef} style={{ width:'100%', height:'100%', display:'block' }} />;
-    };
-
     const Hero = () => {
       return (
-        <section style={{ minHeight: '90vh', background: 'var(--bg)', position: 'relative', overflow: 'hidden', display: 'grid', gridTemplateColumns: '54% 46%', paddingTop: 92 }}>
-          
-          {/* Left Hero Content */}
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '60px 0 60px 72px', position: 'relative', zIndex: 2 }}>
+        <section style={{ background: 'var(--color-canvas)', paddingTop: 72, paddingBottom: 80, borderBottom: '1px solid var(--border-hairline)' }}>
+          <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px' }}>
             
-            {/* Enterprise Tagline Badge */}
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 28 }}>
-              <div style={{ width: 28, height: 2, background: 'linear-gradient(90deg, #7c3aed, #a855f7)', borderRadius: 2 }}></div>
-              <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11.5, color: '#7c3aed', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
-                AI Engineering & Transformation
-              </span>
-            </div>
-
-            {/* Main Headline */}
-            <h1 style={{ fontFamily: '"Space Grotesk",sans-serif', fontWeight: 800, lineHeight: 1.02, letterSpacing: '-0.045em', marginBottom: 24 }}>
-              <span style={{ display: 'block', fontSize: 'clamp(42px, 4.4vw, 72px)', color: '#1E1B4B' }}>Build, Deploy and Scale</span>
-              <span className="gradient-text" style={{ display: 'block', fontSize: 'clamp(44px, 4.6vw, 76px)' }}>Production AI Systems.</span>
-            </h1>
-
-            {/* Enterprise Value Prop */}
-            <p style={{ fontSize: 18, color: 'rgba(30,27,75,0.68)', lineHeight: 1.7, maxWidth: 540, marginBottom: 38 }}>
-              SlashLLM helps global enterprises design, build, and operate production-grade AI applications, autonomous agents, and high-performance infrastructure at scale.
-            </p>
-
-            {/* Action Buttons */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 48, flexWrap: 'wrap' }}>
-              <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer"
-                 style={{
-                   display: 'inline-flex',
-                   alignItems: 'center',
-                   gap: 8,
-                   background: '#1E1B4B',
-                   color: '#FAFAFA',
-                   padding: '14px 28px',
-                   borderRadius: 100,
-                   fontSize: 14,
-                   fontWeight: 700,
-                   letterSpacing: '0.02em',
-                   textDecoration: 'none',
-                   transition: 'all 0.2s',
-                   boxShadow: '0 8px 24px rgba(30,27,75,0.18)'
-                 }}
-                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 30px rgba(124,58,237,0.3)'; }}
-                 onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(30,27,75,0.18)'; }}>
-                Talk to an AI Expert
-                <Icon name="arrowRight" size={15} />
-              </a>
-
-              <a href="#solutions-matrix"
-                 style={{
-                   display: 'inline-flex',
-                   alignItems: 'center',
-                   gap: 8,
-                   background: 'rgba(124,58,237,0.08)',
-                   color: '#7c3aed',
-                   border: '1px solid rgba(124,58,237,0.25)',
-                   padding: '14px 24px',
-                   borderRadius: 100,
-                   fontSize: 14,
-                   fontWeight: 600,
-                   textDecoration: 'none',
-                   transition: 'all 0.2s'
-                 }}
-                 onMouseEnter={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.14)'; e.currentTarget.style.borderColor = '#7c3aed'; }}
-                 onMouseLeave={e => { e.currentTarget.style.background = 'rgba(124,58,237,0.08)'; e.currentTarget.style.borderColor = 'rgba(124,58,237,0.25)'; }}>
-                Explore Solutions
-              </a>
-            </div>
-
-            {/* Core Capability Strip */}
-            <div style={{ borderTop: '1px solid #DDD8F0', paddingTop: 24, maxWidth: 560 }}>
-              <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10.5, color: 'rgba(30,27,75,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>
-                Core Capabilities & Delivery
-              </p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                {['AI Engineering', 'AI Agents', 'AI Infrastructure', 'Observability & Ops', 'Data Pipelines', 'Cloud & DevOps'].map((item, idx) => (
-                  <span key={idx} style={{ background: '#fff', border: '1px solid #DDD8F0', borderRadius: 100, padding: '5px 12px', fontSize: 12, fontWeight: 500, color: '#1E1B4B' }}>
-                    {item}
+            <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '52% 48%', gap: 56, alignItems: 'center' }}>
+              
+              {/* Left Column: Editorial Headline & Dual CTAs */}
+              <div>
+                
+                {/* Kicker */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20 }}>
+                  <div style={{ width: 22, height: 1.5, background: 'var(--color-obsidian-ink)' }}></div>
+                  <span className="font-mono" style={{ fontSize: 12, color: 'var(--color-obsidian-ink)', fontWeight: 600 }}>
+                    AI Engineering & Transformation
                   </span>
-                ))}
+                </div>
+
+                {/* Compressed Serif Headline with Purple Gradient Accent */}
+                <h1 className="font-display" style={{
+                  fontSize: 'clamp(44px, 4.8vw, 68px)',
+                  lineHeight: 1.06,
+                  color: 'var(--color-obsidian-ink)',
+                  marginBottom: 24,
+                  fontWeight: 700
+                }}>
+                  Build, deploy and scale <span className="gradient-text-purple">production AI systems.</span>
+                </h1>
+
+                {/* Editorial Subtext */}
+                <p style={{ fontSize: 17.5, color: 'var(--color-fog)', lineHeight: 1.65, maxWidth: 540, marginBottom: 36 }}>
+                  SlashLLM helps global enterprises design, build, and operate production-grade AI applications, autonomous agents, and high-performance infrastructure with strict SLA authority.
+                </p>
+
+                {/* Dual CTAs */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 44, flexWrap: 'wrap' }}>
+                  <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary">
+                    Talk to an AI Expert <Icon name="arrowRight" size={15} />
+                  </a>
+                  <a href="#what-we-do" className="btn-ghost">
+                    Explore Capabilities
+                  </a>
+                </div>
+
+                {/* Core Capability Strip */}
+                <div style={{ borderTop: '1px solid var(--border-hairline)', paddingTop: 22, maxWidth: 540 }}>
+                  <p className="font-mono" style={{ fontSize: 11.5, color: 'var(--color-fog)', marginBottom: 12, fontWeight: 600 }}>
+                    Capabilities & Delivery
+                  </p>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
+                    {['AI Engineering', 'AI Agents', 'AI Infrastructure', 'Observability & Ops', 'Data Pipelines', 'Cloud & DevOps'].map((item, idx) => (
+                      <span key={idx} style={{
+                        background: 'transparent',
+                        border: '1px solid var(--border-hairline)',
+                        borderRadius: 'var(--radius-tags)',
+                        padding: '5px 14px',
+                        fontSize: 13,
+                        fontWeight: 500,
+                        color: 'var(--color-obsidian-ink)'
+                      }}>
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
               </div>
+
+              {/* Right Column: Abstract Deep-Teal Graphic & Product Mockup Overlay */}
+              <div style={{ position: 'relative' }}>
+                
+                {/* Abstract Organic Painted Wash (Deep Teal & Marble) */}
+                <div style={{
+                  position: 'absolute',
+                  inset: '-10px -10px -10px -10px',
+                  background: 'linear-gradient(135deg, rgba(7, 39, 35, 0.08) 0%, rgba(99, 91, 255, 0.06) 50%, rgba(1, 1, 16, 0.04) 100%)',
+                  borderRadius: '12px',
+                  filter: 'blur(20px)',
+                  zIndex: 0
+                }}></div>
+
+                {/* Desktop Product Preview Panel */}
+                <div style={{
+                  background: 'var(--color-canvas)',
+                  border: '1px solid var(--border-hairline)',
+                  borderRadius: 'var(--radius-cards)',
+                  padding: '24px',
+                  position: 'relative',
+                  zIndex: 1,
+                  boxShadow: '0 12px 32px rgba(1, 1, 16, 0.05)'
+                }}>
+                  
+                  {/* Top Bar inside panel */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 14, marginBottom: 16, borderBottom: '1px solid var(--border-hairline)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <img src="/uploads/LOGO%202.png" alt="SlashLLM" style={{ width: 15, height: 15, objectFit: 'contain' }} />
+                      <span className="font-mono" style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-obsidian-ink)' }}>SlashLLM Gateway & Telemetry</span>
+                    </div>
+                    <span style={{ background: '#f4f4f6', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-tags)', padding: '2px 8px', fontSize: 10.5, color: 'var(--color-fog)', fontFamily: 'var(--font-mono)' }}>
+                      Active · 99.99% SLA
+                    </span>
+                  </div>
+
+                  {/* Inner Data Table */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
+                    <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '12px 14px' }}>
+                      <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)', display: 'block', marginBottom: 4 }}>Inference Latency</span>
+                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: 20, fontWeight: 600, color: 'var(--color-obsidian-ink)' }}>18.4ms</p>
+                      <span style={{ fontSize: 11, color: 'var(--color-fog)' }}>-42% vs baseline</span>
+                    </div>
+
+                    <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '12px 14px' }}>
+                      <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)', display: 'block', marginBottom: 4 }}>Monthly Token Savings</span>
+                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: 20, fontWeight: 600, color: 'var(--color-obsidian-ink)' }}>$48,200</p>
+                      <span style={{ fontSize: 11, color: 'var(--color-fog)' }}>via semantic cache</span>
+                    </div>
+                  </div>
+
+                  {/* Mini Chart Row (using Iris Pulse stroke accent) */}
+                  <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '14px', marginBottom: 14 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                      <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--color-obsidian-ink)' }}>Dynamic Model Routing Stream</span>
+                      <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-iris-pulse)' }}>Iris Pulse Telemetry</span>
+                    </div>
+                    {/* SVG Sparkline with Iris Pulse stroke */}
+                    <svg width="100%" height="44" viewBox="0 0 300 44" fill="none" style={{ display: 'block' }}>
+                      <path d="M0 34 L30 30 L60 38 L90 20 L120 26 L150 14 L180 18 L210 8 L240 16 L270 6 L300 12" stroke="var(--color-iris-pulse)" strokeWidth="1.75" fill="none"/>
+                      <path d="M0 34 L30 30 L60 38 L90 20 L120 26 L150 14 L180 18 L210 8 L240 16 L270 6 L300 12 L300 44 L0 44 Z" fill="rgba(99, 91, 255, 0.05)"/>
+                    </svg>
+                  </div>
+
+                  {/* Bottom Pipeline Status */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 11.5, color: 'var(--color-fog)' }}>
+                    <span>Cluster: AWS Bedrock / vLLM v0.6.2</span>
+                    <span className="link-editorial" style={{ fontSize: 11.5, cursor: 'pointer' }}>View Telemetry →</span>
+                  </div>
+
+                </div>
+
+                {/* Overlaid Phone / Node Card */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: '-24px',
+                  right: '-16px',
+                  background: 'var(--color-canvas)',
+                  border: '1px solid var(--border-hairline)',
+                  borderRadius: 'var(--radius-cards)',
+                  padding: '14px 18px',
+                  boxShadow: '0 16px 36px rgba(1, 1, 16, 0.08)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 12,
+                  zIndex: 2
+                }}>
+                  <div style={{ width: 32, height: 32, borderRadius: 4, background: 'var(--color-obsidian-ink)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff' }}>
+                    <Icon name="shield" size={16} />
+                  </div>
+                  <div>
+                    <p style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--color-obsidian-ink)', lineHeight: 1.2 }}>Deterministic Evals</p>
+                    <p style={{ fontSize: 11, color: 'var(--color-fog)' }}>99.9% Guardrail Assurance</p>
+                  </div>
+                </div>
+
+              </div>
+
             </div>
 
           </div>
-
-          {/* Right Hero Graphic & Floating Telemetry */}
-          <div style={{ position: 'relative', overflow: 'hidden' }}>
-            <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 140, background: 'linear-gradient(90deg, #FAFAFA, transparent)', zIndex: 2, pointerEvents: 'none' }}></div>
-            <NeuralCanvas />
-
-            {/* Top Right Availability Badge */}
-            <div style={{ position: 'absolute', top: 96, right: 48, background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(16px)', border: '1px solid rgba(124,58,237,0.2)', borderRadius: 12, padding: '10px 18px', zIndex: 4, boxShadow: '0 12px 32px rgba(0,0,0,0.06)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#22c55e', display: 'block' }}></span>
-                <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#1E1B4B', fontWeight: 600 }}>Enterprise AI Cohort 2026</span>
-              </div>
-            </div>
-
-            {/* Bottom Right Metric Card */}
-            <div style={{ position: 'absolute', bottom: 84, right: 48, background: '#fff', border: '1px solid rgba(124,58,237,0.25)', borderRadius: 16, padding: '20px 24px', zIndex: 4, boxShadow: '0 20px 48px rgba(124,58,237,0.12)', maxWidth: 320 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 12 }}>
-                <div style={{ width: 42, height: 42, borderRadius: 10, background: 'rgba(124,58,237,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#7c3aed' }}>
-                  <Icon name="observability" size={22} />
-                </div>
-                <div>
-                  <p style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 28, fontWeight: 800, color: '#1E1B4B', lineHeight: 1 }}>38% – 60%</p>
-                  <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 9.5, color: '#7c3aed', letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: 3 }}>Inference Cost Reduction</p>
-                </div>
-              </div>
-              <p style={{ fontSize: 12, color: 'rgba(30,27,75,0.6)', lineHeight: 1.45 }}>
-                Achieved through dynamic model routing, prompt compression, and SlashLLM Gateway caching.
-              </p>
-            </div>
-
-          </div>
-
         </section>
       );
     };
 
+    /* Partner Brands Strip (Monochrome on White Canvas) */
     const LogoBar = () => {
       const logos = [
         { type: 'img', name: 'impress.ai', src: '/uploads/imp.svg' },
@@ -793,20 +894,18 @@
       const all = [...logos, ...logos, ...logos];
 
       return (
-        <section className="reveal" style={{ borderTop: '1px solid #DDD8F0', borderBottom: '1px solid #DDD8F0', padding: '30px 0', background: '#FAFAFA', overflow: 'hidden' }}>
-          <p style={{ textAlign: 'center', fontSize: 11, color: 'rgba(30,27,75,0.4)', letterSpacing: '0.14em', textTransform: 'uppercase', fontFamily: '"JetBrains Mono",monospace', marginBottom: 20 }}>
+        <section style={{ borderBottom: '1px solid var(--border-hairline)', padding: '28px 0', background: 'var(--color-canvas)', overflow: 'hidden' }}>
+          <p className="font-mono" style={{ textAlign: 'center', fontSize: 10.5, color: 'var(--color-fog)', marginBottom: 18 }}>
             Powering AI Systems For High-Growth Innovators & Global Enterprises
           </p>
           <div style={{ overflow: 'hidden', position: 'relative' }}>
-            <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 120, background: 'linear-gradient(90deg, #FAFAFA, transparent)', zIndex: 1, pointerEvents: 'none' }}></div>
-            <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 120, background: 'linear-gradient(270deg, #FAFAFA, transparent)', zIndex: 1, pointerEvents: 'none' }}></div>
             <div className="logo-marquee">
               {all.map((item, i) => (
-                <div key={i} style={{ padding: '0 48px', flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+                <div key={i} style={{ padding: '0 44px', flexShrink: 0, display: 'flex', alignItems: 'center' }}>
                   {item.type === 'img' ? (
-                    <img src={item.src} alt={item.name} style={{ height: item.name === 'CareO' ? 30 : 22, opacity: 0.75, objectFit: 'contain' }} />
+                    <img src={item.src} alt={item.name} style={{ height: item.name === 'CareO' ? 26 : 20, filter: 'grayscale(100%) contrast(120%)', opacity: 0.7, objectFit: 'contain' }} />
                   ) : (
-                    <span style={{ fontFamily: '"Space Grotesk",sans-serif', fontWeight: 700, fontSize: 15, color: 'rgba(30,27,75,0.3)', letterSpacing: '-0.02em' }}>{item.name}</span>
+                    <span style={{ fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: 14, color: 'var(--color-fog)', letterSpacing: '-0.02em' }}>{item.name}</span>
                   )}
                 </div>
               ))}
@@ -816,7 +915,7 @@
       );
     };
 
-    Object.assign(window, { NeuralCanvas, Hero, LogoBar });
+    Object.assign(window, { Hero, LogoBar });
   </script>
 
   <!-- ═══ SCRIPT 3: Capabilities (What We Do) & Industries Matrix ═══ -->
@@ -874,20 +973,20 @@
       ];
 
       return (
-        <section id="what-we-do" style={{ padding: '120px 0', background: 'var(--bg)', borderTop: '1px solid #DDD8F0' }}>
-          <div className="reveal" style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px' }}>
+        <section id="what-we-do" style={{ padding: '96px 0', background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)' }}>
+          <div className="reveal" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px' }}>
             
             {/* Header */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 64, flexWrap: 'wrap', gap: 24 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 56, flexWrap: 'wrap', gap: 20 }}>
               <div>
-                <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#7c3aed', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12 }}>
-                  What We Do · Capabilities
+                <p className="font-mono" style={{ fontSize: 12, color: 'var(--color-obsidian-ink)', fontWeight: 600, marginBottom: 12 }}>
+                  Capabilities · What We Do
                 </p>
-                <h2 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 'clamp(32px,3.2vw,48px)', fontWeight: 800, letterSpacing: '-0.035em', color: '#1E1B4B', maxWidth: 640 }}>
+                <h2 className="font-display" style={{ fontSize: 'clamp(32px, 3.4vw, 46px)', color: 'var(--color-obsidian-ink)', maxWidth: 660 }}>
                   End-to-End Enterprise AI Engineering Services
                 </h2>
               </div>
-              <a href="/Services.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: '#7c3aed', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+              <a href="/Services.html" className="link-editorial" style={{ fontSize: 15, fontWeight: 600 }}>
                 Explore All Capabilities <Icon name="arrowRight" size={14} />
               </a>
             </div>
@@ -895,28 +994,28 @@
             {/* 6-Card Grid */}
             <div className="grid-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
               {capabilities.map(cap => (
-                <div key={cap.id} className="card-hover" style={{ background: '#fff', border: '1px solid #DDD8F0', borderRadius: 20, padding: '36px 30px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div key={cap.id} className="card-editorial" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
-                    <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(124,58,237,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#7c3aed', marginBottom: 22 }}>
-                      <Icon name={cap.icon} size={22} />
+                    <div style={{ width: 40, height: 40, borderRadius: 6, background: '#f0f0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-obsidian-ink)', marginBottom: 20 }}>
+                      <Icon name={cap.icon} size={20} />
                     </div>
-                    <h3 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 20, fontWeight: 700, color: '#1E1B4B', letterSpacing: '-0.025em', marginBottom: 12 }}>
+                    <h3 className="font-display" style={{ fontSize: 24, fontWeight: 600, color: 'var(--color-obsidian-ink)', marginBottom: 12 }}>
                       {cap.title}
                     </h3>
-                    <p style={{ fontSize: 14, color: 'rgba(30,27,75,0.65)', lineHeight: 1.65, marginBottom: 24 }}>
+                    <p style={{ fontSize: 15, color: 'var(--color-fog)', lineHeight: 1.6, marginBottom: 20 }}>
                       {cap.desc}
                     </p>
-                    <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 9, marginBottom: 28, borderTop: '1px solid rgba(30,27,75,0.06)', paddingTop: 18 }}>
+                    <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 9, marginBottom: 24, borderTop: '1px solid var(--border-hairline)', paddingTop: 16 }}>
                       {cap.bullets.map((b, idx) => (
-                        <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12.5, color: '#1E1B4B' }}>
-                          <span style={{ color: '#7c3aed', flexShrink: 0 }}><Icon name="check" size={14} /></span>
+                        <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'var(--color-obsidian-ink)', fontWeight: 450 }}>
+                          <span style={{ color: 'var(--color-obsidian-ink)', flexShrink: 0 }}><Icon name="check" size={13} /></span>
                           {b}
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <a href={cap.href} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600, color: '#7c3aed', textDecoration: 'none' }}>
-                    Explore capability <Icon name="arrowRight" size={12} />
+                  <a href={cap.href} className="link-editorial" style={{ fontSize: 14, fontWeight: 600 }}>
+                    Explore capability <Icon name="arrowRight" size={13} />
                   </a>
                 </div>
               ))}
@@ -927,6 +1026,7 @@
       );
     };
 
+    /* Industry Solutions Matrix */
     const IndustryMatrixSection = () => {
       const [activeTab, setActiveTab] = useState(0);
 
@@ -1026,91 +1126,101 @@
       const cur = industries[activeTab];
 
       return (
-        <section id="industries-matrix" style={{ padding: '120px 0', background: '#F8F6FC', borderTop: '1px solid #DDD8F0' }}>
-          <div className="reveal" style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px' }}>
+        <section id="industries-matrix" style={{ padding: '96px 0', background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)' }}>
+          <div className="reveal" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px' }}>
             
             {/* Header */}
-            <div style={{ textAlign: 'center', maxWidth: 680, margin: '0 auto 56px' }}>
-              <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#7c3aed', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12 }}>
-                Industry Solutions
+            <div style={{ textAlign: 'center', maxWidth: 680, margin: '0 auto 48px' }}>
+              <p className="font-mono" style={{ fontSize: 12, color: 'var(--color-obsidian-ink)', fontWeight: 600, marginBottom: 12 }}>
+                Industry Verticals
               </p>
-              <h2 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 'clamp(32px,3.2vw,48px)', fontWeight: 800, letterSpacing: '-0.035em', color: '#1E1B4B', marginBottom: 16 }}>
+              <h2 className="font-display" style={{ fontSize: 'clamp(32px, 3.4vw, 46px)', color: 'var(--color-obsidian-ink)', marginBottom: 14 }}>
                 AI Tailored to Your Industry's Reality
               </h2>
-              <p style={{ fontSize: 16, color: 'rgba(30,27,75,0.65)', lineHeight: 1.65 }}>
-                We don't just supply generic AI tools. We build domain-specific architectures that understand your compliance frameworks, legacy systems, and industry metrics.
+              <p style={{ fontSize: 16, color: 'var(--color-fog)', lineHeight: 1.6 }}>
+                We engineer domain-specific architectures designed around compliance frameworks, legacy databases, and operational metrics.
               </p>
             </div>
 
-            {/* Industry Selector Tabs */}
-            <div style={{ display: 'flex', justifyContent: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 48 }}>
+            {/* Pill Tabs Selector (100px radius) */}
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 40 }}>
               {industries.map((ind, idx) => (
                 <button key={ind.id} onClick={() => setActiveTab(idx)}
-                        className={`tab-btn ${activeTab === idx ? 'active' : ''}`}
                         style={{
                           display: 'inline-flex',
                           alignItems: 'center',
-                          gap: 8,
-                          padding: '10px 20px',
-                          borderRadius: 100,
-                          fontSize: 13.5,
+                          gap: 6,
+                          padding: '9px 20px',
+                          borderRadius: 'var(--radius-buttons)',
+                          fontSize: 14,
                           fontWeight: 600,
-                          border: '1px solid #DDD8F0',
-                          background: activeTab === idx ? '#1E1B4B' : '#fff',
-                          color: activeTab === idx ? '#FAFAFA' : '#1E1B4B',
-                          cursor: 'pointer'
+                          border: '1px solid',
+                          borderColor: activeTab === idx ? 'var(--color-obsidian-ink)' : 'var(--border-hairline)',
+                          background: activeTab === idx ? 'var(--color-obsidian-ink)' : 'transparent',
+                          color: activeTab === idx ? '#ffffff' : 'var(--color-obsidian-ink)',
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease'
                         }}>
-                  <Icon name={ind.icon} size={16} />
+                  <Icon name={ind.icon} size={15} color={activeTab === idx ? '#ffffff' : 'var(--color-obsidian-ink)'} />
                   {ind.label}
                 </button>
               ))}
             </div>
 
             {/* Active Industry Panel */}
-            <div style={{ background: '#fff', border: '1px solid #DDD8F0', borderRadius: 24, padding: '48px 44px', boxShadow: '0 16px 40px rgba(124,58,237,0.06)' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '55% 45%', gap: 48, alignItems: 'center' }} className="hero-grid">
+            <div style={{ background: 'var(--color-canvas)', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-cards)', padding: '44px' }}>
+              <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '58% 42%', gap: 48, alignItems: 'center' }}>
                 
                 {/* Left Use Cases */}
                 <div>
-                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(124,58,237,0.08)', borderRadius: 100, padding: '5px 14px', marginBottom: 16 }}>
-                    <Icon name={cur.icon} size={14} color="#7c3aed" />
-                    <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#7c3aed', fontWeight: 600 }}>{cur.label} Vertical</span>
-                  </div>
-                  <h3 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 26, fontWeight: 700, color: '#1E1B4B', letterSpacing: '-0.03em', marginBottom: 14 }}>
+                  <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-iris-pulse)', fontWeight: 600, display: 'block', marginBottom: 8 }}>
+                    {cur.label} Architecture
+                  </span>
+                  <h3 className="font-display" style={{ fontSize: 26, fontWeight: 600, color: 'var(--color-obsidian-ink)', marginBottom: 12 }}>
                     {cur.title}
                   </h3>
-                  <p style={{ fontSize: 15, color: 'rgba(30,27,75,0.65)', lineHeight: 1.65, marginBottom: 32 }}>
+                  <p style={{ fontSize: 15, color: 'var(--color-fog)', lineHeight: 1.6, marginBottom: 28 }}>
                     {cur.desc}
                   </p>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }} className="grid-3col">
+                  <div className="grid-3col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                     {cur.useCases.map((uc, uIdx) => (
-                      <div key={uIdx} style={{ background: '#F8F6FC', border: '1px solid #EBE5F5', borderRadius: 12, padding: '16px 18px' }}>
-                        <p style={{ fontSize: 13.5, fontWeight: 700, color: '#1E1B4B', marginBottom: 4 }}>{uc.name}</p>
-                        <p style={{ fontSize: 12, color: 'rgba(30,27,75,0.6)', lineHeight: 1.45 }}>{uc.desc}</p>
+                      <div key={uIdx} style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '16px' }}>
+                        <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--color-obsidian-ink)', marginBottom: 4 }}>{uc.name}</p>
+                        <p style={{ fontSize: 12.5, color: 'var(--color-fog)', lineHeight: 1.45 }}>{uc.desc}</p>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Right Impact & Metric Display */}
-                <div style={{ background: 'linear-gradient(135deg, #1E1B4B 0%, #2d2766 100%)', borderRadius: 20, padding: '40px 36px', color: '#fff', position: 'relative', overflow: 'hidden' }}>
-                  <div style={{ position: 'absolute', top: -40, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(168,85,247,0.3) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
-                  
-                  <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#a855f7', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 20 }}>
-                    Industry Impact Metric
+                {/* Right Impact Display (Editorial Dark Metric Card) */}
+                <div style={{ background: 'linear-gradient(135deg, #0c0a21 0%, #171038 100%)', border: '1px solid rgba(99, 91, 255, 0.25)', borderRadius: 'var(--radius-cards)', padding: '40px', color: '#ffffff', boxShadow: '0 12px 36px rgba(12, 10, 33, 0.2)' }}>
+                  <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)', marginBottom: 16, fontWeight: 600 }}>
+                    Production Impact Metric
                   </p>
-                  <p style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 'clamp(44px, 4vw, 64px)', fontWeight: 800, color: '#FAFAFA', lineHeight: 1, letterSpacing: '-0.04em', marginBottom: 8 }}>
+                  <p className="font-display" style={{ fontSize: 'clamp(52px, 4.5vw, 72px)', color: '#ffffff', fontWeight: 700, lineHeight: 1, marginBottom: 10 }}>
                     {cur.stat}
                   </p>
-                  <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', lineHeight: 1.5, marginBottom: 32 }}>
+                  <p style={{ fontSize: 14.5, color: 'rgba(255,255,255,0.7)', lineHeight: 1.5, marginBottom: 28 }}>
                     {cur.statLabel}
                   </p>
 
-                  <div style={{ borderTop: '1px solid rgba(255,255,255,0.12)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)' }}>Explore case studies & architecture for this sector</span>
-                    <a href={`/Industries.html#${cur.id}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#fff', color: '#1E1B4B', padding: '8px 16px', borderRadius: 8, fontSize: 12.5, fontWeight: 700, textDecoration: 'none' }}>
-                      Deep Dive <Icon name="arrowRight" size={12} />
+                  <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.12)', paddingTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)' }}>Sector Deep Dive</span>
+                    <a href={`/Industries.html#${cur.id}`} style={{
+                      background: 'transparent',
+                      border: '1px solid rgba(255, 255, 255, 0.5)',
+                      color: '#ffffff',
+                      padding: '7px 16px',
+                      borderRadius: 'var(--radius-buttons)',
+                      fontSize: 13,
+                      fontWeight: 600,
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 5
+                    }}>
+                      Case Studies <Icon name="arrowRight" size={12} />
                     </a>
                   </div>
                 </div>
@@ -1126,7 +1236,7 @@
     Object.assign(window, { CapabilitiesSection, IndustryMatrixSection });
   </script>
 
-  <!-- ═══ SCRIPT 4: Solutions, Products Suite & Customer Stories ═══ -->
+  <!-- ═══ SCRIPT 4: Business Solutions & Full-Bleed Dark Platform Band ═══ -->
   <script type="text/babel">
     const SolutionsSection = () => {
       const solutions = [
@@ -1139,7 +1249,7 @@
         },
         {
           title: 'AI Cost & Latency Optimization',
-          problem: 'Skyrocketing API bills from OpenAI/Anthropic and 3000ms+ inference latency hurting customer UX.',
+          problem: 'Skyrocketing API bills from commercial LLMs and 3000ms+ inference latency hurting customer UX.',
           solution: 'SlashLLM dynamic routing, tiered model fallback, semantic caching, and local small-model distillation.',
           icon: 'cost',
           href: '/Solutions.html#cost-optimization'
@@ -1161,47 +1271,49 @@
       ];
 
       return (
-        <section id="solutions-matrix" style={{ padding: '120px 0', background: 'var(--bg)', borderTop: '1px solid #DDD8F0' }}>
-          <div className="reveal" style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px' }}>
+        <section id="solutions-matrix" style={{ padding: '96px 0', background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)' }}>
+          <div className="reveal" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px' }}>
             
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 64, flexWrap: 'wrap', gap: 24 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 56, flexWrap: 'wrap', gap: 20 }}>
               <div>
-                <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#7c3aed', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12 }}>
+                <p className="font-mono" style={{ fontSize: 12, color: 'var(--color-obsidian-ink)', fontWeight: 600, marginBottom: 12 }}>
                   Business Solutions
                 </p>
-                <h2 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 'clamp(32px,3.2vw,48px)', fontWeight: 800, letterSpacing: '-0.035em', color: '#1E1B4B', maxWidth: 640 }}>
+                <h2 className="font-display" style={{ fontSize: 'clamp(32px, 3.4vw, 46px)', color: 'var(--color-obsidian-ink)', maxWidth: 660 }}>
                   Solving the Hardest Enterprise AI Challenges
                 </h2>
               </div>
-              <a href="/Solutions.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: '#7c3aed', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+              <a href="/Solutions.html" className="link-editorial" style={{ fontSize: 15, fontWeight: 600 }}>
                 View All Solutions <Icon name="arrowRight" size={14} />
               </a>
             </div>
 
             <div className="grid-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24 }}>
               {solutions.map((sol, idx) => (
-                <div key={idx} className="card-hover" style={{ background: '#fff', border: '1px solid #DDD8F0', borderRadius: 20, padding: '36px 32px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20 }}>
-                    <div style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(124,58,237,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#7c3aed' }}>
-                      <Icon name={sol.icon} size={20} />
+                <div key={idx} className="card-editorial" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
+                      <div style={{ width: 36, height: 36, borderRadius: 6, background: '#f0f0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-obsidian-ink)' }}>
+                        <Icon name={sol.icon} size={18} />
+                      </div>
+                      <h3 className="font-display" style={{ fontSize: 22, fontWeight: 600, color: 'var(--color-obsidian-ink)' }}>
+                        {sol.title}
+                      </h3>
                     </div>
-                    <h3 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 20, fontWeight: 700, color: '#1E1B4B', letterSpacing: '-0.02em' }}>
-                      {sol.title}
-                    </h3>
+
+                    <div style={{ marginBottom: 14 }}>
+                      <p className="font-mono" style={{ fontSize: 10.5, color: 'var(--color-fog)', fontWeight: 600, marginBottom: 3 }}>The Enterprise Challenge</p>
+                      <p style={{ fontSize: 14.5, color: 'var(--color-fog)', lineHeight: 1.55 }}>{sol.problem}</p>
+                    </div>
+
+                    <div style={{ marginBottom: 20 }}>
+                      <p className="font-mono" style={{ fontSize: 10.5, color: 'var(--color-obsidian-ink)', fontWeight: 600, marginBottom: 3 }}>SlashLLM Solution</p>
+                      <p style={{ fontSize: 14.5, color: 'var(--color-obsidian-ink)', fontWeight: 500, lineHeight: 1.55 }}>{sol.solution}</p>
+                    </div>
                   </div>
 
-                  <div style={{ marginBottom: 16 }}>
-                    <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10.5, color: '#ef4444', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>The Enterprise Challenge</p>
-                    <p style={{ fontSize: 13.5, color: 'rgba(30,27,75,0.65)', lineHeight: 1.55 }}>{sol.problem}</p>
-                  </div>
-
-                  <div style={{ marginBottom: 24 }}>
-                    <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10.5, color: '#22c55e', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>SlashLLM Solution</p>
-                    <p style={{ fontSize: 13.5, color: '#1E1B4B', fontWeight: 500, lineHeight: 1.55 }}>{sol.solution}</p>
-                  </div>
-
-                  <a href={sol.href} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600, color: '#7c3aed', textDecoration: 'none' }}>
-                    Solution Architecture <Icon name="arrowRight" size={12} />
+                  <a href={sol.href} className="link-editorial" style={{ fontSize: 14, fontWeight: 600 }}>
+                    Solution Architecture <Icon name="arrowRight" size={13} />
                   </a>
                 </div>
               ))}
@@ -1212,6 +1324,7 @@
       );
     };
 
+    /* Full-Bleed Dark Band (Carbon #111117 Base + Graphite #22222a Feature Cards) */
     const ProductsSuiteSection = () => {
       const products = [
         {
@@ -1249,42 +1362,42 @@
       ];
 
       return (
-        <section id="products-suite" style={{ padding: '120px 0', background: '#110E2E', color: '#fff', borderTop: '1px solid rgba(124,58,237,0.2)', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', top: 0, left: '20%', width: 600, height: 300, background: 'radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
-          
-          <div className="reveal" style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px', position: 'relative', zIndex: 1 }}>
+        <section id="products-suite" style={{ padding: '100px 0', background: 'var(--color-carbon)', color: '#ffffff' }}>
+          <div className="reveal" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px' }}>
             
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 64, flexWrap: 'wrap', gap: 24 }}>
+            {/* Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 56, flexWrap: 'wrap', gap: 20 }}>
               <div>
-                <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#a855f7', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12 }}>
-                  Products & Platforms
+                <p className="font-mono" style={{ fontSize: 12, color: 'var(--color-fog)', fontWeight: 600, marginBottom: 12 }}>
+                  Proprietary Tech Suite
                 </p>
-                <h2 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 'clamp(32px,3.2vw,48px)', fontWeight: 800, letterSpacing: '-0.035em', color: '#FAFAFA', maxWidth: 640 }}>
+                <h2 className="font-display" style={{ fontSize: 'clamp(32px, 3.4vw, 46px)', color: '#ffffff', maxWidth: 660 }}>
                   Proprietary Platforms Powering Enterprise AI
                 </h2>
               </div>
-              <a href="/Products.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: '#a855f7', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+              <a href="/Products.html" style={{ color: '#ffffff', fontSize: 14.5, fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 5 }}>
                 Explore Platform Architecture <Icon name="arrowRight" size={14} />
               </a>
             </div>
 
-            <div className="grid-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
+            {/* 4-Card Graphite Grid */}
+            <div className="grid-4col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
               {products.map((prod, idx) => (
-                <div key={idx} style={{ background: '#1A1640', border: '1px solid rgba(124,58,237,0.2)', borderRadius: 18, padding: '32px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div key={idx} className="card-dark" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
-                    <div style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(168,85,247,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#a855f7', marginBottom: 18 }}>
-                      <Icon name={prod.icon} size={20} />
+                    <div style={{ width: 38, height: 38, borderRadius: 6, background: 'rgba(255, 255, 255, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', marginBottom: 18 }}>
+                      <Icon name={prod.icon} size={19} />
                     </div>
-                    <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10, color: '#a855f7', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 6 }}>{prod.tag}</span>
-                    <h3 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 19, fontWeight: 700, color: '#FAFAFA', letterSpacing: '-0.02em', marginBottom: 12 }}>{prod.name}</h3>
-                    <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.55, marginBottom: 20 }}>{prod.desc}</p>
+                    <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)', fontWeight: 600, display: 'block', marginBottom: 6 }}>{prod.tag}</span>
+                    <h3 className="font-display" style={{ fontSize: 21, fontWeight: 600, color: '#ffffff', marginBottom: 12 }}>{prod.name}</h3>
+                    <p style={{ fontSize: 14, color: 'var(--color-fog)', lineHeight: 1.6, marginBottom: 22 }}>{prod.desc}</p>
                   </div>
                   <div>
-                    <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 14, marginBottom: 18 }}>
-                      <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10.5, color: '#4ade80' }}>✓ {prod.metrics}</span>
+                    <div style={{ borderTop: '1px solid var(--border-dark-hairline)', paddingTop: 14, marginBottom: 18 }}>
+                      <span className="font-mono" style={{ fontSize: 11.5, fontWeight: 600, color: '#ffffff' }}>✓ {prod.metrics}</span>
                     </div>
-                    <a href={prod.href} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 12.5, fontWeight: 600, color: '#a855f7', textDecoration: 'none' }}>
-                      Learn more <Icon name="arrowRight" size={11} />
+                    <a href={prod.href} style={{ color: '#ffffff', fontSize: 13.5, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                      Learn more <Icon name="arrowRight" size={12} />
                     </a>
                   </div>
                 </div>
@@ -1296,6 +1409,7 @@
       );
     };
 
+    /* Customer Stories & Proof */
     const CaseStudiesSection = () => {
       const stories = [
         {
@@ -1323,58 +1437,57 @@
       ];
 
       return (
-        <section id="customer-stories" style={{ padding: '120px 0', background: 'var(--bg)', borderTop: '1px solid #DDD8F0' }}>
-          <div className="reveal" style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px' }}>
+        <section id="customer-stories" style={{ padding: '96px 0', background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)' }}>
+          <div className="reveal" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px' }}>
             
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 64, flexWrap: 'wrap', gap: 24 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 56, flexWrap: 'wrap', gap: 20 }}>
               <div>
-                <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#7c3aed', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12 }}>
+                <p className="font-mono" style={{ fontSize: 12, color: 'var(--color-obsidian-ink)', fontWeight: 600, marginBottom: 12 }}>
                   Customer Stories & Proven Outcomes
                 </p>
-                <h2 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 'clamp(32px,3.2vw,48px)', fontWeight: 800, letterSpacing: '-0.035em', color: '#1E1B4B', maxWidth: 640 }}>
+                <h2 className="font-display" style={{ fontSize: 'clamp(32px, 3.4vw, 46px)', color: 'var(--color-obsidian-ink)', maxWidth: 660 }}>
                   Measurable Business Outcomes, Shipped to Production
                 </h2>
               </div>
-              <a href="/CaseStudies.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: '#7c3aed', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+              <a href="/CaseStudies.html" className="link-editorial" style={{ fontSize: 15, fontWeight: 600 }}>
                 All Case Studies <Icon name="arrowRight" size={14} />
               </a>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }} className="hero-grid">
+            <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
               {stories.map((s, idx) => (
-                <div key={idx} style={{ background: '#fff', border: '1px solid #DDD8F0', borderRadius: 24, padding: '40px 36px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div key={idx} className="card-editorial" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-                      <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#7c3aed', fontWeight: 600, background: 'rgba(124,58,237,0.08)', padding: '4px 12px', borderRadius: 100 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
+                      <span className="font-mono" style={{ fontSize: 12, color: 'var(--color-fog)', fontWeight: 600 }}>
                         {s.client} · {s.industry}
                       </span>
-                      <span style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 24, fontWeight: 800, color: '#1E1B4B' }}>{s.metric}</span>
+                      <span className="font-display" style={{ fontSize: 28, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>{s.metric}</span>
                     </div>
 
-                    <h3 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 21, fontWeight: 700, color: '#1E1B4B', letterSpacing: '-0.02em', lineHeight: 1.3, marginBottom: 24 }}>
+                    <h3 className="font-display" style={{ fontSize: 24, fontWeight: 600, color: 'var(--color-obsidian-ink)', lineHeight: 1.25, marginBottom: 20 }}>
                       {s.headline}
                     </h3>
 
-                    {/* Structured consulting model: Challenge -> Approach -> Result */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 28 }}>
-                      <div style={{ background: '#FAF9FD', border: '1px solid #EAE6F3', borderRadius: 10, padding: '12px 16px' }}>
-                        <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10, color: '#ef4444', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 3 }}>The Challenge</p>
-                        <p style={{ fontSize: 13, color: 'rgba(30,27,75,0.7)', lineHeight: 1.5 }}>{s.challenge}</p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 26 }}>
+                      <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '14px 16px' }}>
+                        <p className="font-mono" style={{ fontSize: 10.5, color: 'var(--color-fog)', fontWeight: 600, marginBottom: 3 }}>Challenge</p>
+                        <p style={{ fontSize: 13.5, color: 'var(--color-fog)', lineHeight: 1.5 }}>{s.challenge}</p>
                       </div>
 
-                      <div style={{ background: '#FAF9FD', border: '1px solid #EAE6F3', borderRadius: 10, padding: '12px 16px' }}>
-                        <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10, color: '#7c3aed', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 3 }}>Our Engineering Approach</p>
-                        <p style={{ fontSize: 13, color: 'rgba(30,27,75,0.7)', lineHeight: 1.5 }}>{s.approach}</p>
+                      <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '14px 16px' }}>
+                        <p className="font-mono" style={{ fontSize: 10.5, color: 'var(--color-obsidian-ink)', fontWeight: 600, marginBottom: 3 }}>Engineering Approach</p>
+                        <p style={{ fontSize: 13.5, color: 'var(--color-fog)', lineHeight: 1.5 }}>{s.approach}</p>
                       </div>
 
-                      <div style={{ background: '#FAF9FD', border: '1px solid #EAE6F3', borderRadius: 10, padding: '12px 16px' }}>
-                        <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10, color: '#22c55e', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 3 }}>Business Outcome</p>
-                        <p style={{ fontSize: 13, color: '#1E1B4B', fontWeight: 600, lineHeight: 1.5 }}>{s.outcome}</p>
+                      <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '14px 16px' }}>
+                        <p className="font-mono" style={{ fontSize: 10.5, color: 'var(--color-obsidian-ink)', fontWeight: 600, marginBottom: 3 }}>Outcome</p>
+                        <p style={{ fontSize: 14, color: 'var(--color-obsidian-ink)', fontWeight: 600, lineHeight: 1.5 }}>{s.outcome}</p>
                       </div>
                     </div>
                   </div>
 
-                  <a href={s.href} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13.5, fontWeight: 600, color: '#7c3aed', textDecoration: 'none' }}>
+                  <a href={s.href} className="link-editorial" style={{ fontSize: 14, fontWeight: 600 }}>
                     Read Complete Case Study <Icon name="arrowRight" size={13} />
                   </a>
                 </div>
@@ -1386,6 +1499,7 @@
       );
     };
 
+    /* Insights Section */
     const InsightsSection = () => {
       const articles = [
         {
@@ -1412,40 +1526,40 @@
       ];
 
       return (
-        <section id="insights-section" style={{ padding: '120px 0', background: '#F8F6FC', borderTop: '1px solid #DDD8F0' }}>
-          <div className="reveal" style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px' }}>
+        <section id="insights-section" style={{ padding: '96px 0', background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)' }}>
+          <div className="reveal" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px' }}>
             
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 64, flexWrap: 'wrap', gap: 24 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 56, flexWrap: 'wrap', gap: 20 }}>
               <div>
-                <p style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#7c3aed', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12 }}>
+                <p className="font-mono" style={{ fontSize: 12, color: 'var(--color-obsidian-ink)', fontWeight: 600, marginBottom: 12 }}>
                   Insights & Engineering Authority
                 </p>
-                <h2 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 'clamp(32px,3.2vw,48px)', fontWeight: 800, letterSpacing: '-0.035em', color: '#1E1B4B', maxWidth: 640 }}>
+                <h2 className="font-display" style={{ fontSize: 'clamp(32px, 3.4vw, 46px)', color: 'var(--color-obsidian-ink)', maxWidth: 660 }}>
                   Technical Research, Architecture Guides & Industry Reports
                 </h2>
               </div>
-              <a href="/blog" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: '#7c3aed', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
+              <a href="/blog" className="link-editorial" style={{ fontSize: 15, fontWeight: 600 }}>
                 View All Insights <Icon name="arrowRight" size={14} />
               </a>
             </div>
 
             <div className="grid-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
               {articles.map((art, idx) => (
-                <a key={idx} href={art.href} className="card-hover" style={{ background: '#fff', border: '1px solid #DDD8F0', borderRadius: 20, padding: '32px 28px', textDecoration: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <a key={idx} href={art.href} className="card-editorial" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-                      <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 10.5, color: '#7c3aed', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600 }}>{art.category}</span>
-                      <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: 'rgba(30,27,75,0.4)' }}>{art.date}</span>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
+                      <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)', fontWeight: 600 }}>{art.category}</span>
+                      <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)' }}>{art.date}</span>
                     </div>
-                    <h3 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 18, fontWeight: 700, color: '#1E1B4B', letterSpacing: '-0.02em', lineHeight: 1.35, marginBottom: 14 }}>
+                    <h3 className="font-display" style={{ fontSize: 21, fontWeight: 600, color: 'var(--color-obsidian-ink)', lineHeight: 1.3, marginBottom: 12 }}>
                       {art.title}
                     </h3>
-                    <p style={{ fontSize: 13.5, color: 'rgba(30,27,75,0.65)', lineHeight: 1.6, marginBottom: 24 }}>
+                    <p style={{ fontSize: 14.5, color: 'var(--color-fog)', lineHeight: 1.6, marginBottom: 22 }}>
                       {art.desc}
                     </p>
                   </div>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600, color: '#7c3aed' }}>
-                    Read research report <Icon name="arrowRight" size={12} />
+                  <span className="link-editorial" style={{ fontSize: 14, fontWeight: 600 }}>
+                    Read research report <Icon name="arrowRight" size={13} />
                   </span>
                 </a>
               ))}
@@ -1456,28 +1570,25 @@
       );
     };
 
+    /* Bottom Pre-footer Call to Action */
     const BottomCTA = () => (
-      <section style={{ padding: '0 28px 120px', background: '#F8F6FC' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          <div style={{ background: 'linear-gradient(135deg, #1E1B4B 0%, #2d2766 50%, #1a1845 100%)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 28, padding: '88px 64px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-            <div style={{ position: 'absolute', top: -120, left: '50%', transform: 'translateX(-50%)', width: 700, height: 350, borderRadius: '50%', background: 'radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
-            
-            <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#a855f7', letterSpacing: '0.14em', textTransform: 'uppercase', display: 'inline-block', marginBottom: 16 }}>
+      <section style={{ padding: '80px 24px', background: 'var(--color-canvas)' }}>
+        <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto' }}>
+          <div style={{ background: 'linear-gradient(135deg, #fafafa 0%, #f7f5ff 100%)', border: '1px solid rgba(99, 91, 255, 0.18)', borderRadius: 'var(--radius-cards)', padding: '64px 48px', textAlign: 'center', boxShadow: '0 16px 40px rgba(99, 91, 255, 0.04)' }}>
+            <span className="font-mono" style={{ fontSize: 12, color: 'var(--color-iris-pulse)', display: 'inline-block', marginBottom: 12, fontWeight: 600 }}>
               Enterprise Transformation Partner
             </span>
-            <h2 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 'clamp(36px,3.6vw,56px)', fontWeight: 800, letterSpacing: '-0.04em', color: '#FAFAFA', marginBottom: 20, position: 'relative', lineHeight: 1.15 }}>
-              Ready to Operationalize AI Across Your Enterprise?
+            <h2 className="font-display" style={{ fontSize: 'clamp(32px, 3.4vw, 48px)', fontWeight: 600, color: 'var(--color-obsidian-ink)', marginBottom: 16, lineHeight: 1.15 }}>
+              Ready to <span className="gradient-text-purple">operationalize AI</span> across your enterprise?
             </h2>
-            <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.65)', maxWidth: 580, margin: '0 auto 44px', lineHeight: 1.7, position: 'relative' }}>
+            <p style={{ fontSize: 17, color: 'var(--color-fog)', maxWidth: 580, margin: '0 auto 36px', lineHeight: 1.65 }}>
               Partner with SlashLLM to design, architect, and ship high-impact AI systems with dedicated engineering teams and proven enterprise platforms.
             </p>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap', position: 'relative' }}>
-              <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer"
-                 style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#FAFAFA', color: '#1E1B4B', padding: '14px 30px', borderRadius: 100, fontSize: 14.5, fontWeight: 700, letterSpacing: '-0.01em', textDecoration: 'none' }}>
-                Talk to an AI Expert <Icon name="arrowRight" size={14} />
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 14, flexWrap: 'wrap' }}>
+              <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary">
+                Talk to an AI Expert <Icon name="arrowRight" size={15} />
               </a>
-              <a href="/Solutions.html"
-                 style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', padding: '14px 26px', borderRadius: 100, fontSize: 14.5, fontWeight: 600, textDecoration: 'none' }}>
+              <a href="/Solutions.html" className="btn-ghost">
                 Explore Solutions
               </a>
             </div>
@@ -1496,13 +1607,14 @@
         const els = document.querySelectorAll('.reveal');
         const obs = new IntersectionObserver(entries => {
           entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-        }, { threshold: 0.06 });
+        }, { threshold: 0.05 });
         els.forEach(el => obs.observe(el));
         return () => obs.disconnect();
       }, []);
 
       return (
         <React.Fragment>
+          <AnnouncementBar />
           <GlobalNav />
           <main>
             <Hero />

@@ -14,52 +14,173 @@
   <meta property="og:description" content="Enterprise AI Gateway, Observability, and Agent Orchestration Platforms.">
   <meta property="og:image" content="https://slashllm.com/uploads/LOGO%202.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Single Unified Typography: Proxima Nova -->
+  <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin="anonymous">
+  <link href="https://fonts.cdnfonts.com/css/proxima-nova" rel="stylesheet">
 
-  <script>
-    tailwind = { config: { theme: { extend: { fontFamily: { sans: ['Inter','system-ui','sans-serif'], display: ['"Space Grotesk"','sans-serif'], mono: ['"JetBrains Mono"','monospace'] } } } } };
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
 
   <style>
+    :root {
+      --color-canvas: #ffffff;
+      --color-obsidian-ink: #010110;
+      --color-carbon: #111117;
+      --color-graphite: #22222a;
+      --color-fog: #73737c;
+      --color-ash: #d9d9d9;
+      --color-iris-pulse: #635bff;
+      --border-hairline: rgba(1, 1, 16, 0.1);
+      --border-dark-hairline: rgba(255, 255, 255, 0.08);
+
+      --font-display: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-sans: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+      --page-max-width: 1200px;
+      --radius-cards: 8px;
+      --radius-buttons: 100px;
+      --radius-tags: 9999px;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { background: #FAFAFA; color: #1E1B4B; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--color-canvas);
+      color: var(--color-obsidian-ink);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.55;
+      letter-spacing: -0.015em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
     a { color: inherit; text-decoration: none; }
 
-    :root {
-      --bg: #FAFAFA; --surface: #F3F0FF; --card: #EDE9FF;
-      --border: #DDD8F0; --text: #1E1B4B; --muted: rgba(30,27,75,0.6);
-      --accent: #a855f7; --accent2: #7c3aed;
+    .font-display { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.03em; }
+    .font-sans { font-family: var(--font-sans); letter-spacing: -0.015em; }
+    .font-mono { font-family: var(--font-mono); font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
+
+    .gradient-text-purple {
+      background: linear-gradient(135deg, #010110 10%, #635bff 60%, #9333ea 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline;
     }
 
-    .gradient-text {
-      background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #be38de 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    .btn-primary {
+      background: linear-gradient(135deg, #0c0a21 0%, #1e134b 55%, #351c75 100%);
+      color: #ffffff !important;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+      padding: 12px 24px;
+      border-radius: var(--radius-buttons);
+      border: 1px solid rgba(99, 91, 255, 0.25);
+      box-shadow: 0 4px 14px rgba(30, 19, 75, 0.15);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #635bff 0%, #7c3aed 100%);
+      border-color: rgba(99, 91, 255, 0.5);
+      box-shadow: 0 6px 20px rgba(99, 91, 255, 0.3);
+      transform: translateY(-1px);
     }
 
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
-    .reveal.in { opacity: 1; transform: translateY(0); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--color-obsidian-ink) !important;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+      padding: 12px 24px;
+      border-radius: var(--radius-buttons);
+      border: 1px solid rgba(1, 1, 16, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-ghost:hover {
+      background: #f5f3ff;
+      border-color: var(--color-iris-pulse);
+      color: var(--color-iris-pulse) !important;
+    }
+
+    .btn-pill-header {
+      background: transparent;
+      border: 1px solid #ffffff;
+      color: #ffffff !important;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: var(--radius-buttons);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .btn-pill-header:hover {
+      background: #ffffff;
+      color: var(--color-iris-pulse) !important;
+    }
+
+    .card-editorial {
+      background: var(--color-canvas);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-cards);
+      padding: 40px;
+      transition: all 0.2s ease;
+    }
+    .card-editorial:hover {
+      border-color: rgba(99, 91, 255, 0.35);
+      box-shadow: 0 12px 32px rgba(99, 91, 255, 0.05);
+    }
+
+    .link-editorial {
+      color: var(--color-obsidian-ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .link-editorial:hover {
+      color: var(--color-iris-pulse);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .link-muted { color: var(--color-fog); text-decoration: none; transition: color 0.15s ease; }
+    .link-muted:hover { color: var(--color-obsidian-ink); }
 
     .nav-dropdown {
       position: absolute;
-      top: calc(100% + 10px);
-      background: rgba(255,255,255,0.98);
-      backdrop-filter: blur(24px);
-      border: 1px solid rgba(30,27,75,0.12);
-      border-radius: 16px;
-      box-shadow: 0 24px 64px rgba(30,27,75,0.12);
+      top: calc(100% + 8px);
+      background: #ffffff;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-cards);
+      box-shadow: 0 16px 36px rgba(1, 1, 16, 0.08);
       padding: 12px;
       z-index: 100;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(6px);
-      transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+      transform: translateY(4px);
+      transition: all 0.15s ease;
     }
     .nav-item-wrap:hover .nav-dropdown {
       opacity: 1;
@@ -67,18 +188,14 @@
       transform: translateY(0);
     }
 
-    .card-hover {
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-    }
-    .card-hover:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 36px rgba(124,58,237,0.08);
-      border-color: rgba(168,85,247,0.4) !important;
+    .halftone-pattern {
+      background-image: radial-gradient(var(--color-ash) 1px, transparent 1px);
+      background-size: 16px 16px;
     }
 
     @media (max-width: 1024px) {
+      .grid-2col { grid-template-columns: 1fr !important; gap: 32px !important; }
       .hide-mobile { display: none !important; }
-      .grid-2col { grid-template-columns: 1fr !important; }
       .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 36px !important; }
     }
     @media (max-width: 640px) {
@@ -89,11 +206,10 @@
 <body>
   <div id="root"></div>
 
-  <!-- Shared Nav & Footer Scripts -->
   <script type="text/babel">
     const { useState, useEffect } = React;
 
-    const Icon = ({ name, size=20, color='currentColor' }) => {
+    const Icon = ({ name, size=18, color='currentColor' }) => {
       const paths = {
         arrowRight: <path d="M5 12h14M12 5l7 7-7 7"/>,
         chevronDown: <path d="M6 9l6 6 6-6"/>,
@@ -104,123 +220,84 @@
         observability: <><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></>,
         data: <><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></>,
         gateway: <><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></>,
-        shield: <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></>,
-        finance: <><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></>,
-        health: <><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></>,
-        saas: <><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></>,
-        retail: <><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></>,
-        mfg: <><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></>,
-        prof: <><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></>,
-        cost: <><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></>,
         check: <polyline points="20 6 9 17 4 12"/>
       };
       return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0 }}>
           {paths[name] || <circle cx="12" cy="12" r="9"/>}
         </svg>
       );
     };
 
+    const AnnouncementBar = () => (
+      <div style={{ background: 'var(--color-iris-pulse)', color: '#ffffff', padding: '10px 24px', fontSize: 13, fontWeight: 500, letterSpacing: '-0.02em', zIndex: 1100 }}>
+        <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+          <span style={{ margin: '0 auto' }}>Announcing SlashLLM Enterprise Cohort 2026 — Dedicated autonomous agents & GPU clusters with SLA guarantees.</span>
+          <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-pill-header hide-mobile">
+            Schedule Briefing <Icon name="arrowRight" size={12} />
+          </a>
+        </div>
+      </div>
+    );
+
     const GlobalNav = () => {
-      const [scrolled, setScrolled] = useState(false);
-      useEffect(() => {
-        const fn = () => setScrolled(window.scrollY > 20);
-        window.addEventListener('scroll', fn);
-        return () => window.removeEventListener('scroll', fn);
-      }, []);
-
-      const servicesMenu = [
-        { title: 'AI & Generative AI', desc: 'Enterprise LLMs, SLMs, multimodal & RAG architectures', href: '/Services.html#ai-genai', icon: 'sparkles' },
-        { title: 'AI Agents & Workflows', desc: 'Autonomous & human-in-the-loop multi-agent systems', href: '/Services.html#ai-agents', icon: 'agent' },
-        { title: 'AI Engineering', desc: 'From prototype to scale: architecture, evals & production code', href: '/Services.html#ai-engineering', icon: 'engineering' },
-        { title: 'AI Infrastructure & DevOps', desc: 'GPU orchestration, high-throughput model serving & clusters', href: '/Services.html#ai-infrastructure', icon: 'infra' },
-        { title: 'AI Observability & Ops', desc: 'Tracing, latency, token costs, drift & guardrail telemetry', href: '/Services.html#ai-observability', icon: 'observability' },
-        { title: 'Data & Analytics for AI', desc: 'Vector pipelines, ETL, real-time embeddings & feature stores', href: '/Services.html#data-analytics', icon: 'data' }
-      ];
-
-      const industriesMenu = [
-        { title: 'Financial Services', desc: 'Fraud detection, regulatory intelligence, AI customer ops', href: '/Industries.html#financial-services', icon: 'finance' },
-        { title: 'Healthcare & Life Sciences', desc: 'Clinical document processing, HIPAA patient assistants', href: '/Industries.html#healthcare', icon: 'health' },
-        { title: 'SaaS & Technology', desc: 'Embedded AI copilots, multi-tenant agent infra, cost routing', href: '/Industries.html#saas', icon: 'saas' },
-        { title: 'Retail & E-Commerce', desc: 'Conversational commerce, recommendation engines, support', href: '/Industries.html#retail', icon: 'retail' },
-        { title: 'Manufacturing & Logistics', desc: 'Supply chain intelligence, predictive diagnosis agents', href: '/Industries.html#manufacturing', icon: 'mfg' },
-        { title: 'Professional Services', desc: 'Contract intelligence, research agents, knowledge search', href: '/Industries.html#professional-services', icon: 'prof' }
-      ];
-
-      const navBtnStyle = {
-        color: 'rgba(30,27,75,0.68)', fontSize: 13.5, fontWeight: 500, padding: '8px 12px', borderRadius: 8,
-        display: 'inline-flex', alignItems: 'center', gap: 4, background: 'transparent', border: 'none', cursor: 'pointer'
+      const navLinkStyle = {
+        color: 'var(--color-obsidian-ink)', fontSize: 14, fontWeight: 400, padding: '8px 12px', display: 'inline-flex',
+        alignItems: 'center', gap: 4, background: 'transparent', border: 'none', cursor: 'pointer', letterSpacing: '-0.02em'
       };
 
       return (
-        <div style={{ position: 'fixed', top: 12, left: 0, right: 0, zIndex: 1000, display: 'flex', justifyContent: 'center', padding: '0 16px' }}>
-          <nav style={{
-            width: '100%', maxWidth: 1240, height: 56, background: scrolled ? 'rgba(255,255,255,0.96)' : 'rgba(255,255,255,0.85)',
-            backdropFilter: 'blur(20px)', border: '1px solid rgba(30,27,75,0.1)', borderRadius: 100, display: 'flex',
-            alignItems: 'center', justifyContent: 'space-between', padding: '0 18px'
-          }}>
-            <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
-              <img src="/uploads/LOGO 2.png" alt="SlashLLM" style={{ width: 28, height: 28 }} />
-              <span style={{ fontFamily: '"Space Grotesk",sans-serif', fontWeight: 800, fontSize: 16, color: '#1E1B4B' }}>SlashLLM</span>
+        <header style={{ position: 'sticky', top: 0, background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)', height: 64, display: 'flex', alignItems: 'center', zIndex: 1000 }}>
+          <div style={{ maxWidth: 'var(--page-max-width)', width: '100%', margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+              <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 26, height: 26, objectFit: 'contain', display: 'block' }} />
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+                <span style={{ fontWeight: 700, fontSize: 16, letterSpacing: '-0.02em', color: 'var(--color-obsidian-ink)' }}>slashllm</span>
+                <span style={{ fontSize: 13, color: 'var(--color-fog)', fontWeight: 400 }}>/ enterprise ai</span>
+              </div>
             </a>
 
-            <div className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-              <div className="nav-item-wrap" style={{ position: 'relative' }}>
-                <button style={navBtnStyle}>What We Do <Icon name="chevronDown" size={12} /></button>
-                <div className="nav-dropdown" style={{ left: 0, width: 600, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-                  {servicesMenu.map((item, idx) => (
-                    <a key={idx} href={item.href} style={{ display: 'flex', gap: 10, padding: '10px 12px', borderRadius: 10, textDecoration: 'none' }}>
-                      <div style={{ color: '#7c3aed' }}><Icon name={item.icon} size={16} /></div>
-                      <div><p style={{ fontSize: 13, fontWeight: 600, color: '#1E1B4B' }}>{item.title}</p><p style={{ fontSize: 11.5, color: 'rgba(30,27,75,0.55)' }}>{item.desc}</p></div>
-                    </a>
-                  ))}
-                </div>
-              </div>
+            <nav className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <a href="/Services.html" style={navLinkStyle}>What We Do</a>
+              <a href="/Industries.html" style={navLinkStyle}>Industries</a>
+              <a href="/Products.html" style={{ ...navLinkStyle, fontWeight: 600 }}>Products</a>
+              <a href="/Solutions.html" style={navLinkStyle}>Solutions</a>
+              <a href="/CaseStudies.html" style={navLinkStyle}>Stories</a>
+              <a href="/blog" style={navLinkStyle}>Insights</a>
+              <a href="/About.html" style={navLinkStyle}>Company</a>
+            </nav>
 
-              <div className="nav-item-wrap" style={{ position: 'relative' }}>
-                <button style={navBtnStyle}>Industries <Icon name="chevronDown" size={12} /></button>
-                <div className="nav-dropdown" style={{ left: '-50px', width: 600, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-                  {industriesMenu.map((item, idx) => (
-                    <a key={idx} href={item.href} style={{ display: 'flex', gap: 10, padding: '10px 12px', borderRadius: 10, textDecoration: 'none' }}>
-                      <div style={{ color: '#7c3aed' }}><Icon name={item.icon} size={16} /></div>
-                      <div><p style={{ fontSize: 13, fontWeight: 600, color: '#1E1B4B' }}>{item.title}</p><p style={{ fontSize: 11.5, color: 'rgba(30,27,75,0.55)' }}>{item.desc}</p></div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              <a href="/Products.html" style={{ ...navBtnStyle, color: '#7c3aed', fontWeight: 600 }}>Products & Platforms</a>
-              <a href="/Solutions.html" style={navBtnStyle}>Solutions</a>
-              <a href="/CaseStudies.html" style={navBtnStyle}>Customer Stories</a>
-              <a href="/blog" style={navBtnStyle}>Insights</a>
-              <a href="/About.html" style={navBtnStyle}>Company</a>
-            </div>
-
-            <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer"
-               style={{ background: '#1E1B4B', color: '#fff', padding: '8px 18px', borderRadius: 100, fontSize: 13, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-              Talk to an AI Expert <Icon name="arrowRight" size={13} />
+            <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '9px 20px', fontSize: 14 }}>
+              Talk to an AI Expert <Icon name="arrowRight" size={14} />
             </a>
-          </nav>
-        </div>
+          </div>
+        </header>
       );
     };
 
     const GlobalFooter = () => (
-      <footer style={{ borderTop: '1px solid #DDD8F0', background: '#F4F1FA', paddingTop: 64, paddingBottom: 44 }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20, borderBottom: '1px solid rgba(30,27,75,0.08)', paddingBottom: 32, marginBottom: 40 }}>
+      <footer style={{ background: 'var(--color-canvas)', borderTop: '1px solid var(--border-hairline)', paddingTop: 72, paddingBottom: 48, position: 'relative' }}>
+        <div className="halftone-pattern" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 180, opacity: 0.25, pointerEvents: 'none' }}></div>
+        <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20, marginBottom: 40, borderBottom: '1px solid var(--border-hairline)', paddingBottom: 32 }}>
             <div>
-              <span style={{ fontFamily: '"Space Grotesk",sans-serif', fontWeight: 800, fontSize: 20, color: '#1E1B4B' }}>SlashLLM Platforms</span>
-              <p style={{ fontSize: 13, color: 'rgba(30,27,75,0.6)', marginTop: 4 }}>Proprietary infrastructure engineered for high-throughput enterprise AI.</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 22, height: 22, objectFit: 'contain', display: 'block' }} />
+                <span style={{ fontWeight: 700, fontSize: 16 }}>slashllm</span>
+              </div>
+              <p style={{ fontSize: 13, color: 'var(--color-fog)' }}>Proprietary infrastructure engineered for high-throughput enterprise AI.</p>
             </div>
-            <div style={{ display: 'flex', gap: 16 }}>
-              <a href="/Services.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Services</a>
-              <a href="/Industries.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Industries</a>
-              <a href="/Solutions.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Solutions</a>
-              <a href="/CaseStudies.html" style={{ fontSize: 13, color: '#7c3aed', fontWeight: 600 }}>Case Studies</a>
+            <div style={{ display: 'flex', gap: 20 }}>
+              <a href="/Services.html" className="link-editorial" style={{ fontSize: 13 }}>Services</a>
+              <a href="/Industries.html" className="link-editorial" style={{ fontSize: 13 }}>Industries</a>
+              <a href="/Solutions.html" className="link-editorial" style={{ fontSize: 13 }}>Solutions</a>
+              <a href="/CaseStudies.html" className="link-editorial" style={{ fontSize: 13 }}>Case Studies</a>
             </div>
           </div>
-          <p style={{ color: 'rgba(30,27,75,0.45)', fontSize: 12.5, textAlign: 'center' }}>© 2026 SlashLLM Inc. All rights reserved.</p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14 }}>
+            <p style={{ color: 'var(--color-fog)', fontSize: 12.5 }}>© 2026 SlashLLM Inc. All rights reserved. Restraint as authority.</p>
+            <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)' }}>San Francisco · London · Singapore · Bengaluru</span>
+          </div>
         </div>
       </footer>
     );
@@ -318,66 +395,70 @@ const loanAgent = new SlashAgent({
 
       return (
         <React.Fragment>
+          <AnnouncementBar />
           <GlobalNav />
-          <main style={{ paddingTop: 100 }}>
-            <section style={{ padding: '80px 28px 60px', textAlign: 'center', background: 'linear-gradient(180deg, #F3F0FF 0%, #FAFAFA 100%)' }}>
+          <main>
+            
+            {/* Editorial Hero */}
+            <section style={{ padding: '72px 24px 48px', textAlign: 'center', background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)' }}>
               <div style={{ maxWidth: 840, margin: '0 auto' }}>
-                <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11.5, color: '#7c3aed', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 600 }}>
-                  Proprietary Technology Portfolio
+                <span className="font-mono" style={{ fontSize: 12, color: 'var(--color-obsidian-ink)', fontWeight: 600, display: 'block', marginBottom: 12 }}>
+                  Proprietary Tech Suite
                 </span>
-                <h1 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 'clamp(38px, 4vw, 62px)', fontWeight: 800, letterSpacing: '-0.04em', color: '#1E1B4B', margin: '16px 0 20px' }}>
-                  Enterprise AI Platforms Built for Scale
+                <h1 className="font-display" style={{ fontSize: 'clamp(42px, 4.5vw, 64px)', fontWeight: 700, color: 'var(--color-obsidian-ink)', marginBottom: 18, lineHeight: 1.06 }}>
+                  Enterprise AI Platforms <span className="gradient-text-purple">Built for Scale</span>
                 </h1>
-                <p style={{ fontSize: 17, color: 'rgba(30,27,75,0.65)', lineHeight: 1.65 }}>
+                <p style={{ fontSize: 17.5, color: 'var(--color-fog)', lineHeight: 1.65, maxWidth: 660, margin: '0 auto' }}>
                   The underlying software platforms and developer tools powering SlashLLM's enterprise transformations. Available standalone or bundled within our engineering engagements.
                 </p>
               </div>
             </section>
 
-            <section style={{ maxWidth: 1280, margin: '0 auto', padding: '40px 28px 120px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 64 }}>
+            {/* Products List */}
+            <section style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '56px 24px 96px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
                 {products.map((prod, idx) => (
-                  <div key={prod.id} id={prod.id} style={{ background: '#fff', border: '1px solid #DDD8F0', borderRadius: 24, padding: '48px 44px', boxShadow: '0 12px 32px rgba(124,58,237,0.05)' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '55% 45%', gap: 48, alignItems: 'center' }} className="grid-2col">
+                  <div key={prod.id} id={prod.id} className="card-editorial">
+                    <div style={{ display: 'grid', gridTemplateColumns: '52% 48%', gap: 48, alignItems: 'center' }} className="grid-2col">
                       <div>
-                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(124,58,237,0.08)', borderRadius: 100, padding: '5px 14px', marginBottom: 16 }}>
-                          <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: '#7c3aed', fontWeight: 600 }}>0{idx+1} · Platform Product</span>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-tags)', padding: '4px 14px', marginBottom: 16 }}>
+                          <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-obsidian-ink)', fontWeight: 600 }}>0{idx+1} · Platform Product</span>
                         </div>
-                        <h2 style={{ fontFamily: '"Space Grotesk",sans-serif', fontSize: 30, fontWeight: 800, color: '#1E1B4B', letterSpacing: '-0.03em', marginBottom: 12 }}>
+                        <h2 className="font-display" style={{ fontSize: 28, fontWeight: 600, color: 'var(--color-obsidian-ink)', marginBottom: 12, lineHeight: 1.15 }}>
                           {prod.name}
                         </h2>
-                        <p style={{ fontSize: 16, fontWeight: 600, color: '#7c3aed', marginBottom: 16 }}>
+                        <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--color-obsidian-ink)', marginBottom: 14 }}>
                           {prod.headline}
                         </p>
-                        <p style={{ fontSize: 14.5, color: 'rgba(30,27,75,0.7)', lineHeight: 1.65, marginBottom: 28 }}>
+                        <p style={{ fontSize: 15.5, color: 'var(--color-fog)', lineHeight: 1.65, marginBottom: 24 }}>
                           {prod.desc}
                         </p>
                         
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 32 }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 11, marginBottom: 28 }}>
                           {prod.features.map((feat, fIdx) => (
-                            <div key={fIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13.5, color: '#1E1B4B' }}>
-                              <span style={{ color: '#22c55e', flexShrink: 0, marginTop: 3 }}><Icon name="check" size={15} /></span>
+                            <div key={fIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontSize: 14.5, color: 'var(--color-obsidian-ink)', lineHeight: 1.45, fontWeight: 450 }}>
+                              <span style={{ color: 'var(--color-obsidian-ink)', flexShrink: 0, marginTop: 2 }}><Icon name="check" size={14} /></span>
                               <span>{feat}</span>
                             </div>
                           ))}
                         </div>
 
-                        <div style={{ display: 'flex', gap: 14 }}>
-                          <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer"
-                             style={{ background: '#1E1B4B', color: '#fff', padding: '10px 22px', borderRadius: 8, fontSize: 13.5, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                            Request Platform Demo <Icon name="arrowRight" size={13} />
+                        <div>
+                          <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary">
+                            Request Platform Demo <Icon name="arrowRight" size={14} />
                           </a>
                         </div>
                       </div>
 
-                      <div style={{ background: '#0e0c24', border: '1px solid #2c2860', borderRadius: 16, overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.4)' }}>
-                        <div style={{ background: '#1a1740', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid #2c2860' }}>
+                      {/* Code Window in Carbon #111117 */}
+                      <div style={{ background: 'var(--color-carbon)', border: '1px solid var(--border-dark-hairline)', borderRadius: 'var(--radius-cards)', overflow: 'hidden' }}>
+                        <div style={{ background: 'var(--color-graphite)', padding: '12px 18px', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid var(--border-dark-hairline)' }}>
                           <div style={{ display: 'flex', gap: 6 }}>
-                            {['#ff5f56', '#ffbd2e', '#27c93f'].map((c, i) => <div key={i} style={{ width: 9, height: 9, borderRadius: '50%', background: c }} />)}
+                            {['#44444a', '#55555e', '#666670'].map((c, i) => <div key={i} style={{ width: 9, height: 9, borderRadius: '50%', background: c }} />)}
                           </div>
-                          <span style={{ fontFamily: '"JetBrains Mono",monospace', fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>{prod.name.toLowerCase().replace(/\s+/g, '_')}.ts</span>
+                          <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)', fontWeight: 600 }}>{prod.name.toLowerCase().replace(/\s+/g, '_')}.ts</span>
                         </div>
-                        <pre style={{ padding: '20px 22px', fontFamily: '"JetBrains Mono",monospace', fontSize: 11.5, color: '#c4b5fd', lineHeight: 1.6, overflowX: 'auto' }}>
+                        <pre style={{ padding: '22px 24px', fontFamily: 'var(--font-mono)', fontSize: 13, color: '#e5e5e5', lineHeight: 1.6, overflowX: 'auto' }}>
                           <code>{prod.code}</code>
                         </pre>
                       </div>
