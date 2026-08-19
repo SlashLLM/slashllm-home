@@ -168,21 +168,39 @@
     .link-muted { color: var(--color-fog); text-decoration: none; transition: color 0.15s ease; }
     .link-muted:hover { color: var(--color-obsidian-ink); }
 
+    /* Dropdown Menu */
+    .nav-item-wrap {
+      position: relative;
+    }
     .nav-dropdown {
       position: absolute;
-      top: calc(100% + 8px);
+      top: 100%;
+      margin-top: 6px;
       background: #ffffff;
       border: 1px solid var(--border-hairline);
       border-radius: var(--radius-cards);
       box-shadow: 0 16px 36px rgba(1, 1, 16, 0.08);
       padding: 12px;
-      z-index: 100;
+      z-index: 1000;
       opacity: 0;
       pointer-events: none;
       transform: translateY(4px);
-      transition: all 0.15s ease;
+      transition: opacity 0.15s ease, transform 0.15s ease;
     }
-    .nav-item-wrap:hover .nav-dropdown {
+    /* Invisible hover bridge spanning between nav item and dropdown */
+    .nav-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      height: 20px;
+      display: block;
+    }
+    .nav-item-wrap:hover .nav-dropdown,
+    .nav-item-wrap:focus-within .nav-dropdown,
+    .nav-dropdown:hover,
+    .nav-dropdown.is-open {
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
@@ -250,11 +268,8 @@
         <header style={{ position: 'sticky', top: 0, background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)', height: 64, display: 'flex', alignItems: 'center', zIndex: 1000 }}>
           <div style={{ maxWidth: 'var(--page-max-width)', width: '100%', margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-              <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 26, height: 26, objectFit: 'contain', display: 'block' }} />
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-                <span style={{ fontWeight: 700, fontSize: 16, letterSpacing: '-0.02em', color: 'var(--color-obsidian-ink)' }}>slashllm</span>
-                <span style={{ fontSize: 13, color: 'var(--color-fog)', fontWeight: 400 }}>/ enterprise ai</span>
-              </div>
+              <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 28, height: 28, objectFit: 'contain', display: 'block' }} />
+              <span style={{ fontWeight: 700, fontSize: 20, letterSpacing: '-0.02em', color: 'var(--color-obsidian-ink)' }}>SlashLLM</span>
             </a>
 
             <nav className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
@@ -282,8 +297,8 @@
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20, marginBottom: 40, borderBottom: '1px solid var(--border-hairline)', paddingBottom: 32 }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-                <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 22, height: 22, objectFit: 'contain', display: 'block' }} />
-                <span style={{ fontWeight: 700, fontSize: 16 }}>slashllm</span>
+                <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 24, height: 24, objectFit: 'contain', display: 'block' }} />
+                <span style={{ fontWeight: 700, fontSize: 18 }}>SlashLLM</span>
               </div>
               <p style={{ fontSize: 13, color: 'var(--color-fog)' }}>Proprietary infrastructure engineered for high-throughput enterprise AI.</p>
             </div>
@@ -450,15 +465,15 @@ const loanAgent = new SlashAgent({
                         </div>
                       </div>
 
-                      {/* Code Window in Carbon #111117 */}
-                      <div style={{ background: 'var(--color-carbon)', border: '1px solid var(--border-dark-hairline)', borderRadius: 'var(--radius-cards)', overflow: 'hidden' }}>
-                        <div style={{ background: 'var(--color-graphite)', padding: '12px 18px', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid var(--border-dark-hairline)' }}>
+                      {/* Code Window in Purple Gradient */}
+                      <div style={{ background: 'linear-gradient(135deg, #0c0a21 0%, #1e134b 55%, #351c75 100%)', border: '1px solid rgba(99, 91, 255, 0.3)', borderRadius: 'var(--radius-cards)', overflow: 'hidden', boxShadow: '0 12px 36px rgba(30, 19, 75, 0.2)' }}>
+                        <div style={{ background: 'rgba(255, 255, 255, 0.06)', padding: '12px 18px', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
                           <div style={{ display: 'flex', gap: 6 }}>
-                            {['#44444a', '#55555e', '#666670'].map((c, i) => <div key={i} style={{ width: 9, height: 9, borderRadius: '50%', background: c }} />)}
+                            {['rgba(255,255,255,0.2)', 'rgba(255,255,255,0.3)', 'rgba(255,255,255,0.4)'].map((c, i) => <div key={i} style={{ width: 9, height: 9, borderRadius: '50%', background: c }} />)}
                           </div>
-                          <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)', fontWeight: 600 }}>{prod.name.toLowerCase().replace(/\s+/g, '_')}.ts</span>
+                          <span className="font-mono" style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.7)', fontWeight: 600 }}>{prod.name.toLowerCase().replace(/\s+/g, '_')}.ts</span>
                         </div>
-                        <pre style={{ padding: '22px 24px', fontFamily: 'var(--font-mono)', fontSize: 13, color: '#e5e5e5', lineHeight: 1.6, overflowX: 'auto' }}>
+                        <pre style={{ padding: '22px 24px', fontFamily: 'var(--font-mono)', fontSize: 13, color: '#f3f0ff', lineHeight: 1.6, overflowX: 'auto' }}>
                           <code>{prod.code}</code>
                         </pre>
                       </div>

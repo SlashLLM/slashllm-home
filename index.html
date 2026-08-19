@@ -95,8 +95,15 @@
       font-size: 16px;
       line-height: 1.55;
       letter-spacing: -0.015em;
+      text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+    }
+    button, input, select, textarea {
+      font-family: inherit;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }
     a { color: inherit; text-decoration: none; }
 
@@ -216,15 +223,17 @@
     }
 
     .card-dark {
-      background: var(--color-graphite);
-      border: 1px solid var(--border-dark-hairline);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: var(--radius-cards);
       padding: 28px;
       transition: all 0.2s ease;
+      backdrop-filter: blur(10px);
     }
     .card-dark:hover {
-      border-color: rgba(147, 51, 234, 0.4);
-      box-shadow: 0 12px 32px rgba(99, 91, 255, 0.08);
+      border-color: rgba(99, 91, 255, 0.5);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+      transform: translateY(-2px);
     }
 
     /* Links */
@@ -253,21 +262,36 @@
     }
 
     /* Dropdown Menu */
+    .nav-item-wrap {
+      position: relative;
+    }
     .nav-dropdown {
       position: absolute;
-      top: calc(100% + 8px);
+      top: 100%;
+      margin-top: 6px;
       background: #ffffff;
       border: 1px solid var(--border-hairline);
       border-radius: var(--radius-cards);
       box-shadow: 0 16px 36px rgba(1, 1, 16, 0.08);
       padding: 12px;
-      z-index: 100;
+      z-index: 1000;
       opacity: 0;
       pointer-events: none;
       transform: translateY(4px);
-      transition: all 0.15s ease;
+      transition: opacity 0.15s ease, transform 0.15s ease;
     }
-    .nav-item-wrap:hover .nav-dropdown {
+    /* Invisible hover bridge spanning between nav item and dropdown */
+    .nav-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 0;
+      right: 0;
+      height: 16px;
+      display: block;
+    }
+    .nav-item-wrap:hover .nav-dropdown,
+    .nav-dropdown:hover {
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
@@ -373,6 +397,26 @@
 
     /* Header Navigation (White, 64px, Hairline Border) */
     const GlobalNav = () => {
+      const [openDropdown, setOpenDropdown] = React.useState(null);
+      const timerRef = React.useRef(null);
+
+      const handleMouseEnter = (name) => {
+        if (timerRef.current) {
+          clearTimeout(timerRef.current);
+          timerRef.current = null;
+        }
+        setOpenDropdown(name);
+      };
+
+      const handleMouseLeave = () => {
+        if (timerRef.current) {
+          clearTimeout(timerRef.current);
+        }
+        timerRef.current = setTimeout(() => {
+          setOpenDropdown(null);
+        }, 180);
+      };
+
       const servicesMenu = [
         { title: 'AI & Generative AI', desc: 'Enterprise LLMs, SLMs, multimodal & RAG architectures', href: '/Services.html#ai-genai', icon: 'sparkles' },
         { title: 'AI Agents & Workflows', desc: 'Autonomous & human-in-the-loop multi-agent systems', href: '/Services.html#ai-agents', icon: 'agent' },
@@ -436,22 +480,22 @@
             
             {/* Logo Wordmark */}
             <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-              <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 26, height: 26, objectFit: 'contain', display: 'block' }} />
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-                <span style={{ fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: 16, letterSpacing: '-0.02em', color: 'var(--color-obsidian-ink)' }}>slashllm</span>
-                <span style={{ fontFamily: 'var(--font-sans)', fontSize: 13, color: 'var(--color-fog)', fontWeight: 400 }}>/ enterprise ai</span>
-              </div>
+              <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 28, height: 28, objectFit: 'contain', display: 'block' }} />
+              <span style={{ fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: 20, letterSpacing: '-0.02em', color: 'var(--color-obsidian-ink)' }}>SlashLLM</span>
             </a>
 
             {/* Nav Center Items */}
             <nav className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
               
               {/* What We Do */}
-              <div className="nav-item-wrap" style={{ position: 'relative' }}>
-                <button style={navLinkStyle}>
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('services')}
+                   onMouseLeave={handleMouseLeave}>
+                <button style={navLinkStyle} onClick={() => setOpenDropdown(openDropdown === 'services' ? null : 'services')}>
                   What We Do <Icon name="chevronDown" size={11} color="var(--color-fog)" />
                 </button>
-                <div className="nav-dropdown" style={{ left: 0, width: 560, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                <div className={`nav-dropdown ${openDropdown === 'services' ? 'is-open' : ''}`}
+                     style={{ left: 0, width: 560, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
                   <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Capabilities & Services</span>
                     <a href="/Services.html" className="link-editorial" style={{ fontSize: 12 }}>View All →</a>
@@ -473,11 +517,14 @@
               </div>
 
               {/* Industries */}
-              <div className="nav-item-wrap" style={{ position: 'relative' }}>
-                <button style={navLinkStyle}>
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('industries')}
+                   onMouseLeave={handleMouseLeave}>
+                <button style={navLinkStyle} onClick={() => setOpenDropdown(openDropdown === 'industries' ? null : 'industries')}>
                   Industries <Icon name="chevronDown" size={11} color="var(--color-fog)" />
                 </button>
-                <div className="nav-dropdown" style={{ left: '-40px', width: 560, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                <div className={`nav-dropdown ${openDropdown === 'industries' ? 'is-open' : ''}`}
+                     style={{ left: '-40px', width: 560, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
                   <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Industry Verticals</span>
                     <a href="/Industries.html" className="link-editorial" style={{ fontSize: 12 }}>All Sectors →</a>
@@ -499,11 +546,14 @@
               </div>
 
               {/* Products & Platforms */}
-              <div className="nav-item-wrap" style={{ position: 'relative' }}>
-                <button style={navLinkStyle}>
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('products')}
+                   onMouseLeave={handleMouseLeave}>
+                <button style={navLinkStyle} onClick={() => setOpenDropdown(openDropdown === 'products' ? null : 'products')}>
                   Products <Icon name="chevronDown" size={11} color="var(--color-fog)" />
                 </button>
-                <div className="nav-dropdown" style={{ left: '-40px', width: 520, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                <div className={`nav-dropdown ${openDropdown === 'products' ? 'is-open' : ''}`}
+                     style={{ left: '-40px', width: 520, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
                   <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Proprietary Platforms</span>
                     <a href="/Products.html" className="link-editorial" style={{ fontSize: 12 }}>Explore Suite →</a>
@@ -525,11 +575,14 @@
               </div>
 
               {/* Solutions */}
-              <div className="nav-item-wrap" style={{ position: 'relative' }}>
-                <button style={navLinkStyle}>
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('solutions')}
+                   onMouseLeave={handleMouseLeave}>
+                <button style={navLinkStyle} onClick={() => setOpenDropdown(openDropdown === 'solutions' ? null : 'solutions')}>
                   Solutions <Icon name="chevronDown" size={11} color="var(--color-fog)" />
                 </button>
-                <div className="nav-dropdown" style={{ left: '-40px', width: 520, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                <div className={`nav-dropdown ${openDropdown === 'solutions' ? 'is-open' : ''}`}
+                     style={{ left: '-40px', width: 520, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
                   <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Enterprise Solutions</span>
                     <a href="/Solutions.html" className="link-editorial" style={{ fontSize: 12 }}>All Solutions →</a>
@@ -645,8 +698,8 @@
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 32, marginBottom: 56, paddingBottom: 40, borderBottom: '1px solid var(--border-hairline)' }}>
               <div style={{ maxWidth: 440 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                  <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 24, height: 24, objectFit: 'contain', display: 'block' }} />
-                  <span style={{ fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: 18, color: 'var(--color-obsidian-ink)', letterSpacing: '-0.02em' }}>slashllm</span>
+                  <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 26, height: 26, objectFit: 'contain', display: 'block' }} />
+                  <span style={{ fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: 20, color: 'var(--color-obsidian-ink)', letterSpacing: '-0.02em' }}>SlashLLM</span>
                 </div>
                 <p style={{ color: 'var(--color-fog)', fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
                   Editorial enterprise AI engineering: designing, building, deploying, optimizing, and operating production-grade AI systems at scale.
@@ -1149,20 +1202,26 @@
                         style={{
                           display: 'inline-flex',
                           alignItems: 'center',
-                          gap: 6,
+                          gap: 6.5,
                           padding: '9px 20px',
                           borderRadius: 'var(--radius-buttons)',
+                          fontFamily: 'var(--font-sans)',
                           fontSize: 14,
                           fontWeight: 600,
+                          letterSpacing: '-0.02em',
+                          WebkitFontSmoothing: 'antialiased',
+                          MozOsxFontSmoothing: 'grayscale',
+                          textRendering: 'optimizeLegibility',
                           border: '1px solid',
-                          borderColor: activeTab === idx ? 'var(--color-obsidian-ink)' : 'var(--border-hairline)',
-                          background: activeTab === idx ? 'var(--color-obsidian-ink)' : 'transparent',
+                          borderColor: activeTab === idx ? 'rgba(99, 91, 255, 0.45)' : 'var(--border-hairline)',
+                          background: activeTab === idx ? 'linear-gradient(135deg, #0c0a21 0%, #1e134b 55%, #351c75 100%)' : '#ffffff',
                           color: activeTab === idx ? '#ffffff' : 'var(--color-obsidian-ink)',
+                          boxShadow: activeTab === idx ? '0 4px 14px rgba(30, 19, 75, 0.22)' : '0 1px 2px rgba(0, 0, 0, 0.02)',
                           cursor: 'pointer',
                           transition: 'all 0.15s ease'
                         }}>
                   <Icon name={ind.icon} size={15} color={activeTab === idx ? '#ffffff' : 'var(--color-obsidian-ink)'} />
-                  {ind.label}
+                  <span>{ind.label}</span>
                 </button>
               ))}
             </div>
@@ -1193,9 +1252,9 @@
                   </div>
                 </div>
 
-                {/* Right Impact Display (Editorial Dark Metric Card) */}
-                <div style={{ background: 'linear-gradient(135deg, #0c0a21 0%, #171038 100%)', border: '1px solid rgba(99, 91, 255, 0.25)', borderRadius: 'var(--radius-cards)', padding: '40px', color: '#ffffff', boxShadow: '0 12px 36px rgba(12, 10, 33, 0.2)' }}>
-                  <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)', marginBottom: 16, fontWeight: 600 }}>
+                {/* Right Impact Display (Purple Gradient Metric Card) */}
+                <div style={{ background: 'linear-gradient(135deg, #0c0a21 0%, #1e134b 55%, #351c75 100%)', border: '1px solid rgba(99, 91, 255, 0.35)', borderRadius: 'var(--radius-cards)', padding: '40px', color: '#ffffff', boxShadow: '0 12px 36px rgba(30, 19, 75, 0.25)' }}>
+                  <p className="font-mono" style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.7)', marginBottom: 16, fontWeight: 600 }}>
                     Production Impact Metric
                   </p>
                   <p className="font-display" style={{ fontSize: 'clamp(52px, 4.5vw, 72px)', color: '#ffffff', fontWeight: 700, lineHeight: 1, marginBottom: 10 }}>
@@ -1205,11 +1264,11 @@
                     {cur.statLabel}
                   </p>
 
-                  <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.12)', paddingTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.15)', paddingTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)' }}>Sector Deep Dive</span>
                     <a href={`/Industries.html#${cur.id}`} style={{
-                      background: 'transparent',
-                      border: '1px solid rgba(255, 255, 255, 0.5)',
+                      background: 'rgba(255, 255, 255, 0.08)',
+                      border: '1px solid rgba(255, 255, 255, 0.4)',
                       color: '#ffffff',
                       padding: '7px 16px',
                       borderRadius: 'var(--radius-buttons)',
@@ -1218,7 +1277,8 @@
                       textDecoration: 'none',
                       display: 'inline-flex',
                       alignItems: 'center',
-                      gap: 5
+                      gap: 5,
+                      transition: 'all 0.15s ease'
                     }}>
                       Case Studies <Icon name="arrowRight" size={12} />
                     </a>
@@ -1324,7 +1384,7 @@
       );
     };
 
-    /* Full-Bleed Dark Band (Carbon #111117 Base + Graphite #22222a Feature Cards) */
+    /* Full-Bleed Purple Gradient Band (Platforms Powering Enterprise AI) */
     const ProductsSuiteSection = () => {
       const products = [
         {
@@ -1362,13 +1422,13 @@
       ];
 
       return (
-        <section id="products-suite" style={{ padding: '100px 0', background: 'var(--color-carbon)', color: '#ffffff' }}>
+        <section id="products-suite" style={{ padding: '100px 0', background: 'linear-gradient(135deg, #0c0a21 0%, #1e134b 55%, #351c75 100%)', color: '#ffffff', borderTop: '1px solid rgba(99, 91, 255, 0.25)', borderBottom: '1px solid rgba(99, 91, 255, 0.25)' }}>
           <div className="reveal" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px' }}>
             
             {/* Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 56, flexWrap: 'wrap', gap: 20 }}>
               <div>
-                <p className="font-mono" style={{ fontSize: 12, color: 'var(--color-fog)', fontWeight: 600, marginBottom: 12 }}>
+                <p className="font-mono" style={{ fontSize: 12, color: 'rgba(255, 255, 255, 0.7)', fontWeight: 600, marginBottom: 12 }}>
                   Proprietary Tech Suite
                 </p>
                 <h2 className="font-display" style={{ fontSize: 'clamp(32px, 3.4vw, 46px)', color: '#ffffff', maxWidth: 660 }}>
@@ -1380,20 +1440,20 @@
               </a>
             </div>
 
-            {/* 4-Card Graphite Grid */}
+            {/* 4-Card Purple Glass Grid */}
             <div className="grid-4col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
               {products.map((prod, idx) => (
                 <div key={idx} className="card-dark" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
-                    <div style={{ width: 38, height: 38, borderRadius: 6, background: 'rgba(255, 255, 255, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', marginBottom: 18 }}>
+                    <div style={{ width: 38, height: 38, borderRadius: 6, background: 'rgba(255, 255, 255, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', marginBottom: 18, border: '1px solid rgba(255, 255, 255, 0.12)' }}>
                       <Icon name={prod.icon} size={19} />
                     </div>
-                    <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)', fontWeight: 600, display: 'block', marginBottom: 6 }}>{prod.tag}</span>
+                    <span className="font-mono" style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.7)', fontWeight: 600, display: 'block', marginBottom: 6 }}>{prod.tag}</span>
                     <h3 className="font-display" style={{ fontSize: 21, fontWeight: 600, color: '#ffffff', marginBottom: 12 }}>{prod.name}</h3>
-                    <p style={{ fontSize: 14, color: 'var(--color-fog)', lineHeight: 1.6, marginBottom: 22 }}>{prod.desc}</p>
+                    <p style={{ fontSize: 14, color: 'rgba(255, 255, 255, 0.75)', lineHeight: 1.6, marginBottom: 22 }}>{prod.desc}</p>
                   </div>
                   <div>
-                    <div style={{ borderTop: '1px solid var(--border-dark-hairline)', paddingTop: 14, marginBottom: 18 }}>
+                    <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.12)', paddingTop: 14, marginBottom: 18 }}>
                       <span className="font-mono" style={{ fontSize: 11.5, fontWeight: 600, color: '#ffffff' }}>✓ {prod.metrics}</span>
                     </div>
                     <a href={prod.href} style={{ color: '#ffffff', fontSize: 13.5, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 5 }}>

@@ -168,21 +168,39 @@
     .link-muted { color: var(--color-fog); text-decoration: none; transition: color 0.15s ease; }
     .link-muted:hover { color: var(--color-obsidian-ink); }
 
+    /* Dropdown Menu */
+    .nav-item-wrap {
+      position: relative;
+    }
     .nav-dropdown {
       position: absolute;
-      top: calc(100% + 8px);
+      top: 100%;
+      margin-top: 6px;
       background: #ffffff;
       border: 1px solid var(--border-hairline);
       border-radius: var(--radius-cards);
       box-shadow: 0 16px 36px rgba(1, 1, 16, 0.08);
       padding: 12px;
-      z-index: 100;
+      z-index: 1000;
       opacity: 0;
       pointer-events: none;
       transform: translateY(4px);
-      transition: all 0.15s ease;
+      transition: opacity 0.15s ease, transform 0.15s ease;
     }
-    .nav-item-wrap:hover .nav-dropdown {
+    /* Invisible hover bridge spanning between nav item and dropdown */
+    .nav-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      height: 20px;
+      display: block;
+    }
+    .nav-item-wrap:hover .nav-dropdown,
+    .nav-item-wrap:focus-within .nav-dropdown,
+    .nav-dropdown:hover,
+    .nav-dropdown.is-open {
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
@@ -194,15 +212,28 @@
     }
 
     .ind-tab {
-      background: transparent;
-      border: 1px solid var(--border-hairline);
-      color: var(--color-fog);
-      transition: all 0.15s ease;
+      background: #ffffff;
+      border: 1px solid rgba(1, 1, 16, 0.16);
+      color: #0c0a21;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      transition: all 0.18s ease;
+    }
+    .ind-tab .tab-num {
+      color: #555566;
+      font-weight: 700;
+      transition: color 0.18s ease;
     }
     .ind-tab.is-active, .ind-tab:hover {
       background: linear-gradient(135deg, #0c0a21 0%, #1e134b 55%, #351c75 100%);
       color: #ffffff;
-      border-color: rgba(99, 91, 255, 0.4);
+      border-color: rgba(99, 91, 255, 0.45);
+      box-shadow: 0 4px 14px rgba(12, 10, 33, 0.2);
+    }
+    .ind-tab.is-active .tab-num, .ind-tab:hover .tab-num {
+      color: #c7d2fe;
     }
 
     @media (max-width: 1024px) {
@@ -270,11 +301,8 @@
         <header style={{ position: 'sticky', top: 0, background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)', height: 64, display: 'flex', alignItems: 'center', zIndex: 1000 }}>
           <div style={{ maxWidth: 'var(--page-max-width)', width: '100%', margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-              <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 26, height: 26, objectFit: 'contain', display: 'block' }} />
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-                <span style={{ fontWeight: 700, fontSize: 16, letterSpacing: '-0.02em', color: 'var(--color-obsidian-ink)' }}>slashllm</span>
-                <span style={{ fontSize: 13, color: 'var(--color-fog)', fontWeight: 400 }}>/ enterprise ai</span>
-              </div>
+              <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 28, height: 28, objectFit: 'contain', display: 'block' }} />
+              <span style={{ fontWeight: 700, fontSize: 20, letterSpacing: '-0.02em', color: 'var(--color-obsidian-ink)' }}>SlashLLM</span>
             </a>
 
             <nav className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
@@ -302,8 +330,8 @@
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20, marginBottom: 40, borderBottom: '1px solid var(--border-hairline)', paddingBottom: 32 }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-                <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 22, height: 22, objectFit: 'contain', display: 'block' }} />
-                <span style={{ fontWeight: 700, fontSize: 16 }}>slashllm</span>
+                <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 24, height: 24, objectFit: 'contain', display: 'block' }} />
+                <span style={{ fontWeight: 700, fontSize: 18 }}>SlashLLM</span>
               </div>
               <p style={{ fontSize: 13, color: 'var(--color-fog)' }}>Domain-specific enterprise AI systems engineered for regulatory compliance and business outcomes.</p>
             </div>
@@ -464,9 +492,9 @@
                 {INDUSTRIES.map(ind => (
                   <button key={ind.id} onClick={() => { setActiveId(ind.id); jumpTo(ind.id); }}
                           className={`ind-tab ${activeId === ind.id ? 'is-active' : ''}`}
-                          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '8px 18px', borderRadius: 'var(--radius-buttons)', fontSize: 13.5, fontWeight: 600, cursor: 'pointer' }}>
-                    <span className="font-mono" style={{ fontSize: 11, fontWeight: 600 }}>{ind.num}</span>
-                    {ind.short}
+                          style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '9px 18px', borderRadius: 'var(--radius-buttons)', fontSize: 14, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                    <span className="font-mono tab-num" style={{ fontSize: 11.5, letterSpacing: '0.02em' }}>{ind.num}</span>
+                    <span style={{ fontWeight: 600, letterSpacing: '-0.01em' }}>{ind.short}</span>
                   </button>
                 ))}
               </div>
