@@ -1801,21 +1801,21 @@
     const CaseStudiesSection = () => {
       const stories = [
         {
-          client: 'Impress AI',
-          industry: 'HR Tech & Enterprise Talent',
-          headline: 'Real-time Computer Vision & 7-Dimension Video Interview Evaluation',
-          challenge: 'Recruiting teams needed to assess video interviews at scale without bias or manual scoring bottlenecks, while tracking candidate integrity and off-screen gaze reading.',
-          approach: 'SlashLLM architected a production AWS Bedrock (Claude) + MediaPipe computer vision inference engine with asynchronous S3 processing for unlimited concurrent interviews.',
-          outcome: 'Automated 7-dimension competency scoring across 2,800+ frames per candidate, 0ms human review latency, and 100% integrity validation.',
-          metric: '7-Dim',
-          metricLbl: 'AI Competency Scoring',
-          href: '/CaseStudies.html#impress-ai'
+          client: 'CareO Health',
+          industry: 'Healthcare & Life Sciences',
+          headline: '72% Nursing Documentation Time Deflection via HIPAA Ambient AI Notes',
+          challenge: 'Clinical staff spent 2.5+ hours per shift manually transcribing patient consultations into EHR systems.',
+          approach: 'Fine-tuned Whisper-v3 & vLLM pipeline running on air-gapped private VPC with automatic FHIR/HL7 schema mapping.',
+          outcome: 'Saved $3.2M annually across 14 hospital departments with 99.4% clinical entity accuracy.',
+          metric: '72%',
+          metricLbl: 'Time Saved',
+          href: '/CaseStudies.html#careo-health'
         },
         {
           client: 'Global Fintech Scaleup',
           industry: 'Financial Services',
           headline: '38% LLM Inference Cost Reduction via Intelligent Model Routing & Caching',
-          challenge: 'Enterprise spending $120k+/month across multiple commercial LLM endpoints with high latency variance and lack of per-team cost attribution.',
+          challenge: 'Enterprise spending $120k+/month across multiple commercial LLM endpoints with high latency variance.',
           approach: 'Implemented SlashLLM Gateway with semantic prompt caching, automated small-model classification fallback, and real-time observability telemetry.',
           outcome: '38% reduction in monthly AI inference spend and 4.2x latency improvement for high-volume customer queries.',
           metric: '38%',
@@ -1828,7 +1828,8 @@
         <section id="customer-stories" style={{ padding: '96px 0', background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)' }}>
           <div className="reveal" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px' }}>
             
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 56, flexWrap: 'wrap', gap: 20 }}>
+            {/* Main Section Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 48, flexWrap: 'wrap', gap: 20 }}>
               <div>
                 <p className="font-mono" style={{ fontSize: 12, color: 'var(--color-obsidian-ink)', fontWeight: 600, marginBottom: 12 }}>
                   Customer Stories & Proven Outcomes
@@ -1842,6 +1843,90 @@
               </a>
             </div>
 
+            {/* ═══ FEATURED CASE STUDY: IMPRESS AI ═══ */}
+            <div style={{
+              background: 'linear-gradient(180deg, #ffffff 0%, #faf8ff 100%)',
+              border: '1px solid rgba(99, 91, 255, 0.25)',
+              borderRadius: 'var(--radius-cards)',
+              padding: 'clamp(36px, 5vw, 64px)',
+              marginBottom: 48,
+              boxShadow: '0 20px 50px rgba(99, 91, 255, 0.08)',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
+              
+              {/* Client Tag */}
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#f5f3ff', border: '1px solid rgba(99, 91, 255, 0.2)', borderRadius: 'var(--radius-tags)', padding: '6px 16px', marginBottom: 24 }}>
+                <span className="font-mono" style={{ fontSize: 12, color: 'var(--color-iris-pulse)', fontWeight: 700, letterSpacing: '0.05em' }}>
+                  Impress AI · HR Tech & Enterprise Talent
+                </span>
+              </div>
+
+              {/* Quote Icon & Big Headline */}
+              <div style={{ marginBottom: 36, position: 'relative' }}>
+                <svg width="52" height="42" viewBox="0 0 48 38" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ opacity: 0.3, display: 'block', marginBottom: 18 }}>
+                  <path d="M0 24C0 10.7452 10.7452 0 24 0V8C15.1634 8 8 15.1634 8 24H18V38H0V24ZM30 24C30 10.7452 40.7452 0 54 0V8C45.1634 8 38 15.1634 38 24H48V38H30V24Z" fill="#635bff"/>
+                </svg>
+
+                <h3 className="font-display" style={{
+                  fontSize: 'clamp(32px, 3.8vw, 48px)',
+                  fontWeight: 700,
+                  color: 'var(--color-obsidian-ink)',
+                  lineHeight: 1.16,
+                  maxWidth: 1040,
+                  marginBottom: 22,
+                  letterSpacing: '-0.03em'
+                }}>
+                  We needed every candidate evaluated to the same standard. Not approximately the same. <span className="gradient-text-purple">Exactly the same.</span>
+                </h3>
+
+                <p style={{ fontSize: 19, color: 'var(--color-fog)', lineHeight: 1.65, maxWidth: 960, fontWeight: 450 }}>
+                  The client needed to evaluate interviews at scale without sacrificing fairness or rigor. We delivered a real-AWS, computer-vision-powered analysis engine that does exactly that: asynchronously, accurately, and cost-tracked from day one.
+                </p>
+              </div>
+
+              {/* 2-Column Challenge & What We Built Grid */}
+              <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 36, borderTop: '1px solid rgba(99, 91, 255, 0.18)', paddingTop: 36, marginBottom: 36 }}>
+                <div style={{ background: '#ffffff', border: '1px solid rgba(99, 91, 255, 0.15)', borderRadius: '12px', padding: '28px 32px', boxShadow: '0 4px 16px rgba(0,0,0,0.02)' }}>
+                  <p className="font-mono" style={{ fontSize: 13, color: '#8b5cf6', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 10 }}>
+                    THE CHALLENGE
+                  </p>
+                  <p style={{ fontSize: 17, color: '#334155', lineHeight: 1.68, fontWeight: 450 }}>
+                    Recruiting teams needed to assess video interviews at scale, consistently across multiple competency dimensions, without the time cost or bias of manual review. Existing tools could not detect if a candidate was reading from off-screen notes; integrity scoring was effectively broken.
+                  </p>
+                </div>
+
+                <div style={{ background: '#ffffff', border: '1px solid rgba(99, 91, 255, 0.15)', borderRadius: '12px', padding: '28px 32px', boxShadow: '0 4px 16px rgba(0,0,0,0.02)' }}>
+                  <p className="font-mono" style={{ fontSize: 13, color: '#8b5cf6', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 10 }}>
+                    WHAT WE BUILT
+                  </p>
+                  <p style={{ fontSize: 17, color: '#334155', lineHeight: 1.68, fontWeight: 450 }}>
+                    A production REST API combining AWS Bedrock (Claude Opus 4.6) for 7-dimensional NLP scoring, AWS Transcribe for real speech-to-text, and MediaPipe computer vision for frame-by-frame iris gaze tracking. Async S3 architecture enables unlimited concurrent interviews with full fault tolerance.
+                  </p>
+                </div>
+              </div>
+
+              {/* 3 Large Metric Cards */}
+              <div className="grid-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }}>
+                <div style={{ background: '#f5f3ff', border: '1px solid rgba(139, 92, 246, 0.3)', borderRadius: '12px', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  <span className="font-display" style={{ fontSize: 22, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>7 dims</span>
+                  <span style={{ fontSize: 15, color: '#475569', lineHeight: 1.4, fontWeight: 500 }}>AI competency scoring per interview</span>
+                </div>
+
+                <div style={{ background: '#f5f3ff', border: '1px solid rgba(139, 92, 246, 0.3)', borderRadius: '12px', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  <span className="font-display" style={{ fontSize: 22, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>Real AWS</span>
+                  <span style={{ fontSize: 15, color: '#475569', lineHeight: 1.4, fontWeight: 500 }}>Bedrock + Transcribe, zero mock data</span>
+                </div>
+
+                <div style={{ background: '#f5f3ff', border: '1px solid rgba(139, 92, 246, 0.3)', borderRadius: '12px', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  <span className="font-display" style={{ fontSize: 22, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>Async</span>
+                  <span style={{ fontSize: 15, color: '#475569', lineHeight: 1.4, fontWeight: 500 }}>unlimited concurrent interviews via S3</span>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Additional Secondary Case Study Cards */}
             <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
               {stories.map((s, idx) => (
                 <div key={idx} className="card-editorial" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -1853,7 +1938,7 @@
                       <span className="font-display" style={{ fontSize: 28, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>{s.metric}</span>
                     </div>
 
-                    <h3 className="font-display" style={{ fontSize: 24, fontWeight: 600, color: 'var(--color-obsidian-ink)', lineHeight: 1.25, marginBottom: 20 }}>
+                    <h3 className="font-display" style={{ fontSize: 22, fontWeight: 600, color: 'var(--color-obsidian-ink)', lineHeight: 1.25, marginBottom: 20 }}>
                       {s.headline}
                     </h3>
 

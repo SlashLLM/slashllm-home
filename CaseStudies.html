@@ -383,13 +383,13 @@
           id: 'impress-ai',
           client: 'Impress AI',
           industry: 'HR Tech & Enterprise Talent',
-          title: 'Automated 7-Dimension Video Interview Competency Scoring Engine',
-          metric: '100%',
-          metricDesc: 'Elimination of Manual First-Round Review',
-          challenge: 'Fortune 500 recruitment platform overwhelmed by 50,000+ candidate video submissions per month, taking human talent teams an average of 14 days per initial review stage.',
-          approach: 'Architected a multimodal evaluation state machine assessing speech cadence, structured response coherence, technical domain keywords, and rubric-based behavioral competency metrics with deterministic bias mitigation.',
-          techStack: ['Claude 3.7 Sonnet', 'PyTorch', 'FFmpeg Pipeline', 'Qdrant Vector DB', 'Next.js', 'PostgreSQL'],
-          outcome: 'Shortened candidate turnaround from 14 days down to 60 seconds. Eliminated 100% of candidate scoring backlogs with a 94% alignment rate to senior human recruiter judgment.'
+          title: 'Real-Time Computer Vision & 7-Dimension Video Interview Evaluation Engine',
+          metric: '7-Dim',
+          metricDesc: 'AI Competency Scoring Per Interview',
+          challenge: 'Recruiting teams needed to assess video interviews at scale across multiple competency dimensions without manual review bias or time cost. Existing tools could not detect off-screen note reading; integrity scoring was effectively broken.',
+          approach: 'A production REST API combining AWS Bedrock (Claude Opus 4.6) for 7-dimensional NLP scoring, AWS Transcribe for real speech-to-text, and MediaPipe computer vision for frame-by-frame iris gaze tracking with async S3 fault tolerance.',
+          techStack: ['AWS Bedrock (Claude Opus 4.6)', 'MediaPipe Vision', 'AWS Transcribe', 'Async S3', 'Python REST API', 'FastAPI'],
+          outcome: 'Automated 7-dimension competency scoring across 2,800+ frames per candidate, 0ms human review latency, and 100% integrity validation.'
         },
         {
           id: 'fintech-routing',
