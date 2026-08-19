@@ -94,15 +94,35 @@
     }
 
     .gradient-text-purple {
-      background: linear-gradient(135deg, #010110 10%, #635bff 60%, #9333ea 100%);
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       display: inline;
     }
+    .nav-link-active {
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      font-weight: 700 !important;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-link-active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 8px;
+      right: 8px;
+      height: 2.5px;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+    }
 
     .btn-primary {
-      background: linear-gradient(135deg, #0c0a21 0%, #1e134b 55%, #351c75 100%);
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
       color: #ffffff !important;
       font-family: var(--font-sans);
       font-weight: 600;
@@ -110,8 +130,8 @@
       letter-spacing: -0.02em;
       padding: 12px 24px;
       border-radius: var(--radius-buttons);
-      border: 1px solid rgba(99, 91, 255, 0.25);
-      box-shadow: 0 4px 14px rgba(30, 19, 75, 0.15);
+      border: 1px solid transparent;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -121,9 +141,9 @@
     }
 
     .btn-primary:hover {
-      background: linear-gradient(135deg, #635bff 0%, #7c3aed 100%);
-      border-color: rgba(99, 91, 255, 0.5);
-      box-shadow: 0 6px 20px rgba(99, 91, 255, 0.3);
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      filter: brightness(1.08);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
       transform: translateY(-1px);
     }
 
@@ -177,12 +197,48 @@
       border: 1px solid var(--border-hairline);
       border-radius: var(--radius-cards);
       padding: 36px;
-      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
     }
-
+    .card-editorial::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      opacity: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
     .card-editorial:hover {
-      border-color: rgba(99, 91, 255, 0.35);
-      box-shadow: 0 12px 32px rgba(99, 91, 255, 0.05);
+      transform: translateY(-6px);
+      border-color: rgba(99, 91, 255, 0.4);
+      box-shadow: 0 20px 40px -12px rgba(99, 91, 255, 0.18), 0 0 24px -4px rgba(168, 85, 247, 0.12);
+    }
+    .card-editorial:hover::before {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+    .card-editorial .card-icon-wrap {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-editorial:hover .card-icon-wrap {
+      transform: scale(1.08);
+      background: linear-gradient(135deg, rgba(0, 192, 248, 0.15), rgba(99, 102, 241, 0.15), rgba(251, 104, 195, 0.15)) !important;
+      color: var(--color-iris-pulse) !important;
+      box-shadow: 0 4px 14px rgba(99, 91, 255, 0.15);
+    }
+    .card-editorial .link-editorial svg,
+    .card-editorial a svg {
+      transition: transform 0.25s ease;
+    }
+    .card-editorial:hover .link-editorial svg,
+    .card-editorial:hover a svg {
+      transform: translateX(4px);
     }
 
     .link-editorial {
@@ -271,13 +327,31 @@
     }
     .ind-tab.is-active,
     .ind-tab:hover {
-      background: linear-gradient(135deg, #0c0a21 0%, #1e134b 55%, #351c75 100%);
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
       color: #ffffff;
-      border-color: rgba(99, 91, 255, 0.45);
-      box-shadow: 0 4px 14px rgba(12, 10, 33, 0.2);
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
     }
     .ind-tab.is-active .tab-num, .ind-tab:hover .tab-num {
-      color: #c7d2fe;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .subnav-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(99, 91, 255, 0.3) transparent;
+    }
+    .subnav-scroll::-webkit-scrollbar {
+      height: 4px;
+    }
+    .subnav-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .subnav-scroll::-webkit-scrollbar-thumb {
+      background: rgba(99, 91, 255, 0.25);
+      border-radius: 9999px;
+    }
+    .subnav-scroll::-webkit-scrollbar-thumb:hover {
+      background: rgba(99, 91, 255, 0.5);
     }
 
     @media (max-width: 1024px) {
@@ -358,14 +432,13 @@
       return (
         <header style={{ position: 'sticky', top: 0, background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)', height: 64, display: 'flex', alignItems: 'center', zIndex: 1000 }}>
           <div style={{ maxWidth: 'var(--page-max-width)', width: '100%', margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-              <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 28, height: 28, objectFit: 'contain', display: 'block' }} />
-              <span style={{ fontWeight: 700, fontSize: 20, letterSpacing: '-0.02em', color: 'var(--color-obsidian-ink)' }}>SlashLLM</span>
+            <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+              <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style={{ height: 28, width: 'auto', objectFit: 'contain', display: 'block' }} />
             </a>
 
-            <nav className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                        <nav className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
               <a href="/Services.html" style={navLinkStyle}>What We Do</a>
-              <a href="/Industries.html" style={{ ...navLinkStyle, fontWeight: 600 }}>Industries</a>
+              <a href="/Industries.html" className="nav-link-active" style={navLinkStyle}>Industries</a>
               <a href="/Products.html" style={navLinkStyle}>Products</a>
               <a href="/Solutions.html" style={navLinkStyle}>Solutions</a>
               <a href="/CaseStudies.html" style={navLinkStyle}>Stories</a>
@@ -387,9 +460,8 @@
         <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20, marginBottom: 40, borderBottom: '1px solid var(--border-hairline)', paddingBottom: 32 }}>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-                <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 24, height: 24, objectFit: 'contain', display: 'block' }} />
-                <span style={{ fontWeight: 700, fontSize: 18 }}>SlashLLM</span>
+              <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
+                <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style={{ height: 24, width: 'auto', objectFit: 'contain', display: 'block' }} />
               </div>
               <p style={{ fontSize: 13, color: 'var(--color-fog)' }}>Domain-specific enterprise AI systems engineered for regulatory compliance and business outcomes.</p>
             </div>
@@ -546,7 +618,7 @@
 
             {/* Subnav Ribbon */}
             <div style={{ position: 'sticky', top: 64, zIndex: 900, background: 'rgba(255, 255, 255, 0.96)', backdropFilter: 'blur(16px)', borderBottom: '1px solid var(--border-hairline)' }}>
-              <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '12px 24px', display: 'flex', gap: 8, overflowX: 'auto' }}>
+              <div className="subnav-scroll" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '12px 24px', display: 'flex', gap: 8, overflowX: 'auto' }}>
                 {INDUSTRIES.map(ind => (
                   <button key={ind.id} onClick={() => { setActiveId(ind.id); jumpTo(ind.id); }}
                     className={`ind-tab ${activeId === ind.id ? 'is-active' : ''}`}

@@ -126,11 +126,31 @@
 
     /* Gradient Text Accents */
     .gradient-text-purple {
-      background: linear-gradient(135deg, #010110 10%, #635bff 60%, #9333ea 100%);
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       display: inline;
+    }
+    .nav-link-active {
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      font-weight: 700 !important;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-link-active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 8px;
+      right: 8px;
+      height: 2.5px;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
     }
     .gradient-text-light {
       background: linear-gradient(135deg, #ffffff 30%, #c4b5fd 75%, #a855f7 100%);
@@ -142,7 +162,7 @@
 
     /* Buttons */
     .btn-primary {
-      background: linear-gradient(135deg, #0c0a21 0%, #1e134b 55%, #351c75 100%);
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
       color: #ffffff !important;
       font-family: var(--font-sans);
       font-weight: 600;
@@ -150,8 +170,8 @@
       letter-spacing: -0.02em;
       padding: 12px 24px;
       border-radius: var(--radius-buttons);
-      border: 1px solid rgba(99, 91, 255, 0.25);
-      box-shadow: 0 4px 14px rgba(30, 19, 75, 0.15);
+      border: 1px solid transparent;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -160,9 +180,9 @@
       transition: all 0.2s ease;
     }
     .btn-primary:hover {
-      background: linear-gradient(135deg, #635bff 0%, #7c3aed 100%);
-      border-color: rgba(99, 91, 255, 0.5);
-      box-shadow: 0 6px 20px rgba(99, 91, 255, 0.3);
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      filter: brightness(1.08);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
       transform: translateY(-1px);
     }
 
@@ -215,11 +235,48 @@
       border: 1px solid var(--border-hairline);
       border-radius: var(--radius-cards);
       padding: 28px;
-      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+    .card-editorial::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      opacity: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .card-editorial:hover {
-      border-color: rgba(99, 91, 255, 0.35);
-      box-shadow: 0 12px 32px rgba(99, 91, 255, 0.05);
+      transform: translateY(-6px);
+      border-color: rgba(99, 91, 255, 0.4);
+      box-shadow: 0 20px 40px -12px rgba(99, 91, 255, 0.18), 0 0 24px -4px rgba(168, 85, 247, 0.12);
+    }
+    .card-editorial:hover::before {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+    .card-editorial .card-icon-wrap {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-editorial:hover .card-icon-wrap {
+      transform: scale(1.08);
+      background: linear-gradient(135deg, rgba(0, 192, 248, 0.15), rgba(99, 102, 241, 0.15), rgba(251, 104, 195, 0.15)) !important;
+      color: var(--color-iris-pulse) !important;
+      box-shadow: 0 4px 14px rgba(99, 91, 255, 0.15);
+    }
+    .card-editorial .link-editorial svg,
+    .card-editorial a svg {
+      transition: transform 0.25s ease;
+    }
+    .card-editorial:hover .link-editorial svg,
+    .card-editorial:hover a svg {
+      transform: translateX(4px);
     }
 
     .card-dark {
@@ -234,6 +291,247 @@
       border-color: rgba(99, 91, 255, 0.5);
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
       transform: translateY(-2px);
+    }
+
+    /* Logo Gradient Section & Card Styles */
+    .section-platforms-gradient {
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      color: #ffffff;
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .section-platforms-gradient::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .section-platforms-gradient::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      right: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0, 192, 248, 0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .btn-platforms-header {
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: #ffffff !important;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 9px 20px;
+      border-radius: var(--radius-buttons);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-platforms-header:hover {
+      background: #ffffff;
+      color: #6366f1 !important;
+      border-color: #ffffff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
+    .btn-platforms-header svg {
+      transition: transform 0.25s ease;
+    }
+    .btn-platforms-header:hover svg {
+      transform: translateX(4px);
+    }
+
+    .card-platform {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: var(--radius-cards);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    .card-platform::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3.5px;
+      background: #ffffff;
+      opacity: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 14px rgba(255, 255, 255, 0.9);
+    }
+    .card-platform:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.24);
+      border-color: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.3), 0 0 24px rgba(255, 255, 255, 0.25);
+    }
+    .card-platform:hover::before {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+    .card-platform .card-icon-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(8px);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-platform:hover .card-icon-wrap {
+      transform: scale(1.12) translateY(-2px);
+      background: #ffffff;
+      color: #6366f1;
+      border-color: #ffffff;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    }
+    .card-platform-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.92);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 6px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .card-platform-title {
+      font-family: var(--font-display);
+      font-size: 21px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+    .card-platform-desc {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.6;
+      margin-bottom: 22px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .card-platform-metrics {
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      padding-top: 14px;
+      margin-bottom: 18px;
+    }
+    .card-platform-metrics span {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.03em;
+    }
+    .card-platform-link {
+      color: #ffffff;
+      font-size: 13.5px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .card-platform-link svg {
+      transition: transform 0.25s ease;
+    }
+    .card-platform:hover .card-platform-link svg,
+    .card-platform-link:hover svg {
+      transform: translateX(5px);
+    }
+
+    /* Industry Matrix Metric Card */
+    .card-metric-gradient {
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: var(--radius-cards);
+      padding: 40px;
+      color: #ffffff;
+      box-shadow: 0 16px 40px rgba(99, 102, 241, 0.28), 0 4px 16px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+    .card-metric-gradient::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, transparent 60%);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    .card-metric-gradient:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 50px rgba(99, 102, 241, 0.4), 0 8px 24px rgba(251, 104, 195, 0.3);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+    .card-metric-gradient:hover::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .card-metric-gradient .btn-metric-pill {
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: #ffffff !important;
+      padding: 8px 18px;
+      border-radius: var(--radius-buttons);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-metric-gradient .btn-metric-pill:hover {
+      background: #ffffff;
+      color: #6366f1 !important;
+      border-color: #ffffff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+      transform: translateY(-1px);
+    }
+    .card-metric-gradient .btn-metric-pill svg {
+      transition: transform 0.25s ease;
+    }
+    .card-metric-gradient .btn-metric-pill:hover svg {
+      transform: translateX(4px);
     }
 
     /* Links */
@@ -317,6 +615,11 @@
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .logo-marquee { display: flex; animation: marquee 30s linear infinite; }
     .logo-marquee:hover { animation-play-state: paused; }
+
+    @keyframes typewriterBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
 
     @media (max-width: 1024px) {
       .hide-mobile { display: none !important; }
@@ -417,37 +720,163 @@
         }, 180);
       };
 
+      const getCoverDiameter = (width, height, x, y) => {
+        return Math.ceil(
+          2 * Math.max(
+            Math.hypot(x, y),
+            Math.hypot(width - x, y),
+            Math.hypot(x, height - y),
+            Math.hypot(width - x, height - y)
+          )
+        );
+      };
+
+      const NavSubItem = ({ item }) => {
+        const itemRef = React.useRef(null);
+        const [hovered, setHovered] = React.useState(false);
+        const [origin, setOrigin] = React.useState({ x: 0, y: 0 });
+        const [coverSize, setCoverSize] = React.useState(0);
+
+        const updateOriginFromPointer = (e) => {
+          const node = itemRef.current;
+          if (!node) return;
+          const rect = node.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          setOrigin({ x, y });
+          setCoverSize(getCoverDiameter(rect.width, rect.height, x, y));
+        };
+
+        const handlePointerEnter = (e) => {
+          updateOriginFromPointer(e);
+          setHovered(true);
+        };
+
+        const handlePointerLeave = () => {
+          setHovered(false);
+        };
+
+        return (
+          <a
+            ref={itemRef}
+            href={item.href}
+            onPointerEnter={handlePointerEnter}
+            onPointerLeave={handlePointerLeave}
+            style={{
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: 10,
+              padding: '9px 11px',
+              borderRadius: 'var(--radius-cards)',
+              textDecoration: 'none',
+              overflow: 'hidden',
+              transition: 'box-shadow 0.25s ease'
+            }}
+            className="nav-sub-item"
+          >
+            {/* Expanding Radial Logo-Gradient Circle */}
+            <span
+              style={{
+                position: 'absolute',
+                left: origin.x,
+                top: origin.y,
+                width: coverSize || 10,
+                height: coverSize || 10,
+                borderRadius: '50%',
+                transform: `translate(-50%, -50%) scale(${hovered && coverSize > 0 ? 1 : 0})`,
+                transformOrigin: 'center',
+                background: 'linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%)',
+                transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
+                pointerEvents: 'none',
+                zIndex: 0,
+                opacity: hovered ? 1 : 0
+              }}
+            />
+
+            {/* Icon Badge */}
+            <div
+              style={{
+                position: 'relative',
+                zIndex: 1,
+                width: 30,
+                height: 30,
+                borderRadius: 6,
+                background: hovered ? 'rgba(255, 255, 255, 0.25)' : (item.bg || '#f0f0f2'),
+                border: `1px solid ${hovered ? 'rgba(255, 255, 255, 0.45)' : (item.border || 'transparent')}`,
+                color: hovered ? '#ffffff' : (item.color || 'var(--color-obsidian-ink)'),
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+                boxShadow: hovered ? '0 2px 8px rgba(0,0,0,0.15)' : 'none',
+                transform: hovered ? 'scale(1.08)' : 'scale(1)',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+              }}
+            >
+              <Icon name={item.icon} size={15} color={hovered ? '#ffffff' : (item.color || 'var(--color-obsidian-ink)')} />
+            </div>
+
+            {/* Text Content */}
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <p
+                style={{
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: hovered ? '#ffffff' : 'var(--color-obsidian-ink)',
+                  marginBottom: 2,
+                  transition: 'color 0.2s ease',
+                  lineHeight: 1.25
+                }}
+              >
+                {item.title}
+              </p>
+              <p
+                style={{
+                  fontSize: 11.5,
+                  color: hovered ? 'rgba(255, 255, 255, 0.92)' : 'var(--color-fog)',
+                  lineHeight: 1.3,
+                  transition: 'color 0.2s ease'
+                }}
+              >
+                {item.desc}
+              </p>
+            </div>
+          </a>
+        );
+      };
+
       const servicesMenu = [
-        { title: 'AI & Generative AI', desc: 'Enterprise LLMs, SLMs, multimodal & RAG architectures', href: '/Services.html#ai-genai', icon: 'sparkles' },
-        { title: 'AI Agents & Workflows', desc: 'Autonomous & human-in-the-loop multi-agent systems', href: '/Services.html#ai-agents', icon: 'agent' },
-        { title: 'AI Engineering', desc: 'From prototype to scale: architecture, evals & production code', href: '/Services.html#ai-engineering', icon: 'engineering' },
-        { title: 'AI Infrastructure & DevOps', desc: 'GPU orchestration, high-throughput model serving & clusters', href: '/Services.html#ai-infrastructure', icon: 'infra' },
-        { title: 'AI Observability & Ops', desc: 'Tracing, latency, token costs, drift & guardrail telemetry', href: '/Services.html#ai-observability', icon: 'observability' },
-        { title: 'Data & Analytics for AI', desc: 'Vector pipelines, ETL, real-time embeddings & feature stores', href: '/Services.html#data-analytics', icon: 'data' }
+        { title: 'AI & Generative AI', desc: 'Enterprise LLMs, SLMs, multimodal & RAG architectures', href: '/Services.html#ai-genai', icon: 'sparkles', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'AI Agents & Workflows', desc: 'Autonomous & human-in-the-loop multi-agent systems', href: '/Services.html#ai-agents', icon: 'agent', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' },
+        { title: 'AI Engineering', desc: 'From prototype to scale: architecture, evals & production code', href: '/Services.html#ai-engineering', icon: 'engineering', color: '#a855f7', bg: 'rgba(168, 85, 247, 0.12)', border: 'rgba(168, 85, 247, 0.25)' },
+        { title: 'AI Infrastructure & DevOps', desc: 'GPU orchestration, high-throughput model serving & clusters', href: '/Services.html#ai-infrastructure', icon: 'infra', color: '#fb68c3', bg: 'rgba(251, 104, 195, 0.12)', border: 'rgba(251, 104, 195, 0.25)' },
+        { title: 'AI Observability & Ops', desc: 'Tracing, latency, token costs, drift & guardrail telemetry', href: '/Services.html#ai-observability', icon: 'observability', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' },
+        { title: 'Data & Analytics for AI', desc: 'Vector pipelines, ETL, real-time embeddings & feature stores', href: '/Services.html#data-analytics', icon: 'data', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.25)' }
       ];
 
       const industriesMenu = [
-        { title: 'Financial Services', desc: 'Fraud detection, regulatory intelligence, AI customer ops', href: '/Industries.html#financial-services', icon: 'finance' },
-        { title: 'Healthcare & Life Sciences', desc: 'Clinical document processing, HIPAA patient assistants', href: '/Industries.html#healthcare', icon: 'health' },
-        { title: 'SaaS & Technology', desc: 'Embedded AI copilots, multi-tenant agent infra, cost routing', href: '/Industries.html#saas', icon: 'saas' },
-        { title: 'Retail & E-Commerce', desc: 'Conversational commerce, recommendation engines, support', href: '/Industries.html#retail', icon: 'retail' },
-        { title: 'Manufacturing & Logistics', desc: 'Supply chain intelligence, predictive diagnosis agents', href: '/Industries.html#manufacturing', icon: 'mfg' },
-        { title: 'Professional Services', desc: 'Contract intelligence, research agents, knowledge search', href: '/Industries.html#professional-services', icon: 'prof' }
+        { title: 'Financial Services', desc: 'Fraud detection, regulatory intelligence, AI customer ops', href: '/Industries.html#financial-services', icon: 'finance', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' },
+        { title: 'Healthcare & Life Sciences', desc: 'Clinical document processing, HIPAA patient assistants', href: '/Industries.html#healthcare', icon: 'health', color: '#fb68c3', bg: 'rgba(251, 104, 195, 0.12)', border: 'rgba(251, 104, 195, 0.25)' },
+        { title: 'SaaS & Technology', desc: 'Embedded AI copilots, multi-tenant agent infra, cost routing', href: '/Industries.html#saas', icon: 'saas', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'Retail & E-Commerce', desc: 'Conversational commerce, recommendation engines, support', href: '/Industries.html#retail', icon: 'retail', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.25)' },
+        { title: 'Manufacturing & Logistics', desc: 'Supply chain intelligence, predictive diagnosis agents', href: '/Industries.html#manufacturing', icon: 'mfg', color: '#a855f7', bg: 'rgba(168, 85, 247, 0.12)', border: 'rgba(168, 85, 247, 0.25)' },
+        { title: 'Professional Services', desc: 'Contract intelligence, research agents, knowledge search', href: '/Industries.html#professional-services', icon: 'prof', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' }
       ];
 
       const productsMenu = [
-        { title: 'SlashLLM Gateway', desc: 'Unified API, model routing, semantic caching & failover', href: '/Products.html#gateway', icon: 'gateway' },
-        { title: 'SlashLLM Observability', desc: 'Real-time token tracing, cost attribution & latency monitoring', href: '/Products.html#observability', icon: 'observability' },
-        { title: 'SlashLLM AI Platform', desc: 'Developer toolkit for prompt ops, model evaluation & CI/CD', href: '/Products.html#ai-platform', icon: 'sparkles' },
-        { title: 'SlashLLM Agent Platform', desc: 'Orchestration, state management & tool sandboxing for agents', href: '/Products.html#agent-platform', icon: 'agent' }
+        { title: 'SlashLLM Gateway', desc: 'Unified API, model routing, semantic caching & failover', href: '/Products.html#gateway', icon: 'gateway', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'SlashLLM Observability', desc: 'Real-time token tracing, cost attribution & latency monitoring', href: '/Products.html#observability', icon: 'observability', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' },
+        { title: 'SlashLLM AI Platform', desc: 'Developer toolkit for prompt ops, model evaluation & CI/CD', href: '/Products.html#ai-platform', icon: 'sparkles', color: '#a855f7', bg: 'rgba(168, 85, 247, 0.12)', border: 'rgba(168, 85, 247, 0.25)' },
+        { title: 'SlashLLM Agent Platform', desc: 'Orchestration, state management & tool sandboxing for agents', href: '/Products.html#agent-platform', icon: 'agent', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' }
       ];
 
       const solutionsMenu = [
-        { title: 'Enterprise AI Transformation', desc: 'Full-stack AI adoption strategy and legacy modernization', href: '/Solutions.html#transformation', icon: 'sparkles' },
-        { title: 'AI Cost & Latency Optimization', desc: 'Reduce inference spend by 30–60% without quality degradation', href: '/Solutions.html#cost-optimization', icon: 'cost' },
-        { title: 'LLM Governance & Guardrails', desc: 'Safety policies, PII redaction, red-teaming & compliance', href: '/Solutions.html#governance', icon: 'shield' },
-        { title: 'Private & Hybrid AI Infra', desc: 'On-premise & air-gapped VPC deployments with open weights', href: '/Solutions.html#private-ai', icon: 'infra' },
-        { title: 'Intelligent Document AI', desc: 'Automated extraction, structuring & synthesis of enterprise data', href: '/Solutions.html#document-ai', icon: 'data' }
+        { title: 'Enterprise AI Transformation', desc: 'Full-stack AI adoption strategy and legacy modernization', href: '/Solutions.html#transformation', icon: 'sparkles', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'AI Cost & Latency Optimization', desc: 'Reduce inference spend by 30–60% without quality degradation', href: '/Solutions.html#cost-optimization', icon: 'cost', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.25)' },
+        { title: 'LLM Governance & Guardrails', desc: 'Safety policies, PII redaction, red-teaming & compliance', href: '/Solutions.html#governance', icon: 'shield', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' },
+        { title: 'Private & Hybrid AI Infra', desc: 'On-premise & air-gapped VPC deployments with open weights', href: '/Solutions.html#private-ai', icon: 'infra', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' },
+        { title: 'Intelligent Document AI', desc: 'Automated extraction, structuring & synthesis of enterprise data', href: '/Solutions.html#document-ai', icon: 'data', color: '#fb68c3', bg: 'rgba(251, 104, 195, 0.12)', border: 'rgba(251, 104, 195, 0.25)' }
       ];
 
       const navLinkStyle = {
@@ -479,9 +908,8 @@
           <div style={{ maxWidth: 'var(--page-max-width)', width: '100%', margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             
             {/* Logo Wordmark */}
-            <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-              <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 28, height: 28, objectFit: 'contain', display: 'block' }} />
-              <span style={{ fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: 20, letterSpacing: '-0.02em', color: 'var(--color-obsidian-ink)' }}>SlashLLM</span>
+            <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+              <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style={{ height: 28, width: 'auto', objectFit: 'contain', display: 'block' }} />
             </a>
 
             {/* Nav Center Items */}
@@ -491,7 +919,7 @@
               <div className="nav-item-wrap"
                    onMouseEnter={() => handleMouseEnter('services')}
                    onMouseLeave={handleMouseLeave}>
-                <button style={navLinkStyle} onClick={() => setOpenDropdown(openDropdown === 'services' ? null : 'services')}>
+                 <button style={navLinkStyle} onClick={() => setOpenDropdown(openDropdown === 'services' ? null : 'services')}>
                   What We Do <Icon name="chevronDown" size={11} color="var(--color-fog)" />
                 </button>
                 <div className={`nav-dropdown ${openDropdown === 'services' ? 'is-open' : ''}`}
@@ -501,17 +929,7 @@
                     <a href="/Services.html" className="link-editorial" style={{ fontSize: 12 }}>View All →</a>
                   </div>
                   {servicesMenu.map((item, idx) => (
-                    <a key={idx} href={item.href} style={{ display: 'flex', gap: 10, padding: '8px 10px', borderRadius: 'var(--radius-cards)', textDecoration: 'none', transition: 'background 0.15s' }}
-                       onMouseEnter={e => e.currentTarget.style.background = '#f7f7f7'}
-                       onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                      <div style={{ width: 28, height: 28, borderRadius: 4, background: '#f0f0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--color-obsidian-ink)' }}>
-                        <Icon name={item.icon} size={15} />
-                      </div>
-                      <div>
-                        <p style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-obsidian-ink)', marginBottom: 2 }}>{item.title}</p>
-                        <p style={{ fontSize: 11.5, color: 'var(--color-fog)', lineHeight: 1.3 }}>{item.desc}</p>
-                      </div>
-                    </a>
+                    <NavSubItem key={idx} item={item} />
                   ))}
                 </div>
               </div>
@@ -530,17 +948,7 @@
                     <a href="/Industries.html" className="link-editorial" style={{ fontSize: 12 }}>All Sectors →</a>
                   </div>
                   {industriesMenu.map((item, idx) => (
-                    <a key={idx} href={item.href} style={{ display: 'flex', gap: 10, padding: '8px 10px', borderRadius: 'var(--radius-cards)', textDecoration: 'none', transition: 'background 0.15s' }}
-                       onMouseEnter={e => e.currentTarget.style.background = '#f7f7f7'}
-                       onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                      <div style={{ width: 28, height: 28, borderRadius: 4, background: '#f0f0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--color-obsidian-ink)' }}>
-                        <Icon name={item.icon} size={15} />
-                      </div>
-                      <div>
-                        <p style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-obsidian-ink)', marginBottom: 2 }}>{item.title}</p>
-                        <p style={{ fontSize: 11.5, color: 'var(--color-fog)', lineHeight: 1.3 }}>{item.desc}</p>
-                      </div>
-                    </a>
+                    <NavSubItem key={idx} item={item} />
                   ))}
                 </div>
               </div>
@@ -559,17 +967,7 @@
                     <a href="/Products.html" className="link-editorial" style={{ fontSize: 12 }}>Explore Suite →</a>
                   </div>
                   {productsMenu.map((item, idx) => (
-                    <a key={idx} href={item.href} style={{ display: 'flex', gap: 10, padding: '8px 10px', borderRadius: 'var(--radius-cards)', textDecoration: 'none', transition: 'background 0.15s' }}
-                       onMouseEnter={e => e.currentTarget.style.background = '#f7f7f7'}
-                       onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                      <div style={{ width: 28, height: 28, borderRadius: 4, background: '#f0f0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--color-obsidian-ink)' }}>
-                        <Icon name={item.icon} size={15} />
-                      </div>
-                      <div>
-                        <p style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-obsidian-ink)', marginBottom: 2 }}>{item.title}</p>
-                        <p style={{ fontSize: 11.5, color: 'var(--color-fog)', lineHeight: 1.3 }}>{item.desc}</p>
-                      </div>
-                    </a>
+                    <NavSubItem key={idx} item={item} />
                   ))}
                 </div>
               </div>
@@ -588,17 +986,7 @@
                     <a href="/Solutions.html" className="link-editorial" style={{ fontSize: 12 }}>All Solutions →</a>
                   </div>
                   {solutionsMenu.map((item, idx) => (
-                    <a key={idx} href={item.href} style={{ display: 'flex', gap: 10, padding: '8px 10px', borderRadius: 'var(--radius-cards)', textDecoration: 'none', transition: 'background 0.15s' }}
-                       onMouseEnter={e => e.currentTarget.style.background = '#f7f7f7'}
-                       onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                      <div style={{ width: 28, height: 28, borderRadius: 4, background: '#f0f0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--color-obsidian-ink)' }}>
-                        <Icon name={item.icon} size={15} />
-                      </div>
-                      <div>
-                        <p style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-obsidian-ink)', marginBottom: 2 }}>{item.title}</p>
-                        <p style={{ fontSize: 11.5, color: 'var(--color-fog)', lineHeight: 1.3 }}>{item.desc}</p>
-                      </div>
-                    </a>
+                    <NavSubItem key={idx} item={item} />
                   ))}
                 </div>
               </div>
@@ -697,9 +1085,8 @@
             {/* Top Brand Spread */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 32, marginBottom: 56, paddingBottom: 40, borderBottom: '1px solid var(--border-hairline)' }}>
               <div style={{ maxWidth: 440 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                  <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style={{ width: 26, height: 26, objectFit: 'contain', display: 'block' }} />
-                  <span style={{ fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: 20, color: 'var(--color-obsidian-ink)', letterSpacing: '-0.02em' }}>SlashLLM</span>
+                <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
+                  <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style={{ height: 26, width: 'auto', objectFit: 'contain', display: 'block' }} />
                 </div>
                 <p style={{ color: 'var(--color-fog)', fontSize: 14, lineHeight: 1.6, marginBottom: 20 }}>
                   Editorial enterprise AI engineering: designing, building, deploying, optimizing, and operating production-grade AI systems at scale.
@@ -760,171 +1147,126 @@
     Object.assign(window, { Icon, AnnouncementBar, GlobalNav, GlobalFooter });
   </script>
 
-  <!-- ═══ SCRIPT 2: Hero Section & Abstract Product Canvas ═══ -->
+  <!-- ═══ SCRIPT 2: Hero Section & Typewriter Animation ═══ -->
   <script type="text/babel">
+    /* Typewriter animation component with cycling phrases and blinking caret */
+    const TypewriterText = ({ phrases = ["production AI systems.", "autonomous agents.", "enterprise LLM clusters.", "mission-critical AI stacks."], typingSpeed = 65, deletingSpeed = 35, pauseTime = 2000 }) => {
+      const [text, setText] = React.useState('');
+      const [phraseIndex, setPhraseIndex] = React.useState(0);
+      const [isDeleting, setIsDeleting] = React.useState(false);
+
+      React.useEffect(() => {
+        const currentPhrase = phrases[phraseIndex % phrases.length];
+        let timer;
+
+        if (!isDeleting && text === currentPhrase) {
+          timer = setTimeout(() => setIsDeleting(true), pauseTime);
+        } else if (isDeleting && text === '') {
+          setIsDeleting(false);
+          setPhraseIndex((prev) => (prev + 1) % phrases.length);
+        } else {
+          const speed = isDeleting ? deletingSpeed : typingSpeed;
+          timer = setTimeout(() => {
+            setText((prev) =>
+              isDeleting
+                ? currentPhrase.substring(0, prev.length - 1)
+                : currentPhrase.substring(0, prev.length + 1)
+            );
+          }, speed);
+        }
+
+        return () => clearTimeout(timer);
+      }, [text, isDeleting, phraseIndex, phrases, typingSpeed, deletingSpeed, pauseTime]);
+
+      return (
+        <span style={{ display: 'inline-block', position: 'relative' }}>
+          <span className="gradient-text-purple">{text}</span>
+          <span
+            style={{
+              display: 'inline-block',
+              width: '3px',
+              height: '0.88em',
+              marginLeft: '4px',
+              verticalAlign: '-0.06em',
+              background: 'linear-gradient(135deg, #00c0f8, #6366f1, #fb68c3)',
+              animation: 'typewriterBlink 0.9s infinite'
+            }}
+          />
+        </span>
+      );
+    };
+
     const Hero = () => {
       return (
-        <section style={{ background: 'var(--color-canvas)', paddingTop: 72, paddingBottom: 80, borderBottom: '1px solid var(--border-hairline)' }}>
-          <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px' }}>
+        <section style={{ background: 'var(--color-canvas)', paddingTop: 88, paddingBottom: 96, borderBottom: '1px solid var(--border-hairline)', position: 'relative', overflow: 'hidden' }}>
+          {/* Ambient Centered Radial Glow Backdrop */}
+          <div style={{
+            position: 'absolute',
+            top: '-20%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '80%',
+            height: '140%',
+            background: 'radial-gradient(ellipse at center, rgba(99, 91, 255, 0.06) 0%, rgba(0, 192, 248, 0.03) 45%, transparent 70%)',
+            pointerEvents: 'none',
+            zIndex: 0
+          }} />
+
+          <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
             
-            <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '52% 48%', gap: 56, alignItems: 'center' }}>
+            <div style={{ maxWidth: 960, margin: '0 auto', textAlign: 'center' }}>
               
-              {/* Left Column: Editorial Headline & Dual CTAs */}
-              <div>
-                
-                {/* Kicker */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20 }}>
-                  <div style={{ width: 22, height: 1.5, background: 'var(--color-obsidian-ink)' }}></div>
-                  <span className="font-mono" style={{ fontSize: 12, color: 'var(--color-obsidian-ink)', fontWeight: 600 }}>
-                    AI Engineering & Transformation
-                  </span>
+              {/* Dynamic Headline with Typewriter Effect */}
+              <h1 className="font-display" style={{
+                fontSize: 'clamp(44px, 5.4vw, 80px)',
+                lineHeight: 1.06,
+                color: 'var(--color-obsidian-ink)',
+                marginBottom: 28,
+                fontWeight: 700,
+                textAlign: 'center',
+                letterSpacing: '-0.035em'
+              }}>
+                <div>Build, deploy and scale</div>
+                <div style={{ minHeight: '1.2em' }}>
+                  <TypewriterText phrases={["production AI systems.", "autonomous agents.", "enterprise LLM clusters.", "mission-critical AI stacks."]} />
                 </div>
+              </h1>
 
-                {/* Compressed Serif Headline with Purple Gradient Accent */}
-                <h1 className="font-display" style={{
-                  fontSize: 'clamp(44px, 4.8vw, 68px)',
-                  lineHeight: 1.06,
-                  color: 'var(--color-obsidian-ink)',
-                  marginBottom: 24,
-                  fontWeight: 700
-                }}>
-                  Build, deploy and scale <span className="gradient-text-purple">production AI systems.</span>
-                </h1>
+              {/* Centered Editorial Subtext */}
+              <p style={{ fontSize: 18.5, color: 'var(--color-fog)', lineHeight: 1.65, maxWidth: 660, margin: '0 auto 40px', textAlign: 'center' }}>
+                SlashLLM helps global enterprises design, build, and operate production-grade AI applications, autonomous agents, and high-performance infrastructure with strict SLA authority.
+              </p>
 
-                {/* Editorial Subtext */}
-                <p style={{ fontSize: 17.5, color: 'var(--color-fog)', lineHeight: 1.65, maxWidth: 540, marginBottom: 36 }}>
-                  SlashLLM helps global enterprises design, build, and operate production-grade AI applications, autonomous agents, and high-performance infrastructure with strict SLA authority.
-                </p>
-
-                {/* Dual CTAs */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 44, flexWrap: 'wrap' }}>
-                  <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary">
-                    Talk to an AI Expert <Icon name="arrowRight" size={15} />
-                  </a>
-                  <a href="#what-we-do" className="btn-ghost">
-                    Explore Capabilities
-                  </a>
-                </div>
-
-                {/* Core Capability Strip */}
-                <div style={{ borderTop: '1px solid var(--border-hairline)', paddingTop: 22, maxWidth: 540 }}>
-                  <p className="font-mono" style={{ fontSize: 11.5, color: 'var(--color-fog)', marginBottom: 12, fontWeight: 600 }}>
-                    Capabilities & Delivery
-                  </p>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
-                    {['AI Engineering', 'AI Agents', 'AI Infrastructure', 'Observability & Ops', 'Data Pipelines', 'Cloud & DevOps'].map((item, idx) => (
-                      <span key={idx} style={{
-                        background: 'transparent',
-                        border: '1px solid var(--border-hairline)',
-                        borderRadius: 'var(--radius-tags)',
-                        padding: '5px 14px',
-                        fontSize: 13,
-                        fontWeight: 500,
-                        color: 'var(--color-obsidian-ink)'
-                      }}>
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
+              {/* Centered Dual CTAs */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, marginBottom: 52, flexWrap: 'wrap' }}>
+                <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '12px 26px', fontSize: 14.5 }}>
+                  Talk to an AI Expert <Icon name="arrowRight" size={15} />
+                </a>
+                <a href="#what-we-do" className="btn-ghost" style={{ padding: '12px 24px', fontSize: 14.5 }}>
+                  Explore Capabilities
+                </a>
               </div>
 
-              {/* Right Column: Abstract Deep-Teal Graphic & Product Mockup Overlay */}
-              <div style={{ position: 'relative' }}>
-                
-                {/* Abstract Organic Painted Wash (Deep Teal & Marble) */}
-                <div style={{
-                  position: 'absolute',
-                  inset: '-10px -10px -10px -10px',
-                  background: 'linear-gradient(135deg, rgba(7, 39, 35, 0.08) 0%, rgba(99, 91, 255, 0.06) 50%, rgba(1, 1, 16, 0.04) 100%)',
-                  borderRadius: '12px',
-                  filter: 'blur(20px)',
-                  zIndex: 0
-                }}></div>
-
-                {/* Desktop Product Preview Panel */}
-                <div style={{
-                  background: 'var(--color-canvas)',
-                  border: '1px solid var(--border-hairline)',
-                  borderRadius: 'var(--radius-cards)',
-                  padding: '24px',
-                  position: 'relative',
-                  zIndex: 1,
-                  boxShadow: '0 12px 32px rgba(1, 1, 16, 0.05)'
-                }}>
-                  
-                  {/* Top Bar inside panel */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 14, marginBottom: 16, borderBottom: '1px solid var(--border-hairline)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <img src="/uploads/LOGO%202.png" alt="SlashLLM" style={{ width: 15, height: 15, objectFit: 'contain' }} />
-                      <span className="font-mono" style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-obsidian-ink)' }}>SlashLLM Gateway & Telemetry</span>
-                    </div>
-                    <span style={{ background: '#f4f4f6', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-tags)', padding: '2px 8px', fontSize: 10.5, color: 'var(--color-fog)', fontFamily: 'var(--font-mono)' }}>
-                      Active · 99.99% SLA
+              {/* Centered Core Capability Strip */}
+              <div style={{ borderTop: '1px solid var(--border-hairline)', paddingTop: 28, maxWidth: 720, margin: '0 auto' }}>
+                <p className="font-mono" style={{ fontSize: 11.5, color: 'var(--color-fog)', marginBottom: 14, fontWeight: 600, textAlign: 'center' }}>
+                  Capabilities & Delivery
+                </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
+                  {['AI Engineering', 'AI Agents', 'AI Infrastructure', 'Observability & Ops', 'Data Pipelines', 'Cloud & DevOps'].map((item, idx) => (
+                    <span key={idx} style={{
+                      background: '#fafafa',
+                      border: '1px solid var(--border-hairline)',
+                      borderRadius: 'var(--radius-tags)',
+                      padding: '6px 16px',
+                      fontSize: 13,
+                      fontWeight: 500,
+                      color: 'var(--color-obsidian-ink)'
+                    }}>
+                      {item}
                     </span>
-                  </div>
-
-                  {/* Inner Data Table */}
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
-                    <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '12px 14px' }}>
-                      <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)', display: 'block', marginBottom: 4 }}>Inference Latency</span>
-                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: 20, fontWeight: 600, color: 'var(--color-obsidian-ink)' }}>18.4ms</p>
-                      <span style={{ fontSize: 11, color: 'var(--color-fog)' }}>-42% vs baseline</span>
-                    </div>
-
-                    <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '12px 14px' }}>
-                      <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)', display: 'block', marginBottom: 4 }}>Monthly Token Savings</span>
-                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: 20, fontWeight: 600, color: 'var(--color-obsidian-ink)' }}>$48,200</p>
-                      <span style={{ fontSize: 11, color: 'var(--color-fog)' }}>via semantic cache</span>
-                    </div>
-                  </div>
-
-                  {/* Mini Chart Row (using Iris Pulse stroke accent) */}
-                  <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '14px', marginBottom: 14 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                      <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--color-obsidian-ink)' }}>Dynamic Model Routing Stream</span>
-                      <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-iris-pulse)' }}>Iris Pulse Telemetry</span>
-                    </div>
-                    {/* SVG Sparkline with Iris Pulse stroke */}
-                    <svg width="100%" height="44" viewBox="0 0 300 44" fill="none" style={{ display: 'block' }}>
-                      <path d="M0 34 L30 30 L60 38 L90 20 L120 26 L150 14 L180 18 L210 8 L240 16 L270 6 L300 12" stroke="var(--color-iris-pulse)" strokeWidth="1.75" fill="none"/>
-                      <path d="M0 34 L30 30 L60 38 L90 20 L120 26 L150 14 L180 18 L210 8 L240 16 L270 6 L300 12 L300 44 L0 44 Z" fill="rgba(99, 91, 255, 0.05)"/>
-                    </svg>
-                  </div>
-
-                  {/* Bottom Pipeline Status */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 11.5, color: 'var(--color-fog)' }}>
-                    <span>Cluster: AWS Bedrock / vLLM v0.6.2</span>
-                    <span className="link-editorial" style={{ fontSize: 11.5, cursor: 'pointer' }}>View Telemetry →</span>
-                  </div>
-
+                  ))}
                 </div>
-
-                {/* Overlaid Phone / Node Card */}
-                <div style={{
-                  position: 'absolute',
-                  bottom: '-24px',
-                  right: '-16px',
-                  background: 'var(--color-canvas)',
-                  border: '1px solid var(--border-hairline)',
-                  borderRadius: 'var(--radius-cards)',
-                  padding: '14px 18px',
-                  boxShadow: '0 16px 36px rgba(1, 1, 16, 0.08)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 12,
-                  zIndex: 2
-                }}>
-                  <div style={{ width: 32, height: 32, borderRadius: 4, background: 'var(--color-obsidian-ink)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff' }}>
-                    <Icon name="shield" size={16} />
-                  </div>
-                  <div>
-                    <p style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--color-obsidian-ink)', lineHeight: 1.2 }}>Deterministic Evals</p>
-                    <p style={{ fontSize: 11, color: 'var(--color-fog)' }}>99.9% Guardrail Assurance</p>
-                  </div>
-                </div>
-
               </div>
 
             </div>
@@ -1014,14 +1356,6 @@
           desc: 'Monitor token consumption, latency bottlenecks, model quality drift, and hallucination metrics in real time.',
           bullets: ['Granular Per-Customer Cost Attribution', 'Semantic Tracing & Audit Trails', 'Dynamic Cost Optimization & Routing'],
           href: '/Services.html#ai-observability'
-        },
-        {
-          id: 'data-analytics',
-          icon: 'data',
-          title: 'Data & Analytics for AI',
-          desc: 'Engineer high-performance data pipelines, vector databases, and real-time embedding workflows powering AI intelligence.',
-          bullets: ['Unstructured ETL & Document Parsers', 'Vector Database Tuning (Qdrant, Pinecone, pgvector)', 'Synthetic Data Generation & Curation'],
-          href: '/Services.html#data-analytics'
         }
       ];
 
@@ -1044,12 +1378,12 @@
               </a>
             </div>
 
-            {/* 6-Card Grid */}
-            <div className="grid-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+            {/* 5-Card Grid */}
+            <div className="grid-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
               {capabilities.map(cap => (
                 <div key={cap.id} className="card-editorial" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
-                    <div style={{ width: 40, height: 40, borderRadius: 6, background: '#f0f0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-obsidian-ink)', marginBottom: 20 }}>
+                    <div className="card-icon-wrap" style={{ width: 40, height: 40, borderRadius: 6, background: '#f0f0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-obsidian-ink)', marginBottom: 20 }}>
                       <Icon name={cap.icon} size={20} />
                     </div>
                     <h3 className="font-display" style={{ fontSize: 24, fontWeight: 600, color: 'var(--color-obsidian-ink)', marginBottom: 12 }}>
@@ -1213,10 +1547,10 @@
                           MozOsxFontSmoothing: 'grayscale',
                           textRendering: 'optimizeLegibility',
                           border: '1px solid',
-                          borderColor: activeTab === idx ? 'rgba(99, 91, 255, 0.45)' : 'var(--border-hairline)',
-                          background: activeTab === idx ? 'linear-gradient(135deg, #0c0a21 0%, #1e134b 55%, #351c75 100%)' : '#ffffff',
+                          borderColor: activeTab === idx ? 'transparent' : 'var(--border-hairline)',
+                          background: activeTab === idx ? 'linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%)' : '#ffffff',
                           color: activeTab === idx ? '#ffffff' : 'var(--color-obsidian-ink)',
-                          boxShadow: activeTab === idx ? '0 4px 14px rgba(30, 19, 75, 0.22)' : '0 1px 2px rgba(0, 0, 0, 0.02)',
+                          boxShadow: activeTab === idx ? '0 4px 14px rgba(99, 102, 241, 0.35)' : '0 1px 2px rgba(0, 0, 0, 0.02)',
                           cursor: 'pointer',
                           transition: 'all 0.15s ease'
                         }}>
@@ -1252,34 +1586,21 @@
                   </div>
                 </div>
 
-                {/* Right Impact Display (Purple Gradient Metric Card) */}
-                <div style={{ background: 'linear-gradient(135deg, #0c0a21 0%, #1e134b 55%, #351c75 100%)', border: '1px solid rgba(99, 91, 255, 0.35)', borderRadius: 'var(--radius-cards)', padding: '40px', color: '#ffffff', boxShadow: '0 12px 36px rgba(30, 19, 75, 0.25)' }}>
-                  <p className="font-mono" style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.7)', marginBottom: 16, fontWeight: 600 }}>
+                {/* Right Impact Display (Logo Gradient Metric Card) */}
+                <div className="card-metric-gradient">
+                  <p className="font-mono" style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.95)', marginBottom: 16, fontWeight: 700, letterSpacing: '0.09em' }}>
                     Production Impact Metric
                   </p>
-                  <p className="font-display" style={{ fontSize: 'clamp(52px, 4.5vw, 72px)', color: '#ffffff', fontWeight: 700, lineHeight: 1, marginBottom: 10 }}>
+                  <p className="font-display" style={{ fontSize: 'clamp(52px, 4.5vw, 72px)', color: '#ffffff', fontWeight: 700, lineHeight: 1, marginBottom: 10, textShadow: '0 2px 12px rgba(0,0,0,0.12)' }}>
                     {cur.stat}
                   </p>
-                  <p style={{ fontSize: 14.5, color: 'rgba(255,255,255,0.7)', lineHeight: 1.5, marginBottom: 28 }}>
+                  <p style={{ fontSize: 14.5, color: '#ffffff', lineHeight: 1.5, marginBottom: 28, fontWeight: 500 }}>
                     {cur.statLabel}
                   </p>
 
-                  <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.15)', paddingTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)' }}>Sector Deep Dive</span>
-                    <a href={`/Industries.html#${cur.id}`} style={{
-                      background: 'rgba(255, 255, 255, 0.08)',
-                      border: '1px solid rgba(255, 255, 255, 0.4)',
-                      color: '#ffffff',
-                      padding: '7px 16px',
-                      borderRadius: 'var(--radius-buttons)',
-                      fontSize: 13,
-                      fontWeight: 600,
-                      textDecoration: 'none',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 5,
-                      transition: 'all 0.15s ease'
-                    }}>
+                  <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.25)', paddingTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: 13, color: 'rgba(255, 255, 255, 0.95)', fontWeight: 500 }}>Sector Deep Dive</span>
+                    <a href={`/Industries.html#${cur.id}`} className="btn-metric-pill">
                       Case Studies <Icon name="arrowRight" size={12} />
                     </a>
                   </div>
@@ -1353,7 +1674,7 @@
                 <div key={idx} className="card-editorial" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
-                      <div style={{ width: 36, height: 36, borderRadius: 6, background: '#f0f0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-obsidian-ink)' }}>
+                      <div className="card-icon-wrap" style={{ width: 36, height: 36, borderRadius: 6, background: '#f0f0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-obsidian-ink)' }}>
                         <Icon name={sol.icon} size={18} />
                       </div>
                       <h3 className="font-display" style={{ fontSize: 22, fontWeight: 600, color: 'var(--color-obsidian-ink)' }}>
@@ -1422,41 +1743,41 @@
       ];
 
       return (
-        <section id="products-suite" style={{ padding: '100px 0', background: 'linear-gradient(135deg, #0c0a21 0%, #1e134b 55%, #351c75 100%)', color: '#ffffff', borderTop: '1px solid rgba(99, 91, 255, 0.25)', borderBottom: '1px solid rgba(99, 91, 255, 0.25)' }}>
-          <div className="reveal" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px' }}>
+        <section id="products-suite" className="section-platforms-gradient" style={{ padding: '100px 0' }}>
+          <div className="reveal" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
             
             {/* Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 56, flexWrap: 'wrap', gap: 20 }}>
               <div>
-                <p className="font-mono" style={{ fontSize: 12, color: 'rgba(255, 255, 255, 0.7)', fontWeight: 600, marginBottom: 12 }}>
+                <p className="font-mono" style={{ fontSize: 12, color: 'rgba(255, 255, 255, 0.95)', fontWeight: 700, marginBottom: 12, letterSpacing: '0.09em', textTransform: 'uppercase' }}>
                   Proprietary Tech Suite
                 </p>
-                <h2 className="font-display" style={{ fontSize: 'clamp(32px, 3.4vw, 46px)', color: '#ffffff', maxWidth: 660 }}>
+                <h2 className="font-display" style={{ fontSize: 'clamp(32px, 3.4vw, 46px)', color: '#ffffff', maxWidth: 660, textShadow: '0 2px 12px rgba(0,0,0,0.12)' }}>
                   Proprietary Platforms Powering Enterprise AI
                 </h2>
               </div>
-              <a href="/Products.html" style={{ color: '#ffffff', fontSize: 14.5, fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+              <a href="/Products.html" className="btn-platforms-header">
                 Explore Platform Architecture <Icon name="arrowRight" size={14} />
               </a>
             </div>
 
-            {/* 4-Card Purple Glass Grid */}
+            {/* 4-Card Logo Gradient Glass Grid */}
             <div className="grid-4col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
               {products.map((prod, idx) => (
-                <div key={idx} className="card-dark" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div key={idx} className="card-platform">
                   <div>
-                    <div style={{ width: 38, height: 38, borderRadius: 6, background: 'rgba(255, 255, 255, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', marginBottom: 18, border: '1px solid rgba(255, 255, 255, 0.12)' }}>
+                    <div className="card-icon-wrap">
                       <Icon name={prod.icon} size={19} />
                     </div>
-                    <span className="font-mono" style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.7)', fontWeight: 600, display: 'block', marginBottom: 6 }}>{prod.tag}</span>
-                    <h3 className="font-display" style={{ fontSize: 21, fontWeight: 600, color: '#ffffff', marginBottom: 12 }}>{prod.name}</h3>
-                    <p style={{ fontSize: 14, color: 'rgba(255, 255, 255, 0.75)', lineHeight: 1.6, marginBottom: 22 }}>{prod.desc}</p>
+                    <span className="card-platform-tag">{prod.tag}</span>
+                    <h3 className="card-platform-title">{prod.name}</h3>
+                    <p className="card-platform-desc">{prod.desc}</p>
                   </div>
                   <div>
-                    <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.12)', paddingTop: 14, marginBottom: 18 }}>
-                      <span className="font-mono" style={{ fontSize: 11.5, fontWeight: 600, color: '#ffffff' }}>✓ {prod.metrics}</span>
+                    <div className="card-platform-metrics">
+                      <span>✓ {prod.metrics}</span>
                     </div>
-                    <a href={prod.href} style={{ color: '#ffffff', fontSize: 13.5, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                    <a href={prod.href} className="card-platform-link">
                       Learn more <Icon name="arrowRight" size={12} />
                     </a>
                   </div>

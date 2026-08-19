@@ -89,15 +89,35 @@
     .font-mono { font-family: var(--font-mono); font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
 
     .gradient-text-purple {
-      background: linear-gradient(135deg, #010110 10%, #635bff 60%, #9333ea 100%);
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       display: inline;
     }
+    .nav-link-active {
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      font-weight: 700 !important;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-link-active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 8px;
+      right: 8px;
+      height: 2.5px;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+    }
 
     .btn-primary {
-      background: linear-gradient(135deg, #0c0a21 0%, #1e134b 55%, #351c75 100%);
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
       color: #ffffff !important;
       font-family: var(--font-sans);
       font-weight: 600;
@@ -105,8 +125,8 @@
       letter-spacing: -0.02em;
       padding: 12px 24px;
       border-radius: var(--radius-buttons);
-      border: 1px solid rgba(99, 91, 255, 0.25);
-      box-shadow: 0 4px 14px rgba(30, 19, 75, 0.15);
+      border: 1px solid transparent;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -115,9 +135,9 @@
       transition: all 0.2s ease;
     }
     .btn-primary:hover {
-      background: linear-gradient(135deg, #635bff 0%, #7c3aed 100%);
-      border-color: rgba(99, 91, 255, 0.5);
-      box-shadow: 0 6px 20px rgba(99, 91, 255, 0.3);
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      filter: brightness(1.08);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
       transform: translateY(-1px);
     }
 
@@ -189,18 +209,17 @@
   <!-- Header Nav -->
   <header style="position: sticky; top: 0; background: var(--color-canvas); border-bottom: 1px solid var(--border-hairline); height: 64px; display: flex; align-items: center; z-index: 1000;">
     <div style="max-width: var(--page-max-width); width: 100%; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between;">
-      <a href="/" style="display: flex; align-items: center; gap: 10px;">
-        <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style="width: 28px; height: 28px; object-fit: contain; display: block;" />
-        <span style="font-weight: 700; font-size: 20px; letter-spacing: -0.02em; color: var(--color-obsidian-ink);">SlashLLM</span>
+      <a href="/" style="display: flex; align-items: center;">
+        <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style="height: 28px; width: auto; object-fit: contain; display: block;" />
       </a>
 
-      <nav class="hide-mobile" style="display: flex; align-items: center; gap: 8px;">
+            <nav class="hide-mobile" style="display: flex; align-items: center; gap: 8px;">
         <a href="/Services.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px;">What We Do</a>
         <a href="/Industries.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px;">Industries</a>
         <a href="/Products.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px;">Products</a>
         <a href="/Solutions.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px;">Solutions</a>
         <a href="/CaseStudies.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px;">Stories</a>
-        <a href="/blog" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px; font-weight: 600;">Insights</a>
+        <a href="/blog" class="nav-link-active" style="padding: 8px 12px; font-size: 14px;">Insights</a>
         <a href="/About.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px;">Company</a>
       </nav>
 
@@ -279,9 +298,8 @@
     <div style="max-width: var(--page-max-width); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1;">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin-bottom: 40px; border-bottom: 1px solid var(--border-hairline); padding-bottom: 32px;">
         <div>
-          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-            <img src="/uploads/LOGO%202.png" alt="SlashLLM Logo" style="width: 24px; height: 24px; object-fit: contain; display: block;" />
-            <span style="font-weight: 700; font-size: 18px;">SlashLLM</span>
+          <div style="display: flex; align-items: center; margin-bottom: 8px;">
+            <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style="height: 24px; width: auto; object-fit: contain; display: block;" />
           </div>
           <p style="font-size: 13px; color: var(--color-fog);">Practical writing on shipping AI products, agents, and infrastructure.</p>
         </div>
