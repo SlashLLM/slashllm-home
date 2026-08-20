@@ -294,21 +294,13 @@
     }
 
     .subnav-scroll {
-      scrollbar-width: thin;
-      scrollbar-color: rgba(99, 91, 255, 0.3) transparent;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
     .subnav-scroll::-webkit-scrollbar {
-      height: 4px;
-    }
-    .subnav-scroll::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .subnav-scroll::-webkit-scrollbar-thumb {
-      background: rgba(99, 91, 255, 0.25);
-      border-radius: 9999px;
-    }
-    .subnav-scroll::-webkit-scrollbar-thumb:hover {
-      background: rgba(99, 91, 255, 0.5);
+      display: none;
+      width: 0;
+      height: 0;
     }
 
     @media (max-width: 1024px) {
@@ -837,11 +829,11 @@
 
             {/* Subnav Ribbon */}
             <div style={{ position: 'sticky', top: 64, zIndex: 900, background: 'rgba(255, 255, 255, 0.96)', backdropFilter: 'blur(16px)', borderBottom: '1px solid var(--border-hairline)' }}>
-              <div className="subnav-scroll" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '12px 24px', display: 'flex', gap: 8, overflowX: 'auto' }}>
+              <div className="subnav-scroll" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '10px 24px', display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
                 {SERVICES.map(s => (
                   <button key={s.id} onClick={() => { setActiveId(s.id); jumpTo(s.id); }}
                           className={`svc-tab ${activeId === s.id ? 'is-active' : ''}`}
-                          style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '9px 18px', borderRadius: 'var(--radius-buttons)', fontSize: 14, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '8px 15px', borderRadius: 'var(--radius-buttons)', fontSize: 13.5, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
                     <span className="font-mono tab-num" style={{ fontSize: 11.5, letterSpacing: '0.02em' }}>{s.num}</span>
                     <span style={{ fontWeight: 600, letterSpacing: '-0.01em' }}>{s.short}</span>
                   </button>

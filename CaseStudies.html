@@ -225,6 +225,43 @@
     .link-muted { color: var(--color-fog); text-decoration: none; transition: color 0.15s ease; }
     .link-muted:hover { color: var(--color-obsidian-ink); }
 
+    /* Dropdown Menu */
+    .nav-item-wrap {
+      position: relative;
+    }
+    .nav-dropdown {
+      position: absolute;
+      top: 100%;
+      margin-top: 6px;
+      background: #ffffff;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-cards);
+      box-shadow: 0 16px 36px rgba(1, 1, 16, 0.12);
+      padding: 12px;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+    .nav-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      height: 20px;
+      display: block;
+    }
+    .nav-item-wrap:hover .nav-dropdown,
+    .nav-item-wrap:focus-within .nav-dropdown,
+    .nav-dropdown:hover,
+    .nav-dropdown.is-open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
     /* Filter Subnav */
     .filter-tab {
       background: #ffffff;
@@ -261,18 +298,13 @@
     }
 
     .subnav-scroll {
-      scrollbar-width: thin;
-      scrollbar-color: rgba(99, 91, 255, 0.3) transparent;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
     .subnav-scroll::-webkit-scrollbar {
-      height: 4px;
-    }
-    .subnav-scroll::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .subnav-scroll::-webkit-scrollbar-thumb {
-      background: rgba(99, 91, 255, 0.3);
-      border-radius: 4px;
+      display: none;
+      width: 0;
+      height: 0;
     }
 
     .halftone-pattern {
@@ -1007,7 +1039,7 @@
 
             {/* Filter Subnav Ribbon */}
             <div style={{ position: 'sticky', top: 64, zIndex: 900, background: 'rgba(255, 255, 255, 0.96)', backdropFilter: 'blur(16px)', borderBottom: '1px solid var(--border-hairline)' }}>
-              <div className="subnav-scroll" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '12px 24px', display: 'flex', gap: 10, overflowX: 'auto', alignItems: 'center' }}>
+              <div className="subnav-scroll" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '10px 24px', display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
                 {FILTER_TABS.map(tab => (
                   <button
                     key={tab.id}
