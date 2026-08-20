@@ -8,10 +8,10 @@
   <link rel="icon" type="image/png" href="/uploads/favicon-32.png?v=2" sizes="32x32">
   <link rel="icon" type="image/png" href="/uploads/favicon-16.png?v=2" sizes="16x16">
   <link rel="apple-touch-icon" href="/uploads/favicon-180.png?v=2">
-  <meta name="description" content="Measurable business outcomes shipped to production by SlashLLM across CareO Health, Impress AI, Fintech scaleups, and more.">
+  <meta name="description" content="Authentic production AI case studies shipped across HR Tech, Healthcare, Fintech, and FoodTech by SlashLLM.">
   <link rel="canonical" href="https://slashllm.com/case-studies">
   <meta property="og:title" content="Customer Stories & Case Studies — SlashLLM">
-  <meta property="og:description" content="Proven enterprise AI transformations with verifiable ROI.">
+  <meta property="og:description" content="Proven enterprise AI engineering results shipped to production.">
   <meta property="og:image" content="https://slashllm.com/uploads/LOGO%202.png">
 
   <!-- Single Unified Typography: Proxima Nova -->
@@ -225,42 +225,54 @@
     .link-muted { color: var(--color-fog); text-decoration: none; transition: color 0.15s ease; }
     .link-muted:hover { color: var(--color-obsidian-ink); }
 
-    /* Dropdown Menu */
-    .nav-item-wrap {
-      position: relative;
-    }
-    .nav-dropdown {
-      position: absolute;
-      top: 100%;
-      margin-top: 6px;
+    /* Filter Subnav */
+    .filter-tab {
       background: #ffffff;
-      border: 1px solid var(--border-hairline);
-      border-radius: var(--radius-cards);
-      box-shadow: 0 16px 36px rgba(1, 1, 16, 0.08);
-      padding: 12px;
-      z-index: 1000;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(4px);
-      transition: opacity 0.15s ease, transform 0.15s ease;
+      border: 1px solid rgba(1, 1, 16, 0.16);
+      color: #0c0a21;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      padding: 9px 18px;
+      border-radius: var(--radius-buttons);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-sans);
+      transition: all 0.18s ease;
     }
-    /* Invisible hover bridge spanning between nav item and dropdown */
-    .nav-dropdown::before {
-      content: '';
-      position: absolute;
-      top: -20px;
-      left: 0;
-      right: 0;
-      height: 20px;
-      display: block;
+    .filter-tab .tab-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #555566;
+      font-weight: 700;
+      transition: color 0.18s ease;
     }
-    .nav-item-wrap:hover .nav-dropdown,
-    .nav-item-wrap:focus-within .nav-dropdown,
-    .nav-dropdown:hover,
-    .nav-dropdown.is-open {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
+    .filter-tab:hover, .filter-tab.is-active {
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+    }
+    .filter-tab:hover .tab-badge, .filter-tab.is-active .tab-badge {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .subnav-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(99, 91, 255, 0.3) transparent;
+    }
+    .subnav-scroll::-webkit-scrollbar {
+      height: 4px;
+    }
+    .subnav-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .subnav-scroll::-webkit-scrollbar-thumb {
+      background: rgba(99, 91, 255, 0.3);
+      border-radius: 4px;
     }
 
     .halftone-pattern {
@@ -270,11 +282,13 @@
 
     @media (max-width: 1024px) {
       .grid-2col { grid-template-columns: 1fr !important; gap: 24px !important; }
+      .grid-3col { grid-template-columns: 1fr !important; gap: 14px !important; }
       .hide-mobile { display: none !important; }
       .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 36px !important; }
     }
     @media (max-width: 640px) {
       .footer-grid { grid-template-columns: 1fr !important; }
+      .card-editorial { padding: 24px; }
     }
   </style>
 </head>
@@ -282,16 +296,33 @@
   <div id="root"></div>
 
   <script type="text/babel">
-    const { useState, useEffect } = React;
+    const { useState, useEffect, useRef } = React;
 
-    const Icon = ({ name, size=18, color='currentColor' }) => {
+    const Icon = ({ name, size=18, color='currentColor', className='' }) => {
       const paths = {
         arrowRight: <path d="M5 12h14M12 5l7 7-7 7"/>,
         chevronDown: <path d="M6 9l6 6 6-6"/>,
-        check: <polyline points="20 6 9 17 4 12"/>
+        sparkles: <><path d="M12 3l1.9 4.9L19 10l-4.1 3.1L16 18l-4-2.8L8 18l1.1-4.9L5 10l5.1-2.1z"/><path d="M19 3l.8 2.2L22 6l-1.8 1.4.5 2.2-1.7-1.3L17.3 9.6l.5-2.2L16 6l2.2-.8z"/></>,
+        agent: <><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="11"/><circle cx="8.5" cy="16" r="1" fill={color}/><circle cx="15.5" cy="16" r="1" fill={color}/></>,
+        engineering: <><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></>,
+        infra: <><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></>,
+        observability: <><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></>,
+        data: <><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></>,
+        gateway: <><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></>,
+        shield: <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></>,
+        finance: <><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></>,
+        health: <><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></>,
+        saas: <><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></>,
+        retail: <><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></>,
+        mfg: <><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></>,
+        prof: <><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></>,
+        cost: <><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></>,
+        check: <polyline points="20 6 9 17 4 12"/>,
+        layers: <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>,
+        code: <polyline points="16 18 22 12 16 6 M8 6 2 12 8 18"/>
       };
       return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0 }}>
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0 }}>
           {paths[name] || <circle cx="12" cy="12" r="9"/>}
         </svg>
       );
@@ -308,32 +339,314 @@
       </div>
     );
 
-    const GlobalNav = () => {
+    /* Header Navigation (White, 64px, Hairline Border) */
+    const GlobalNav = ({ activePage = 'stories' }) => {
+      const [openDropdown, setOpenDropdown] = React.useState(null);
+      const timerRef = React.useRef(null);
+      const currentPath = typeof window !== 'undefined' ? window.location.pathname.toLowerCase() : '';
+
+      const isServicesActive = activePage === 'services' || currentPath.includes('/services');
+      const isIndustriesActive = activePage === 'industries' || currentPath.includes('/industries');
+      const isProductsActive = activePage === 'products' || currentPath.includes('/products');
+      const isSolutionsActive = activePage === 'solutions' || currentPath.includes('/solutions');
+      const isStoriesActive = activePage === 'stories' || currentPath.includes('/casestudies') || currentPath.includes('/case-studies');
+      const isInsightsActive = activePage === 'insights' || currentPath.includes('/blog');
+      const isCompanyActive = activePage === 'company' || currentPath.includes('/about');
+
+      const handleMouseEnter = (name) => {
+        if (timerRef.current) {
+          clearTimeout(timerRef.current);
+          timerRef.current = null;
+        }
+        setOpenDropdown(name);
+      };
+
+      const handleMouseLeave = () => {
+        if (timerRef.current) {
+          clearTimeout(timerRef.current);
+        }
+        timerRef.current = setTimeout(() => {
+          setOpenDropdown(null);
+        }, 180);
+      };
+
+      const getCoverDiameter = (width, height, x, y) => {
+        return Math.ceil(
+          2 * Math.max(
+            Math.hypot(x, y),
+            Math.hypot(width - x, y),
+            Math.hypot(x, height - y),
+            Math.hypot(width - x, height - y)
+          )
+        );
+      };
+
+      const NavSubItem = ({ item }) => {
+        const itemRef = React.useRef(null);
+        const [hovered, setHovered] = React.useState(false);
+        const [origin, setOrigin] = React.useState({ x: 0, y: 0 });
+        const [coverSize, setCoverSize] = React.useState(0);
+
+        const updateOriginFromPointer = (e) => {
+          const node = itemRef.current;
+          if (!node) return;
+          const rect = node.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          setOrigin({ x, y });
+          setCoverSize(getCoverDiameter(rect.width, rect.height, x, y));
+        };
+
+        const handlePointerEnter = (e) => {
+          updateOriginFromPointer(e);
+          setHovered(true);
+        };
+
+        const handlePointerLeave = () => {
+          setHovered(false);
+        };
+
+        return (
+          <a
+            ref={itemRef}
+            href={item.href}
+            onPointerEnter={handlePointerEnter}
+            onPointerLeave={handlePointerLeave}
+            style={{
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: 10,
+              padding: '9px 11px',
+              borderRadius: 'var(--radius-cards)',
+              textDecoration: 'none',
+              overflow: 'hidden',
+              transition: 'box-shadow 0.25s ease'
+            }}
+            className="nav-sub-item"
+          >
+            <span
+              style={{
+                position: 'absolute',
+                left: origin.x,
+                top: origin.y,
+                width: coverSize || 10,
+                height: coverSize || 10,
+                borderRadius: '50%',
+                transform: `translate(-50%, -50%) scale(${hovered && coverSize > 0 ? 1 : 0})`,
+                transformOrigin: 'center',
+                background: 'linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%)',
+                transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
+                pointerEvents: 'none',
+                zIndex: 0,
+                opacity: hovered ? 1 : 0
+              }}
+            />
+
+            <div
+              style={{
+                position: 'relative',
+                zIndex: 1,
+                width: 30,
+                height: 30,
+                borderRadius: 6,
+                background: hovered ? 'rgba(255, 255, 255, 0.25)' : (item.bg || '#f0f0f2'),
+                border: `1px solid ${hovered ? 'rgba(255, 255, 255, 0.45)' : (item.border || 'transparent')}`,
+                color: hovered ? '#ffffff' : (item.color || 'var(--color-obsidian-ink)'),
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+                boxShadow: hovered ? '0 2px 8px rgba(0,0,0,0.15)' : 'none',
+                transform: hovered ? 'scale(1.08)' : 'scale(1)',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+              }}
+            >
+              <Icon name={item.icon} size={15} color={hovered ? '#ffffff' : (item.color || 'var(--color-obsidian-ink)')} />
+            </div>
+
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <p
+                style={{
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: hovered ? '#ffffff' : 'var(--color-obsidian-ink)',
+                  marginBottom: 2,
+                  transition: 'color 0.2s ease',
+                  lineHeight: 1.25
+                }}
+              >
+                {item.title}
+              </p>
+              <p
+                style={{
+                  fontSize: 11.5,
+                  color: hovered ? 'rgba(255, 255, 255, 0.92)' : 'var(--color-fog)',
+                  lineHeight: 1.3,
+                  transition: 'color 0.2s ease'
+                }}
+              >
+                {item.desc}
+              </p>
+            </div>
+          </a>
+        );
+      };
+
+      const servicesMenu = [
+        { title: 'AI & Generative AI', desc: 'Enterprise LLMs, SLMs, multimodal & RAG architectures', href: '/Services.html#ai-genai', icon: 'sparkles', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'AI Agents & Workflows', desc: 'Autonomous & human-in-the-loop multi-agent systems', href: '/Services.html#ai-agents', icon: 'agent', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' },
+        { title: 'AI Engineering', desc: 'From prototype to scale: architecture, evals & production code', href: '/Services.html#ai-engineering', icon: 'engineering', color: '#a855f7', bg: 'rgba(168, 85, 247, 0.12)', border: 'rgba(168, 85, 247, 0.25)' },
+        { title: 'AI Infrastructure & DevOps', desc: 'GPU orchestration, high-throughput model serving & clusters', href: '/Services.html#ai-infrastructure', icon: 'infra', color: '#fb68c3', bg: 'rgba(251, 104, 195, 0.12)', border: 'rgba(251, 104, 195, 0.25)' },
+        { title: 'AI Observability & Ops', desc: 'Tracing, latency, token costs, drift & guardrail telemetry', href: '/Services.html#ai-observability', icon: 'observability', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' },
+        { title: 'Data & Analytics for AI', desc: 'Vector pipelines, ETL, real-time embeddings & feature stores', href: '/Services.html#data-analytics', icon: 'data', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.25)' }
+      ];
+
+      const industriesMenu = [
+        { title: 'Financial Services', desc: 'Fraud detection, regulatory intelligence, AI customer ops', href: '/Industries.html#financial-services', icon: 'finance', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' },
+        { title: 'Healthcare & Life Sciences', desc: 'Clinical document processing, HIPAA patient assistants', href: '/Industries.html#healthcare', icon: 'health', color: '#fb68c3', bg: 'rgba(251, 104, 195, 0.12)', border: 'rgba(251, 104, 195, 0.25)' },
+        { title: 'SaaS & Technology', desc: 'Embedded AI copilots, multi-tenant agent infra, cost routing', href: '/Industries.html#saas', icon: 'saas', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'Retail & E-Commerce', desc: 'Conversational commerce, recommendation engines, support', href: '/Industries.html#retail', icon: 'retail', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.25)' },
+        { title: 'Manufacturing & Logistics', desc: 'Supply chain intelligence, predictive diagnosis agents', href: '/Industries.html#manufacturing', icon: 'mfg', color: '#a855f7', bg: 'rgba(168, 85, 247, 0.12)', border: 'rgba(168, 85, 247, 0.25)' },
+        { title: 'Professional Services', desc: 'Contract intelligence, research agents, knowledge search', href: '/Industries.html#professional-services', icon: 'prof', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' }
+      ];
+
+      const productsMenu = [
+        { title: 'SlashLLM Gateway', desc: 'Unified API, model routing, semantic caching & failover', href: '/Products.html#gateway', icon: 'gateway', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'SlashLLM Observability', desc: 'Real-time token tracing, cost attribution & latency monitoring', href: '/Products.html#observability', icon: 'observability', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' },
+        { title: 'SlashLLM AI Platform', desc: 'Developer toolkit for prompt ops, model evaluation & CI/CD', href: '/Products.html#ai-platform', icon: 'sparkles', color: '#a855f7', bg: 'rgba(168, 85, 247, 0.12)', border: 'rgba(168, 85, 247, 0.25)' },
+        { title: 'SlashLLM Agent Platform', desc: 'Orchestration, state management & tool sandboxing for agents', href: '/Products.html#agent-platform', icon: 'agent', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' }
+      ];
+
+      const solutionsMenu = [
+        { title: 'Enterprise AI Transformation', desc: 'Full-stack AI adoption strategy and legacy modernization', href: '/Solutions.html#transformation', icon: 'sparkles', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'AI Cost & Latency Optimization', desc: 'Reduce inference spend by 30–60% without quality degradation', href: '/Solutions.html#cost-optimization', icon: 'cost', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.25)' },
+        { title: 'LLM Governance & Guardrails', desc: 'Safety policies, PII redaction, red-teaming & compliance', href: '/Solutions.html#governance', icon: 'shield', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' },
+        { title: 'Private & Hybrid AI Infra', desc: 'On-premise & air-gapped VPC deployments with open weights', href: '/Solutions.html#private-ai', icon: 'infra', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' },
+        { title: 'Intelligent Document AI', desc: 'Automated extraction, structuring & synthesis of enterprise data', href: '/Solutions.html#document-ai', icon: 'data', color: '#fb68c3', bg: 'rgba(251, 104, 195, 0.12)', border: 'rgba(251, 104, 195, 0.25)' }
+      ];
+
       const navLinkStyle = {
-        color: 'var(--color-obsidian-ink)', fontSize: 14, fontWeight: 400, padding: '8px 12px', display: 'inline-flex',
-        alignItems: 'center', gap: 4, background: 'transparent', border: 'none', cursor: 'pointer', letterSpacing: '-0.02em'
+        color: 'var(--color-obsidian-ink)',
+        fontSize: 14,
+        fontWeight: 400,
+        padding: '8px 12px',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 4,
+        background: 'transparent',
+        border: 'none',
+        cursor: 'pointer',
+        letterSpacing: '-0.02em',
+        transition: 'color 0.15s ease'
       };
 
       return (
-        <header style={{ position: 'sticky', top: 0, background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)', height: 64, display: 'flex', alignItems: 'center', zIndex: 1000 }}>
+        <header style={{
+          position: 'sticky',
+          top: 0,
+          background: 'var(--color-canvas)',
+          borderBottom: '1px solid var(--border-hairline)',
+          height: 64,
+          display: 'flex',
+          alignItems: 'center',
+          zIndex: 1000
+        }}>
           <div style={{ maxWidth: 'var(--page-max-width)', width: '100%', margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            
             <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
               <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style={{ height: 28, width: 'auto', objectFit: 'contain', display: 'block' }} />
             </a>
 
-                        <nav className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-              <a href="/Services.html" style={navLinkStyle}>What We Do</a>
-              <a href="/Industries.html" style={navLinkStyle}>Industries</a>
-              <a href="/Products.html" style={navLinkStyle}>Products</a>
-              <a href="/Solutions.html" style={navLinkStyle}>Solutions</a>
-              <a href="/CaseStudies.html" className="nav-link-active" style={navLinkStyle}>Stories</a>
-              <a href="/blog" style={navLinkStyle}>Insights</a>
-              <a href="/About.html" style={navLinkStyle}>Company</a>
+            <nav className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              
+              {/* What We Do */}
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('services')}
+                   onMouseLeave={handleMouseLeave}>
+                 <button style={navLinkStyle} className={isServicesActive ? 'nav-link-active' : ''} onClick={() => setOpenDropdown(openDropdown === 'services' ? null : 'services')}>
+                  What We Do <Icon name="chevronDown" size={11} color="var(--color-fog)" />
+                </button>
+                <div className={`nav-dropdown ${openDropdown === 'services' ? 'is-open' : ''}`}
+                     style={{ left: 0, width: 560, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Capabilities & Services</span>
+                    <a href="/Services.html" className="link-editorial" style={{ fontSize: 12 }}>View All →</a>
+                  </div>
+                  {servicesMenu.map((item, idx) => (
+                    <NavSubItem key={idx} item={item} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Industries */}
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('industries')}
+                   onMouseLeave={handleMouseLeave}>
+                <button style={navLinkStyle} className={isIndustriesActive ? 'nav-link-active' : ''} onClick={() => setOpenDropdown(openDropdown === 'industries' ? null : 'industries')}>
+                  Industries <Icon name="chevronDown" size={11} color="var(--color-fog)" />
+                </button>
+                <div className={`nav-dropdown ${openDropdown === 'industries' ? 'is-open' : ''}`}
+                     style={{ left: '-40px', width: 560, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Industry Verticals</span>
+                    <a href="/Industries.html" className="link-editorial" style={{ fontSize: 12 }}>All Sectors →</a>
+                  </div>
+                  {industriesMenu.map((item, idx) => (
+                    <NavSubItem key={idx} item={item} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Products & Platforms */}
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('products')}
+                   onMouseLeave={handleMouseLeave}>
+                <button style={navLinkStyle} className={isProductsActive ? 'nav-link-active' : ''} onClick={() => setOpenDropdown(openDropdown === 'products' ? null : 'products')}>
+                  Products <Icon name="chevronDown" size={11} color="var(--color-fog)" />
+                </button>
+                <div className={`nav-dropdown ${openDropdown === 'products' ? 'is-open' : ''}`}
+                     style={{ left: '-40px', width: 520, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Proprietary Platforms</span>
+                    <a href="/Products.html" className="link-editorial" style={{ fontSize: 12 }}>Explore Suite →</a>
+                  </div>
+                  {productsMenu.map((item, idx) => (
+                    <NavSubItem key={idx} item={item} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Solutions */}
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('solutions')}
+                   onMouseLeave={handleMouseLeave}>
+                <button style={navLinkStyle} className={isSolutionsActive ? 'nav-link-active' : ''} onClick={() => setOpenDropdown(openDropdown === 'solutions' ? null : 'solutions')}>
+                  Solutions <Icon name="chevronDown" size={11} color="var(--color-fog)" />
+                </button>
+                <div className={`nav-dropdown ${openDropdown === 'solutions' ? 'is-open' : ''}`}
+                     style={{ left: '-40px', width: 520, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Enterprise Solutions</span>
+                    <a href="/Solutions.html" className="link-editorial" style={{ fontSize: 12 }}>All Solutions →</a>
+                  </div>
+                  {solutionsMenu.map((item, idx) => (
+                    <NavSubItem key={idx} item={item} />
+                  ))}
+                </div>
+              </div>
+
+              <a href="/CaseStudies.html" className={isStoriesActive ? 'nav-link-active' : ''} style={navLinkStyle}>Stories</a>
+              <a href="/blog" className={isInsightsActive ? 'nav-link-active' : ''} style={navLinkStyle}>Insights</a>
+              <a href="/About.html" className={isCompanyActive ? 'nav-link-active' : ''} style={navLinkStyle}>Company</a>
             </nav>
 
-            <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '9px 20px', fontSize: 14 }}>
-              Talk to an AI Expert <Icon name="arrowRight" size={14} />
-            </a>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '8px 18px', fontSize: 13.5 }}>
+                Talk to an AI Expert <Icon name="arrowRight" size={13} />
+              </a>
+            </div>
+
           </div>
         </header>
       );
@@ -359,63 +672,315 @@
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14 }}>
             <p style={{ color: 'var(--color-fog)', fontSize: 12.5 }}>© 2026 SlashLLM Inc. All rights reserved. Restraint as authority.</p>
-            <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)' }}>San Francisco · London · Singapore · Bengaluru</span>
+
           </div>
         </div>
       </footer>
     );
 
+    const getTagPillStyle = (tag) => {
+      const t = tag.toLowerCase();
+      if (['shipped', 'in production', 'built', 'live'].includes(t))
+        return { background: 'rgba(74, 222, 128, 0.1)', color: '#15803d', border: '1px solid rgba(74, 222, 128, 0.25)' };
+      if (t === 'our product' || t === 'our own product')
+        return { background: 'rgba(168, 85, 247, 0.12)', color: '#9333ea', border: '1px solid rgba(168, 85, 247, 0.28)' };
+      if (t.includes('active') || t.includes('mvp'))
+        return { background: 'rgba(251, 191, 36, 0.1)', color: '#b45309', border: '1px solid rgba(251, 191, 36, 0.25)' };
+      if (t === 'prototype')
+        return { background: 'rgba(99, 91, 255, 0.08)', color: 'var(--color-iris-pulse)', border: '1px solid rgba(99, 91, 255, 0.2)' };
+      return { background: '#f5f3ff', color: '#6366f1', border: '1px solid rgba(99, 91, 255, 0.15)' };
+    };
+
+    const CASE_STUDIES = [
+      {
+        id: 'impress-ai',
+        client: 'Impress AI',
+        industryId: 'hr',
+        industry: 'HR Tech & Talent',
+        title: 'AI Video Interview Analysis System & 7-Dimension Competency Scoring',
+        subtitle: 'Real-Time Computer Vision & Asynchronous NLP Evaluation',
+        oneliner: 'Combines real-time transcription and computer vision to assess candidates across 7 dimensions — communication, emotional expression, body language, content relevance, problem-solving, professionalism, and interview integrity.',
+        tags: ['AI Product', 'Computer Vision', 'Shipped'],
+        statusTag: 'Shipped',
+        metrics: ['100% Local-to-Cloud', '7-Dimension Scoring', 'Real AWS Integration'],
+        mainMetric: '7-Dim',
+        metricDesc: 'AI Competency Scoring Per Candidate',
+        challenge: 'Recruiting teams needed to evaluate video interviews at scale consistently across 7 competency dimensions without the time cost or bias of manual review. Traditional tools could not detect if a candidate was reading from off-screen notes, leaving integrity validation unreliable.',
+        approach: 'Architected a production REST API combining AWS Bedrock (Claude 3 Haiku) for 7-dimensional NLP scoring, AWS Transcribe for real speech-to-text, and MediaPipe computer vision for frame-by-frame iris gaze tracking with async S3 persistence.',
+        whatWeBuilt: [
+          'Iris-based gaze detection using MediaPipe landmarks (468–477) to distinguish reading from eye contact',
+          '7-dimensional competency scoring via AWS Bedrock (Claude 3 Haiku)',
+          'Proctoring & integrity detection: candidate absence, multiple faces, reading behaviour',
+          'Multi-interview batch summarisation with AI-synthesised executive reports',
+          'Async architecture with S3 persistence for unlimited concurrent interviews'
+        ],
+        techStack: ['Python', 'FastAPI', 'AWS Bedrock', 'AWS Transcribe', 'MediaPipe', 'OpenCV', 'AWS S3', 'Docker'],
+        outcome: 'Automated 7-dimension competency scoring across thousands of candidate frames with zero human review latency and reliable detection of off-screen reading behavior.'
+      },
+      {
+        id: 'workforce',
+        client: 'Unified Workforce Platform',
+        industryId: 'hr',
+        industry: 'HR Tech & Talent',
+        title: 'Mobile-First Recruitment & On-Demand Workforce Operations Platform',
+        subtitle: '3-Tier Architecture with 5-Factor AI Matching Engine',
+        oneliner: 'Replaced 5+ disconnected tools — CRM, spreadsheets, messaging apps, job boards — with a single-source-of-truth system for on-demand worker operations.',
+        tags: ['Full-Stack Platform', 'AI Matching', 'Shipped'],
+        statusTag: 'Shipped',
+        note: '6-week sprint to production',
+        metrics: ['−50% Recruitment Costs', '−50% Operational Time', '+50% Worker Retention'],
+        mainMetric: '−50%',
+        metricDesc: 'Recruitment & Operations Overhead',
+        challenge: 'On-demand staffing agencies were drowning in 5+ disconnected tools for applicant tracking, shift assignments, GPS check-ins, and payroll exports, resulting in delayed fulfillment and 40%+ worker churn.',
+        approach: 'Engineered a unified 3-tier platform (Worker PWA + Admin Operations Dashboard + Employer Client Portal) powered by a 5-factor AI matching engine and geofence-verified timesheet automation.',
+        whatWeBuilt: [
+          '3-tier platform: Worker PWA + Admin Dashboard + Employer Client Portal',
+          '5-factor AI matching engine (proximity, performance, job type, completion rate, tier)',
+          'GPS-verified attendance with geofence validation and no-show auto-detection',
+          'Multi-tier timesheet approval workflow to automated payroll export',
+          'Bilingual support, AES-256 encrypted PII, privacy-compliant architecture'
+        ],
+        techStack: ['React 18', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Redis', 'AWS (EC2, RDS, S3)', 'Docker', 'GitHub Actions'],
+        outcome: 'Shipped to production in a 6-week sprint, cutting recruitment costs by 50%, reducing operational overhead by 50%, and boosting worker retention by 50%.'
+      },
+      {
+        id: 'savos',
+        client: 'Impress AI SIT-SAVOS',
+        industryId: 'hr',
+        industry: 'HR Tech & Talent',
+        title: 'Secure Applicant Assessment & Bulk Profiling Ingest Platform',
+        subtitle: 'Enterprise Data Consolidation & External API Integration',
+        oneliner: 'Secure web platform consolidating applicant data from multiple CSV sources with OAuth2-protected external assessment API integration — enabling bulk-scale profiling for educational institutions.',
+        tags: ['Data Platform', 'In Production'],
+        statusTag: 'In Production',
+        metrics: ['100+ Applicants / Batch', 'Zero Duplicate Records', 'OAuth2 + KMS Secured'],
+        mainMetric: '100+',
+        metricDesc: 'Applicants Ingested Per Batch',
+        challenge: 'Educational institutions struggled with consolidating fragmented applicant assessment CSVs across disparate evaluation vendors without data duplication or security vulnerabilities.',
+        approach: 'Engineered a streaming CSV ingestion pipeline with AWS KMS encryption, an automated header-mapping synonym engine, and MD5 checksum deduplication with async webhook callbacks.',
+        whatWeBuilt: [
+          'Secure multi-part S3 uploads with AWS KMS encryption',
+          'Streaming CSV parser with automated header mapping via synonym engine',
+          'Idempotent data consolidation with MD5 checksums (zero duplicate records)',
+          'Bulk ingest API (100+ applicants per batch) with async webhook callbacks'
+        ],
+        techStack: ['React 18', 'TypeScript', 'FastAPI', 'AWS S3', 'DynamoDB', 'AWS Cognito', 'Docker'],
+        outcome: 'Eliminated duplicate records entirely across high-volume applicant cohorts, cutting ingest latency to seconds with end-to-end OAuth2 and KMS encryption.'
+      },
+      {
+        id: 'dot-in-space',
+        client: 'Dot in Space',
+        industryId: 'hr',
+        industry: 'HR Tech & Talent',
+        title: 'Interactive Mission-Based Science Education PWA & Exhibit Gamification',
+        subtitle: 'QR-Activated Physical Exhibit Science Adventure',
+        oneliner: 'Mission-based educational PWA for children aged 8–14, QR-activated at physical science centre exhibits. Transforms visits into interactive space adventures with station-based quizzes and progress tracking.',
+        tags: ['EdTech', 'PWA', 'Shipped'],
+        statusTag: 'Shipped',
+        metrics: ['Mobile-First PWA', '6 Interactive Stations', 'Offline-Capable'],
+        mainMetric: '6 Stations',
+        metricDesc: 'QR-Activated Interactive Quests',
+        challenge: 'Physical science centers suffered from passive visitor engagement among young students (aged 8–14), requiring a privacy-conscious, frictionless digital companion without app store downloads.',
+        approach: 'Designed a lightweight, offline-resilient PWA featuring QR-triggered exhibit missions, an 80/20 visual-to-assessment ratio, and an educator dashboard with zero student tracking or ads.',
+        whatWeBuilt: [
+          '6-station sequential mission with animated intros and 80/20 visual-to-assessment ratio',
+          'QR-activated exhibits with offline-friendly PWA architecture',
+          'Admin dashboard for player tracking, score monitoring, and content management',
+          'Child-safe design: no ads, no social features, no public profiles'
+        ],
+        techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'PWA Service Workers'],
+        outcome: 'Delivered an interactive, 100% child-safe science exhibit companion with zero connectivity drop-offs, adopted across multiple museum gallery rotations.'
+      },
+      {
+        id: 'clinedops',
+        client: 'ClinEdOps',
+        industryId: 'healthcare',
+        industry: 'Healthcare & Life Sciences',
+        title: 'Clinical Education Operations & Teaching Hours Governance Platform',
+        subtitle: 'Multi-Discipline Hospital Lifecycle Tracking with Real-Time Audit Trails',
+        oneliner: 'Unified student/tutor lifecycle and teaching hours tracking system for four healthcare disciplines at a leading teaching hospital — Medicine, Allied Health, Nursing, and Training Programmes.',
+        tags: ['Healthcare', 'Full-Stack Platform', 'In Production'],
+        statusTag: 'In Production',
+        note: 'Real-time audit trails',
+        metrics: ['4 Healthcare Disciplines', '80%+ Test Coverage', '5-Month Build'],
+        mainMetric: '4 Disciplines',
+        metricDesc: 'Medicine, Nursing, Allied Health, Training',
+        challenge: 'A major teaching hospital tracked clinical tutors, student rotations, and teaching hours via manual spreadsheets across 4 disconnected departments, creating administrative bottlenecks and audit compliance risks.',
+        approach: 'Architected a full-stack platform with TimescaleDB audit tracking, 4-tier RBAC, batch roster imports, and automated supervisor-to-admin teaching hour approvals.',
+        whatWeBuilt: [
+          'Batch student/tutor import (Excel/CSV) with field mapping and duplicate detection',
+          'Teaching hours logging with multi-level approval (supervisor to programme admin)',
+          'Survey engine with custom JSONB questions and response analytics',
+          'Four-tier RBAC: super_admin, programme_admin, supervisor, tutor, student',
+          'Full audit logging on every CREATE, UPDATE, DELETE with before/after JSONB state'
+        ],
+        techStack: ['React 18', 'Ant Design', 'FastAPI', 'PostgreSQL 16', 'TimescaleDB', 'Celery', 'Redis', 'AWS S3/SES', 'Docker'],
+        outcome: 'Shipped in 5 months with 80%+ test coverage, replacing all paper/spreadsheet tracking with immutable audit trails across 4 medical disciplines.'
+      },
+      {
+        id: 'careo',
+        client: 'CareO',
+        industryId: 'healthcare',
+        industry: 'Healthcare & Life Sciences',
+        title: 'UK Care Home Management & NHS-Compliant MAR Records System',
+        subtitle: 'Real-Time Digital Workflows for Medication Administration & Incident Audits',
+        oneliner: 'Replaces paper records with structured digital workflows for resident care, medication administration, incident reporting, and NHS compliance documentation.',
+        tags: ['Healthcare', 'Care Home Software', 'In Production'],
+        statusTag: 'In Production',
+        metrics: ['NHS-Compliant Workflows', 'Real-Time Team Sync', 'Full Audit Logging'],
+        mainMetric: '100% Sync',
+        metricDesc: 'Real-Time Care Team Coordination',
+        challenge: 'UK care homes relied heavily on physical paper records for resident care plans, Medication Administration Records (MAR), and incident reports, creating high risk of missed doses and compliance audit delays.',
+        approach: 'Built a structured digital care management system featuring real-time team synchronization via Convex, digital MAR charting with scheduling safeguards, and automated NHS Trust incident form generation.',
+        whatWeBuilt: [
+          'Resident profiles with comprehensive care records and document tracking',
+          'Medication Administration Records (MAR) with scheduling and audit trails',
+          'NHS Trust incident reporting with automated form generation',
+          'Manager audit system with before/after state tracking and approval workflows',
+          'Real-time sync across care teams via Convex backend'
+        ],
+        techStack: ['Next.js 15', 'React 19', 'TypeScript', 'shadcn/ui', 'Convex', 'Better Auth', 'Recharts'],
+        outcome: 'Transitioned care facilities from paper records to full NHS compliance with zero sync latency across care workers and shift supervisors.'
+      },
+      {
+        id: 'wealthyhood',
+        client: 'Wealthyhood',
+        industryId: 'fintech',
+        industry: 'Fintech & Enterprise',
+        title: 'Zero-Knowledge Encrypted Personal Wealth Management & Succession System',
+        subtitle: 'Client-Side Cryptographic Security & Granular Portfolio Sharing',
+        oneliner: 'Users track assets, liabilities, insurance, and dependents — then safely share their financial portfolio with trusted family, beneficiaries, or advisors. The server never sees plaintext financial data.',
+        tags: ['Fintech', 'Encrypted Platform', 'Active MVP'],
+        statusTag: 'Active MVP',
+        metrics: ['AES-256 Client-Side', 'Zero-Knowledge Architecture', "Dead-Man's Switch"],
+        mainMetric: 'AES-256',
+        metricDesc: 'Zero-Knowledge Client-Side Encryption',
+        challenge: 'Wealth holders want to track full balance sheets and share plans with family/advisors, but fear cloud data breaches and vendor surveillance of sensitive financial assets.',
+        approach: 'Built a zero-knowledge architecture using client-side AES-256 encryption with PBKDF2 key derivation, granular view/edit permissioning, and a cryptographic dead-man emergency release trigger.',
+        whatWeBuilt: [
+          'Client-side AES-256 encryption with PBKDF2 key derivation (server-zero-knowledge)',
+          'Net worth dashboard with wealth distribution charts and financial health scoring',
+          'Granular portfolio sharing with revocable view/edit access control',
+          "Dead-man's switch: configurable inactivity trigger grants access to beneficiaries",
+          'Advisor dashboard with multi-client portfolio management and risk assessment'
+        ],
+        techStack: ['React 18', 'TypeScript', 'Supabase', 'crypto-js', 'Recharts', 'Framer Motion', 'Edge Functions (Deno)'],
+        outcome: 'Delivered an active MVP where users manage multimillion-dollar portfolios with cryptographic certainty that cloud servers never hold plaintext records.'
+      },
+      {
+        id: 'payrolliq',
+        client: 'PayrollIQ',
+        industryId: 'fintech',
+        industry: 'Fintech & Enterprise',
+        title: 'Local AI-Powered Payroll File Comparison & Discrepancy Detection Engine',
+        subtitle: '100% Air-Gapped On-Premises LLM Analysis with Zero Data Egress',
+        oneliner: 'AI-powered payroll file analysis using locally-hosted Ollama (Gemma 3). Zero data leaves the network — payroll teams get instant discrepancy detection, compliance auditing, and custom queries.',
+        tags: ['Enterprise', 'Local AI', 'Built'],
+        statusTag: 'Built',
+        metrics: ['100% Local Processing', 'Zero Data Egress', '4 Analysis Modes'],
+        mainMetric: '0% Egress',
+        metricDesc: '100% On-Premises Air-Gapped LLM',
+        challenge: 'Corporate payroll departments spending days reconciling monthly salary spreadsheets across ERP versions could not use public LLM APIs due to strict PII and GDPR regulations.',
+        approach: 'Deployed locally-hosted Ollama (Gemma 3 7B) with client-side CSV/XLSX streaming parsers, enabling natural-language discrepancy auditing completely air-gapped on internal networks.',
+        whatWeBuilt: [
+          'Drag-drop file upload with side-by-side preview (CSV, XLSX)',
+          'Streaming LLM analysis via local Ollama instance (Gemma 3 7B)',
+          '4 analysis modes: discrepancy detection, summarisation, compliance check, custom query',
+          '100% local processing — zero data egress, enterprise-grade privacy'
+        ],
+        techStack: ['Next.js 14', 'TypeScript', 'Ollama (Gemma 3 7B)', 'PapaParse', 'XLSX', 'Tailwind CSS'],
+        outcome: 'Reduced payroll audit cycles from hours to seconds while guaranteeing zero byte egress of sensitive employee salary data outside the corporate perimeter.'
+      },
+      {
+        id: 'slashboard',
+        client: 'Slashboard',
+        industryId: 'fintech',
+        industry: 'Fintech & Enterprise',
+        title: 'Real-Time LLM Cost Observatory & Spend Attribution Platform',
+        subtitle: 'Sub-100ms Ingestion via LiteLLM Webhooks and TimescaleDB',
+        oneliner: 'Real-time LLM cost tracking and spend attribution dashboard powered by LiteLLM webhooks and TimescaleDB. We deploy it for clients running LLM APIs in production to give them visibility into every API call, every model, every dollar.',
+        tags: ['Our Product', 'AI Observability', 'Live'],
+        statusTag: 'Our Product',
+        isOurProduct: true,
+        metrics: ['Sub-100ms Dashboard Updates', '90K+ Log Capacity Tested', '20–40% Cost Savings Typical'],
+        mainMetric: '20–40%',
+        metricDesc: 'Typical Production Inference Cost Savings',
+        challenge: 'Enterprises scaling generative AI applications suffer from runaway API bills, lacking granular visibility into which teams, features, or prompt configurations drive excessive token expenditures.',
+        approach: 'Architected a high-throughput telemetry engine streaming LiteLLM webhooks via Redis Streams into TimescaleDB, rendering sub-100ms cost heatmaps and token attribution analytics.',
+        whatWeBuilt: [
+          'Real-time ingestion via LiteLLM webhooks with Redis Stream processing',
+          'Cost attribution by team, project, model, and feature',
+          'Interactive KPI dashboard: spend trends, cost heatmaps, prompt logs',
+          'Roadmap: anomaly detection, budget enforcement, forecasting'
+        ],
+        techStack: ['Next.js 15', 'React 19', 'FastAPI', 'PostgreSQL 16', 'TimescaleDB', 'Redis 7', 'Tremor', 'Recharts', 'Docker'],
+        outcome: 'Deployed in live enterprise environments to provide sub-100ms telemetry, immediately uncovering redundant queries and yielding 20–40% net inference cost reductions.'
+      },
+      {
+        id: 'smobler',
+        client: 'Smobler',
+        industryId: 'foodtech',
+        industry: 'FoodTech & Compliance',
+        title: 'AI-Powered Food Compliance Platform & Automated HACCP / FDA Nutrition Engine',
+        subtitle: 'Automating Food Regulatory Approvals from Weeks to Minutes',
+        oneliner: 'Transforms complex FDA regulatory requirements into an intuitive wizard-based experience — first-time food makers generate professional nutrition labels and HACCP plans in minutes, not weeks.',
+        tags: ['FoodTech', 'AI Compliance', 'Shipped'],
+        statusTag: 'Shipped',
+        metrics: ['FDA/USDA Compliant', 'Minutes vs. Weeks', '12-Week MVP'],
+        mainMetric: '12-Wk MVP',
+        metricDesc: 'From Concept to Shipped FDA Engine',
+        challenge: 'Artisan food manufacturers and CPG startups faced thousands of dollars in consultant fees and weeks of regulatory paperwork to generate compliant nutrition fact labels and HACCP plans.',
+        approach: 'Integrated USDA food databases with a GPT-4 compliance engine to build an interactive wizard validating recipes, calculating nutritional breakdown, and drafting HACCP critical control point documents.',
+        whatWeBuilt: [
+          'AI-generated FDA-compliant nutrition labels with USDA nutritional database integration',
+          'Automated HACCP plan builder with hazard analysis, CCPs, and corrective actions',
+          'Real-time compliance validation against FDA/USDA standards',
+          'Multi-format export: PDF, Word (DOCX), and high-resolution PNG',
+          'Contextual AI food safety assistant with step-aware guidance'
+        ],
+        techStack: ['React', 'TypeScript', 'Supabase', 'GPT-4', 'Tailwind CSS', 'PDFKit'],
+        outcome: 'Reduced compliance turnaround time from 3+ weeks of manual drafting to under 15 minutes, enabling food makers to safely take products from kitchen to retail shelves.'
+      },
+      {
+        id: 'halalchain',
+        client: 'HalalChain',
+        industryId: 'foodtech',
+        industry: 'FoodTech & Compliance',
+        title: 'Decentralized Blockchain Farm-to-Fork Traceability & Halal Certification',
+        subtitle: '5 Solidity Smart Contracts with Mobile QR Supply Chain Verification',
+        oneliner: "Decentralised farm-to-fork traceability platform. Five Solidity smart contracts record every stage of a product's lifecycle on-chain — consumers verify the full journey via QR code.",
+        tags: ['Supply Chain', 'Blockchain', 'Prototype'],
+        statusTag: 'Prototype',
+        metrics: ['5 Smart Contracts', '6 Role-Based Portals', 'On-Chain Verification'],
+        mainMetric: '5 Contracts',
+        metricDesc: 'Immutable On-Chain Verification',
+        challenge: 'Global Halal food supply chains suffer from counterfeit certificates, lack of cold-chain temperature verification, and fraud during multi-party handoffs from abattoir to retail shelf.',
+        approach: 'Engineered 5 interconnected Solidity smart contracts logging supply chain checkpoints, paired with offline-capable QR mobile scanners and 6 distinct role-based stakeholder portals.',
+        whatWeBuilt: [
+          '5 interlocking Solidity contracts: AnimalRegistry, SlaughterProcess, ProcessingBatch, SupplyChain, HalalCertification',
+          '6 role-specific dashboards (Farmer, Slaughterhouse, Processor, Distributor, Retailer, Consumer)',
+          'Mobile-first QR scanning suite with offline queue + sync',
+          'Real-time compliance monitor: temperature, certification expiry, cross-contamination, segregation'
+        ],
+        techStack: ['Solidity', 'Hardhat', 'ethers.js', 'React 18', 'TypeScript', 'shadcn/ui', 'MetaMask'],
+        outcome: 'Delivered a complete decentralized traceability prototype enabling consumers and auditors to verify authentic supply chain provenance in real time via QR scan.'
+      }
+    ];
+
+    const FILTER_TABS = [
+      { id: 'all', label: 'All Stories', count: 11 },
+      { id: 'hr', label: 'HR Tech & Talent', count: 4 },
+      { id: 'healthcare', label: 'Healthcare & Life Sciences', count: 2 },
+      { id: 'fintech', label: 'Fintech & Enterprise', count: 3 },
+      { id: 'foodtech', label: 'FoodTech & Compliance', count: 2 }
+    ];
+
     function CaseStudiesPage() {
-      const caseStudies = [
-        {
-          id: 'careo-health',
-          client: 'CareO Health',
-          industry: 'Healthcare & Clinical Care',
-          title: 'HIPAA-Compliant Ambient Clinical Note Generation for 40+ Medical Specialties',
-          metric: '72%',
-          metricDesc: 'Reduction in Nursing Documentation Time',
-          challenge: 'Nurses and clinical staff spent over 2.5 hours per shift transcribing patient consultations into EHR systems, leading to severe clinician burnout and billing code entry errors.',
-          approach: 'Engineered a HIPAA-compliant ambient acoustic-to-structured clinical pipeline using fine-tuned open-weight medical models on an air-gapped private VPC. The system automatically structures live conversations into FHIR/HL7 schemas with human validation checkpoints.',
-          techStack: ['Whisper-Large-v3', 'vLLM', 'FastAPI', 'AWS Bedrock VPC', 'Langfuse', 'Epic EHR REST API'],
-          outcome: 'Cut nursing documentation time by 72% across 14 hospital departments, achieving 99.4% clinical entity accuracy and saving an estimated $3.2M in annual nursing overtime.'
-        },
-        {
-          id: 'impress-ai',
-          client: 'Impress AI',
-          industry: 'HR Tech & Enterprise Talent',
-          title: 'Automated 7-Dimension Video Interview Competency Scoring Engine',
-          metric: '100%',
-          metricDesc: 'Elimination of Manual First-Round Review',
-          challenge: 'Fortune 500 recruitment platform overwhelmed by 50,000+ candidate video submissions per month, taking human talent teams an average of 14 days per initial review stage.',
-          approach: 'Architected a multimodal evaluation state machine assessing speech cadence, structured response coherence, technical domain keywords, and rubric-based behavioral competency metrics with deterministic bias mitigation.',
-          techStack: ['Claude 3.7 Sonnet', 'PyTorch', 'FFmpeg Pipeline', 'Qdrant Vector DB', 'Next.js', 'PostgreSQL'],
-          outcome: 'Shortened candidate turnaround from 14 days down to 60 seconds. Eliminated 100% of candidate scoring backlogs with a 94% alignment rate to senior human recruiter judgment.'
-        },
-        {
-          id: 'fintech-routing',
-          client: 'Global Fintech Scaleup',
-          industry: 'Financial Services & Payments',
-          title: '38% LLM Inference Cost Reduction via Intelligent Model Routing & Caching',
-          metric: '38%',
-          metricDesc: 'Reduction in Monthly LLM Inference Spend',
-          challenge: 'Fast-growing financial SaaS was spending $120k+/month across multiple commercial LLM endpoints with high latency variance and no per-tenant cost attribution.',
-          approach: 'Implemented SlashLLM Gateway with semantic prompt caching, automated small-model classification fallback, and real-time observability telemetry across 8 core product features.',
-          techStack: ['SlashLLM Gateway', 'Redis Enterprise', 'Llama-3.3-70B', 'GPT-4o', 'OpenTelemetry', 'Golang'],
-          outcome: '38% reduction in monthly AI inference spend ($45,600/month saved) and 4.2x latency improvement for high-volume customer queries.'
-        },
-        {
-          id: 'logistics-defect',
-          client: 'Tier-1 Industrial Logistics',
-          industry: 'Manufacturing & Supply Chain',
-          title: 'Real-Time Edge Computer Vision & Multi-Agent Dispatch for Sorting Facilities',
-          metric: '85%',
-          metricDesc: 'Reduction in Manual Defect Audits',
-          challenge: 'High-speed package distribution centers processing 200,000 parcels daily suffered frequent belt jams and label degradation requiring manual intervention.',
-          approach: 'Deployed TensorRT-accelerated edge vision models on local NVIDIA Jetson units coupled with autonomous supervisor agents managing automated conveyor rerouting.',
-          techStack: ['YOLOv10', 'TensorRT', 'NVIDIA Jetson', 'MQTT', 'Docker Edge', 'Python'],
-          outcome: '85% decrease in manual belt audit interventions, zero parcel misrouting over 6 consecutive months, and 12% faster overall facility throughput.'
-        }
-      ];
+      const [activeFilter, setActiveFilter] = useState('all');
+
+      const filteredStories = activeFilter === 'all'
+        ? CASE_STUDIES
+        : CASE_STUDIES.filter(cs => cs.industryId === activeFilter);
 
       return (
         <React.Fragment>
@@ -425,68 +990,140 @@
             
             {/* Editorial Hero */}
             <section style={{ padding: '72px 24px 48px', textAlign: 'center', background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)' }}>
-              <div style={{ maxWidth: 840, margin: '0 auto' }}>
-                <span className="font-mono" style={{ fontSize: 12, color: 'var(--color-obsidian-ink)', fontWeight: 600, display: 'block', marginBottom: 12 }}>
-                  Customer Stories & Proven Proof
-                </span>
-                <h1 className="font-display" style={{ fontSize: 'clamp(42px, 4.5vw, 64px)', fontWeight: 700, color: 'var(--color-obsidian-ink)', marginBottom: 18, lineHeight: 1.06 }}>
+              <div style={{ maxWidth: 880, margin: '0 auto' }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#f5f3ff', border: '1px solid rgba(99, 91, 255, 0.2)', borderRadius: 'var(--radius-tags)', padding: '6px 16px', marginBottom: 20 }}>
+                  <span className="font-mono" style={{ fontSize: 12, color: 'var(--color-iris-pulse)', fontWeight: 700, letterSpacing: '0.05em' }}>
+                    Customer Stories & Production Proof · 11 Shipped Projects
+                  </span>
+                </div>
+                <h1 className="font-display" style={{ fontSize: 'clamp(40px, 4.5vw, 64px)', fontWeight: 700, color: 'var(--color-obsidian-ink)', marginBottom: 18, lineHeight: 1.06 }}>
                   Measurable AI Impact <span className="gradient-text-purple">in Production</span>
                 </h1>
-                <p style={{ fontSize: 17.5, color: 'var(--color-fog)', lineHeight: 1.65, maxWidth: 660, margin: '0 auto' }}>
-                  Every case study follows our rigorous consulting standard: Challenge → Engineering Approach → Technology Stack → Implementation → Measurable Business Outcome.
+                <p style={{ fontSize: 18, color: 'var(--color-fog)', lineHeight: 1.65, maxWidth: 720, margin: '0 auto' }}>
+                  Authentic engineering case studies from production systems we've architected across HR Tech, Healthcare, Fintech, and FoodTech.
                 </p>
               </div>
             </section>
 
-            {/* Case Studies List */}
+            {/* Filter Subnav Ribbon */}
+            <div style={{ position: 'sticky', top: 64, zIndex: 900, background: 'rgba(255, 255, 255, 0.96)', backdropFilter: 'blur(16px)', borderBottom: '1px solid var(--border-hairline)' }}>
+              <div className="subnav-scroll" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '12px 24px', display: 'flex', gap: 10, overflowX: 'auto', alignItems: 'center' }}>
+                {FILTER_TABS.map(tab => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveFilter(tab.id)}
+                    className={`filter-tab ${activeFilter === tab.id ? 'is-active' : ''}`}
+                  >
+                    <span>{tab.label}</span>
+                    <span className="tab-badge">({tab.count})</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Case Studies Catalog */}
             <section style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '56px 24px 96px' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
-                {caseStudies.map(cs => (
+                {filteredStories.map(cs => (
                   <div key={cs.id} id={cs.id} className="card-editorial">
                     
-                    {/* Header Row */}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 20, borderBottom: '1px solid var(--border-hairline)', paddingBottom: 24, marginBottom: 28 }}>
-                      <div>
-                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-tags)', padding: '4px 14px', marginBottom: 12 }}>
-                          <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-obsidian-ink)', fontWeight: 600 }}>{cs.client} · {cs.industry}</span>
+                    {/* Top Row: Tags & Product Badge */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 20 }}>
+                      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-tags)', padding: '5px 14px', background: '#fafafa' }}>
+                          <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-obsidian-ink)', fontWeight: 700 }}>{cs.client} · {cs.industry}</span>
                         </div>
-                        <h2 className="font-display" style={{ fontSize: 28, fontWeight: 600, color: 'var(--color-obsidian-ink)', lineHeight: 1.2, maxWidth: 780 }}>
+                        {cs.tags.map(tag => (
+                          <span key={tag} style={{ ...getTagPillStyle(tag), padding: '4px 12px', borderRadius: 'var(--radius-tags)', fontSize: 11.5, fontWeight: 600, fontFamily: 'var(--font-mono)' }}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {cs.note && (
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 12px', background: 'rgba(74,222,128,0.1)', border: '1px solid rgba(74,222,128,0.25)', borderRadius: 'var(--radius-tags)' }}>
+                          <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#15803d' }}></div>
+                          <span style={{ fontSize: 11, color: '#15803d', fontWeight: 600, fontFamily: 'var(--font-mono)' }}>{cs.note}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Header Row */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 24, borderBottom: '1px solid var(--border-hairline)', paddingBottom: 24, marginBottom: 28 }}>
+                      <div style={{ maxWidth: 820 }}>
+                        <h2 className="font-display" style={{ fontSize: 'clamp(24px, 2.6vw, 32px)', fontWeight: 700, color: 'var(--color-obsidian-ink)', lineHeight: 1.18, marginBottom: 8 }}>
                           {cs.title}
                         </h2>
+                        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--color-iris-pulse)', letterSpacing: '0.04em', marginBottom: 12, fontWeight: 700 }}>
+                          {cs.subtitle}
+                        </p>
+                        <p style={{ fontSize: 16, color: 'var(--color-fog)', lineHeight: 1.65 }}>
+                          {cs.oneliner}
+                        </p>
                       </div>
-                      <div style={{ background: 'linear-gradient(135deg, #fafafa 0%, #f5f3ff 100%)', border: '1px solid rgba(99, 91, 255, 0.25)', borderRadius: 'var(--radius-cards)', padding: '16px 26px', textAlign: 'center', minWidth: 160, boxShadow: '0 4px 14px rgba(99,91,255,0.08)' }}>
-                        <p className="font-display" style={{ fontSize: 34, fontWeight: 700, color: 'var(--color-obsidian-ink)', lineHeight: 1 }}>{cs.metric}</p>
-                        <p className="font-mono" style={{ fontSize: 10.5, color: 'var(--color-iris-pulse)', marginTop: 4, fontWeight: 600 }}>{cs.metricDesc}</p>
+
+                      {/* Main Metric Box */}
+                      <div style={{ background: 'linear-gradient(135deg, #fafafa 0%, #f5f3ff 100%)', border: '1px solid rgba(99, 91, 255, 0.25)', borderRadius: 'var(--radius-cards)', padding: '18px 24px', textAlign: 'center', minWidth: 170, boxShadow: '0 4px 14px rgba(99,91,255,0.08)' }}>
+                        <p className="font-display" style={{ fontSize: 32, fontWeight: 700, color: 'var(--color-obsidian-ink)', lineHeight: 1 }}>{cs.mainMetric}</p>
+                        <p className="font-mono" style={{ fontSize: 10.5, color: 'var(--color-iris-pulse)', marginTop: 6, fontWeight: 700 }}>{cs.metricDesc}</p>
                       </div>
                     </div>
 
-                    {/* Consulting Steps Grid */}
+                    {/* Consulting Steps: Challenge & Approach */}
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 24 }} className="grid-2col">
-                      <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '20px 22px' }}>
-                        <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)', fontWeight: 600, marginBottom: 6 }}>01. The Challenge</p>
-                        <p style={{ fontSize: 14.5, color: 'var(--color-fog)', lineHeight: 1.6 }}>{cs.challenge}</p>
+                      <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '22px 24px' }}>
+                        <p className="font-mono" style={{ fontSize: 11, color: '#8b5cf6', fontWeight: 700, letterSpacing: '0.08em', marginBottom: 8 }}>01. THE CHALLENGE</p>
+                        <p style={{ fontSize: 14.5, color: '#334155', lineHeight: 1.65 }}>{cs.challenge}</p>
                       </div>
 
-                      <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '20px 22px' }}>
-                        <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-obsidian-ink)', fontWeight: 600, marginBottom: 6 }}>02. Engineering Approach</p>
-                        <p style={{ fontSize: 14.5, color: 'var(--color-obsidian-ink)', lineHeight: 1.6 }}>{cs.approach}</p>
+                      <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '22px 24px' }}>
+                        <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-iris-pulse)', fontWeight: 700, letterSpacing: '0.08em', marginBottom: 8 }}>02. ENGINEERING APPROACH</p>
+                        <p style={{ fontSize: 14.5, color: '#334155', lineHeight: 1.65 }}>{cs.approach}</p>
+                      </div>
+                    </div>
+
+                    {/* What We Built List */}
+                    <div style={{ background: '#ffffff', border: '1px solid rgba(99, 91, 255, 0.16)', borderRadius: 'var(--radius-cards)', padding: '24px 28px', marginBottom: 24, boxShadow: '0 2px 10px rgba(0,0,0,0.02)' }}>
+                      <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-obsidian-ink)', fontWeight: 700, letterSpacing: '0.08em', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <Icon name="layers" size={15} color="var(--color-iris-pulse)" /> WHAT WE ARCHITECTED & BUILT
+                      </p>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                        {cs.whatWeBuilt.map((item, idx) => (
+                          <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                            <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-iris-pulse)', minWidth: 22, paddingTop: 2, fontWeight: 700 }}>
+                              {String(idx + 1).padStart(2, '0')}.
+                            </span>
+                            <span style={{ fontSize: 14, color: '#334155', lineHeight: 1.55 }}>{item}</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
 
                     {/* Tech Stack Bar & Business Outcome */}
                     <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-cards)', padding: '22px 26px' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 16, borderBottom: '1px solid var(--border-hairline)', paddingBottom: 14 }}>
-                        <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-obsidian-ink)', fontWeight: 600 }}>Technology Stack</span>
+                        <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-obsidian-ink)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
+                          <Icon name="code" size={14} color="var(--color-iris-pulse)" /> Technology Stack
+                        </span>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
                           {cs.techStack.map((tech, tIdx) => (
-                            <span key={tIdx} style={{ background: '#ffffff', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-tags)', padding: '4px 12px', fontSize: 12.5, fontWeight: 500, color: 'var(--color-obsidian-ink)' }}>{tech}</span>
+                            <span key={tIdx} style={{ background: '#ffffff', border: '1px solid rgba(1, 1, 16, 0.12)', borderRadius: 'var(--radius-tags)', padding: '4px 12px', fontSize: 12.5, fontWeight: 500, color: 'var(--color-obsidian-ink)' }}>
+                              {tech}
+                            </span>
                           ))}
                         </div>
                       </div>
 
-                      <div>
-                        <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-obsidian-ink)', fontWeight: 600, marginBottom: 4 }}>03. Proven Business Outcome</p>
-                        <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--color-obsidian-ink)', lineHeight: 1.55 }}>{cs.outcome}</p>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
+                        <div>
+                          <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-obsidian-ink)', fontWeight: 700, marginBottom: 6 }}>03. PROVEN BUSINESS OUTCOME</p>
+                          <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--color-obsidian-ink)', lineHeight: 1.55, maxWidth: 860 }}>
+                            {cs.outcome}
+                          </p>
+                        </div>
+                        <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '8px 18px', fontSize: 13.5, whiteSpace: 'nowrap' }}>
+                          Discuss Similar Project <Icon name="arrowRight" size={13} />
+                        </a>
                       </div>
                     </div>
 

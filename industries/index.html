@@ -382,32 +382,32 @@
   <div id="root"></div>
 
   <script type="text/babel">
-    const { useState, useEffect } = React;
+    const { useState, useEffect, useRef } = React;
 
-    const Icon = ({ name, size = 18, color = 'currentColor' }) => {
+    const Icon = ({ name, size=18, color='currentColor', className='' }) => {
       const paths = {
-        arrowRight: <path d="M5 12h14M12 5l7 7-7 7" />,
-        chevronDown: <path d="M6 9l6 6 6-6" />,
-        sparkles: <><path d="M12 3l1.9 4.9L19 10l-4.1 3.1L16 18l-4-2.8L8 18l1.1-4.9L5 10l5.1-2.1z" /><path d="M19 3l.8 2.2L22 6l-1.8 1.4.5 2.2-1.7-1.3L17.3 9.6l.5-2.2L16 6l2.2-.8z" /></>,
-        agent: <><rect x="3" y="11" width="18" height="10" rx="2" /><circle cx="12" cy="5" r="3" /><line x1="12" y1="8" x2="12" y2="11" /><circle cx="8.5" cy="16" r="1" fill={color} /><circle cx="15.5" cy="16" r="1" fill={color} /></>,
-        engineering: <><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /><line x1="14" y1="4" x2="10" y2="20" /></>,
-        infra: <><rect x="2" y="2" width="20" height="8" rx="2" /><rect x="2" y="14" width="20" height="8" rx="2" /><line x1="6" y1="6" x2="6.01" y2="6" /><line x1="6" y1="18" x2="6.01" y2="18" /></>,
-        observability: <><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z" /><circle cx="12" cy="12" r="3" /></>,
-        data: <><ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" /><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" /></>,
-        gateway: <><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></>,
-        shield: <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></>,
-        finance: <><rect x="2" y="4" width="20" height="16" rx="2" /><line x1="2" y1="10" x2="22" y2="10" /></>,
-        health: <><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></>,
-        saas: <><polygon points="12 2 2 7 12 12 22 7 12 2" /><polyline points="2 17 12 22 22 17" /><polyline points="2 12 12 17 22 12" /></>,
-        retail: <><circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" /></>,
-        mfg: <><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /><path d="M9 21V9" /></>,
-        prof: <><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="8.5" cy="7" r="4" /><line x1="20" y1="8" x2="20" y2="14" /><line x1="23" y1="11" x2="17" y2="11" /></>,
-        cost: <><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></>,
-        check: <polyline points="20 6 9 17 4 12" />
+        arrowRight: <path d="M5 12h14M12 5l7 7-7 7"/>,
+        chevronDown: <path d="M6 9l6 6 6-6"/>,
+        sparkles: <><path d="M12 3l1.9 4.9L19 10l-4.1 3.1L16 18l-4-2.8L8 18l1.1-4.9L5 10l5.1-2.1z"/><path d="M19 3l.8 2.2L22 6l-1.8 1.4.5 2.2-1.7-1.3L17.3 9.6l.5-2.2L16 6l2.2-.8z"/></>,
+        agent: <><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="11"/><circle cx="8.5" cy="16" r="1" fill={color}/><circle cx="15.5" cy="16" r="1" fill={color}/></>,
+        engineering: <><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></>,
+        infra: <><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></>,
+        observability: <><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></>,
+        data: <><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></>,
+        gateway: <><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></>,
+        shield: <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></>,
+        finance: <><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></>,
+        health: <><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></>,
+        saas: <><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></>,
+        retail: <><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></>,
+        mfg: <><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></>,
+        prof: <><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></>,
+        cost: <><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></>,
+        check: <polyline points="20 6 9 17 4 12"/>
       };
       return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0 }}>
-          {paths[name] || <circle cx="12" cy="12" r="9" />}
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0 }}>
+          {paths[name] || <circle cx="12" cy="12" r="9"/>}
         </svg>
       );
     };
@@ -423,32 +423,314 @@
       </div>
     );
 
-    const GlobalNav = () => {
+    /* Header Navigation (White, 64px, Hairline Border) */
+    const GlobalNav = ({ activePage = 'industries' }) => {
+      const [openDropdown, setOpenDropdown] = React.useState(null);
+      const timerRef = React.useRef(null);
+      const currentPath = typeof window !== 'undefined' ? window.location.pathname.toLowerCase() : '';
+
+      const isServicesActive = activePage === 'services' || currentPath.includes('/services');
+      const isIndustriesActive = activePage === 'industries' || currentPath.includes('/industries');
+      const isProductsActive = activePage === 'products' || currentPath.includes('/products');
+      const isSolutionsActive = activePage === 'solutions' || currentPath.includes('/solutions');
+      const isStoriesActive = activePage === 'stories' || currentPath.includes('/casestudies') || currentPath.includes('/case-studies');
+      const isInsightsActive = activePage === 'insights' || currentPath.includes('/blog');
+      const isCompanyActive = activePage === 'company' || currentPath.includes('/about');
+
+      const handleMouseEnter = (name) => {
+        if (timerRef.current) {
+          clearTimeout(timerRef.current);
+          timerRef.current = null;
+        }
+        setOpenDropdown(name);
+      };
+
+      const handleMouseLeave = () => {
+        if (timerRef.current) {
+          clearTimeout(timerRef.current);
+        }
+        timerRef.current = setTimeout(() => {
+          setOpenDropdown(null);
+        }, 180);
+      };
+
+      const getCoverDiameter = (width, height, x, y) => {
+        return Math.ceil(
+          2 * Math.max(
+            Math.hypot(x, y),
+            Math.hypot(width - x, y),
+            Math.hypot(x, height - y),
+            Math.hypot(width - x, height - y)
+          )
+        );
+      };
+
+      const NavSubItem = ({ item }) => {
+        const itemRef = React.useRef(null);
+        const [hovered, setHovered] = React.useState(false);
+        const [origin, setOrigin] = React.useState({ x: 0, y: 0 });
+        const [coverSize, setCoverSize] = React.useState(0);
+
+        const updateOriginFromPointer = (e) => {
+          const node = itemRef.current;
+          if (!node) return;
+          const rect = node.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          setOrigin({ x, y });
+          setCoverSize(getCoverDiameter(rect.width, rect.height, x, y));
+        };
+
+        const handlePointerEnter = (e) => {
+          updateOriginFromPointer(e);
+          setHovered(true);
+        };
+
+        const handlePointerLeave = () => {
+          setHovered(false);
+        };
+
+        return (
+          <a
+            ref={itemRef}
+            href={item.href}
+            onPointerEnter={handlePointerEnter}
+            onPointerLeave={handlePointerLeave}
+            style={{
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: 10,
+              padding: '9px 11px',
+              borderRadius: 'var(--radius-cards)',
+              textDecoration: 'none',
+              overflow: 'hidden',
+              transition: 'box-shadow 0.25s ease'
+            }}
+            className="nav-sub-item"
+          >
+            <span
+              style={{
+                position: 'absolute',
+                left: origin.x,
+                top: origin.y,
+                width: coverSize || 10,
+                height: coverSize || 10,
+                borderRadius: '50%',
+                transform: `translate(-50%, -50%) scale(${hovered && coverSize > 0 ? 1 : 0})`,
+                transformOrigin: 'center',
+                background: 'linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%)',
+                transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
+                pointerEvents: 'none',
+                zIndex: 0,
+                opacity: hovered ? 1 : 0
+              }}
+            />
+
+            <div
+              style={{
+                position: 'relative',
+                zIndex: 1,
+                width: 30,
+                height: 30,
+                borderRadius: 6,
+                background: hovered ? 'rgba(255, 255, 255, 0.25)' : (item.bg || '#f0f0f2'),
+                border: `1px solid ${hovered ? 'rgba(255, 255, 255, 0.45)' : (item.border || 'transparent')}`,
+                color: hovered ? '#ffffff' : (item.color || 'var(--color-obsidian-ink)'),
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+                boxShadow: hovered ? '0 2px 8px rgba(0,0,0,0.15)' : 'none',
+                transform: hovered ? 'scale(1.08)' : 'scale(1)',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+              }}
+            >
+              <Icon name={item.icon} size={15} color={hovered ? '#ffffff' : (item.color || 'var(--color-obsidian-ink)')} />
+            </div>
+
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <p
+                style={{
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: hovered ? '#ffffff' : 'var(--color-obsidian-ink)',
+                  marginBottom: 2,
+                  transition: 'color 0.2s ease',
+                  lineHeight: 1.25
+                }}
+              >
+                {item.title}
+              </p>
+              <p
+                style={{
+                  fontSize: 11.5,
+                  color: hovered ? 'rgba(255, 255, 255, 0.92)' : 'var(--color-fog)',
+                  lineHeight: 1.3,
+                  transition: 'color 0.2s ease'
+                }}
+              >
+                {item.desc}
+              </p>
+            </div>
+          </a>
+        );
+      };
+
+      const servicesMenu = [
+        { title: 'AI & Generative AI', desc: 'Enterprise LLMs, SLMs, multimodal & RAG architectures', href: '/Services.html#ai-genai', icon: 'sparkles', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'AI Agents & Workflows', desc: 'Autonomous & human-in-the-loop multi-agent systems', href: '/Services.html#ai-agents', icon: 'agent', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' },
+        { title: 'AI Engineering', desc: 'From prototype to scale: architecture, evals & production code', href: '/Services.html#ai-engineering', icon: 'engineering', color: '#a855f7', bg: 'rgba(168, 85, 247, 0.12)', border: 'rgba(168, 85, 247, 0.25)' },
+        { title: 'AI Infrastructure & DevOps', desc: 'GPU orchestration, high-throughput model serving & clusters', href: '/Services.html#ai-infrastructure', icon: 'infra', color: '#fb68c3', bg: 'rgba(251, 104, 195, 0.12)', border: 'rgba(251, 104, 195, 0.25)' },
+        { title: 'AI Observability & Ops', desc: 'Tracing, latency, token costs, drift & guardrail telemetry', href: '/Services.html#ai-observability', icon: 'observability', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' },
+        { title: 'Data & Analytics for AI', desc: 'Vector pipelines, ETL, real-time embeddings & feature stores', href: '/Services.html#data-analytics', icon: 'data', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.25)' }
+      ];
+
+      const industriesMenu = [
+        { title: 'Financial Services', desc: 'Fraud detection, regulatory intelligence, AI customer ops', href: '/Industries.html#financial-services', icon: 'finance', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' },
+        { title: 'Healthcare & Life Sciences', desc: 'Clinical document processing, HIPAA patient assistants', href: '/Industries.html#healthcare', icon: 'health', color: '#fb68c3', bg: 'rgba(251, 104, 195, 0.12)', border: 'rgba(251, 104, 195, 0.25)' },
+        { title: 'SaaS & Technology', desc: 'Embedded AI copilots, multi-tenant agent infra, cost routing', href: '/Industries.html#saas', icon: 'saas', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'Retail & E-Commerce', desc: 'Conversational commerce, recommendation engines, support', href: '/Industries.html#retail', icon: 'retail', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.25)' },
+        { title: 'Manufacturing & Logistics', desc: 'Supply chain intelligence, predictive diagnosis agents', href: '/Industries.html#manufacturing', icon: 'mfg', color: '#a855f7', bg: 'rgba(168, 85, 247, 0.12)', border: 'rgba(168, 85, 247, 0.25)' },
+        { title: 'Professional Services', desc: 'Contract intelligence, research agents, knowledge search', href: '/Industries.html#professional-services', icon: 'prof', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' }
+      ];
+
+      const productsMenu = [
+        { title: 'SlashLLM Gateway', desc: 'Unified API, model routing, semantic caching & failover', href: '/Products.html#gateway', icon: 'gateway', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'SlashLLM Observability', desc: 'Real-time token tracing, cost attribution & latency monitoring', href: '/Products.html#observability', icon: 'observability', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' },
+        { title: 'SlashLLM AI Platform', desc: 'Developer toolkit for prompt ops, model evaluation & CI/CD', href: '/Products.html#ai-platform', icon: 'sparkles', color: '#a855f7', bg: 'rgba(168, 85, 247, 0.12)', border: 'rgba(168, 85, 247, 0.25)' },
+        { title: 'SlashLLM Agent Platform', desc: 'Orchestration, state management & tool sandboxing for agents', href: '/Products.html#agent-platform', icon: 'agent', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' }
+      ];
+
+      const solutionsMenu = [
+        { title: 'Enterprise AI Transformation', desc: 'Full-stack AI adoption strategy and legacy modernization', href: '/Solutions.html#transformation', icon: 'sparkles', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'AI Cost & Latency Optimization', desc: 'Reduce inference spend by 30–60% without quality degradation', href: '/Solutions.html#cost-optimization', icon: 'cost', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.25)' },
+        { title: 'LLM Governance & Guardrails', desc: 'Safety policies, PII redaction, red-teaming & compliance', href: '/Solutions.html#governance', icon: 'shield', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' },
+        { title: 'Private & Hybrid AI Infra', desc: 'On-premise & air-gapped VPC deployments with open weights', href: '/Solutions.html#private-ai', icon: 'infra', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' },
+        { title: 'Intelligent Document AI', desc: 'Automated extraction, structuring & synthesis of enterprise data', href: '/Solutions.html#document-ai', icon: 'data', color: '#fb68c3', bg: 'rgba(251, 104, 195, 0.12)', border: 'rgba(251, 104, 195, 0.25)' }
+      ];
+
       const navLinkStyle = {
-        color: 'var(--color-obsidian-ink)', fontSize: 14, fontWeight: 400, padding: '8px 12px', display: 'inline-flex',
-        alignItems: 'center', gap: 4, background: 'transparent', border: 'none', cursor: 'pointer', letterSpacing: '-0.02em'
+        color: 'var(--color-obsidian-ink)',
+        fontSize: 14,
+        fontWeight: 400,
+        padding: '8px 12px',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 4,
+        background: 'transparent',
+        border: 'none',
+        cursor: 'pointer',
+        letterSpacing: '-0.02em',
+        transition: 'color 0.15s ease'
       };
 
       return (
-        <header style={{ position: 'sticky', top: 0, background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)', height: 64, display: 'flex', alignItems: 'center', zIndex: 1000 }}>
+        <header style={{
+          position: 'sticky',
+          top: 0,
+          background: 'var(--color-canvas)',
+          borderBottom: '1px solid var(--border-hairline)',
+          height: 64,
+          display: 'flex',
+          alignItems: 'center',
+          zIndex: 1000
+        }}>
           <div style={{ maxWidth: 'var(--page-max-width)', width: '100%', margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            
             <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
               <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style={{ height: 28, width: 'auto', objectFit: 'contain', display: 'block' }} />
             </a>
 
-                        <nav className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-              <a href="/Services.html" style={navLinkStyle}>What We Do</a>
-              <a href="/Industries.html" className="nav-link-active" style={navLinkStyle}>Industries</a>
-              <a href="/Products.html" style={navLinkStyle}>Products</a>
-              <a href="/Solutions.html" style={navLinkStyle}>Solutions</a>
-              <a href="/CaseStudies.html" style={navLinkStyle}>Stories</a>
-              <a href="/blog" style={navLinkStyle}>Insights</a>
-              <a href="/About.html" style={navLinkStyle}>Company</a>
+            <nav className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              
+              {/* What We Do */}
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('services')}
+                   onMouseLeave={handleMouseLeave}>
+                 <button style={navLinkStyle} className={isServicesActive ? 'nav-link-active' : ''} onClick={() => setOpenDropdown(openDropdown === 'services' ? null : 'services')}>
+                  What We Do <Icon name="chevronDown" size={11} color="var(--color-fog)" />
+                </button>
+                <div className={`nav-dropdown ${openDropdown === 'services' ? 'is-open' : ''}`}
+                     style={{ left: 0, width: 560, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Capabilities & Services</span>
+                    <a href="/Services.html" className="link-editorial" style={{ fontSize: 12 }}>View All →</a>
+                  </div>
+                  {servicesMenu.map((item, idx) => (
+                    <NavSubItem key={idx} item={item} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Industries */}
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('industries')}
+                   onMouseLeave={handleMouseLeave}>
+                <button style={navLinkStyle} className={isIndustriesActive ? 'nav-link-active' : ''} onClick={() => setOpenDropdown(openDropdown === 'industries' ? null : 'industries')}>
+                  Industries <Icon name="chevronDown" size={11} color="var(--color-fog)" />
+                </button>
+                <div className={`nav-dropdown ${openDropdown === 'industries' ? 'is-open' : ''}`}
+                     style={{ left: '-40px', width: 560, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Industry Verticals</span>
+                    <a href="/Industries.html" className="link-editorial" style={{ fontSize: 12 }}>All Sectors →</a>
+                  </div>
+                  {industriesMenu.map((item, idx) => (
+                    <NavSubItem key={idx} item={item} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Products & Platforms */}
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('products')}
+                   onMouseLeave={handleMouseLeave}>
+                <button style={navLinkStyle} className={isProductsActive ? 'nav-link-active' : ''} onClick={() => setOpenDropdown(openDropdown === 'products' ? null : 'products')}>
+                  Products <Icon name="chevronDown" size={11} color="var(--color-fog)" />
+                </button>
+                <div className={`nav-dropdown ${openDropdown === 'products' ? 'is-open' : ''}`}
+                     style={{ left: '-40px', width: 520, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Proprietary Platforms</span>
+                    <a href="/Products.html" className="link-editorial" style={{ fontSize: 12 }}>Explore Suite →</a>
+                  </div>
+                  {productsMenu.map((item, idx) => (
+                    <NavSubItem key={idx} item={item} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Solutions */}
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('solutions')}
+                   onMouseLeave={handleMouseLeave}>
+                <button style={navLinkStyle} className={isSolutionsActive ? 'nav-link-active' : ''} onClick={() => setOpenDropdown(openDropdown === 'solutions' ? null : 'solutions')}>
+                  Solutions <Icon name="chevronDown" size={11} color="var(--color-fog)" />
+                </button>
+                <div className={`nav-dropdown ${openDropdown === 'solutions' ? 'is-open' : ''}`}
+                     style={{ left: '-40px', width: 520, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Enterprise Solutions</span>
+                    <a href="/Solutions.html" className="link-editorial" style={{ fontSize: 12 }}>All Solutions →</a>
+                  </div>
+                  {solutionsMenu.map((item, idx) => (
+                    <NavSubItem key={idx} item={item} />
+                  ))}
+                </div>
+              </div>
+
+              <a href="/CaseStudies.html" className={isStoriesActive ? 'nav-link-active' : ''} style={navLinkStyle}>Stories</a>
+              <a href="/blog" className={isInsightsActive ? 'nav-link-active' : ''} style={navLinkStyle}>Insights</a>
+              <a href="/About.html" className={isCompanyActive ? 'nav-link-active' : ''} style={navLinkStyle}>Company</a>
             </nav>
 
-            <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '9px 20px', fontSize: 14 }}>
-              Talk to an AI Expert <Icon name="arrowRight" size={14} />
-            </a>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '8px 18px', fontSize: 13.5 }}>
+                Talk to an AI Expert <Icon name="arrowRight" size={13} />
+              </a>
+            </div>
+
           </div>
         </header>
       );
@@ -474,7 +756,7 @@
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14 }}>
             <p style={{ color: 'var(--color-fog)', fontSize: 12.5 }}>© 2026 SlashLLM Inc. All rights reserved. Restraint as authority.</p>
-            <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)' }}>San Francisco · London · Singapore · Bengaluru</span>
+
           </div>
         </div>
       </footer>

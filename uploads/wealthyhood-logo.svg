@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 40" fill="none">
+  <!-- Wealthyhood Shield / Lock Icon -->
+  <rect x="2" y="4" width="32" height="32" rx="8" fill="url(#wh-grad)"/>
+  <path d="M18 10L25 14V20C25 24.5 21.5 28.2 18 29.5C14.5 28.2 11 24.5 11 20V14L18 10Z" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M15 19L17.5 21.5L21 17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Typography -->
+  <text x="44" y="26" font-family="Plus Jakarta Sans, Inter, system-ui, sans-serif" font-weight="800" font-size="20" fill="#0F172A" letter-spacing="-0.03em">Wealthyhood</text>
+  <defs>
+    <linearGradient id="wh-grad" x1="2" y1="4" x2="34" y2="36" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10B981"/>
+      <stop offset="1" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+</svg>

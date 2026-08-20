@@ -1141,9 +1141,7 @@
               <p style={{ color: 'var(--color-fog)', fontSize: 12.5 }}>
                 © 2026 SlashLLM Inc. All rights reserved. Restraint as authority.
               </p>
-              <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)' }}>
-                San Francisco · London · Singapore · Bengaluru
-              </span>
+
             </div>
 
           </div>
@@ -1283,15 +1281,14 @@
       );
     };
 
-    /* Partner Brands Strip (Monochrome on White Canvas) */
+    /* Partner Brands Strip (Vibrant Colored Actual Company Logos) */
     const LogoBar = () => {
       const logos = [
-        { type: 'img', name: 'impress.ai', src: '/uploads/imp.svg' },
-        { type: 'img', name: 'Smobler', src: '/uploads/Smobler_logo-03.png' },
-        { type: 'img', name: 'CareO', src: '/uploads/CareO_Logo.webp' },
-        { type: 'text', name: 'CelesticAI' },
-        { type: 'text', name: 'FinMatrix Global' },
-        { type: 'text', name: 'OmniHealth AI' }
+        { name: 'impress.ai', src: '/uploads/imp.svg', height: 26 },
+        { name: 'Wealthify', src: '/uploads/wealthify-logo.svg', height: 28 },
+        { name: 'Smobler', src: '/uploads/Smobler_logo-03.png', height: 26 },
+        { name: 'CareO', src: '/uploads/CareO_Logo.webp', height: 32 },
+        { name: 'Celestic Hire', src: '/uploads/celestic_hire_logo.png', height: 28 }
       ];
       const all = [...logos, ...logos, ...logos];
 
@@ -1303,12 +1300,8 @@
           <div style={{ overflow: 'hidden', position: 'relative' }}>
             <div className="logo-marquee">
               {all.map((item, i) => (
-                <div key={i} style={{ padding: '0 44px', flexShrink: 0, display: 'flex', alignItems: 'center' }}>
-                  {item.type === 'img' ? (
-                    <img src={item.src} alt={item.name} style={{ height: item.name === 'CareO' ? 26 : 20, filter: 'grayscale(100%) contrast(120%)', opacity: 0.7, objectFit: 'contain' }} />
-                  ) : (
-                    <span style={{ fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: 14, color: 'var(--color-fog)', letterSpacing: '-0.02em' }}>{item.name}</span>
-                  )}
+                <div key={i} style={{ padding: '0 36px', flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+                  <img src={item.src} alt={item.name} style={{ height: item.height, width: 'auto', objectFit: 'contain', display: 'block' }} />
                 </div>
               ))}
             </div>
@@ -1801,26 +1794,48 @@
     const CaseStudiesSection = () => {
       const stories = [
         {
-          client: 'CareO Health',
-          industry: 'Healthcare & Life Sciences',
-          headline: '72% Nursing Documentation Time Deflection via HIPAA Ambient AI Notes',
-          challenge: 'Clinical staff spent 2.5+ hours per shift manually transcribing patient consultations into EHR systems.',
-          approach: 'Fine-tuned Whisper-v3 & vLLM pipeline running on air-gapped private VPC with automatic FHIR/HL7 schema mapping.',
-          outcome: 'Saved $3.2M annually across 14 hospital departments with 99.4% clinical entity accuracy.',
-          metric: '72%',
-          metricLbl: 'Time Saved',
-          href: '/CaseStudies.html#careo-health'
+          client: 'Unified Workforce Platform',
+          industry: 'HR Tech & Talent',
+          headline: '−50% Recruitment Costs & Operational Overhead via 3-Tier AI Matching Platform',
+          challenge: 'On-demand staffing agencies were bottlenecked across 5+ disconnected tools (CRM, spreadsheets, messaging apps, job boards), causing delayed shifts and 40%+ worker churn.',
+          approach: 'Engineered a unified 3-tier platform (Worker PWA + Admin Dashboard + Employer Portal) powered by a 5-factor AI matching engine and GPS geofenced attendance.',
+          outcome: 'Shipped to production in a 6-week sprint, cutting recruitment costs by 50%, reducing operational overhead by 50%, and lifting worker retention by 50%.',
+          metric: '−50%',
+          metricLbl: 'Recruitment Costs',
+          href: '/CaseStudies.html#workforce'
         },
         {
-          client: 'Global Fintech Scaleup',
-          industry: 'Financial Services',
-          headline: '38% LLM Inference Cost Reduction via Intelligent Model Routing & Caching',
-          challenge: 'Enterprise spending $120k+/month across multiple commercial LLM endpoints with high latency variance.',
-          approach: 'Implemented SlashLLM Gateway with semantic prompt caching, automated small-model classification fallback, and real-time observability telemetry.',
-          outcome: '38% reduction in monthly AI inference spend and 4.2x latency improvement for high-volume customer queries.',
-          metric: '38%',
-          metricLbl: 'Cost Reduction',
-          href: '/CaseStudies.html#fintech-routing'
+          client: 'ClinEdOps',
+          industry: 'Healthcare & Life Sciences',
+          headline: 'Hospital Clinical Education Operations & Teaching Hours Governance Platform',
+          challenge: 'A major teaching hospital tracked clinical tutors, student rotations, and teaching hours via manual spreadsheets across 4 disconnected departments, risking compliance audit failures.',
+          approach: 'Architected a full-stack platform with TimescaleDB audit tracking, 4-tier RBAC, batch CSV roster imports, and automated supervisor teaching hour approvals.',
+          outcome: 'Shipped in 5 months with 80%+ test coverage, replacing all paper/spreadsheet tracking with immutable audit trails across 4 medical disciplines.',
+          metric: '4 Disciplines',
+          metricLbl: 'Medicine, Nursing & Health',
+          href: '/CaseStudies.html#clinedops'
+        },
+        {
+          client: 'Wealthyhood',
+          industry: 'Fintech & Enterprise',
+          headline: 'Client-Side AES-256 Encrypted Personal Wealth Management & Succession System',
+          challenge: 'Wealth holders needed unified balance sheet tracking and portfolio sharing with trusted advisors without exposing plaintext financial data to cloud servers.',
+          approach: 'Built a zero-knowledge architecture using client-side AES-256 encryption with PBKDF2 key derivation and a configurable cryptographic dead-man emergency release switch.',
+          outcome: 'Delivered an active MVP where users manage portfolios with cryptographic certainty that cloud servers never hold plaintext records.',
+          metric: 'AES-256',
+          metricLbl: 'Zero-Knowledge Security',
+          href: '/CaseStudies.html#wealthyhood'
+        },
+        {
+          client: 'Smobler',
+          industry: 'FoodTech & Compliance',
+          headline: 'AI-Powered Food Compliance & Automated HACCP / FDA Nutrition Engine in 12 Weeks',
+          challenge: 'Food makers and CPG startups faced weeks of consultant paperwork and high costs to draft FDA-compliant nutrition panels and HACCP safety plans.',
+          approach: 'Integrated USDA food databases with a GPT-4 compliance engine to build an interactive wizard validating recipes, calculating nutrition facts, and drafting HACCP plans.',
+          outcome: 'Reduced regulatory documentation time from weeks to under 15 minutes, enabling food makers to safely take products to retail shelves.',
+          metric: '12-Wk',
+          metricLbl: 'MVP to Production',
+          href: '/CaseStudies.html#smobler'
         }
       ];
 
@@ -1832,14 +1847,14 @@
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 48, flexWrap: 'wrap', gap: 20 }}>
               <div>
                 <p className="font-mono" style={{ fontSize: 12, color: 'var(--color-obsidian-ink)', fontWeight: 600, marginBottom: 12 }}>
-                  Customer Stories & Proven Outcomes
+                  Customer Stories & Proven Outcomes · 11 Shipped Projects
                 </p>
                 <h2 className="font-display" style={{ fontSize: 'clamp(32px, 3.4vw, 46px)', color: 'var(--color-obsidian-ink)', maxWidth: 660 }}>
                   Measurable Business Outcomes, Shipped to Production
                 </h2>
               </div>
               <a href="/CaseStudies.html" className="link-editorial" style={{ fontSize: 15, fontWeight: 600 }}>
-                All Case Studies <Icon name="arrowRight" size={14} />
+                All 11 Case Studies <Icon name="arrowRight" size={14} />
               </a>
             </div>
 
@@ -1892,7 +1907,7 @@
                     THE CHALLENGE
                   </p>
                   <p style={{ fontSize: 17, color: '#334155', lineHeight: 1.68, fontWeight: 450 }}>
-                    Recruiting teams needed to assess video interviews at scale, consistently across multiple competency dimensions, without the time cost or bias of manual review. Existing tools could not detect if a candidate was reading from off-screen notes; integrity scoring was effectively broken.
+                    Recruiting teams needed to assess video interviews at scale, consistently across 7 competency dimensions, without the time cost or bias of manual review. Conventional tools could not detect if a candidate was reading from off-screen notes, rendering integrity scoring unreliable.
                   </p>
                 </div>
 
@@ -1901,7 +1916,7 @@
                     WHAT WE BUILT
                   </p>
                   <p style={{ fontSize: 17, color: '#334155', lineHeight: 1.68, fontWeight: 450 }}>
-                    A production REST API combining AWS Bedrock (Claude Opus 4.6) for 7-dimensional NLP scoring, AWS Transcribe for real speech-to-text, and MediaPipe computer vision for frame-by-frame iris gaze tracking. Async S3 architecture enables unlimited concurrent interviews with full fault tolerance.
+                    A production REST API combining AWS Bedrock (Claude 3 Haiku) for 7-dimensional NLP scoring, AWS Transcribe for real speech-to-text, and MediaPipe computer vision for frame-by-frame iris gaze tracking (landmarks 468–477). Async S3 persistence enables unlimited concurrent interviews with full fault tolerance.
                   </p>
                 </div>
               </div>
@@ -1915,12 +1930,12 @@
 
                 <div style={{ background: '#f5f3ff', border: '1px solid rgba(139, 92, 246, 0.3)', borderRadius: '12px', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 6 }}>
                   <span className="font-display" style={{ fontSize: 22, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>Real AWS</span>
-                  <span style={{ fontSize: 15, color: '#475569', lineHeight: 1.4, fontWeight: 500 }}>Bedrock + Transcribe, zero mock data</span>
+                  <span style={{ fontSize: 15, color: '#475569', lineHeight: 1.4, fontWeight: 500 }}>Bedrock + Transcribe + S3, zero mock data</span>
                 </div>
 
                 <div style={{ background: '#f5f3ff', border: '1px solid rgba(139, 92, 246, 0.3)', borderRadius: '12px', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 6 }}>
-                  <span className="font-display" style={{ fontSize: 22, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>Async</span>
-                  <span style={{ fontSize: 15, color: '#475569', lineHeight: 1.4, fontWeight: 500 }}>unlimited concurrent interviews via S3</span>
+                  <span className="font-display" style={{ fontSize: 22, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>Async S3</span>
+                  <span style={{ fontSize: 15, color: '#475569', lineHeight: 1.4, fontWeight: 500 }}>Unlimited concurrent interviews via S3</span>
                 </div>
               </div>
 

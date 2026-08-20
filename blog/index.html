@@ -190,6 +190,53 @@
     .post-card:first-child { border-top: 1px solid var(--border-hairline); }
     .post-card:hover h2 { color: var(--color-iris-pulse); }
 
+    /* Dropdown Menu */
+    .nav-item-wrap {
+      position: relative;
+    }
+    .nav-dropdown {
+      position: absolute;
+      top: 100%;
+      margin-top: 6px;
+      background: #ffffff;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-cards);
+      box-shadow: 0 16px 36px rgba(1, 1, 16, 0.08);
+      padding: 12px;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+    .nav-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      height: 20px;
+      display: block;
+    }
+    .nav-item-wrap:hover .nav-dropdown,
+    .nav-dropdown:hover {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .nav-sub-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 11px;
+      border-radius: var(--radius-cards);
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+    .nav-sub-item:hover {
+      background: #f4f4f6;
+    }
+
     @media (max-width: 1024px) {
       .hide-mobile { display: none !important; }
     }
@@ -213,11 +260,186 @@
         <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style="height: 28px; width: auto; object-fit: contain; display: block;" />
       </a>
 
-            <nav class="hide-mobile" style="display: flex; align-items: center; gap: 8px;">
-        <a href="/Services.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px;">What We Do</a>
-        <a href="/Industries.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px;">Industries</a>
-        <a href="/Products.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px;">Products</a>
-        <a href="/Solutions.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px;">Solutions</a>
+      <nav class="hide-mobile" style="display: flex; align-items: center; gap: 2px;">
+        
+        <!-- What We Do -->
+        <div class="nav-item-wrap">
+          <a href="/Services.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 4px;">
+            What We Do <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--color-fog)" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <div class="nav-dropdown" style="left: 0; width: 560px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+            <div style="grid-column: span 2; padding: 4px 8px 8px; border-bottom: 1px solid var(--border-hairline); display: flex; justify-content: space-between; align-items: center;">
+              <span class="font-mono" style="font-size: 10px; color: var(--color-fog);">Capabilities & Services</span>
+              <a href="/Services.html" class="link-editorial" style="font-size: 12px;">View All →</a>
+            </div>
+            <a href="/Services.html#ai-genai" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">AI & Generative AI</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Enterprise LLMs, SLMs, multimodal & RAG architectures</p>
+              </div>
+            </a>
+            <a href="/Services.html#ai-agents" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">AI Agents & Workflows</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Autonomous & human-in-the-loop multi-agent systems</p>
+              </div>
+            </a>
+            <a href="/Services.html#ai-engineering" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">AI Engineering</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">From prototype to scale: architecture, evals & code</p>
+              </div>
+            </a>
+            <a href="/Services.html#ai-infrastructure" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">AI Infrastructure & DevOps</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">GPU orchestration, model serving & clusters</p>
+              </div>
+            </a>
+            <a href="/Services.html#ai-observability" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">AI Observability & Ops</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Tracing, latency, token costs & drift telemetry</p>
+              </div>
+            </a>
+            <a href="/Services.html#data-analytics" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Data & Analytics for AI</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Vector pipelines, ETL & feature stores</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Industries -->
+        <div class="nav-item-wrap">
+          <a href="/Industries.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 4px;">
+            Industries <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--color-fog)" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <div class="nav-dropdown" style="left: -40px; width: 560px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+            <div style="grid-column: span 2; padding: 4px 8px 8px; border-bottom: 1px solid var(--border-hairline); display: flex; justify-content: space-between; align-items: center;">
+              <span class="font-mono" style="font-size: 10px; color: var(--color-fog);">Industry Verticals</span>
+              <a href="/Industries.html" class="link-editorial" style="font-size: 12px;">All Sectors →</a>
+            </div>
+            <a href="/Industries.html#financial-services" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Financial Services</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Fraud detection, regulatory intelligence & customer ops</p>
+              </div>
+            </a>
+            <a href="/Industries.html#healthcare" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Healthcare & Life Sciences</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Clinical document processing & patient assistants</p>
+              </div>
+            </a>
+            <a href="/Industries.html#saas" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">SaaS & Technology</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Embedded AI copilots & multi-tenant agent infra</p>
+              </div>
+            </a>
+            <a href="/Industries.html#retail" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Retail & E-Commerce</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Conversational commerce & recommendation engines</p>
+              </div>
+            </a>
+            <a href="/Industries.html#manufacturing" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Manufacturing & Logistics</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Supply chain intelligence & predictive diagnosis</p>
+              </div>
+            </a>
+            <a href="/Industries.html#professional-services" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Professional Services</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Contract intelligence & research agents</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Products -->
+        <div class="nav-item-wrap">
+          <a href="/Products.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 4px;">
+            Products <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--color-fog)" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <div class="nav-dropdown" style="left: -40px; width: 520px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+            <div style="grid-column: span 2; padding: 4px 8px 8px; border-bottom: 1px solid var(--border-hairline); display: flex; justify-content: space-between; align-items: center;">
+              <span class="font-mono" style="font-size: 10px; color: var(--color-fog);">Proprietary Platforms</span>
+              <a href="/Products.html" class="link-editorial" style="font-size: 12px;">Explore Suite →</a>
+            </div>
+            <a href="/Products.html#gateway" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">SlashLLM Gateway</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Unified API, model routing & semantic caching</p>
+              </div>
+            </a>
+            <a href="/Products.html#observability" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">SlashLLM Observability</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Real-time token tracing & cost attribution</p>
+              </div>
+            </a>
+            <a href="/Products.html#ai-platform" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">SlashLLM AI Platform</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Developer toolkit for prompt ops & model evals</p>
+              </div>
+            </a>
+            <a href="/Products.html#agent-platform" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">SlashLLM Agent Platform</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Orchestration & tool sandboxing for agents</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Solutions -->
+        <div class="nav-item-wrap">
+          <a href="/Solutions.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 4px;">
+            Solutions <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--color-fog)" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <div class="nav-dropdown" style="left: -40px; width: 520px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+            <div style="grid-column: span 2; padding: 4px 8px 8px; border-bottom: 1px solid var(--border-hairline); display: flex; justify-content: space-between; align-items: center;">
+              <span class="font-mono" style="font-size: 10px; color: var(--color-fog);">Enterprise Solutions</span>
+              <a href="/Solutions.html" class="link-editorial" style="font-size: 12px;">All Solutions →</a>
+            </div>
+            <a href="/Solutions.html#transformation" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Enterprise AI Transformation</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Full-stack AI strategy & legacy modernization</p>
+              </div>
+            </a>
+            <a href="/Solutions.html#cost-optimization" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">AI Cost & Latency Optimization</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Reduce inference spend by 30–60%</p>
+              </div>
+            </a>
+            <a href="/Solutions.html#governance" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">LLM Governance & Guardrails</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Safety policies, PII redaction & red-teaming</p>
+              </div>
+            </a>
+            <a href="/Solutions.html#private-ai" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Private & Hybrid AI Infra</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">On-premise & air-gapped VPC deployments</p>
+              </div>
+            </a>
+            <a href="/Solutions.html#document-ai" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Intelligent Document AI</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Automated extraction & structuring of data</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
         <a href="/CaseStudies.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px;">Stories</a>
         <a href="/blog" class="nav-link-active" style="padding: 8px 12px; font-size: 14px;">Insights</a>
         <a href="/About.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px;">Company</a>
@@ -312,7 +534,7 @@
       </div>
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
         <p style="color: var(--color-fog); font-size: 12.5px;">© 2026 SlashLLM Inc. All rights reserved. Restraint as authority.</p>
-        <span className="font-mono" style="font-size: 11px; color: var(--color-fog);">San Francisco · London · Singapore · Bengaluru</span>
+
       </div>
     </div>
   </footer>
