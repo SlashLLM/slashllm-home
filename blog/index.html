@@ -237,8 +237,13 @@
       background: #f4f4f6;
     }
 
+    .hide-desktop { display: none !important; }
     @media (max-width: 1024px) {
       .hide-mobile { display: none !important; }
+      .hide-desktop { display: flex !important; }
+    }
+    @media (max-width: 640px) {
+      h1 { font-size: clamp(30px, 7vw, 56px) !important; line-height: 1.12 !important; }
     }
   </style>
 </head>
@@ -445,10 +450,58 @@
         <a href="/About.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px;">Company</a>
       </nav>
 
-      <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 9px 20px; font-size: 14px;">
-        Talk to an AI Expert →
-      </a>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 7px 14px; font-size: 12.5px; white-space: nowrap;">
+          Talk to an AI Expert →
+        </a>
+
+        <button
+          class="hide-desktop"
+          onclick="toggleBlogMenu()"
+          aria-label="Toggle Navigation Menu"
+          style="width: 36px; height: 36px; border-radius: 8px; background: #f3f3f5; border: 1px solid var(--border-hairline); color: var(--color-obsidian-ink); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; flex-shrink: 0;"
+        >
+          <svg id="blogMenuIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
     </div>
+
+    <!-- Mobile Drawer Overlay -->
+    <div id="blogMobileDrawer" style="display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0; width: 100vw; height: calc(100vh - 64px); background: #ffffff; z-index: 9999; overflow-y: auto; padding: 20px 20px 40px; box-sizing: border-box; flex-direction: column; justify-content: space-between;">
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <a href="/Services.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">What We Do</a>
+        <a href="/Industries.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Industries</a>
+        <a href="/Products.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Products</a>
+        <a href="/Solutions.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Solutions</a>
+        <a href="/CaseStudies.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Stories</a>
+        <a href="/blog" style="font-size: 16px; font-weight: 600; color: var(--color-iris-pulse); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Insights</a>
+        <a href="/About.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Company</a>
+      </div>
+
+      <div style="padding-top: 20px; margin-top: auto;">
+        <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width: 100%; justify-content: center; padding: 12px 18px; font-size: 14.5px; display: flex;">
+          Schedule an AI Briefing →
+        </a>
+      </div>
+    </div>
+
+    <script>
+      function toggleBlogMenu() {
+        var drawer = document.getElementById('blogMobileDrawer');
+        var icon = document.getElementById('blogMenuIcon');
+        if (drawer.style.display === 'none' || drawer.style.display === '') {
+          drawer.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+          icon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
+        } else {
+          drawer.style.display = 'none';
+          document.body.style.overflow = '';
+          icon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+        }
+      }
+    </script>
   </header>
 
   <main>
