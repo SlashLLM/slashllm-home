@@ -303,6 +303,33 @@
       height: 0;
     }
 
+    .subnav-desktop {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      max-width: var(--page-max-width);
+      margin: 0 auto;
+      padding: 10px 24px;
+    }
+    .subnav-mobile-bar {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .subnav-mobile-drawer {
+      display: none;
+    }
+
+    .nav-cta-btn {
+      padding: 7px 14px;
+      font-size: 12.5px;
+      white-space: nowrap;
+    }
     .hide-desktop { display: none !important; }
     @media (max-width: 1024px) {
       .svc-body-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
@@ -310,7 +337,31 @@
       .hide-mobile { display: none !important; }
       .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 36px !important; }
     }
+    @media (max-width: 768px) {
+      .subnav-desktop {
+        display: none !important;
+      }
+      .subnav-mobile-bar {
+        display: flex !important;
+      }
+      .subnav-mobile-drawer.is-open {
+        display: flex !important;
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px 16px 16px;
+        background: #ffffff;
+        border-top: 1px solid var(--border-hairline);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        max-height: 70vh;
+        overflow-y: auto;
+      }
+    }
     @media (max-width: 640px) {
+      .nav-cta-btn {
+        padding: 6px 10px !important;
+        font-size: 11.5px !important;
+        gap: 4px !important;
+      }
       .footer-grid { grid-template-columns: 1fr !important; }
       h1, .hero-title { font-size: clamp(30px, 7vw, 56px) !important; line-height: 1.12 !important; }
     }
@@ -353,16 +404,7 @@
       );
     };
 
-    const AnnouncementBar = () => (
-      <div style={{ background: 'var(--color-iris-pulse)', color: '#ffffff', padding: '10px 24px', fontSize: 13, fontWeight: 500, letterSpacing: '-0.02em', zIndex: 1100 }}>
-        <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-          <span style={{ margin: '0 auto' }}>Announcing SlashLLM Enterprise Cohort 2026 — Dedicated autonomous agents & GPU clusters with SLA guarantees.</span>
-          <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-pill-header hide-mobile">
-            Schedule Briefing <Icon name="arrowRight" size={12} />
-          </a>
-        </div>
-      </div>
-    );
+    const AnnouncementBar = () => null;
 
     /* Header Navigation (White, 64px, Hairline Border) */
     const GlobalNav = ({ activePage = 'services' }) => {
@@ -689,7 +731,7 @@
 
             {/* Right CTAs & Mobile Hamburger */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '7px 14px', fontSize: 12.5, whiteSpace: 'nowrap' }}>
+              <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary nav-cta-btn">
                 Talk to an AI Expert <Icon name="arrowRight" size={12} />
               </a>
 
@@ -724,22 +766,56 @@
           {mobileMenuOpen && (
             <div style={{
               position: 'fixed',
-              top: 64,
+              top: 0,
               left: 0,
               right: 0,
               bottom: 0,
               width: '100vw',
-              height: 'calc(100vh - 64px)',
+              height: '100vh',
               background: '#ffffff',
-              zIndex: 9999,
+              zIndex: 100000,
               overflowY: 'auto',
-              padding: '20px 20px 40px',
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'space-between',
               boxSizing: 'border-box'
             }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {/* Mobile Overlay Top Header with dedicated Close button */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '14px 20px',
+                borderBottom: '1px solid var(--border-hairline)',
+                background: '#ffffff',
+                position: 'sticky',
+                top: 0,
+                zIndex: 10
+              }}>
+                <a href="/" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', alignItems: 'center' }}>
+                  <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style={{ height: 26, width: 'auto', objectFit: 'contain' }} />
+                </a>
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  aria-label="Close Navigation Menu"
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: 8,
+                    background: '#f3f3f5',
+                    border: '1px solid var(--border-hairline)',
+                    color: 'var(--color-obsidian-ink)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    padding: 0
+                  }}
+                >
+                  <Icon name="close" size={18} />
+                </button>
+              </div>
+
+              <div style={{ padding: '20px 20px 40px', display: 'flex', flexDirection: 'column', gap: 12 }}>
                 
                 {/* Accordion: What We Do */}
                 <div style={{ borderBottom: '1px solid var(--border-hairline)', paddingBottom: 10 }}>
@@ -844,7 +920,7 @@
                       textAlign: 'left'
                     }}
                   >
-                    Products
+                    Products & Platforms
                     <Icon name={mobileAccordion === 'products' ? 'chevronUp' : 'chevronDown'} size={15} color="var(--color-fog)" />
                   </button>
                   {mobileAccordion === 'products' && (
@@ -861,7 +937,7 @@
                         </a>
                       ))}
                       <a href="/Products.html" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--color-iris-pulse)', padding: '6px 10px' }}>
-                        Explore Suite →
+                        Explore Platform Suite →
                       </a>
                     </div>
                   )}
@@ -903,44 +979,49 @@
                         </a>
                       ))}
                       <a href="/Solutions.html" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--color-iris-pulse)', padding: '6px 10px' }}>
-                        All Solutions →
+                        All Enterprise Solutions →
                       </a>
                     </div>
                   )}
                 </div>
 
                 {/* Direct Links */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingTop: 4 }}>
-                  <a href="/CaseStudies.html" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: 15.5, fontWeight: 600, color: 'var(--color-obsidian-ink)', textDecoration: 'none' }}>
+                <div style={{ borderBottom: '1px solid var(--border-hairline)', paddingBottom: 10 }}>
+                  <a href="/CaseStudies.html" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', fontSize: 15.5, fontWeight: 600, color: 'var(--color-obsidian-ink)', textDecoration: 'none' }}>
                     Stories
+                    <Icon name="arrowRight" size={13} color="var(--color-fog)" />
                   </a>
-                  <a href="/blog" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: 15.5, fontWeight: 600, color: 'var(--color-obsidian-ink)', textDecoration: 'none' }}>
+                </div>
+                <div style={{ borderBottom: '1px solid var(--border-hairline)', paddingBottom: 10 }}>
+                  <a href="/blog" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', fontSize: 15.5, fontWeight: 600, color: 'var(--color-obsidian-ink)', textDecoration: 'none' }}>
                     Insights
+                    <Icon name="arrowRight" size={13} color="var(--color-fog)" />
                   </a>
-                  <a href="/About.html" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: 15.5, fontWeight: 600, color: 'var(--color-obsidian-ink)', textDecoration: 'none' }}>
+                </div>
+                <div style={{ borderBottom: '1px solid var(--border-hairline)', paddingBottom: 10 }}>
+                  <a href="/About.html" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', fontSize: 15.5, fontWeight: 600, color: 'var(--color-obsidian-ink)', textDecoration: 'none' }}>
                     Company
+                    <Icon name="arrowRight" size={13} color="var(--color-fog)" />
                   </a>
                 </div>
 
-              </div>
-
-              {/* Bottom Call to Action */}
-              <div style={{ paddingTop: 20, marginTop: 'auto' }}>
-                <a
-                  href="https://cal.com/mridhul-pax-jjhwct/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary"
-                  style={{
-                    width: '100%',
-                    justifyContent: 'center',
-                    padding: '12px 18px',
-                    fontSize: 14.5,
-                    display: 'flex'
-                  }}
-                >
-                  Schedule an AI Briefing <Icon name="arrowRight" size={15} />
-                </a>
+                <div style={{ paddingTop: 10 }}>
+                  <a
+                    href="https://cal.com/mridhul-pax-jjhwct/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary"
+                    style={{
+                      width: '100%',
+                      justifyContent: 'center',
+                      padding: '12px 18px',
+                      fontSize: 14.5,
+                      display: 'flex'
+                    }}
+                  >
+                    Schedule an AI Briefing <Icon name="arrowRight" size={15} />
+                  </a>
+                </div>
               </div>
             </div>
           )}
@@ -1073,19 +1154,44 @@
       }
     ];
 
-    const jumpTo = (id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const top = el.getBoundingClientRect().top + window.pageYOffset - 90;
-      window.scrollTo({ top, behavior: 'smooth' });
-    };
-
     function ServicesPage() {
       const [activeId, setActiveId] = useState('ai-genai');
+      const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
+
+      useEffect(() => {
+        const handleScroll = () => {
+          const scrollPosition = window.scrollY + 160;
+          for (let i = SERVICES.length - 1; i >= 0; i--) {
+            const el = document.getElementById(SERVICES[i].id);
+            if (el) {
+              const top = el.offsetTop;
+              if (scrollPosition >= top) {
+                setActiveId(SERVICES[i].id);
+                break;
+              }
+            }
+          }
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
+      const jumpTo = (id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const offset = window.innerWidth <= 768 ? 115 : 120;
+        const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+        setActiveId(id);
+        setIsMobileDrawerOpen(false);
+      };
+
+      const currentService = SERVICES.find(s => s.id === activeId) || SERVICES[0];
 
       return (
         <React.Fragment>
-          <AnnouncementBar />
           <GlobalNav />
           <main>
             
@@ -1105,10 +1211,12 @@
             </section>
 
             {/* Subnav Ribbon */}
-            <div style={{ position: 'sticky', top: 64, zIndex: 900, background: 'rgba(255, 255, 255, 0.96)', backdropFilter: 'blur(16px)', borderBottom: '1px solid var(--border-hairline)' }}>
-              <div className="subnav-scroll" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '10px 24px', display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ position: 'sticky', top: 64, zIndex: 900, background: 'rgba(255, 255, 255, 0.98)', backdropFilter: 'blur(16px)', borderBottom: '1px solid var(--border-hairline)' }}>
+              
+              {/* Desktop Horizontal Ribbon */}
+              <div className="subnav-desktop subnav-scroll">
                 {SERVICES.map(s => (
-                  <button key={s.id} onClick={() => { setActiveId(s.id); jumpTo(s.id); }}
+                  <button key={s.id} onClick={() => jumpTo(s.id)}
                           className={`svc-tab ${activeId === s.id ? 'is-active' : ''}`}
                           style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '8px 15px', borderRadius: 'var(--radius-buttons)', fontSize: 13.5, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
                     <span className="font-mono tab-num" style={{ fontSize: 11.5, letterSpacing: '0.02em' }}>{s.num}</span>
@@ -1116,6 +1224,102 @@
                   </button>
                 ))}
               </div>
+
+              {/* Mobile Compact Sticky Bar */}
+              <div className="subnav-mobile-bar">
+                <button
+                  onClick={() => setIsMobileDrawerOpen(!isMobileDrawerOpen)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    background: 'transparent',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'pointer',
+                    flex: 1,
+                    textAlign: 'left'
+                  }}
+                >
+                  <div
+                    className="svc-tab is-active"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 6,
+                      padding: '6px 12px',
+                      borderRadius: 'var(--radius-buttons)',
+                      fontSize: 12.5,
+                      fontWeight: 600,
+                      maxWidth: 'calc(100vw - 120px)',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap'
+                    }}
+                  >
+                    <span className="font-mono tab-num" style={{ fontSize: 11 }}>{currentService.num}</span>
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{currentService.short}</span>
+                  </div>
+                </button>
+
+                <button
+                  onClick={() => setIsMobileDrawerOpen(!isMobileDrawerOpen)}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 4,
+                    background: isMobileDrawerOpen ? 'rgba(99, 91, 255, 0.1)' : '#f3f3f5',
+                    color: isMobileDrawerOpen ? 'var(--color-iris-pulse)' : 'var(--color-obsidian-ink)',
+                    border: '1px solid var(--border-hairline)',
+                    padding: '6px 10px',
+                    borderRadius: 8,
+                    fontSize: 11.5,
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    flexShrink: 0
+                  }}
+                >
+                  <span>{isMobileDrawerOpen ? 'Close' : 'Nav (6)'}</span>
+                  <Icon name={isMobileDrawerOpen ? 'chevronUp' : 'chevronDown'} size={13} />
+                </button>
+              </div>
+
+              {/* Mobile Collapsible Pill Drawer */}
+              <div className={`subnav-mobile-drawer ${isMobileDrawerOpen ? 'is-open' : ''}`}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 6, borderBottom: '1px solid var(--border-hairline)' }}>
+                  <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)', fontWeight: 700 }}>Jump to Capability</span>
+                  <button
+                    onClick={() => setIsMobileDrawerOpen(false)}
+                    style={{ background: 'none', border: 'none', fontSize: 11.5, fontWeight: 600, color: 'var(--color-iris-pulse)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 2 }}
+                  >
+                    Minimize ▲
+                  </button>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, paddingTop: 4 }}>
+                  {SERVICES.map(s => (
+                    <button
+                      key={s.id}
+                      onClick={() => jumpTo(s.id)}
+                      className={`svc-tab ${activeId === s.id ? 'is-active' : ''}`}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 6,
+                        padding: '8px 10px',
+                        borderRadius: 8,
+                        fontSize: 12,
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        textAlign: 'left'
+                      }}
+                    >
+                      <span className="font-mono tab-num" style={{ fontSize: 10.5 }}>{s.num}</span>
+                      <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{s.short}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
             </div>
 
             {/* Service Blocks */}

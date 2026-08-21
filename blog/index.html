@@ -237,26 +237,28 @@
       background: #f4f4f6;
     }
 
+    .nav-cta-btn {
+      padding: 7px 14px;
+      font-size: 12.5px;
+      white-space: nowrap;
+    }
     .hide-desktop { display: none !important; }
     @media (max-width: 1024px) {
       .hide-mobile { display: none !important; }
       .hide-desktop { display: flex !important; }
     }
     @media (max-width: 640px) {
+      .nav-cta-btn {
+        padding: 6px 10px !important;
+        font-size: 11.5px !important;
+        gap: 4px !important;
+      }
       h1 { font-size: clamp(30px, 7vw, 56px) !important; line-height: 1.12 !important; }
     }
   </style>
 </head>
 <body>
-  <!-- Announcement Bar -->
-  <div style="background: var(--color-iris-pulse); color: #ffffff; padding: 10px 24px; font-size: 13px; font-weight: 500; letter-spacing: -0.02em;">
-    <div style="max-width: var(--page-max-width); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-      <span style="margin: 0 auto;">Announcing SlashLLM Enterprise Cohort 2026 — Dedicated autonomous agents & GPU clusters with SLA guarantees.</span>
-      <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" class="btn-pill-header hide-mobile">
-        Schedule Briefing →
-      </a>
-    </div>
-  </div>
+  
 
   <!-- Header Nav -->
   <header style="position: sticky; top: 0; background: var(--color-canvas); border-bottom: 1px solid var(--border-hairline); height: 64px; display: flex; align-items: center; z-index: 1000;">
@@ -451,7 +453,7 @@
       </nav>
 
       <div style="display: flex; align-items: center; gap: 8px;">
-        <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 7px 14px; font-size: 12.5px; white-space: nowrap;">
+        <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" class="btn-primary nav-cta-btn">
           Talk to an AI Expert →
         </a>
 
@@ -469,8 +471,24 @@
     </div>
 
     <!-- Mobile Drawer Overlay -->
-    <div id="blogMobileDrawer" style="display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0; width: 100vw; height: calc(100vh - 64px); background: #ffffff; z-index: 9999; overflow-y: auto; padding: 20px 20px 40px; box-sizing: border-box; flex-direction: column; justify-content: space-between;">
-      <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div id="blogMobileDrawer" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100vw; height: 100vh; background: #ffffff; z-index: 100000; overflow-y: auto; box-sizing: border-box; flex-direction: column; justify-content: space-between;">
+      <!-- Mobile Top Bar with Close Button -->
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid var(--border-hairline); background: #ffffff; position: sticky; top: 0; z-index: 10;">
+        <a href="/" onclick="toggleBlogMenu()" style="display: flex; align-items: center;">
+          <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style="height: 26px; width: auto; object-fit: contain;" />
+        </a>
+        <button
+          onclick="toggleBlogMenu()"
+          aria-label="Close Navigation Menu"
+          style="width: 36px; height: 36px; border-radius: 8px; background: #f3f3f5; border: 1px solid var(--border-hairline); color: var(--color-obsidian-ink); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div style="padding: 20px 20px 40px; display: flex; flex-direction: column; gap: 16px;">
         <a href="/Services.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">What We Do</a>
         <a href="/Industries.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Industries</a>
         <a href="/Products.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Products</a>
@@ -478,12 +496,12 @@
         <a href="/CaseStudies.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Stories</a>
         <a href="/blog" style="font-size: 16px; font-weight: 600; color: var(--color-iris-pulse); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Insights</a>
         <a href="/About.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Company</a>
-      </div>
 
-      <div style="padding-top: 20px; margin-top: auto;">
-        <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width: 100%; justify-content: center; padding: 12px 18px; font-size: 14.5px; display: flex;">
-          Schedule an AI Briefing →
-        </a>
+        <div style="padding-top: 10px;">
+          <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width: 100%; justify-content: center; padding: 12px 18px; font-size: 14.5px; display: flex;">
+            Schedule an AI Briefing →
+          </a>
+        </div>
       </div>
     </div>
 
@@ -494,11 +512,11 @@
         if (drawer.style.display === 'none' || drawer.style.display === '') {
           drawer.style.display = 'flex';
           document.body.style.overflow = 'hidden';
-          icon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
+          if (icon) icon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
         } else {
           drawer.style.display = 'none';
           document.body.style.overflow = '';
-          icon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+          if (icon) icon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
         }
       }
     </script>
