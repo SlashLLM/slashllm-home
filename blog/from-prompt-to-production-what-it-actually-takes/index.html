@@ -1,140 +1,731 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-site-verification" content="REPLACE_WITH_YOUR_GOOGLE_VERIFICATION_CODE">
-  <title>From prompt to production: what it actually takes — SlashLLM</title>
+  <title>From Prompt to Production: What It Actually Takes — SlashLLM</title>
   <link rel="icon" href="/favicon.ico?v=2" sizes="any">
   <link rel="icon" type="image/png" href="/uploads/favicon-32.png?v=2" sizes="32x32">
   <link rel="icon" type="image/png" href="/uploads/favicon-16.png?v=2" sizes="16x16">
   <link rel="apple-touch-icon" href="/uploads/favicon-180.png?v=2">
-  <meta name="description" content="A working prototype is about 20% of an AI product. Here is the other 80% — evaluation, infrastructure, cost control, and the engineering that turns a demo into production.">
-  <link rel="canonical" href="https://slashllm.com/blog/from-prompt-to-production-what-it-actually-takes">
-  <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="https://slashllm.com/blog/from-prompt-to-production-what-it-actually-takes">
-  <meta property="og:site_name" content="SlashLLM">
-  <meta property="og:title" content="From prompt to production: what it actually takes">
-  <meta property="og:description" content="A working prototype is about 20% of an AI product. Here is the other 80%.">
+  <meta name="description"
+    content="A working prompt is 10% of the job. What separates an impressive demo from an AI application that survives real users, edge cases, costs, and scale.">
+  <link rel="canonical" href="https://slashllm.com/blog/from-prompt-to-production-what-it-actually-takes/">
+  <meta property="og:title" content="From Prompt to Production: What It Actually Takes — SlashLLM">
+  <meta property="og:description"
+    content="What separates an impressive AI demo from an application that survives in enterprise production.">
   <meta property="og:image" content="https://slashllm.com/uploads/LOGO%202.png">
-  <meta property="article:published_time" content="2026-06-17">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="From prompt to production: what it actually takes">
-  <meta name="twitter:description" content="A working prototype is about 20% of an AI product. Here is the other 80%.">
-  <meta name="twitter:image" content="https://slashllm.com/uploads/LOGO%202.png">
 
+  <!-- Schema.org -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "From prompt to production: what it actually takes",
-    "description": "A working prototype is about 20% of an AI product. Here is the other 80% — evaluation, infrastructure, cost control, and the engineering that turns a demo into production.",
-    "image": "https://slashllm.com/uploads/LOGO%202.png",
-    "datePublished": "2026-06-17",
-    "dateModified": "2026-06-17",
-    "author": { "@type": "Organization", "name": "SlashLLM", "url": "https://slashllm.com/" },
-    "publisher": { "@type": "Organization", "name": "SlashLLM", "logo": { "@type": "ImageObject", "url": "https://slashllm.com/uploads/LOGO%202.png" } },
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://slashllm.com/blog/from-prompt-to-production-what-it-actually-takes" }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://slashllm.com/" },
-      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://slashllm.com/blog" },
-      { "@type": "ListItem", "position": 3, "name": "From prompt to production: what it actually takes", "item": "https://slashllm.com/blog/from-prompt-to-production-what-it-actually-takes" }
-    ]
+    "headline": "From Prompt to Production: What It Actually Takes",
+    "description": "A working prompt is 10% of the job. What separates an impressive demo from an AI application that survives real users, edge cases, costs, and scale.",
+    "url": "https://slashllm.com/blog/from-prompt-to-production-what-it-actually-takes/",
+    "datePublished": "2026-02-01",
+    "dateModified": "2026-02-01",
+    "author": {
+      "@type": "Organization",
+      "name": "SlashLLM Team",
+      "url": "https://slashllm.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "SlashLLM",
+      "url": "https://slashllm.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://slashllm.com/uploads/LOGO%202.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://slashllm.com/blog/from-prompt-to-production-what-it-actually-takes/"
+    }
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Single Unified Typography: Proxima Nova -->
+  <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin="anonymous">
+  <link href="https://fonts.cdnfonts.com/css/proxima-nova" rel="stylesheet">
+
   <style>
-    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    :root { --bg:#FAFAFA; --text:#1E1B4B; --muted:rgba(30,27,75,0.6); --border:#DDD8F0; --accent:#a855f7; }
-    body { background:var(--bg); color:var(--text); font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; line-height:1.7; }
-    a { color:inherit; }
-    .display { font-family:'Space Grotesk',sans-serif; letter-spacing:-0.04em; }
-    .wrap { max-width:680px; margin:0 auto; padding:0 24px; }
-    header.site { border-bottom:1px solid var(--border); }
-    header.site .bar { display:flex; align-items:center; justify-content:space-between; height:64px; max-width:680px; margin:0 auto; padding:0 24px; }
-    .brand { display:flex; align-items:center; gap:8px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16px; text-decoration:none; }
-    .brand img { width:26px; height:26px; object-fit:contain; }
-    nav a { color:var(--muted); font-size:14px; margin-left:20px; text-decoration:none; }
-    nav a:hover { color:var(--text); }
-    .crumbs { font-size:13px; color:var(--muted); padding-top:32px; }
-    .crumbs a { text-decoration:none; }
-    article { padding:24px 0 80px; }
-    article .meta { color:var(--muted); font-size:13px; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:16px; }
-    article h1 { font-size:40px; font-weight:800; line-height:1.08; margin-bottom:24px; }
-    article h2 { font-size:24px; font-weight:700; margin:40px 0 12px; font-family:'Space Grotesk',sans-serif; letter-spacing:-0.03em; }
-    article p { margin:16px 0; font-size:17px; }
-    article ul { margin:16px 0 16px 22px; }
-    article li { margin:8px 0; font-size:17px; }
-    article strong { font-weight:600; }
-    .lead { font-size:20px; color:var(--text); }
-    .cta { margin-top:48px; padding:28px; border:1px solid var(--border); border-radius:14px; background:#F3F0FF; }
-    .cta a { color:var(--accent); font-weight:600; text-decoration:none; }
-    footer.site { border-top:1px solid var(--border); padding:32px 0; color:var(--muted); font-size:13.5px; }
-    @media (max-width:640px){ article h1{font-size:30px} }
+    :root {
+      --color-canvas: #ffffff;
+      --color-obsidian-ink: #010110;
+      --color-carbon: #111117;
+      --color-graphite: #22222a;
+      --color-fog: #73737c;
+      --color-ash: #d9d9d9;
+      --color-iris-pulse: #635bff;
+      --border-hairline: rgba(1, 1, 16, 0.1);
+
+      --font-display: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-sans: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+      --page-max-width: 1200px;
+      --radius-cards: 8px;
+      --radius-buttons: 100px;
+      --radius-tags: 9999px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--color-canvas);
+      color: var(--color-obsidian-ink);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.65;
+      letter-spacing: -0.015em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .font-display {
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .font-sans {
+      font-family: var(--font-sans);
+      letter-spacing: -0.015em;
+    }
+
+    .font-mono {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .gradient-text-purple {
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline;
+    }
+    .nav-link-active {
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      font-weight: 700 !important;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-link-active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 8px;
+      right: 8px;
+      height: 2.5px;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      color: #ffffff !important;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+      padding: 12px 24px;
+      border-radius: var(--radius-buttons);
+      border: 1px solid transparent;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      filter: brightness(1.08);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-pill-header {
+      background: transparent;
+      border: 1px solid #ffffff;
+      color: #ffffff !important;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: var(--radius-buttons);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .btn-pill-header:hover {
+      background: #ffffff;
+      color: var(--color-iris-pulse) !important;
+    }
+
+    .link-editorial {
+      color: var(--color-obsidian-ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+      transition: color 0.15s ease;
+    }
+
+    .link-editorial:hover {
+      color: var(--color-iris-pulse);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .halftone-pattern {
+      background-image: radial-gradient(var(--color-ash) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+
+    /* Article layout */
+    .article-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .article-wrap h1 {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 4.2vw, 54px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.08;
+      color: var(--color-obsidian-ink);
+      margin-bottom: 24px;
+    }
+
+    .article-wrap h2 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--color-obsidian-ink);
+      margin: 44px 0 18px;
+    }
+
+    .article-wrap p {
+      margin-bottom: 20px;
+      color: #33333d;
+      font-size: 17px;
+      line-height: 1.72;
+    }
+
+    .article-wrap ul {
+      margin: 0 0 24px 20px;
+      color: #33333d;
+      font-size: 16.5px;
+      line-height: 1.7;
+    }
+
+    .article-wrap li {
+      margin-bottom: 8px;
+    }
+
+    .callout-box {
+      background: linear-gradient(135deg, #fafafa 0%, #f7f5ff 100%);
+      border: 1px solid rgba(99, 91, 255, 0.2);
+      border-radius: var(--radius-cards);
+      padding: 28px 32px;
+      margin: 48px 0 24px;
+      box-shadow: 0 8px 24px rgba(99, 91, 255, 0.05);
+    }
+
+    /* Dropdown Menu */
+    .nav-item-wrap {
+      position: relative;
+    }
+    .nav-dropdown {
+      position: absolute;
+      top: 100%;
+      margin-top: 6px;
+      background: #ffffff;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-cards);
+      box-shadow: 0 16px 36px rgba(1, 1, 16, 0.08);
+      padding: 12px;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+    .nav-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      height: 20px;
+      display: block;
+    }
+    .nav-item-wrap:hover .nav-dropdown,
+    .nav-dropdown:hover {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .nav-sub-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 11px;
+      border-radius: var(--radius-cards);
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+    .nav-sub-item:hover {
+      background: #f4f4f6;
+    }
+
+    .hide-desktop { display: none !important; }
+    .nav-cta-btn {
+      padding: 7px 14px;
+      font-size: 12.5px;
+      white-space: nowrap;
+    }
+    @media (max-width: 1024px) {
+      .hide-mobile {
+        display: none !important;
+      }
+      .hide-desktop { display: flex !important; }
+    }
+    @media (max-width: 640px) {
+      .nav-cta-btn {
+        padding: 6px 10px !important;
+        font-size: 11.5px !important;
+        gap: 4px !important;
+      }
+      h1 { font-size: clamp(30px, 7vw, 56px) !important; line-height: 1.12 !important; }
+    }
   </style>
 </head>
+
 <body>
-  <header class="site">
-    <div class="bar">
-      <a class="brand" href="/"><img src="/uploads/LOGO 2.png" alt="SlashLLM">SlashLLM</a>
-      <nav>
-        <a href="Services.html">Services</a>
-        <a href="/blog">Blog</a>
-        <a href="About.html">About</a>
+  
+
+  <!-- Header Nav -->
+  <header
+    style="position: sticky; top: 0; background: var(--color-canvas); border-bottom: 1px solid var(--border-hairline); height: 64px; display: flex; align-items: center; z-index: 1000;">
+    <div
+      style="max-width: var(--page-max-width); width: 100%; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between;">
+      <a href="/" style="display: flex; align-items: center;">
+        <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style="height: 28px; width: auto; object-fit: contain; display: block;" />
+      </a>
+
+      <nav class="hide-mobile" style="display: flex; align-items: center; gap: 2px;">
+        
+        <!-- What We Do -->
+        <div class="nav-item-wrap">
+          <a href="/Services.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 4px;">
+            What We Do <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--color-fog)" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <div class="nav-dropdown" style="left: 0; width: 560px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+            <div style="grid-column: span 2; padding: 4px 8px 8px; border-bottom: 1px solid var(--border-hairline); display: flex; justify-content: space-between; align-items: center;">
+              <span class="font-mono" style="font-size: 10px; color: var(--color-fog);">Capabilities & Services</span>
+              <a href="/Services.html" class="link-editorial" style="font-size: 12px;">View All →</a>
+            </div>
+            <a href="/Services.html#ai-genai" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">AI & Generative AI</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Enterprise LLMs, SLMs, multimodal & RAG architectures</p>
+              </div>
+            </a>
+            <a href="/Services.html#ai-agents" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">AI Agents & Workflows</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Autonomous & human-in-the-loop multi-agent systems</p>
+              </div>
+            </a>
+            <a href="/Services.html#ai-engineering" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">AI Engineering</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">From prototype to scale: architecture, evals & code</p>
+              </div>
+            </a>
+            <a href="/Services.html#ai-infrastructure" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">AI Infrastructure & DevOps</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">GPU orchestration, model serving & clusters</p>
+              </div>
+            </a>
+            <a href="/Services.html#ai-observability" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">AI Observability & Ops</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Tracing, latency, token costs & drift telemetry</p>
+              </div>
+            </a>
+            <a href="/Services.html#data-analytics" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Data & Analytics for AI</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Vector pipelines, ETL & feature stores</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Industries -->
+        <div class="nav-item-wrap">
+          <a href="/Industries.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 4px;">
+            Industries <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--color-fog)" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <div class="nav-dropdown" style="left: -40px; width: 560px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+            <div style="grid-column: span 2; padding: 4px 8px 8px; border-bottom: 1px solid var(--border-hairline); display: flex; justify-content: space-between; align-items: center;">
+              <span class="font-mono" style="font-size: 10px; color: var(--color-fog);">Industry Verticals</span>
+              <a href="/Industries.html" class="link-editorial" style="font-size: 12px;">All Sectors →</a>
+            </div>
+            <a href="/Industries.html#financial-services" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Financial Services</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Fraud detection, regulatory intelligence & customer ops</p>
+              </div>
+            </a>
+            <a href="/Industries.html#healthcare" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Healthcare & Life Sciences</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Clinical document processing & patient assistants</p>
+              </div>
+            </a>
+            <a href="/Industries.html#saas" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">SaaS & Technology</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Embedded AI copilots & multi-tenant agent infra</p>
+              </div>
+            </a>
+            <a href="/Industries.html#retail" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Retail & E-Commerce</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Conversational commerce & recommendation engines</p>
+              </div>
+            </a>
+            <a href="/Industries.html#manufacturing" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Manufacturing & Logistics</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Supply chain intelligence & predictive diagnosis</p>
+              </div>
+            </a>
+            <a href="/Industries.html#professional-services" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Professional Services</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Contract intelligence & research agents</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Products -->
+        <div class="nav-item-wrap">
+          <a href="/Products.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 4px;">
+            Products <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--color-fog)" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <div class="nav-dropdown" style="left: -40px; width: 520px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+            <div style="grid-column: span 2; padding: 4px 8px 8px; border-bottom: 1px solid var(--border-hairline); display: flex; justify-content: space-between; align-items: center;">
+              <span class="font-mono" style="font-size: 10px; color: var(--color-fog);">Proprietary Platforms</span>
+              <a href="/Products.html" class="link-editorial" style="font-size: 12px;">Explore Suite →</a>
+            </div>
+            <a href="/Products.html#gateway" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">SlashLLM Gateway</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Unified API, model routing & semantic caching</p>
+              </div>
+            </a>
+            <a href="/Products.html#observability" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">SlashLLM Observability</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Real-time token tracing & cost attribution</p>
+              </div>
+            </a>
+            <a href="/Products.html#ai-platform" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">SlashLLM AI Platform</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Developer toolkit for prompt ops & model evals</p>
+              </div>
+            </a>
+            <a href="/Products.html#agent-platform" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">SlashLLM Agent Platform</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Orchestration & tool sandboxing for agents</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Solutions -->
+        <div class="nav-item-wrap">
+          <a href="/Solutions.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px; display: inline-flex; align-items: center; gap: 4px;">
+            Solutions <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--color-fog)" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <div class="nav-dropdown" style="left: -40px; width: 520px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+            <div style="grid-column: span 2; padding: 4px 8px 8px; border-bottom: 1px solid var(--border-hairline); display: flex; justify-content: space-between; align-items: center;">
+              <span class="font-mono" style="font-size: 10px; color: var(--color-fog);">Enterprise Solutions</span>
+              <a href="/Solutions.html" class="link-editorial" style="font-size: 12px;">All Solutions →</a>
+            </div>
+            <a href="/Solutions.html#transformation" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Enterprise AI Transformation</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Full-stack AI strategy & legacy modernization</p>
+              </div>
+            </a>
+            <a href="/Solutions.html#cost-optimization" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">AI Cost & Latency Optimization</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Reduce inference spend by 30–60%</p>
+              </div>
+            </a>
+            <a href="/Solutions.html#governance" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">LLM Governance & Guardrails</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Safety policies, PII redaction & red-teaming</p>
+              </div>
+            </a>
+            <a href="/Solutions.html#private-ai" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Private & Hybrid AI Infra</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">On-premise & air-gapped VPC deployments</p>
+              </div>
+            </a>
+            <a href="/Solutions.html#document-ai" class="nav-sub-item">
+              <div>
+                <p style="font-size: 13px; font-weight: 600; color: var(--color-obsidian-ink); margin-bottom: 2px;">Intelligent Document AI</p>
+                <p style="font-size: 11.5px; color: var(--color-fog);">Automated extraction & structuring of data</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a href="/CaseStudies.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px;">Stories</a>
+        <a href="/blog" class="nav-link-active" style="padding: 8px 12px; font-size: 14px;">Insights</a>
+        <a href="/About.html" style="color: var(--color-obsidian-ink); font-size: 14px; padding: 8px 12px;">Company</a>
       </nav>
+
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" class="btn-primary nav-cta-btn">
+          Talk to an AI Expert →
+        </a>
+
+        <button
+          class="hide-desktop"
+          onclick="toggleBlogArticleMenu()"
+          aria-label="Toggle Navigation Menu"
+          style="width: 36px; height: 36px; border-radius: 8px; background: #f3f3f5; border: 1px solid var(--border-hairline); color: var(--color-obsidian-ink); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; flex-shrink: 0;"
+        >
+          <svg id="blogArticleMenuIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
     </div>
+
+    <!-- Mobile Drawer Overlay -->
+    <div id="blogArticleMobileDrawer" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100vw; height: 100vh; background: #ffffff; z-index: 100000; overflow-y: auto; box-sizing: border-box; flex-direction: column; justify-content: space-between;">
+      <!-- Mobile Top Bar with Close Button -->
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid var(--border-hairline); background: #ffffff; position: sticky; top: 0; z-index: 10;">
+        <a href="/" onclick="toggleBlogArticleMenu()" style="display: flex; align-items: center;">
+          <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style="height: 26px; width: auto; object-fit: contain;" />
+        </a>
+        <button
+          onclick="toggleBlogArticleMenu()"
+          aria-label="Close Navigation Menu"
+          style="width: 36px; height: 36px; border-radius: 8px; background: #f3f3f5; border: 1px solid var(--border-hairline); color: var(--color-obsidian-ink); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div style="padding: 20px 20px 40px; display: flex; flex-direction: column; gap: 16px;">
+        <a href="/Services.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">What We Do</a>
+        <a href="/Industries.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Industries</a>
+        <a href="/Products.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Products</a>
+        <a href="/Solutions.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Solutions</a>
+        <a href="/CaseStudies.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Stories</a>
+        <a href="/blog" style="font-size: 16px; font-weight: 600; color: var(--color-iris-pulse); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Insights</a>
+        <a href="/About.html" style="font-size: 16px; font-weight: 600; color: var(--color-obsidian-ink); text-decoration: none; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px;">Company</a>
+
+        <div style="padding-top: 10px;">
+          <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width: 100%; justify-content: center; padding: 12px 18px; font-size: 14.5px; display: flex;">
+            Schedule an AI Briefing →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleBlogArticleMenu() {
+        var drawer = document.getElementById('blogArticleMobileDrawer');
+        var icon = document.getElementById('blogArticleMenuIcon');
+        if (drawer.style.display === 'none' || drawer.style.display === '') {
+          drawer.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+          if (icon) icon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
+        } else {
+          drawer.style.display = 'none';
+          document.body.style.overflow = '';
+          if (icon) icon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+        }
+      }
+    </script>
   </header>
 
-  <main class="wrap">
-    <div class="crumbs"><a href="/">Home</a> › <a href="/blog">Blog</a> › From prompt to production</div>
-    <article>
-      <div class="meta">Jun 17, 2026 · 6 min read · SlashLLM</div>
-      <h1 class="display">From prompt to production: what it actually takes</h1>
+  <main>
+    <article class="article-wrap">
+      <div style="margin-bottom: 20px;">
+        <a href="/blog" class="link-editorial"
+          style="font-size: 13px; color: var(--color-fog); margin-bottom: 12px; display: inline-flex;">← Back to
+          Insights</a>
+        <div style="display: flex; gap: 16px; align-items: center; margin-top: 8px;">
+          <span class="font-mono" style="font-size: 11px; color: var(--color-iris-pulse); font-weight: 600;">Engineering
+            Architecture</span>
+          <span class="font-mono" style="font-size: 11px; color: var(--color-fog);">5 min read</span>
+        </div>
+      </div>
 
-      <p class="lead">A prompt that produces a great answer in a playground is a demo. A demo is not a product. The gap between the two is where most AI projects quietly die — and it is almost entirely engineering, not modeling.</p>
+      <h1>From Prompt to Production: <span class="gradient-text-purple">What It Actually Takes</span></h1>
 
-      <p>At SlashLLM we take AI projects from prompt to production. In practice, the working prototype is about 20% of the job. This post is about the other 80% — the parts that decide whether your AI actually ships, holds up under real traffic, and earns its cost.</p>
+      <p style="font-size: 18px; color: var(--color-fog); line-height: 1.6; margin-bottom: 32px; font-style: italic;">
+        A working prompt in a playground is about 10% of the effort required to ship an enterprise AI application that
+        survives contact with real-world users, scale, and compliance auditors.
+      </p>
 
-      <h2>1. Evaluation: how do you know it works?</h2>
-      <p>Before anything goes live, you need a way to measure quality that is not "it looked good when I tried it." That means a labeled evaluation set, automated scoring (exact-match, rubric-based, or LLM-as-judge), and a regression suite that runs on every prompt or model change. Without evals, every change is a gamble.</p>
+      <p>
+        Most AI proofs-of-concept feel magical in week one. A clever prompt, an API key, and a handful of curated
+        examples produce impressive results. Then the team attempts to put that prompt in front of real customers — and
+        everything breaks.
+      </p>
+      <p>
+        Users type unexpected inputs. Edge cases surface that the prompt author never imagined. Latency spikes during
+        peak hours. The first monthly API bill lands and sets off alarms in finance. Security asks questions about data
+        retention and PII that nobody has answers for.
+      </p>
+      <p>
+        Here is what the other 90% of the work actually looks like.
+      </p>
 
-      <h2>2. Infrastructure: the engineering around the AI</h2>
-      <p>Production AI needs the same foundations as any serious software: APIs, queues, retries, timeouts, caching, observability, and graceful degradation when the model provider has an outage. Streaming responses, rate-limit handling, and fallbacks between models are not optional once real users arrive.</p>
+      <h2>1. Evaluation: beyond "looks good to me"</h2>
+      <p>
+        The single biggest differentiator between amateur AI projects and production systems is continuous, automated
+        evaluation. If you cannot measure whether a prompt change improved or degraded performance across 500 edge
+        cases, you cannot ship updates safely.
+      </p>
+      <p>
+        Production teams build evaluation suites — "golden datasets" of representative inputs, edge cases, and known
+        failure modes — and run them automatically on every prompt revision, model switch, or code change.
+      </p>
+
+      <h2>2. Infrastructure: the harness around the model</h2>
+      <p>
+        The model is a tiny component of an AI system. The rest is infrastructure: retrieval pipelines (RAG) that fetch
+        relevant context without hallucinating, embedding models, vector stores, caching layers, rate-limiters, fallback
+        mechanisms when upstream APIs fail, and streaming response pipelines.
+      </p>
 
       <h2>3. Cost: knowing what you spend</h2>
-      <p>Token costs scale with usage in ways prototypes never reveal. Production-grade systems track cost per request, cache aggressively, route easy queries to cheaper models, and set hard budgets. The difference between a profitable feature and a money pit is often just instrumentation.</p>
+      <p>
+        Token costs scale with usage in ways prototypes never reveal. Production-grade systems track cost per request,
+        cache aggressively, route easy queries to cheaper models, and set hard budgets. The difference between a
+        profitable feature and a money pit is often just instrumentation.
+      </p>
 
       <h2>4. Safety and reliability</h2>
-      <p>Real products need guardrails: input validation, output filtering, prompt-injection defenses, and human-in-the-loop review where the stakes are high. Reliability is a feature — users forgive a slower answer far more than a wrong or unsafe one.</p>
+      <p>
+        Real products need guardrails: input validation, output filtering, prompt-injection defenses, and
+        human-in-the-loop review where the stakes are high. Reliability is a feature — users forgive a slower answer far
+        more than a wrong or unsafe one.
+      </p>
 
       <h2>The short version</h2>
-      <p>Shipping production AI takes four things beyond the prototype:</p>
-      <ul>
-        <li><strong>Evaluation</strong> — measurable quality and regression testing.</li>
-        <li><strong>Infrastructure</strong> — the APIs, pipelines, and observability around the model.</li>
-        <li><strong>Cost control</strong> — per-request tracking, caching, and model routing.</li>
-        <li><strong>Safety</strong> — guardrails, monitoring, and graceful failure.</li>
-      </ul>
+      <p>
+        Shipping enterprise AI isn't prompt engineering. It's software engineering applied to stochastic systems. The
+        teams that succeed are the ones that treat AI with the same discipline they apply to databases, distributed
+        systems, and security infrastructure.
+      </p>
 
-      <div class="cta">
-        <p style="margin:0 0 8px;font-weight:600;">Building something that needs to ship, not just demo?</p>
-        <p style="margin:0;">See <a href="Services.html">what SlashLLM does</a> or <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer">book a 30-minute call</a>.</p>
+      <div class="callout-box">
+        <h3 class="font-display" style="font-size: 22px; color: var(--color-obsidian-ink); margin-bottom: 8px;">Need
+          help bridging the prototype-to-production gap?</h3>
+        <p style="font-size: 15px; color: var(--color-fog); line-height: 1.6; margin-bottom: 20px;">
+          SlashLLM engineers build production AI infrastructure, evaluation suites, and cost-optimized deployment
+          pipelines for enterprises.
+        </p>
+        <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+          <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer"
+            class="btn-primary" style="padding: 10px 20px; font-size: 14px;">
+            Schedule Architecture Review →
+          </a>
+          <a href="/Services.html" class="link-editorial" style="font-size: 14px; padding: 10px 0;">Explore Services
+            →</a>
+        </div>
       </div>
     </article>
   </main>
 
-  <footer class="site">
-    <div class="wrap">© 2026 SlashLLM. From prompt to production. · <a href="/blog">More posts</a></div>
+  <footer
+    style="background: var(--color-canvas); border-top: 1px solid var(--border-hairline); padding: 72px 0 48px; position: relative;">
+    <div class="halftone-pattern"
+      style="position: absolute; top: 0; left: 0; right: 0; height: 180px; opacity: 0.25; pointer-events: none;"></div>
+    <div style="max-width: var(--page-max-width); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1;">
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin-bottom: 40px; border-bottom: 1px solid var(--border-hairline); padding-bottom: 32px;">
+        <div>
+          <div style="display: flex; align-items: center; margin-bottom: 8px;">
+            <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style="height: 24px; width: auto; object-fit: contain; display: block;" />
+          </div>
+          <p style="font-size: 13px; color: var(--color-fog);">Practical writing on shipping AI products, agents, and
+            infrastructure.</p>
+        </div>
+        <div style="display: flex; gap: 20px;">
+          <a href="/Services.html" class="link-editorial" style="font-size: 13px;">Services</a>
+          <a href="/Industries.html" class="link-editorial" style="font-size: 13px;">Industries</a>
+          <a href="/Products.html" class="link-editorial" style="font-size: 13px;">Products</a>
+          <a href="/CaseStudies.html" class="link-editorial" style="font-size: 13px;">Case Studies</a>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+        <p style="color: var(--color-fog); font-size: 12.5px;">© 2026 SlashLLM Inc. All rights reserved. Restraint as
+          authority.</p>
+
+      </div>
+    </div>
   </footer>
 </body>
+
 </html>

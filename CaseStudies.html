@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About SlashLLM — Enterprise AI Engineering</title>
+  <title>Customer Stories & Case Studies — SlashLLM</title>
   <link rel="icon" href="/favicon.ico?v=2" sizes="any">
   <link rel="icon" type="image/png" href="/uploads/favicon-32.png?v=2" sizes="32x32">
   <link rel="icon" type="image/png" href="/uploads/favicon-16.png?v=2" sizes="16x16">
   <link rel="apple-touch-icon" href="/uploads/favicon-180.png?v=2">
-  <meta name="description" content="SlashLLM is the technology partner enterprises trust to build, deploy, optimize, and operate production AI systems at scale.">
-  <link rel="canonical" href="https://slashllm.com/about">
-  <meta property="og:title" content="About SlashLLM — Enterprise AI Engineering">
-  <meta property="og:description" content="Enterprise AI engineering, dedicated autonomous agents, and model infrastructure.">
+  <meta name="description" content="Authentic production AI case studies shipped across HR Tech, Healthcare, Fintech, and FoodTech by SlashLLM.">
+  <link rel="canonical" href="https://slashllm.com/CaseStudies.html">
+  <meta property="og:title" content="Customer Stories & Case Studies — SlashLLM">
+  <meta property="og:description" content="Proven enterprise AI engineering results shipped to production.">
   <meta property="og:image" content="https://slashllm.com/uploads/LOGO%202.png">
 
   <!-- Single Unified Typography: Proxima Nova -->
@@ -236,7 +236,7 @@
       background: #ffffff;
       border: 1px solid var(--border-hairline);
       border-radius: var(--radius-cards);
-      box-shadow: 0 16px 36px rgba(1, 1, 16, 0.08);
+      box-shadow: 0 16px 36px rgba(1, 1, 16, 0.12);
       padding: 12px;
       z-index: 1000;
       opacity: 0;
@@ -244,7 +244,6 @@
       transform: translateY(4px);
       transition: opacity 0.15s ease, transform 0.15s ease;
     }
-    /* Invisible hover bridge spanning between nav item and dropdown */
     .nav-dropdown::before {
       content: '';
       position: absolute;
@@ -263,6 +262,73 @@
       transform: translateY(0);
     }
 
+    /* Filter Subnav */
+    .filter-tab {
+      background: #ffffff;
+      border: 1px solid rgba(1, 1, 16, 0.16);
+      color: #0c0a21;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      padding: 9px 18px;
+      border-radius: var(--radius-buttons);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-sans);
+      transition: all 0.18s ease;
+    }
+    .filter-tab .tab-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #555566;
+      font-weight: 700;
+      transition: color 0.18s ease;
+    }
+    .filter-tab:hover, .filter-tab.is-active {
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+    }
+    .filter-tab:hover .tab-badge, .filter-tab.is-active .tab-badge {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .subnav-scroll {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .subnav-scroll::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    .subnav-desktop {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      max-width: var(--page-max-width);
+      margin: 0 auto;
+      padding: 10px 24px;
+    }
+    .subnav-mobile-bar {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .subnav-mobile-drawer {
+      display: none;
+    }
+
     .halftone-pattern {
       background-image: radial-gradient(var(--color-ash) 1px, transparent 1px);
       background-size: 16px 16px;
@@ -275,10 +341,30 @@
     }
     .hide-desktop { display: none !important; }
     @media (max-width: 1024px) {
-      .grid-2col { grid-template-columns: 1fr !important; gap: 32px !important; }
+      .grid-2col { grid-template-columns: 1fr !important; gap: 24px !important; }
+      .grid-3col { grid-template-columns: 1fr !important; gap: 14px !important; }
       .hide-desktop { display: flex !important; }
       .hide-mobile { display: none !important; }
       .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 36px !important; }
+    }
+    @media (max-width: 768px) {
+      .subnav-desktop {
+        display: none !important;
+      }
+      .subnav-mobile-bar {
+        display: flex !important;
+      }
+      .subnav-mobile-drawer.is-open {
+        display: flex !important;
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px 16px 16px;
+        background: #ffffff;
+        border-top: 1px solid var(--border-hairline);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        max-height: 70vh;
+        overflow-y: auto;
+      }
     }
     @media (max-width: 640px) {
       .nav-cta-btn {
@@ -287,6 +373,7 @@
         gap: 4px !important;
       }
       .footer-grid { grid-template-columns: 1fr !important; }
+      .card-editorial { padding: 24px; }
       h1, .hero-title { font-size: clamp(30px, 7vw, 56px) !important; line-height: 1.12 !important; }
     }
   </style>
@@ -319,7 +406,9 @@
         mfg: <><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></>,
         prof: <><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></>,
         cost: <><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></>,
-        check: <polyline points="20 6 9 17 4 12"/>
+        check: <polyline points="20 6 9 17 4 12"/>,
+        layers: <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>,
+        code: <polyline points="16 18 22 12 16 6 M8 6 2 12 8 18"/>
       };
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0 }}>
@@ -330,7 +419,8 @@
 
     const AnnouncementBar = () => null;
 
-    const GlobalNav = ({ activePage = 'company' }) => {
+    /* Header Navigation (White, 64px, Hairline Border) */
+    const GlobalNav = ({ activePage = 'stories' }) => {
       const [openDropdown, setOpenDropdown] = React.useState(null);
       const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
       const [mobileAccordion, setMobileAccordion] = React.useState(null);
@@ -679,7 +769,7 @@
 
           </div>
 
-                    {/* Full-Screen Clean Drop-Down Overlay (Mobile Only) */}
+          {/* Full-Screen Clean Drop-Down Overlay (Mobile Only) */}
           {mobileMenuOpen && (
             <div style={{
               position: 'fixed',
@@ -834,7 +924,7 @@
                       textAlign: 'left'
                     }}
                   >
-                    Products
+                    Products & Platforms
                     <Icon name={mobileAccordion === 'products' ? 'chevronUp' : 'chevronDown'} size={15} color="var(--color-fog)" />
                   </button>
                   {mobileAccordion === 'products' && (
@@ -851,7 +941,7 @@
                         </a>
                       ))}
                       <a href="/Products.html" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--color-iris-pulse)', padding: '6px 10px' }}>
-                        Explore Suite →
+                        Explore Platform Suite →
                       </a>
                     </div>
                   )}
@@ -892,7 +982,7 @@
                         </a>
                       ))}
                       <a href="/Solutions.html" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--color-iris-pulse)', padding: '6px 10px' }}>
-                        All Solutions →
+                        All Enterprise Solutions →
                       </a>
                     </div>
                   )}
@@ -917,24 +1007,23 @@
                   </a>
                 </div>
 
-              </div>
-
-              <div style={{ paddingTop: 20, marginTop: 'auto' }}>
-                <a
-                  href="https://cal.com/mridhul-pax-jjhwct/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary"
-                  style={{
-                    width: '100%',
-                    justifyContent: 'center',
-                    padding: '12px 18px',
-                    fontSize: 14.5,
-                    display: 'flex'
-                  }}
-                >
-                  Schedule an AI Briefing <Icon name="arrowRight" size={15} />
-                </a>
+                <div style={{ paddingTop: 10 }}>
+                  <a
+                    href="https://cal.com/mridhul-pax-jjhwct/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary"
+                    style={{
+                      width: '100%',
+                      justifyContent: 'center',
+                      padding: '12px 18px',
+                      fontSize: 14.5,
+                      display: 'flex'
+                    }}
+                  >
+                    Schedule an AI Briefing <Icon name="arrowRight" size={15} />
+                  </a>
+                </div>
               </div>
             </div>
           )}
@@ -951,7 +1040,7 @@
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
                 <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style={{ height: 24, width: 'auto', objectFit: 'contain', display: 'block' }} />
               </div>
-              <p style={{ fontSize: 13, color: 'var(--color-fog)' }}>Enterprise AI engineering, proprietary platforms, and dedicated transformation.</p>
+              <p style={{ fontSize: 13, color: 'var(--color-fog)' }}>Proven enterprise AI engineering results shipped to production.</p>
             </div>
             <div style={{ display: 'flex', gap: 20 }}>
               <a href="/Services.html" className="link-editorial" style={{ fontSize: 13 }}>Services</a>
@@ -968,96 +1057,611 @@
       </footer>
     );
 
-    function AboutPage() {
-      const values = [
-        {
-          num: '01',
-          title: 'Production Rigor Over Proof-of-Concept Hype',
-          desc: 'We judge our success exclusively by software running live in production under strict SLAs, low latency, and deterministic output safety.'
-        },
-        {
-          num: '02',
-          title: 'Software Engineering First, Prompts Second',
-          desc: 'Reliable AI requires robust distributed systems, deterministic state machines, automated regression testing, and resilient fallback routing.'
-        },
-        {
-          num: '03',
-          title: 'Data Sovereignty & Enterprise Security',
-          desc: 'Enterprise AI must be secure by design. We build with client-side encryption, air-gapped private VPCs, and automated PII scrubbers that guarantee zero data leakage.'
-        },
-        {
-          num: '04',
-          title: 'Cost Transparency & Model Neutrality',
-          desc: 'We are vendor-agnostic. Whether OpenAI, Anthropic, AWS Bedrock, Google Vertex, or self-hosted open-weights on vLLM — we route workloads to the most cost-effective solution.'
+    const getTagPillStyle = (tag) => {
+      const t = tag.toLowerCase();
+      if (['shipped', 'in production', 'built', 'live'].includes(t))
+        return { background: 'rgba(74, 222, 128, 0.1)', color: '#15803d', border: '1px solid rgba(74, 222, 128, 0.25)' };
+      if (t === 'our product' || t === 'our own product')
+        return { background: 'rgba(168, 85, 247, 0.12)', color: '#9333ea', border: '1px solid rgba(168, 85, 247, 0.28)' };
+      if (t.includes('active') || t.includes('mvp'))
+        return { background: 'rgba(251, 191, 36, 0.1)', color: '#b45309', border: '1px solid rgba(251, 191, 36, 0.25)' };
+      if (t === 'prototype')
+        return { background: 'rgba(99, 91, 255, 0.08)', color: 'var(--color-iris-pulse)', border: '1px solid rgba(99, 91, 255, 0.2)' };
+      return { background: '#f5f3ff', color: '#6366f1', border: '1px solid rgba(99, 91, 255, 0.15)' };
+    };
+
+    const CASE_STUDIES = [
+      {
+        id: 'impress-ai',
+        client: 'Impress AI',
+        industryId: 'hr',
+        industry: 'HR Tech & Talent',
+        title: 'AI Video Interview Analysis System & 7-Dimension Competency Scoring',
+        subtitle: 'Real-Time Computer Vision & Asynchronous NLP Evaluation',
+        oneliner: 'Combines real-time transcription and computer vision to assess candidates across 7 dimensions — communication, emotional expression, body language, content relevance, problem-solving, professionalism, and interview integrity.',
+        tags: ['AI Product', 'Computer Vision', 'Shipped'],
+        statusTag: 'Shipped',
+        metrics: ['100% Local-to-Cloud', '7-Dimension Scoring', 'Real AWS Integration'],
+        mainMetric: '7-Dim',
+        metricDesc: 'AI Competency Scoring Per Candidate',
+        challenge: 'Recruiting teams needed to evaluate video interviews at scale consistently across 7 competency dimensions without the time cost or bias of manual review. Traditional tools could not detect if a candidate was reading from off-screen notes, leaving integrity validation unreliable.',
+        approach: 'Architected a production REST API combining AWS Bedrock (Claude 3 Haiku) for 7-dimensional NLP scoring, AWS Transcribe for real speech-to-text, and MediaPipe computer vision for frame-by-frame iris gaze tracking with async S3 persistence.',
+        whatWeBuilt: [
+          'Iris-based gaze detection using MediaPipe landmarks (468–477) to distinguish reading from eye contact',
+          '7-dimensional competency scoring via AWS Bedrock (Claude 3 Haiku)',
+          'Proctoring & integrity detection: candidate absence, multiple faces, reading behaviour',
+          'Multi-interview batch summarisation with AI-synthesised executive reports',
+          'Async architecture with S3 persistence for unlimited concurrent interviews'
+        ],
+        techStack: ['Python', 'FastAPI', 'AWS Bedrock', 'AWS Transcribe', 'MediaPipe', 'OpenCV', 'AWS S3', 'Docker'],
+        outcome: 'Automated 7-dimension competency scoring across thousands of candidate frames with zero human review latency and reliable detection of off-screen reading behavior.'
+      },
+      {
+        id: 'workforce',
+        client: 'Unified Workforce Platform',
+        industryId: 'hr',
+        industry: 'HR Tech & Talent',
+        title: 'Mobile-First Recruitment & On-Demand Workforce Operations Platform',
+        subtitle: '3-Tier Architecture with 5-Factor AI Matching Engine',
+        oneliner: 'Replaced 5+ disconnected tools — CRM, spreadsheets, messaging apps, job boards — with a single-source-of-truth system for on-demand worker operations.',
+        tags: ['Full-Stack Platform', 'AI Matching', 'Shipped'],
+        statusTag: 'Shipped',
+        note: '6-week sprint to production',
+        metrics: ['−50% Recruitment Costs', '−50% Operational Time', '+50% Worker Retention'],
+        mainMetric: '−50%',
+        metricDesc: 'Recruitment & Operations Overhead',
+        challenge: 'On-demand staffing agencies were drowning in 5+ disconnected tools for applicant tracking, shift assignments, GPS check-ins, and payroll exports, resulting in delayed fulfillment and 40%+ worker churn.',
+        approach: 'Engineered a unified 3-tier platform (Worker PWA + Admin Operations Dashboard + Employer Client Portal) powered by a 5-factor AI matching engine and geofence-verified timesheet automation.',
+        whatWeBuilt: [
+          '3-tier platform: Worker PWA + Admin Dashboard + Employer Client Portal',
+          '5-factor AI matching engine (proximity, performance, job type, completion rate, tier)',
+          'GPS-verified attendance with geofence validation and no-show auto-detection',
+          'Multi-tier timesheet approval workflow to automated payroll export',
+          'Bilingual support, AES-256 encrypted PII, privacy-compliant architecture'
+        ],
+        techStack: ['React 18', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Redis', 'AWS (EC2, RDS, S3)', 'Docker', 'GitHub Actions'],
+        outcome: 'Shipped to production in a 6-week sprint, cutting recruitment costs by 50%, reducing operational overhead by 50%, and boosting worker retention by 50%.'
+      },
+      {
+        id: 'savos',
+        client: 'Impress AI SIT-SAVOS',
+        industryId: 'hr',
+        industry: 'HR Tech & Talent',
+        title: 'Secure Applicant Assessment & Bulk Profiling Ingest Platform',
+        subtitle: 'Enterprise Data Consolidation & External API Integration',
+        oneliner: 'Secure web platform consolidating applicant data from multiple CSV sources with OAuth2-protected external assessment API integration — enabling bulk-scale profiling for educational institutions.',
+        tags: ['Data Platform', 'In Production'],
+        statusTag: 'In Production',
+        metrics: ['100+ Applicants / Batch', 'Zero Duplicate Records', 'OAuth2 + KMS Secured'],
+        mainMetric: '100+',
+        metricDesc: 'Applicants Ingested Per Batch',
+        challenge: 'Educational institutions struggled with consolidating fragmented applicant assessment CSVs across disparate evaluation vendors without data duplication or security vulnerabilities.',
+        approach: 'Engineered a streaming CSV ingestion pipeline with AWS KMS encryption, an automated header-mapping synonym engine, and MD5 checksum deduplication with async webhook callbacks.',
+        whatWeBuilt: [
+          'Secure multi-part S3 uploads with AWS KMS encryption',
+          'Streaming CSV parser with automated header mapping via synonym engine',
+          'Idempotent data consolidation with MD5 checksums (zero duplicate records)',
+          'Bulk ingest API (100+ applicants per batch) with async webhook callbacks'
+        ],
+        techStack: ['React 18', 'TypeScript', 'FastAPI', 'AWS S3', 'DynamoDB', 'AWS Cognito', 'Docker'],
+        outcome: 'Eliminated duplicate records entirely across high-volume applicant cohorts, cutting ingest latency to seconds with end-to-end OAuth2 and KMS encryption.'
+      },
+      {
+        id: 'dot-in-space',
+        client: 'Dot in Space',
+        industryId: 'hr',
+        industry: 'HR Tech & Talent',
+        title: 'Interactive Mission-Based Science Education PWA & Exhibit Gamification',
+        subtitle: 'QR-Activated Physical Exhibit Science Adventure',
+        oneliner: 'Mission-based educational PWA for children aged 8–14, QR-activated at physical science centre exhibits. Transforms visits into interactive space adventures with station-based quizzes and progress tracking.',
+        tags: ['EdTech', 'PWA', 'Shipped'],
+        statusTag: 'Shipped',
+        metrics: ['Mobile-First PWA', '6 Interactive Stations', 'Offline-Capable'],
+        mainMetric: '6 Stations',
+        metricDesc: 'QR-Activated Interactive Quests',
+        challenge: 'Physical science centers suffered from passive visitor engagement among young students (aged 8–14), requiring a privacy-conscious, frictionless digital companion without app store downloads.',
+        approach: 'Designed a lightweight, offline-resilient PWA featuring QR-triggered exhibit missions, an 80/20 visual-to-assessment ratio, and an educator dashboard with zero student tracking or ads.',
+        whatWeBuilt: [
+          '6-station sequential mission with animated intros and 80/20 visual-to-assessment ratio',
+          'QR-activated exhibits with offline-friendly PWA architecture',
+          'Admin dashboard for player tracking, score monitoring, and content management',
+          'Child-safe design: no ads, no social features, no public profiles'
+        ],
+        techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'PWA Service Workers'],
+        outcome: 'Delivered an interactive, 100% child-safe science exhibit companion with zero connectivity drop-offs, adopted across multiple museum gallery rotations.'
+      },
+      {
+        id: 'clinedops',
+        client: 'ClinEdOps',
+        industryId: 'healthcare',
+        industry: 'Healthcare & Life Sciences',
+        title: 'Clinical Education Operations & Teaching Hours Governance Platform',
+        subtitle: 'Multi-Discipline Hospital Lifecycle Tracking with Real-Time Audit Trails',
+        oneliner: 'Unified student/tutor lifecycle and teaching hours tracking system for four healthcare disciplines at a leading teaching hospital — Medicine, Allied Health, Nursing, and Training Programmes.',
+        tags: ['Healthcare', 'Full-Stack Platform', 'In Production'],
+        statusTag: 'In Production',
+        note: 'Real-time audit trails',
+        metrics: ['4 Healthcare Disciplines', '80%+ Test Coverage', '5-Month Build'],
+        mainMetric: '4 Disciplines',
+        metricDesc: 'Medicine, Nursing, Allied Health, Training',
+        challenge: 'A major teaching hospital tracked clinical tutors, student rotations, and teaching hours via manual spreadsheets across 4 disconnected departments, creating administrative bottlenecks and audit compliance risks.',
+        approach: 'Architected a full-stack platform with TimescaleDB audit tracking, 4-tier RBAC, batch roster imports, and automated supervisor-to-admin teaching hour approvals.',
+        whatWeBuilt: [
+          'Batch student/tutor import (Excel/CSV) with field mapping and duplicate detection',
+          'Teaching hours logging with multi-level approval (supervisor to programme admin)',
+          'Survey engine with custom JSONB questions and response analytics',
+          'Four-tier RBAC: super_admin, programme_admin, supervisor, tutor, student',
+          'Full audit logging on every CREATE, UPDATE, DELETE with before/after JSONB state'
+        ],
+        techStack: ['React 18', 'Ant Design', 'FastAPI', 'PostgreSQL 16', 'TimescaleDB', 'Celery', 'Redis', 'AWS S3/SES', 'Docker'],
+        outcome: 'Shipped in 5 months with 80%+ test coverage, replacing all paper/spreadsheet tracking with immutable audit trails across 4 medical disciplines.'
+      },
+      {
+        id: 'careo',
+        client: 'CareO',
+        industryId: 'healthcare',
+        industry: 'Healthcare & Life Sciences',
+        title: 'UK Care Home Management & NHS-Compliant MAR Records System',
+        subtitle: 'Real-Time Digital Workflows for Medication Administration & Incident Audits',
+        oneliner: 'Replaces paper records with structured digital workflows for resident care, medication administration, incident reporting, and NHS compliance documentation.',
+        tags: ['Healthcare', 'Care Home Software', 'In Production'],
+        statusTag: 'In Production',
+        metrics: ['NHS-Compliant Workflows', 'Real-Time Team Sync', 'Full Audit Logging'],
+        mainMetric: '100% Sync',
+        metricDesc: 'Real-Time Care Team Coordination',
+        challenge: 'UK care homes relied heavily on physical paper records for resident care plans, Medication Administration Records (MAR), and incident reports, creating high risk of missed doses and compliance audit delays.',
+        approach: 'Built a structured digital care management system featuring real-time team synchronization via Convex, digital MAR charting with scheduling safeguards, and automated NHS Trust incident form generation.',
+        whatWeBuilt: [
+          'Resident profiles with comprehensive care records and document tracking',
+          'Medication Administration Records (MAR) with scheduling and audit trails',
+          'NHS Trust incident reporting with automated form generation',
+          'Manager audit system with before/after state tracking and approval workflows',
+          'Real-time sync across care teams via Convex backend'
+        ],
+        techStack: ['Next.js 15', 'React 19', 'TypeScript', 'shadcn/ui', 'Convex', 'Better Auth', 'Recharts'],
+        outcome: 'Transitioned care facilities from paper records to full NHS compliance with zero sync latency across care workers and shift supervisors.'
+      },
+      {
+        id: 'wealthyhood',
+        client: 'Wealthyhood',
+        industryId: 'fintech',
+        industry: 'Fintech & Enterprise',
+        title: 'Zero-Knowledge Encrypted Personal Wealth Management & Succession System',
+        subtitle: 'Client-Side Cryptographic Security & Granular Portfolio Sharing',
+        oneliner: 'Users track assets, liabilities, insurance, and dependents — then safely share their financial portfolio with trusted family, beneficiaries, or advisors. The server never sees plaintext financial data.',
+        tags: ['Fintech', 'Encrypted Platform', 'Active MVP'],
+        statusTag: 'Active MVP',
+        metrics: ['AES-256 Client-Side', 'Zero-Knowledge Architecture', "Dead-Man's Switch"],
+        mainMetric: 'AES-256',
+        metricDesc: 'Zero-Knowledge Client-Side Encryption',
+        challenge: 'Wealth holders want to track full balance sheets and share plans with family/advisors, but fear cloud data breaches and vendor surveillance of sensitive financial assets.',
+        approach: 'Built a zero-knowledge architecture using client-side AES-256 encryption with PBKDF2 key derivation, granular view/edit permissioning, and a cryptographic dead-man emergency release trigger.',
+        whatWeBuilt: [
+          'Client-side AES-256 encryption with PBKDF2 key derivation (server-zero-knowledge)',
+          'Net worth dashboard with wealth distribution charts and financial health scoring',
+          'Granular portfolio sharing with revocable view/edit access control',
+          "Dead-man's switch: configurable inactivity trigger grants access to beneficiaries",
+          'Advisor dashboard with multi-client portfolio management and risk assessment'
+        ],
+        techStack: ['React 18', 'TypeScript', 'Supabase', 'crypto-js', 'Recharts', 'Framer Motion', 'Edge Functions (Deno)'],
+        outcome: 'Delivered an active MVP where users manage multimillion-dollar portfolios with cryptographic certainty that cloud servers never hold plaintext records.'
+      },
+      {
+        id: 'payrolliq',
+        client: 'PayrollIQ',
+        industryId: 'fintech',
+        industry: 'Fintech & Enterprise',
+        title: 'Local AI-Powered Payroll File Comparison & Discrepancy Detection Engine',
+        subtitle: '100% Air-Gapped On-Premises LLM Analysis with Zero Data Egress',
+        oneliner: 'AI-powered payroll file analysis using locally-hosted Ollama (Gemma 3). Zero data leaves the network — payroll teams get instant discrepancy detection, compliance auditing, and custom queries.',
+        tags: ['Enterprise', 'Local AI', 'Built'],
+        statusTag: 'Built',
+        metrics: ['100% Local Processing', 'Zero Data Egress', '4 Analysis Modes'],
+        mainMetric: '0% Egress',
+        metricDesc: '100% On-Premises Air-Gapped LLM',
+        challenge: 'Corporate payroll departments spending days reconciling monthly salary spreadsheets across ERP versions could not use public LLM APIs due to strict PII and GDPR regulations.',
+        approach: 'Deployed locally-hosted Ollama (Gemma 3 7B) with client-side CSV/XLSX streaming parsers, enabling natural-language discrepancy auditing completely air-gapped on internal networks.',
+        whatWeBuilt: [
+          'Drag-drop file upload with side-by-side preview (CSV, XLSX)',
+          'Streaming LLM analysis via local Ollama instance (Gemma 3 7B)',
+          '4 analysis modes: discrepancy detection, summarisation, compliance check, custom query',
+          '100% local processing — zero data egress, enterprise-grade privacy'
+        ],
+        techStack: ['Next.js 14', 'TypeScript', 'Ollama (Gemma 3 7B)', 'PapaParse', 'XLSX', 'Tailwind CSS'],
+        outcome: 'Reduced payroll audit cycles from hours to seconds while guaranteeing zero byte egress of sensitive employee salary data outside the corporate perimeter.'
+      },
+      {
+        id: 'slashboard',
+        client: 'Slashboard',
+        industryId: 'fintech',
+        industry: 'Fintech & Enterprise',
+        title: 'Real-Time LLM Cost Observatory & Spend Attribution Platform',
+        subtitle: 'Sub-100ms Ingestion via LiteLLM Webhooks and TimescaleDB',
+        oneliner: 'Real-time LLM cost tracking and spend attribution dashboard powered by LiteLLM webhooks and TimescaleDB. We deploy it for clients running LLM APIs in production to give them visibility into every API call, every model, every dollar.',
+        tags: ['Our Product', 'AI Observability', 'Live'],
+        statusTag: 'Our Product',
+        isOurProduct: true,
+        metrics: ['Sub-100ms Dashboard Updates', '90K+ Log Capacity Tested', '20–40% Cost Savings Typical'],
+        mainMetric: '20–40%',
+        metricDesc: 'Typical Production Inference Cost Savings',
+        challenge: 'Enterprises scaling generative AI applications suffer from runaway API bills, lacking granular visibility into which teams, features, or prompt configurations drive excessive token expenditures.',
+        approach: 'Architected a high-throughput telemetry engine streaming LiteLLM webhooks via Redis Streams into TimescaleDB, rendering sub-100ms cost heatmaps and token attribution analytics.',
+        whatWeBuilt: [
+          'Real-time ingestion via LiteLLM webhooks with Redis Stream processing',
+          'Cost attribution by team, project, model, and feature',
+          'Interactive KPI dashboard: spend trends, cost heatmaps, prompt logs',
+          'Roadmap: anomaly detection, budget enforcement, forecasting'
+        ],
+        techStack: ['Next.js 15', 'React 19', 'FastAPI', 'PostgreSQL 16', 'TimescaleDB', 'Redis 7', 'Tremor', 'Recharts', 'Docker'],
+        outcome: 'Deployed in live enterprise environments to provide sub-100ms telemetry, immediately uncovering redundant queries and yielding 20–40% net inference cost reductions.'
+      },
+      {
+        id: 'smobler',
+        client: 'Smobler',
+        industryId: 'foodtech',
+        industry: 'FoodTech & Compliance',
+        title: 'AI-Powered Food Compliance Platform & Automated HACCP / FDA Nutrition Engine',
+        subtitle: 'Automating Food Regulatory Approvals from Weeks to Minutes',
+        oneliner: 'Transforms complex FDA regulatory requirements into an intuitive wizard-based experience — first-time food makers generate professional nutrition labels and HACCP plans in minutes, not weeks.',
+        tags: ['FoodTech', 'AI Compliance', 'Shipped'],
+        statusTag: 'Shipped',
+        metrics: ['FDA/USDA Compliant', 'Minutes vs. Weeks', '12-Week MVP'],
+        mainMetric: '12-Wk MVP',
+        metricDesc: 'From Concept to Shipped FDA Engine',
+        challenge: 'Artisan food manufacturers and CPG startups faced thousands of dollars in consultant fees and weeks of regulatory paperwork to generate compliant nutrition fact labels and HACCP plans.',
+        approach: 'Integrated USDA food databases with a GPT-4 compliance engine to build an interactive wizard validating recipes, calculating nutritional breakdown, and drafting HACCP critical control point documents.',
+        whatWeBuilt: [
+          'AI-generated FDA-compliant nutrition labels with USDA nutritional database integration',
+          'Automated HACCP plan builder with hazard analysis, CCPs, and corrective actions',
+          'Real-time compliance validation against FDA/USDA standards',
+          'Multi-format export: PDF, Word (DOCX), and high-resolution PNG',
+          'Contextual AI food safety assistant with step-aware guidance'
+        ],
+        techStack: ['React', 'TypeScript', 'Supabase', 'GPT-4', 'Tailwind CSS', 'PDFKit'],
+        outcome: 'Reduced compliance turnaround time from 3+ weeks of manual drafting to under 15 minutes, enabling food makers to safely take products from kitchen to retail shelves.'
+      },
+      {
+        id: 'halalchain',
+        client: 'HalalChain',
+        industryId: 'foodtech',
+        industry: 'FoodTech & Compliance',
+        title: 'Decentralized Blockchain Farm-to-Fork Traceability & Halal Certification',
+        subtitle: '5 Solidity Smart Contracts with Mobile QR Supply Chain Verification',
+        oneliner: "Decentralised farm-to-fork traceability platform. Five Solidity smart contracts record every stage of a product's lifecycle on-chain — consumers verify the full journey via QR code.",
+        tags: ['Supply Chain', 'Blockchain', 'Prototype'],
+        statusTag: 'Prototype',
+        metrics: ['5 Smart Contracts', '6 Role-Based Portals', 'On-Chain Verification'],
+        mainMetric: '5 Contracts',
+        metricDesc: 'Immutable On-Chain Verification',
+        challenge: 'Global Halal food supply chains suffer from counterfeit certificates, lack of cold-chain temperature verification, and fraud during multi-party handoffs from abattoir to retail shelf.',
+        approach: 'Engineered 5 interconnected Solidity smart contracts logging supply chain checkpoints, paired with offline-capable QR mobile scanners and 6 distinct role-based stakeholder portals.',
+        whatWeBuilt: [
+          '5 interlocking Solidity contracts: AnimalRegistry, SlaughterProcess, ProcessingBatch, SupplyChain, HalalCertification',
+          '6 role-specific dashboards (Farmer, Slaughterhouse, Processor, Distributor, Retailer, Consumer)',
+          'Mobile-first QR scanning suite with offline queue + sync',
+          'Real-time compliance monitor: temperature, certification expiry, cross-contamination, segregation'
+        ],
+        techStack: ['Solidity', 'Hardhat', 'ethers.js', 'React 18', 'TypeScript', 'shadcn/ui', 'MetaMask'],
+        outcome: 'Delivered a complete decentralized traceability prototype enabling consumers and auditors to verify authentic supply chain provenance in real time via QR scan.'
+      }
+    ];
+
+    const FILTER_TABS = [
+      { id: 'all', label: 'All Stories', count: 11 },
+      { id: 'hr', label: 'HR Tech & Talent', count: 4 },
+      { id: 'healthcare', label: 'Healthcare & Life Sciences', count: 2 },
+      { id: 'fintech', label: 'Fintech & Enterprise', count: 3 },
+      { id: 'foodtech', label: 'FoodTech & Compliance', count: 2 }
+    ];
+
+    function CaseStudiesPage() {
+      const [activeFilter, setActiveFilter] = useState('all');
+      const [highlightedTab, setHighlightedTab] = useState('all');
+      const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
+
+      const filteredStories = activeFilter === 'all'
+        ? CASE_STUDIES
+        : CASE_STUDIES.filter(cs => cs.industryId === activeFilter);
+
+      useEffect(() => {
+        const handleScroll = () => {
+          const scrollPosition = window.scrollY + 180;
+          const catalogEl = document.getElementById('catalog-top');
+          if (catalogEl && window.scrollY < catalogEl.offsetTop - 120) {
+            setHighlightedTab('all');
+            return;
+          }
+          for (let i = CASE_STUDIES.length - 1; i >= 0; i--) {
+            const el = document.getElementById(CASE_STUDIES[i].id);
+            if (el) {
+              const top = el.offsetTop;
+              if (scrollPosition >= top) {
+                setHighlightedTab(CASE_STUDIES[i].industryId);
+                break;
+              }
+            }
+          }
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, [activeFilter]);
+
+      const handleTabClick = (tabId) => {
+        setActiveFilter(tabId);
+        setHighlightedTab(tabId);
+        setIsMobileDrawerOpen(false);
+
+        if (tabId === 'all') {
+          const el = document.getElementById('catalog-top');
+          if (el) {
+            const offset = window.innerWidth <= 768 ? 115 : 120;
+            const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        } else {
+          const firstStory = CASE_STUDIES.find(cs => cs.industryId === tabId);
+          if (firstStory) {
+            setTimeout(() => {
+              const el = document.getElementById(firstStory.id);
+              if (el) {
+                const offset = window.innerWidth <= 768 ? 115 : 120;
+                const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top, behavior: 'smooth' });
+              }
+            }, 60);
+          }
         }
-      ];
+      };
+
+      const currentTabId = activeFilter === 'all' ? highlightedTab : activeFilter;
+      const currentTab = FILTER_TABS.find(t => t.id === currentTabId) || FILTER_TABS[0];
 
       return (
         <React.Fragment>
           <GlobalNav />
           <main>
+            
             {/* Editorial Hero */}
             <section style={{ padding: '72px 24px 48px', textAlign: 'center', background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)' }}>
-              <div style={{ maxWidth: 840, margin: '0 auto' }}>
-                <span className="font-mono" style={{ fontSize: 12, color: 'var(--color-obsidian-ink)', fontWeight: 600, display: 'block', marginBottom: 12 }}>
-                  Company Profile
-                </span>
-                <h1 className="font-display" style={{ fontSize: 'clamp(42px, 4.5vw, 64px)', fontWeight: 700, color: 'var(--color-obsidian-ink)', marginBottom: 18, lineHeight: 1.06 }}>
-                  Enterprise AI Engineering & <span className="gradient-text-purple">Transformation</span>
+              <div style={{ maxWidth: 880, margin: '0 auto' }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#f5f3ff', border: '1px solid rgba(99, 91, 255, 0.2)', borderRadius: 'var(--radius-tags)', padding: '6px 16px', marginBottom: 20 }}>
+                  <span className="font-mono" style={{ fontSize: 12, color: 'var(--color-iris-pulse)', fontWeight: 700, letterSpacing: '0.05em' }}>
+                    Customer Stories & Production Proof · 11 Shipped Projects
+                  </span>
+                </div>
+                <h1 className="font-display" style={{ fontSize: 'clamp(40px, 4.5vw, 64px)', fontWeight: 700, color: 'var(--color-obsidian-ink)', marginBottom: 18, lineHeight: 1.06 }}>
+                  Measurable AI Impact <span className="gradient-text-purple">in Production</span>
                 </h1>
-                <p style={{ fontSize: 17.5, color: 'var(--color-fog)', lineHeight: 1.65, maxWidth: 660, margin: '0 auto' }}>
-                  SlashLLM is the technology partner enterprises trust to build, deploy, optimize, and operate production AI systems at scale.
+                <p style={{ fontSize: 18, color: 'var(--color-fog)', lineHeight: 1.65, maxWidth: 720, margin: '0 auto' }}>
+                  Authentic engineering case studies from production systems we've architected across HR Tech, Healthcare, Fintech, and FoodTech.
                 </p>
               </div>
             </section>
 
-            {/* Story Grid */}
-            <section style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '56px 24px 96px' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '52% 48%', gap: 48, alignItems: 'start' }} className="grid-2col">
-                <div>
-                  <span className="font-mono" style={{ fontSize: 11.5, color: 'var(--color-fog)', fontWeight: 600, display: 'block', marginBottom: 8 }}>Our Mission</span>
-                  <h2 className="font-display" style={{ fontSize: 32, fontWeight: 600, color: 'var(--color-obsidian-ink)', lineHeight: 1.15, marginBottom: 18 }}>
-                    Bridging the Gap Between AI Prototypes and Enterprise Operations
-                  </h2>
-                  <p style={{ fontSize: 15.5, color: 'var(--color-fog)', lineHeight: 1.65, marginBottom: 16 }}>
-                    Over 80% of enterprise AI proofs-of-concept stall before reaching production. Organizations struggle with unpredictable token bills, security concerns, brittle tool calling, and lack of specialized AI infrastructure expertise.
-                  </p>
-                  <p style={{ fontSize: 15.5, color: 'var(--color-fog)', lineHeight: 1.65, marginBottom: 32 }}>
-                    SlashLLM combines elite full-stack software engineering, deep machine learning research, and proprietary platforms (SlashLLM Gateway & Observability) to deliver deterministic business outcomes.
-                  </p>
-                  
-                  <div style={{ display: 'flex', gap: 36, borderTop: '1px solid var(--border-hairline)', paddingTop: 24 }}>
-                    <div>
-                      <p className="font-display" style={{ fontSize: 38, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>99.98%</p>
-                      <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-iris-pulse)', marginTop: 4, fontWeight: 600 }}>Production SLA</p>
-                    </div>
-                    <div>
-                      <p className="font-display" style={{ fontSize: 38, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>&lt;90 Days</p>
-                      <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-iris-pulse)', marginTop: 4, fontWeight: 600 }}>Time to Production</p>
-                    </div>
-                    <div>
-                      <p className="font-display" style={{ fontSize: 38, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>30–60%</p>
-                      <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-iris-pulse)', marginTop: 4, fontWeight: 600 }}>Inference Saved</p>
-                    </div>
-                  </div>
-                </div>
+            {/* Filter Subnav Ribbon */}
+            <div style={{ position: 'sticky', top: 64, zIndex: 900, background: 'rgba(255, 255, 255, 0.98)', backdropFilter: 'blur(16px)', borderBottom: '1px solid var(--border-hairline)' }}>
+              
+              {/* Desktop Horizontal Ribbon */}
+              <div className="subnav-desktop subnav-scroll">
+                {FILTER_TABS.map(tab => (
+                  <button
+                    key={tab.id}
+                    onClick={() => handleTabClick(tab.id)}
+                    className={`filter-tab ${(currentTabId === tab.id || activeFilter === tab.id) ? 'is-active' : ''}`}
+                  >
+                    <span>{tab.label}</span>
+                    <span className="tab-badge">({tab.count})</span>
+                  </button>
+                ))}
+              </div>
 
-                <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-cards)', padding: '38px 34px' }}>
-                  <h3 className="font-display" style={{ fontSize: 24, fontWeight: 600, color: 'var(--color-obsidian-ink)', marginBottom: 22 }}>
-                    Our Engineering Principles
-                  </h3>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                    {values.map((v, i) => (
-                      <div key={i} style={{ borderBottom: i < values.length - 1 ? '1px solid var(--border-hairline)' : 'none', paddingBottom: i < values.length - 1 ? 16 : 0 }}>
-                        <p style={{ fontSize: 15.5, fontWeight: 600, color: 'var(--color-obsidian-ink)', marginBottom: 5 }}>
-                          <span className="font-mono" style={{ fontSize: 12, color: 'var(--color-iris-pulse)', marginRight: 8, fontWeight: 600 }}>{v.num}.</span>
-                          {v.title}
-                        </p>
-                        <p style={{ fontSize: 14, color: 'var(--color-fog)', lineHeight: 1.6 }}>{v.desc}</p>
-                      </div>
-                    ))}
+              {/* Mobile Compact Sticky Bar */}
+              <div className="subnav-mobile-bar">
+                <button
+                  onClick={() => setIsMobileDrawerOpen(!isMobileDrawerOpen)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    background: 'transparent',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'pointer',
+                    flex: 1,
+                    textAlign: 'left'
+                  }}
+                >
+                  <div
+                    className="filter-tab is-active"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 6,
+                      padding: '6px 12px',
+                      borderRadius: 'var(--radius-buttons)',
+                      fontSize: 12.5,
+                      fontWeight: 600,
+                      maxWidth: 'calc(100vw - 120px)',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap'
+                    }}
+                  >
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{currentTab.label}</span>
+                    <span className="tab-badge" style={{ fontSize: 11 }}>({currentTab.count})</span>
                   </div>
+                </button>
+
+                <button
+                  onClick={() => setIsMobileDrawerOpen(!isMobileDrawerOpen)}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 4,
+                    background: isMobileDrawerOpen ? 'rgba(99, 91, 255, 0.1)' : '#f3f3f5',
+                    color: isMobileDrawerOpen ? 'var(--color-iris-pulse)' : 'var(--color-obsidian-ink)',
+                    border: '1px solid var(--border-hairline)',
+                    padding: '6px 10px',
+                    borderRadius: 8,
+                    fontSize: 11.5,
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    flexShrink: 0
+                  }}
+                >
+                  <span>{isMobileDrawerOpen ? 'Close' : 'Filter (5)'}</span>
+                  <Icon name={isMobileDrawerOpen ? 'chevronUp' : 'chevronDown'} size={13} />
+                </button>
+              </div>
+
+              {/* Mobile Collapsible Filter Drawer */}
+              <div className={`subnav-mobile-drawer ${isMobileDrawerOpen ? 'is-open' : ''}`}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 6, borderBottom: '1px solid var(--border-hairline)' }}>
+                  <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)', fontWeight: 700 }}>Filter by Sector</span>
+                  <button
+                    onClick={() => setIsMobileDrawerOpen(false)}
+                    style={{ background: 'none', border: 'none', fontSize: 11.5, fontWeight: 600, color: 'var(--color-iris-pulse)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 2 }}
+                  >
+                    Minimize ▲
+                  </button>
                 </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, paddingTop: 4 }}>
+                  {FILTER_TABS.map(tab => (
+                    <button
+                      key={tab.id}
+                      onClick={() => handleTabClick(tab.id)}
+                      className={`filter-tab ${(currentTabId === tab.id || activeFilter === tab.id) ? 'is-active' : ''}`}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '9px 12px',
+                        borderRadius: 8,
+                        fontSize: 13,
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        textAlign: 'left'
+                      }}
+                    >
+                      <span>{tab.label}</span>
+                      <span className="tab-badge">({tab.count})</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+
+            {/* Case Studies Catalog */}
+            <section id="catalog-top" style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '56px 24px 96px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
+                {filteredStories.map(cs => (
+                  <div key={cs.id} id={cs.id} className="card-editorial">
+                    
+                    {/* Top Row: Tags & Product Badge */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 20 }}>
+                      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-tags)', padding: '5px 14px', background: '#fafafa' }}>
+                          <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-obsidian-ink)', fontWeight: 700 }}>{cs.client} · {cs.industry}</span>
+                        </div>
+                        {cs.tags.map(tag => (
+                          <span key={tag} style={{ ...getTagPillStyle(tag), padding: '4px 12px', borderRadius: 'var(--radius-tags)', fontSize: 11.5, fontWeight: 600, fontFamily: 'var(--font-mono)' }}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {cs.note && (
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 12px', background: 'rgba(74,222,128,0.1)', border: '1px solid rgba(74,222,128,0.25)', borderRadius: 'var(--radius-tags)' }}>
+                          <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#15803d' }}></div>
+                          <span style={{ fontSize: 11, color: '#15803d', fontWeight: 600, fontFamily: 'var(--font-mono)' }}>{cs.note}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Header Row */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 24, borderBottom: '1px solid var(--border-hairline)', paddingBottom: 24, marginBottom: 28 }}>
+                      <div style={{ maxWidth: 820 }}>
+                        <h2 className="font-display" style={{ fontSize: 'clamp(24px, 2.6vw, 32px)', fontWeight: 700, color: 'var(--color-obsidian-ink)', lineHeight: 1.18, marginBottom: 8 }}>
+                          {cs.title}
+                        </h2>
+                        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--color-iris-pulse)', letterSpacing: '0.04em', marginBottom: 12, fontWeight: 700 }}>
+                          {cs.subtitle}
+                        </p>
+                        <p style={{ fontSize: 16, color: 'var(--color-fog)', lineHeight: 1.65 }}>
+                          {cs.oneliner}
+                        </p>
+                      </div>
+
+                      {/* Main Metric Box */}
+                      <div style={{ background: 'linear-gradient(135deg, #fafafa 0%, #f5f3ff 100%)', border: '1px solid rgba(99, 91, 255, 0.25)', borderRadius: 'var(--radius-cards)', padding: '18px 24px', textAlign: 'center', minWidth: 170, boxShadow: '0 4px 14px rgba(99,91,255,0.08)' }}>
+                        <p className="font-display" style={{ fontSize: 32, fontWeight: 700, color: 'var(--color-obsidian-ink)', lineHeight: 1 }}>{cs.mainMetric}</p>
+                        <p className="font-mono" style={{ fontSize: 10.5, color: 'var(--color-iris-pulse)', marginTop: 6, fontWeight: 700 }}>{cs.metricDesc}</p>
+                      </div>
+                    </div>
+
+                    {/* Consulting Steps: Challenge & Approach */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 24 }} className="grid-2col">
+                      <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '22px 24px' }}>
+                        <p className="font-mono" style={{ fontSize: 11, color: '#8b5cf6', fontWeight: 700, letterSpacing: '0.08em', marginBottom: 8 }}>01. THE CHALLENGE</p>
+                        <p style={{ fontSize: 14.5, color: '#334155', lineHeight: 1.65 }}>{cs.challenge}</p>
+                      </div>
+
+                      <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '22px 24px' }}>
+                        <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-iris-pulse)', fontWeight: 700, letterSpacing: '0.08em', marginBottom: 8 }}>02. ENGINEERING APPROACH</p>
+                        <p style={{ fontSize: 14.5, color: '#334155', lineHeight: 1.65 }}>{cs.approach}</p>
+                      </div>
+                    </div>
+
+                    {/* What We Built List */}
+                    <div style={{ background: '#ffffff', border: '1px solid rgba(99, 91, 255, 0.16)', borderRadius: 'var(--radius-cards)', padding: '24px 28px', marginBottom: 24, boxShadow: '0 2px 10px rgba(0,0,0,0.02)' }}>
+                      <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-obsidian-ink)', fontWeight: 700, letterSpacing: '0.08em', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <Icon name="layers" size={15} color="var(--color-iris-pulse)" /> WHAT WE ARCHITECTED & BUILT
+                      </p>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                        {cs.whatWeBuilt.map((item, idx) => (
+                          <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                            <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-iris-pulse)', minWidth: 22, paddingTop: 2, fontWeight: 700 }}>
+                              {String(idx + 1).padStart(2, '0')}.
+                            </span>
+                            <span style={{ fontSize: 14, color: '#334155', lineHeight: 1.55 }}>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Tech Stack Bar & Business Outcome */}
+                    <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-cards)', padding: '22px 26px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 16, borderBottom: '1px solid var(--border-hairline)', paddingBottom: 14 }}>
+                        <span className="font-mono" style={{ fontSize: 11, color: 'var(--color-obsidian-ink)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
+                          <Icon name="code" size={14} color="var(--color-iris-pulse)" /> Technology Stack
+                        </span>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
+                          {cs.techStack.map((tech, tIdx) => (
+                            <span key={tIdx} style={{ background: '#ffffff', border: '1px solid rgba(1, 1, 16, 0.12)', borderRadius: 'var(--radius-tags)', padding: '4px 12px', fontSize: 12.5, fontWeight: 500, color: 'var(--color-obsidian-ink)' }}>
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
+                        <div>
+                          <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-obsidian-ink)', fontWeight: 700, marginBottom: 6 }}>03. PROVEN BUSINESS OUTCOME</p>
+                          <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--color-obsidian-ink)', lineHeight: 1.55, maxWidth: 860 }}>
+                            {cs.outcome}
+                          </p>
+                        </div>
+                        <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '8px 18px', fontSize: 13.5, whiteSpace: 'nowrap' }}>
+                          Discuss Similar Project <Icon name="arrowRight" size={13} />
+                        </a>
+                      </div>
+                    </div>
+
+                  </div>
+                ))}
               </div>
             </section>
           </main>
@@ -1066,7 +1670,7 @@
       );
     }
 
-    ReactDOM.createRoot(document.getElementById('root')).render(<AboutPage />);
+    ReactDOM.createRoot(document.getElementById('root')).render(<CaseStudiesPage />);
   </script>
 </body>
 </html>

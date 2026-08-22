@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About SlashLLM — Enterprise AI Engineering</title>
+  <title>Enterprise AI Solutions — SlashLLM</title>
   <link rel="icon" href="/favicon.ico?v=2" sizes="any">
   <link rel="icon" type="image/png" href="/uploads/favicon-32.png?v=2" sizes="32x32">
   <link rel="icon" type="image/png" href="/uploads/favicon-16.png?v=2" sizes="16x16">
   <link rel="apple-touch-icon" href="/uploads/favicon-180.png?v=2">
-  <meta name="description" content="SlashLLM is the technology partner enterprises trust to build, deploy, optimize, and operate production AI systems at scale.">
-  <link rel="canonical" href="https://slashllm.com/about">
-  <meta property="og:title" content="About SlashLLM — Enterprise AI Engineering">
-  <meta property="og:description" content="Enterprise AI engineering, dedicated autonomous agents, and model infrastructure.">
+  <meta name="description" content="Outcome-driven enterprise AI solutions: Enterprise AI Transformation, Cost Optimization, LLM Governance, Private AI Infrastructure, and Intelligent Document AI.">
+  <link rel="canonical" href="https://slashllm.com/solutions">
+  <meta property="og:title" content="Enterprise AI Solutions — SlashLLM">
+  <meta property="og:description" content="Outcome-driven enterprise AI solutions by SlashLLM.">
   <meta property="og:image" content="https://slashllm.com/uploads/LOGO%202.png">
 
   <!-- Single Unified Typography: Proxima Nova -->
@@ -330,7 +330,7 @@
 
     const AnnouncementBar = () => null;
 
-    const GlobalNav = ({ activePage = 'company' }) => {
+    const GlobalNav = ({ activePage = 'solutions' }) => {
       const [openDropdown, setOpenDropdown] = React.useState(null);
       const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
       const [mobileAccordion, setMobileAccordion] = React.useState(null);
@@ -951,13 +951,13 @@
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
                 <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style={{ height: 24, width: 'auto', objectFit: 'contain', display: 'block' }} />
               </div>
-              <p style={{ fontSize: 13, color: 'var(--color-fog)' }}>Enterprise AI engineering, proprietary platforms, and dedicated transformation.</p>
+              <p style={{ fontSize: 13, color: 'var(--color-fog)' }}>Strategic transformation and production engineering addressing core enterprise business challenges.</p>
             </div>
             <div style={{ display: 'flex', gap: 20 }}>
               <a href="/Services.html" className="link-editorial" style={{ fontSize: 13 }}>Services</a>
               <a href="/Industries.html" className="link-editorial" style={{ fontSize: 13 }}>Industries</a>
               <a href="/Products.html" className="link-editorial" style={{ fontSize: 13 }}>Products</a>
-              <a href="/Solutions.html" className="link-editorial" style={{ fontSize: 13 }}>Solutions</a>
+              <a href="/CaseStudies.html" className="link-editorial" style={{ fontSize: 13 }}>Case Studies</a>
             </div>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14 }}>
@@ -968,27 +968,77 @@
       </footer>
     );
 
-    function AboutPage() {
-      const values = [
+    function SolutionsPage() {
+      const solutions = [
         {
-          num: '01',
-          title: 'Production Rigor Over Proof-of-Concept Hype',
-          desc: 'We judge our success exclusively by software running live in production under strict SLAs, low latency, and deterministic output safety.'
+          id: 'transformation',
+          icon: 'sparkles',
+          title: 'Enterprise AI Transformation',
+          subtitle: 'End-to-End Strategic Modernization & Production Delivery',
+          problem: 'Most Fortune 2000 organizations are stuck in proof-of-concept purgatory. Siloed experiments lack enterprise security, legacy API integration, and verifiable ROI.',
+          deliverables: [
+            'Enterprise AI Opportunity Matrix & ROI Business Case',
+            'Reference Architecture & Security Compliance Blueprint',
+            'Legacy ERP, CRM & Database API Integration Layer',
+            '4-to-16 Week Agile Production Delivery Sprints'
+          ],
+          impact: 'Accelerates AI time-to-market from 18+ months down to under 90 days with deterministic production rollouts.'
         },
         {
-          num: '02',
-          title: 'Software Engineering First, Prompts Second',
-          desc: 'Reliable AI requires robust distributed systems, deterministic state machines, automated regression testing, and resilient fallback routing.'
+          id: 'cost-optimization',
+          icon: 'cost',
+          title: 'AI Cost & Latency Optimization',
+          subtitle: 'Slashing Model Inference Bills by 30% to 60%',
+          problem: 'Commercial LLMs cause ballooning cloud expenditure, while multi-second API latency degrades user retention and conversion rates.',
+          deliverables: [
+            'SlashLLM Gateway Semantic Cache Integration',
+            'Dynamic Model Tiering & Automated Small Model Distillation',
+            'Prompt Compression & Token Payload Pruning',
+            'Granular Cost Allocation & Budget Guardrails'
+          ],
+          impact: 'Average client achieves a 38% to 60% reduction in monthly token spend and up to 4.2x latency improvements.'
         },
         {
-          num: '03',
-          title: 'Data Sovereignty & Enterprise Security',
-          desc: 'Enterprise AI must be secure by design. We build with client-side encryption, air-gapped private VPCs, and automated PII scrubbers that guarantee zero data leakage.'
+          id: 'governance',
+          icon: 'shield',
+          title: 'LLM Governance, Safety & Guardrails',
+          subtitle: 'Zero-Leakage Compliance, PII Redaction & Red-Teaming',
+          problem: 'Legal, risk, and security teams block AI initiatives due to fears of data leakage, toxic model hallucinations, and regulatory liability (EU AI Act, HIPAA, SOC 2).',
+          deliverables: [
+            'Real-Time PII & Sensitive Credential Scrubbing Layer',
+            'Deterministic Output Validation Harnesses',
+            'Automated Adversarial Red-Teaming & Jailbreak Tests',
+            'Immutable Audit Logs for Every Model Decision'
+          ],
+          impact: '100% auditability and deterministic safety compliance across all customer-facing AI interactions.'
         },
         {
-          num: '04',
-          title: 'Cost Transparency & Model Neutrality',
-          desc: 'We are vendor-agnostic. Whether OpenAI, Anthropic, AWS Bedrock, Google Vertex, or self-hosted open-weights on vLLM — we route workloads to the most cost-effective solution.'
+          id: 'private-ai',
+          icon: 'infra',
+          title: 'Private & Hybrid AI Infrastructure',
+          subtitle: 'Air-Gapped & VPC Deployments with Open-Weight Models',
+          problem: 'Strict data residency rules, IP sensitivity, or regulatory mandates prevent the use of third-party public cloud AI APIs.',
+          deliverables: [
+            'Self-Hosted vLLM & TensorRT Inference Clusters on Private VPC',
+            'Fine-Tuned Open-Weight Models (Llama 3, Mistral, Qwen)',
+            'Air-Gapped On-Premises Kubernetes GPU Orchestration',
+            'Custom Vector Database & Local Embedding Infrastructure'
+          ],
+          impact: 'Complete intellectual property sovereignty with zero external data egress and enterprise-grade SLA performance.'
+        },
+        {
+          id: 'document-ai',
+          icon: 'data',
+          title: 'Intelligent Document & Knowledge AI',
+          subtitle: 'Unlocking Unstructured Enterprise Data at Scale',
+          problem: 'Critical enterprise data is trapped in millions of PDFs, scanned contracts, clinical records, and spreadsheets.',
+          deliverables: [
+            'Multimodal Optical Character & Layout Recognition (OCR)',
+            'Domain-Specific Knowledge Graph Construction',
+            'Hybrid Semantic & Keyword Vector Retrieval (RAG)',
+            'Automated Structuring into Downstream Databases (SQL/JSON)'
+          ],
+          impact: 'Extracts tabular and textual data with 99.8% precision, cutting manual review time by 80%+.'
         }
       ];
 
@@ -996,68 +1046,77 @@
         <React.Fragment>
           <GlobalNav />
           <main>
+            
             {/* Editorial Hero */}
             <section style={{ padding: '72px 24px 48px', textAlign: 'center', background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)' }}>
               <div style={{ maxWidth: 840, margin: '0 auto' }}>
                 <span className="font-mono" style={{ fontSize: 12, color: 'var(--color-obsidian-ink)', fontWeight: 600, display: 'block', marginBottom: 12 }}>
-                  Company Profile
+                  Business Solutions
                 </span>
                 <h1 className="font-display" style={{ fontSize: 'clamp(42px, 4.5vw, 64px)', fontWeight: 700, color: 'var(--color-obsidian-ink)', marginBottom: 18, lineHeight: 1.06 }}>
-                  Enterprise AI Engineering & <span className="gradient-text-purple">Transformation</span>
+                  Outcome-Driven <span className="gradient-text-purple">AI Solutions</span>
                 </h1>
                 <p style={{ fontSize: 17.5, color: 'var(--color-fog)', lineHeight: 1.65, maxWidth: 660, margin: '0 auto' }}>
-                  SlashLLM is the technology partner enterprises trust to build, deploy, optimize, and operate production AI systems at scale.
+                  We don't sell generic slide decks. We solve specific enterprise operational bottlenecks through targeted AI architectures, proprietary technology, and disciplined engineering execution.
                 </p>
               </div>
             </section>
 
-            {/* Story Grid */}
+            {/* Solutions List */}
             <section style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '56px 24px 96px' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '52% 48%', gap: 48, alignItems: 'start' }} className="grid-2col">
-                <div>
-                  <span className="font-mono" style={{ fontSize: 11.5, color: 'var(--color-fog)', fontWeight: 600, display: 'block', marginBottom: 8 }}>Our Mission</span>
-                  <h2 className="font-display" style={{ fontSize: 32, fontWeight: 600, color: 'var(--color-obsidian-ink)', lineHeight: 1.15, marginBottom: 18 }}>
-                    Bridging the Gap Between AI Prototypes and Enterprise Operations
-                  </h2>
-                  <p style={{ fontSize: 15.5, color: 'var(--color-fog)', lineHeight: 1.65, marginBottom: 16 }}>
-                    Over 80% of enterprise AI proofs-of-concept stall before reaching production. Organizations struggle with unpredictable token bills, security concerns, brittle tool calling, and lack of specialized AI infrastructure expertise.
-                  </p>
-                  <p style={{ fontSize: 15.5, color: 'var(--color-fog)', lineHeight: 1.65, marginBottom: 32 }}>
-                    SlashLLM combines elite full-stack software engineering, deep machine learning research, and proprietary platforms (SlashLLM Gateway & Observability) to deliver deterministic business outcomes.
-                  </p>
-                  
-                  <div style={{ display: 'flex', gap: 36, borderTop: '1px solid var(--border-hairline)', paddingTop: 24 }}>
-                    <div>
-                      <p className="font-display" style={{ fontSize: 38, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>99.98%</p>
-                      <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-iris-pulse)', marginTop: 4, fontWeight: 600 }}>Production SLA</p>
-                    </div>
-                    <div>
-                      <p className="font-display" style={{ fontSize: 38, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>&lt;90 Days</p>
-                      <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-iris-pulse)', marginTop: 4, fontWeight: 600 }}>Time to Production</p>
-                    </div>
-                    <div>
-                      <p className="font-display" style={{ fontSize: 38, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>30–60%</p>
-                      <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-iris-pulse)', marginTop: 4, fontWeight: 600 }}>Inference Saved</p>
-                    </div>
-                  </div>
-                </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
+                {solutions.map((sol, idx) => (
+                  <div key={sol.id} id={sol.id} className="card-editorial">
+                    <div style={{ display: 'grid', gridTemplateColumns: '52% 48%', gap: 48, alignItems: 'center' }} className="grid-2col">
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                          <div style={{ width: 38, height: 38, borderRadius: 6, background: '#f0f0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-obsidian-ink)' }}>
+                            <Icon name={sol.icon} size={19} />
+                          </div>
+                          <span className="font-mono" style={{ fontSize: 11.5, color: 'var(--color-fog)', fontWeight: 600 }}>Solution Pillar 0{idx+1}</span>
+                        </div>
 
-                <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-cards)', padding: '38px 34px' }}>
-                  <h3 className="font-display" style={{ fontSize: 24, fontWeight: 600, color: 'var(--color-obsidian-ink)', marginBottom: 22 }}>
-                    Our Engineering Principles
-                  </h3>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                    {values.map((v, i) => (
-                      <div key={i} style={{ borderBottom: i < values.length - 1 ? '1px solid var(--border-hairline)' : 'none', paddingBottom: i < values.length - 1 ? 16 : 0 }}>
-                        <p style={{ fontSize: 15.5, fontWeight: 600, color: 'var(--color-obsidian-ink)', marginBottom: 5 }}>
-                          <span className="font-mono" style={{ fontSize: 12, color: 'var(--color-iris-pulse)', marginRight: 8, fontWeight: 600 }}>{v.num}.</span>
-                          {v.title}
+                        <h2 className="font-display" style={{ fontSize: 28, fontWeight: 600, color: 'var(--color-obsidian-ink)', lineHeight: 1.15, marginBottom: 10 }}>
+                          {sol.title}
+                        </h2>
+                        <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--color-obsidian-ink)', marginBottom: 18 }}>
+                          {sol.subtitle}
                         </p>
-                        <p style={{ fontSize: 14, color: 'var(--color-fog)', lineHeight: 1.6 }}>{v.desc}</p>
+
+                        <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: '6px', padding: '16px 18px', marginBottom: 26 }}>
+                          <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-fog)', fontWeight: 600, marginBottom: 4 }}>The Challenge We Solve</p>
+                          <p style={{ fontSize: 14.5, color: 'var(--color-fog)', lineHeight: 1.55 }}>{sol.problem}</p>
+                        </div>
+
+                        <div>
+                          <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary">
+                            Discuss this Solution <Icon name="arrowRight" size={14} />
+                          </a>
+                        </div>
                       </div>
-                    ))}
+
+                      <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-cards)', padding: '30px 28px' }}>
+                        <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-obsidian-ink)', fontWeight: 600, marginBottom: 16 }}>
+                          What SlashLLM Delivers
+                        </p>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 11, marginBottom: 22 }}>
+                          {sol.deliverables.map((del, dIdx) => (
+                            <div key={dIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontSize: 14.5, color: 'var(--color-obsidian-ink)', lineHeight: 1.45, fontWeight: 450 }}>
+                              <span style={{ color: 'var(--color-obsidian-ink)', flexShrink: 0, marginTop: 2 }}><Icon name="check" size={14} /></span>
+                              <span>{del}</span>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div style={{ borderTop: '1px solid var(--border-hairline)', paddingTop: 16 }}>
+                          <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-obsidian-ink)', fontWeight: 600, marginBottom: 4 }}>Measurable Impact</p>
+                          <p style={{ fontSize: 14, color: 'var(--color-fog)', lineHeight: 1.5 }}>{sol.impact}</p>
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
             </section>
           </main>
@@ -1066,7 +1125,7 @@
       );
     }
 
-    ReactDOM.createRoot(document.getElementById('root')).render(<AboutPage />);
+    ReactDOM.createRoot(document.getElementById('root')).render(<SolutionsPage />);
   </script>
 </body>
 </html>

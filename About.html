@@ -3,494 +3,1070 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — SlashLLM</title>
-  <link rel="icon" type="image/png" href="uploads/LOGO 2.png">
-  <meta name="description" content="SlashLLM — the team companies call when they need AI that actually ships.">
+  <title>About SlashLLM — Enterprise AI Engineering</title>
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/uploads/favicon-32.png?v=2" sizes="32x32">
+  <link rel="icon" type="image/png" href="/uploads/favicon-16.png?v=2" sizes="16x16">
+  <link rel="apple-touch-icon" href="/uploads/favicon-180.png?v=2">
+  <meta name="description" content="SlashLLM is the technology partner enterprises trust to build, deploy, optimize, and operate production AI systems at scale.">
   <link rel="canonical" href="https://slashllm.com/About.html">
-  <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://slashllm.com/About.html">
-  <meta property="og:site_name" content="SlashLLM">
-  <meta property="og:title" content="About — SlashLLM">
-  <meta property="og:description" content="SlashLLM — the team companies call when they need AI that actually ships.">
+  <meta property="og:title" content="About SlashLLM — Enterprise AI Engineering">
+  <meta property="og:description" content="Enterprise AI engineering, dedicated autonomous agents, and model infrastructure.">
   <meta property="og:image" content="https://slashllm.com/uploads/LOGO%202.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="About — SlashLLM">
-  <meta name="twitter:description" content="SlashLLM — the team companies call when they need AI that actually ships.">
-  <meta name="twitter:image" content="https://slashllm.com/uploads/LOGO%202.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <script>tailwind={config:{theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif'],display:['"Space Grotesk"','sans-serif'],mono:['"JetBrains Mono"','monospace']}}}}};</script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <!-- Single Unified Typography: Proxima Nova -->
+  <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin="anonymous">
+  <link href="https://fonts.cdnfonts.com/css/proxima-nova" rel="stylesheet">
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
 
   <style>
+    :root {
+      --color-canvas: #ffffff;
+      --color-obsidian-ink: #010110;
+      --color-carbon: #111117;
+      --color-graphite: #22222a;
+      --color-fog: #73737c;
+      --color-ash: #d9d9d9;
+      --color-iris-pulse: #635bff;
+      --border-hairline: rgba(1, 1, 16, 0.1);
+      --border-dark-hairline: rgba(255, 255, 255, 0.08);
+
+      --font-display: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-sans: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+      --page-max-width: 1200px;
+      --radius-cards: 8px;
+      --radius-buttons: 100px;
+      --radius-tags: 9999px;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { background: #FAFAFA; color: #1E1B4B; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--color-canvas);
+      color: var(--color-obsidian-ink);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.55;
+      letter-spacing: -0.015em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
     a { color: inherit; text-decoration: none; }
 
-    :root {
-      --bg: #FAFAFA; --surface: #F3F0FF; --card: #EDE9FF;
-      --border: #DDD8F0; --text: #1E1B4B; --muted: rgba(30,27,75,0.5);
-      --accent: #a855f7; --accent2: #7c3aed;
+    .font-display { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.03em; }
+    .font-sans { font-family: var(--font-sans); letter-spacing: -0.015em; }
+    .font-mono { font-family: var(--font-mono); font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
+
+    .gradient-text-purple {
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline;
+    }
+    .nav-link-active {
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      font-weight: 700 !important;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-link-active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 8px;
+      right: 8px;
+      height: 2.5px;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
     }
 
-    .gradient-text {
-      background: linear-gradient(135deg, #a855f7 0%, #be38de 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    .btn-primary {
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      color: #ffffff !important;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+      padding: 12px 24px;
+      border-radius: var(--radius-buttons);
+      border: 1px solid transparent;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      filter: brightness(1.08);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+      transform: translateY(-1px);
     }
 
-    /* ── Reveal ── */
-    .reveal { opacity:0; transform:translateY(24px); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
-    .reveal.in { opacity:1; transform:none; }
-    .reveal[data-d="1"]{ transition-delay:0.08s; } .reveal[data-d="2"]{ transition-delay:0.16s; }
-    .reveal[data-d="3"]{ transition-delay:0.24s; } .reveal[data-d="4"]{ transition-delay:0.32s; }
-    .reveal[data-d="5"]{ transition-delay:0.4s; }  .reveal[data-d="6"]{ transition-delay:0.48s; }
-
-    /* ── Hero card float ── */
-    @keyframes card-float {
-      0%,100% { box-shadow: 0 40px 80px rgba(30,27,75,0.2), 0 0 0 1px rgba(168,85,247,0.08), 0 0 60px rgba(168,85,247,0.04); transform: perspective(1400px) rotateY(-6deg) rotateX(2deg) translateY(0px); }
-      50%      { box-shadow: 0 48px 96px rgba(30,27,75,0.24), 0 0 0 1px rgba(168,85,247,0.14), 0 0 80px rgba(168,85,247,0.06); transform: perspective(1400px) rotateY(-6deg) rotateX(2deg) translateY(-6px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--color-obsidian-ink) !important;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+      padding: 12px 24px;
+      border-radius: var(--radius-buttons);
+      border: 1px solid rgba(1, 1, 16, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
     }
-    .hero-card { animation: card-float 6s ease-in-out infinite; }
-
-    /* ── Progress bar ── */
-    @keyframes bar-fill { from { width: 0; } }
-
-    /* ── Belief card hover ── */
-    .belief-card { transition: transform 0.22s cubic-bezier(0.16,1,0.3,1), box-shadow 0.22s cubic-bezier(0.16,1,0.3,1); cursor: default; }
-
-    /* ── Misc shared ── */
-    .txt-lnk { transition: color 0.15s; }
-    .txt-lnk:hover { color: #1E1B4B !important; }
-
-    @keyframes badge-pulse { 0%,100%{box-shadow:0 0 0 2px rgba(74,222,128,0.3)} 50%{box-shadow:0 0 0 7px rgba(74,222,128,0.07)} }
-    .status-dot { animation: badge-pulse 2s ease infinite; }
-
-    /* ── Responsive ── */
-    @media (max-width: 1000px) {
-      .hero-right { display: none !important; }
-      .hero-left { max-width: 100% !important; }
-      .story-grid { grid-template-columns: 1fr !important; }
-      .beliefs-grid { grid-template-columns: 1fr !important; }
+    .btn-ghost:hover {
+      background: #f5f3ff;
+      border-color: var(--color-iris-pulse);
+      color: var(--color-iris-pulse) !important;
     }
-    @media (max-width: 700px) {
-      .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 40px !important; }
+
+    .btn-pill-header {
+      background: transparent;
+      border: 1px solid #ffffff;
+      color: #ffffff !important;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: var(--radius-buttons);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.15s ease;
     }
-    @media (max-width: 480px) {
+    .btn-pill-header:hover {
+      background: #ffffff;
+      color: var(--color-iris-pulse) !important;
+    }
+
+    .card-editorial {
+      background: var(--color-canvas);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-cards);
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+    .card-editorial::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%);
+      opacity: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-editorial:hover {
+      transform: translateY(-6px);
+      border-color: rgba(99, 91, 255, 0.4);
+      box-shadow: 0 20px 40px -12px rgba(99, 91, 255, 0.18), 0 0 24px -4px rgba(168, 85, 247, 0.12);
+    }
+    .card-editorial:hover::before {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+    .card-editorial .card-icon-wrap {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-editorial:hover .card-icon-wrap {
+      transform: scale(1.08);
+      background: linear-gradient(135deg, rgba(0, 192, 248, 0.15), rgba(99, 102, 241, 0.15), rgba(251, 104, 195, 0.15)) !important;
+      color: var(--color-iris-pulse) !important;
+      box-shadow: 0 4px 14px rgba(99, 91, 255, 0.15);
+    }
+    .card-editorial .link-editorial svg,
+    .card-editorial a svg {
+      transition: transform 0.25s ease;
+    }
+    .card-editorial:hover .link-editorial svg,
+    .card-editorial:hover a svg {
+      transform: translateX(4px);
+    }
+
+    .link-editorial {
+      color: var(--color-obsidian-ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .link-editorial:hover {
+      color: var(--color-iris-pulse);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .link-muted { color: var(--color-fog); text-decoration: none; transition: color 0.15s ease; }
+    .link-muted:hover { color: var(--color-obsidian-ink); }
+
+    /* Dropdown Menu */
+    .nav-item-wrap {
+      position: relative;
+    }
+    .nav-dropdown {
+      position: absolute;
+      top: 100%;
+      margin-top: 6px;
+      background: #ffffff;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-cards);
+      box-shadow: 0 16px 36px rgba(1, 1, 16, 0.08);
+      padding: 12px;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+    /* Invisible hover bridge spanning between nav item and dropdown */
+    .nav-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      height: 20px;
+      display: block;
+    }
+    .nav-item-wrap:hover .nav-dropdown,
+    .nav-item-wrap:focus-within .nav-dropdown,
+    .nav-dropdown:hover,
+    .nav-dropdown.is-open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .halftone-pattern {
+      background-image: radial-gradient(var(--color-ash) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+
+    .nav-cta-btn {
+      padding: 7px 14px;
+      font-size: 12.5px;
+      white-space: nowrap;
+    }
+    .hide-desktop { display: none !important; }
+    @media (max-width: 1024px) {
+      .grid-2col { grid-template-columns: 1fr !important; gap: 32px !important; }
+      .hide-desktop { display: flex !important; }
+      .hide-mobile { display: none !important; }
+      .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 36px !important; }
+    }
+    @media (max-width: 640px) {
+      .nav-cta-btn {
+        padding: 6px 10px !important;
+        font-size: 11.5px !important;
+        gap: 4px !important;
+      }
       .footer-grid { grid-template-columns: 1fr !important; }
-      .hero-stats { gap: 24px !important; }
+      h1, .hero-title { font-size: clamp(30px, 7vw, 56px) !important; line-height: 1.12 !important; }
     }
   </style>
 </head>
 <body>
-<div id="root"></div>
+  <div id="root"></div>
 
-<!-- ═══ SCRIPT 1 · Nav + Footer ═══ -->
-<script type="text/babel">
-  const { useState, useEffect } = React;
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
 
-  const Nav = () => {
-    const [resOpen, setResOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-    useEffect(() => {
-      const fn = () => setScrolled(window.scrollY > 40);
-      window.addEventListener('scroll', fn);
-      return () => window.removeEventListener('scroll', fn);
-    }, []);
-    const lk = { color:'rgba(30,27,75,0.5)', fontSize:13.5, fontWeight:400, padding:'5px 12px', borderRadius:6, textDecoration:'none', transition:'all 0.15s', background:'transparent', display:'inline-flex', alignItems:'center', gap:3, border:'none', cursor:'pointer', fontFamily:'Inter,sans-serif' };
-    const hi = e => { e.currentTarget.style.color='#1E1B4B'; e.currentTarget.style.background='rgba(30,27,75,0.06)'; };
-    const ho = e => { e.currentTarget.style.color='rgba(30,27,75,0.5)'; e.currentTarget.style.background='transparent'; };
-    return (
-      <div style={{ position:'fixed', top:16, left:0, right:0, zIndex:1000, display:'flex', justifyContent:'center', pointerEvents:'none' }}>
-        <nav style={{ pointerEvents:'auto', width:'calc(100% - 48px)', maxWidth:920, height:52, background:scrolled?'rgba(250,250,250,0.96)':'rgba(250,250,250,0.75)', backdropFilter:'blur(22px)', WebkitBackdropFilter:'blur(22px)', border:scrolled?'1px solid rgba(30,27,75,0.14)':'1px solid rgba(30,27,75,0.08)', borderRadius:100, boxShadow:scrolled?'0 8px 40px rgba(0,0,0,0.09)':'none', transition:'all 0.35s cubic-bezier(0.16,1,0.3,1)', display:'flex', alignItems:'center', padding:'0 18px', gap:4 }}>
-          <a href="index.html" style={{ display:'flex', alignItems:'center', gap:7, textDecoration:'none', flexShrink:0, marginRight:8 }}>
-            <img src="uploads/LOGO 2.png" alt="SlashLLM" style={{ width:26, height:26, objectFit:'contain' }} />
-            <span style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:700, fontSize:15, letterSpacing:'-0.03em', color:'#1E1B4B' }}>SlashLLM</span>
+    const Icon = ({ name, size=18, color='currentColor', className='' }) => {
+      const paths = {
+        arrowRight: <path d="M5 12h14M12 5l7 7-7 7"/>,
+        chevronDown: <path d="M6 9l6 6 6-6"/>,
+        chevronUp: <path d="M18 15l-6-6-6 6"/>,
+        menu: <><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></>,
+        close: <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>,
+        sparkles: <><path d="M12 3l1.9 4.9L19 10l-4.1 3.1L16 18l-4-2.8L8 18l1.1-4.9L5 10l5.1-2.1z"/><path d="M19 3l.8 2.2L22 6l-1.8 1.4.5 2.2-1.7-1.3L17.3 9.6l.5-2.2L16 6l2.2-.8z"/></>,
+        agent: <><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="11"/><circle cx="8.5" cy="16" r="1" fill={color}/><circle cx="15.5" cy="16" r="1" fill={color}/></>,
+        engineering: <><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></>,
+        infra: <><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></>,
+        observability: <><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></>,
+        data: <><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></>,
+        gateway: <><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></>,
+        shield: <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></>,
+        finance: <><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></>,
+        health: <><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></>,
+        saas: <><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></>,
+        retail: <><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></>,
+        mfg: <><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></>,
+        prof: <><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></>,
+        cost: <><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></>,
+        check: <polyline points="20 6 9 17 4 12"/>
+      };
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0 }}>
+          {paths[name] || <circle cx="12" cy="12" r="9"/>}
+        </svg>
+      );
+    };
+
+    const AnnouncementBar = () => null;
+
+    const GlobalNav = ({ activePage = 'company' }) => {
+      const [openDropdown, setOpenDropdown] = React.useState(null);
+      const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+      const [mobileAccordion, setMobileAccordion] = React.useState(null);
+      const timerRef = React.useRef(null);
+      const currentPath = typeof window !== 'undefined' ? window.location.pathname.toLowerCase() : '';
+
+      const isServicesActive = activePage === 'services' || currentPath.includes('/services');
+      const isIndustriesActive = activePage === 'industries' || currentPath.includes('/industries');
+      const isProductsActive = activePage === 'products' || currentPath.includes('/products');
+      const isSolutionsActive = activePage === 'solutions' || currentPath.includes('/solutions');
+      const isStoriesActive = activePage === 'stories' || currentPath.includes('/casestudies') || currentPath.includes('/case-studies');
+      const isInsightsActive = activePage === 'insights' || currentPath.includes('/blog');
+      const isCompanyActive = activePage === 'company' || currentPath.includes('/about');
+
+      React.useEffect(() => {
+        if (mobileMenuOpen) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+        return () => {
+          document.body.style.overflow = '';
+        };
+      }, [mobileMenuOpen]);
+
+      const toggleMobileAccordion = (name) => {
+        setMobileAccordion(mobileAccordion === name ? null : name);
+      };
+
+      const handleMouseEnter = (name) => {
+        if (timerRef.current) {
+          clearTimeout(timerRef.current);
+          timerRef.current = null;
+        }
+        setOpenDropdown(name);
+      };
+
+      const handleMouseLeave = () => {
+        if (timerRef.current) {
+          clearTimeout(timerRef.current);
+        }
+        timerRef.current = setTimeout(() => {
+          setOpenDropdown(null);
+        }, 180);
+      };
+
+      const getCoverDiameter = (width, height, x, y) => {
+        return Math.ceil(
+          2 * Math.max(
+            Math.hypot(x, y),
+            Math.hypot(width - x, y),
+            Math.hypot(x, height - y),
+            Math.hypot(width - x, height - y)
+          )
+        );
+      };
+
+      const NavSubItem = ({ item }) => {
+        const itemRef = React.useRef(null);
+        const [hovered, setHovered] = React.useState(false);
+        const [origin, setOrigin] = React.useState({ x: 0, y: 0 });
+        const [coverSize, setCoverSize] = React.useState(0);
+
+        const updateOriginFromPointer = (e) => {
+          const node = itemRef.current;
+          if (!node) return;
+          const rect = node.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          setOrigin({ x, y });
+          setCoverSize(getCoverDiameter(rect.width, rect.height, x, y));
+        };
+
+        const handlePointerEnter = (e) => {
+          updateOriginFromPointer(e);
+          setHovered(true);
+        };
+
+        const handlePointerLeave = () => {
+          setHovered(false);
+        };
+
+        return (
+          <a
+            ref={itemRef}
+            href={item.href}
+            onPointerEnter={handlePointerEnter}
+            onPointerLeave={handlePointerLeave}
+            style={{
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: 10,
+              padding: '9px 11px',
+              borderRadius: 'var(--radius-cards)',
+              textDecoration: 'none',
+              overflow: 'hidden',
+              transition: 'box-shadow 0.25s ease'
+            }}
+            className="nav-sub-item"
+          >
+            <span
+              style={{
+                position: 'absolute',
+                left: origin.x,
+                top: origin.y,
+                width: coverSize || 10,
+                height: coverSize || 10,
+                borderRadius: '50%',
+                transform: `translate(-50%, -50%) scale(${hovered && coverSize > 0 ? 1 : 0})`,
+                transformOrigin: 'center',
+                background: 'linear-gradient(135deg, #00c0f8 0%, #6366f1 35%, #a855f7 70%, #fb68c3 100%)',
+                transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
+                pointerEvents: 'none',
+                zIndex: 0,
+                opacity: hovered ? 1 : 0
+              }}
+            />
+
+            <div
+              style={{
+                position: 'relative',
+                zIndex: 1,
+                width: 30,
+                height: 30,
+                borderRadius: 6,
+                background: hovered ? 'rgba(255, 255, 255, 0.25)' : (item.bg || '#f0f0f2'),
+                border: `1px solid ${hovered ? 'rgba(255, 255, 255, 0.45)' : (item.border || 'transparent')}`,
+                color: hovered ? '#ffffff' : (item.color || 'var(--color-obsidian-ink)'),
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+                boxShadow: hovered ? '0 2px 8px rgba(0,0,0,0.15)' : 'none',
+                transform: hovered ? 'scale(1.08)' : 'scale(1)',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+              }}
+            >
+              <Icon name={item.icon} size={15} color={hovered ? '#ffffff' : (item.color || 'var(--color-obsidian-ink)')} />
+            </div>
+
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <p
+                style={{
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: hovered ? '#ffffff' : 'var(--color-obsidian-ink)',
+                  marginBottom: 2,
+                  transition: 'color 0.2s ease',
+                  lineHeight: 1.25
+                }}
+              >
+                {item.title}
+              </p>
+              <p
+                style={{
+                  fontSize: 11.5,
+                  color: hovered ? 'rgba(255, 255, 255, 0.92)' : 'var(--color-fog)',
+                  lineHeight: 1.3,
+                  transition: 'color 0.2s ease'
+                }}
+              >
+                {item.desc}
+              </p>
+            </div>
           </a>
-          <div style={{ flex:1, display:'flex', alignItems:'center', justifyContent:'center', gap:2 }}>
-            <a href="Services.html" style={lk} onMouseEnter={hi} onMouseLeave={ho}>Services</a>
-            <a href="Industries.html" style={lk} onMouseEnter={hi} onMouseLeave={ho}>Industries</a>
-            <div style={{ position:'relative' }} onMouseEnter={()=>setResOpen(true)} onMouseLeave={()=>setResOpen(false)}>
-              <button style={lk} onMouseEnter={hi} onMouseLeave={ho}>
-                Resources <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M6 9l6 6 6-6"/></svg>
-              </button>
-              {resOpen && (
-                <div style={{ position:'absolute', top:'calc(100% + 12px)', left:'50%', transform:'translateX(-50%)', background:'rgba(250,250,250,0.97)', border:'1px solid rgba(30,27,75,0.1)', borderRadius:14, padding:6, minWidth:176, boxShadow:'0 24px 56px rgba(0,0,0,0.1)', backdropFilter:'blur(24px)', zIndex:10 }}>
-                  {[['Case studies','#'],['Blog','#']].map(([l,h])=>(
-                    <a key={l} href={h} style={{ display:'block', padding:'9px 14px', color:'rgba(30,27,75,0.5)', fontSize:13, borderRadius:8, transition:'all 0.14s' }}
-                       onMouseEnter={e=>{e.currentTarget.style.background='rgba(30,27,75,0.06)';e.currentTarget.style.color='#1E1B4B'}}
-                       onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.color='rgba(30,27,75,0.5)'}}>{l}</a>
+        );
+      };
+
+      const servicesMenu = [
+        { title: 'AI & Generative AI', desc: 'Enterprise LLMs, SLMs, multimodal & RAG architectures', href: '/Services.html#ai-genai', icon: 'sparkles', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'AI Agents & Workflows', desc: 'Autonomous & human-in-the-loop multi-agent systems', href: '/Services.html#ai-agents', icon: 'agent', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' },
+        { title: 'AI Engineering', desc: 'From prototype to scale: architecture, evals & production code', href: '/Services.html#ai-engineering', icon: 'engineering', color: '#a855f7', bg: 'rgba(168, 85, 247, 0.12)', border: 'rgba(168, 85, 247, 0.25)' },
+        { title: 'AI Infrastructure & DevOps', desc: 'GPU orchestration, high-throughput model serving & clusters', href: '/Services.html#ai-infrastructure', icon: 'infra', color: '#fb68c3', bg: 'rgba(251, 104, 195, 0.12)', border: 'rgba(251, 104, 195, 0.25)' },
+        { title: 'AI Observability & Ops', desc: 'Tracing, latency, token costs, drift & guardrail telemetry', href: '/Services.html#ai-observability', icon: 'observability', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' },
+        { title: 'Data & Analytics for AI', desc: 'Vector pipelines, ETL, real-time embeddings & feature stores', href: '/Services.html#data-analytics', icon: 'data', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.25)' }
+      ];
+
+      const industriesMenu = [
+        { title: 'Financial Services', desc: 'Fraud detection, regulatory intelligence, AI customer ops', href: '/Industries.html#financial-services', icon: 'finance', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' },
+        { title: 'Healthcare & Life Sciences', desc: 'Clinical document processing, HIPAA patient assistants', href: '/Industries.html#healthcare', icon: 'health', color: '#fb68c3', bg: 'rgba(251, 104, 195, 0.12)', border: 'rgba(251, 104, 195, 0.25)' },
+        { title: 'SaaS & Technology', desc: 'Embedded AI copilots, multi-tenant agent infra, cost routing', href: '/Industries.html#saas', icon: 'saas', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'Retail & E-Commerce', desc: 'Conversational commerce, recommendation engines, support', href: '/Industries.html#retail', icon: 'retail', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.25)' },
+        { title: 'Manufacturing & Logistics', desc: 'Supply chain intelligence, predictive diagnosis agents', href: '/Industries.html#manufacturing', icon: 'mfg', color: '#a855f7', bg: 'rgba(168, 85, 247, 0.12)', border: 'rgba(168, 85, 247, 0.25)' },
+        { title: 'Professional Services', desc: 'Contract intelligence, research agents, knowledge search', href: '/Industries.html#professional-services', icon: 'prof', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' }
+      ];
+
+      const productsMenu = [
+        { title: 'SlashLLM Gateway', desc: 'Unified API, model routing, semantic caching & failover', href: '/Products.html#gateway', icon: 'gateway', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'SlashLLM Observability', desc: 'Real-time token tracing, cost attribution & latency monitoring', href: '/Products.html#observability', icon: 'observability', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' },
+        { title: 'SlashLLM AI Platform', desc: 'Developer toolkit for prompt ops, model evaluation & CI/CD', href: '/Products.html#ai-platform', icon: 'sparkles', color: '#a855f7', bg: 'rgba(168, 85, 247, 0.12)', border: 'rgba(168, 85, 247, 0.25)' },
+        { title: 'SlashLLM Agent Platform', desc: 'Orchestration, state management & tool sandboxing for agents', href: '/Products.html#agent-platform', icon: 'agent', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' }
+      ];
+
+      const solutionsMenu = [
+        { title: 'Enterprise AI Transformation', desc: 'Full-stack AI adoption strategy and legacy modernization', href: '/Solutions.html#transformation', icon: 'sparkles', color: '#00c0f8', bg: 'rgba(0, 192, 248, 0.12)', border: 'rgba(0, 192, 248, 0.25)' },
+        { title: 'AI Cost & Latency Optimization', desc: 'Reduce inference spend by 30–60% without quality degradation', href: '/Solutions.html#cost-optimization', icon: 'cost', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.25)' },
+        { title: 'LLM Governance & Guardrails', desc: 'Safety policies, PII redaction, red-teaming & compliance', href: '/Solutions.html#governance', icon: 'shield', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.25)' },
+        { title: 'Private & Hybrid AI Infra', desc: 'On-premise & air-gapped VPC deployments with open weights', href: '/Solutions.html#private-ai', icon: 'infra', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.25)' },
+        { title: 'Intelligent Document AI', desc: 'Automated extraction, structuring & synthesis of enterprise data', href: '/Solutions.html#document-ai', icon: 'data', color: '#fb68c3', bg: 'rgba(251, 104, 195, 0.12)', border: 'rgba(251, 104, 195, 0.25)' }
+      ];
+
+      const navLinkStyle = {
+        color: 'var(--color-obsidian-ink)',
+        fontSize: 14,
+        fontWeight: 400,
+        padding: '8px 12px',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 4,
+        background: 'transparent',
+        border: 'none',
+        cursor: 'pointer',
+        letterSpacing: '-0.02em',
+        transition: 'color 0.15s ease'
+      };
+
+      return (
+        <header style={{
+          position: 'sticky',
+          top: 0,
+          background: 'var(--color-canvas)',
+          borderBottom: '1px solid var(--border-hairline)',
+          height: 64,
+          display: 'flex',
+          alignItems: 'center',
+          zIndex: 1000
+        }}>
+          <div style={{ maxWidth: 'var(--page-max-width)', width: '100%', margin: '0 auto', padding: '0 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            
+            <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+              <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style={{ height: 26, width: 'auto', objectFit: 'contain', display: 'block' }} />
+            </a>
+
+            <nav className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              
+              {/* What We Do */}
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('services')}
+                   onMouseLeave={handleMouseLeave}>
+                 <button style={navLinkStyle} className={isServicesActive ? 'nav-link-active' : ''} onClick={() => setOpenDropdown(openDropdown === 'services' ? null : 'services')}>
+                  What We Do <Icon name="chevronDown" size={11} color="var(--color-fog)" />
+                </button>
+                <div className={`nav-dropdown ${openDropdown === 'services' ? 'is-open' : ''}`}
+                     style={{ left: 0, width: 560, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Capabilities & Services</span>
+                    <a href="/Services.html" className="link-editorial" style={{ fontSize: 12 }}>View All →</a>
+                  </div>
+                  {servicesMenu.map((item, idx) => (
+                    <NavSubItem key={idx} item={item} />
                   ))}
                 </div>
-              )}
-            </div>
-            <a href="About.html" style={{ ...lk, color:'#1E1B4B', background:'rgba(30,27,75,0.06)' }}>About</a>
-          </div>
-          <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" style={{ background:'#1E1B4B', color:'#FAFAFA', padding:'7px 18px', borderRadius:100, fontSize:12.5, fontWeight:600, letterSpacing:'-0.01em', whiteSpace:'nowrap', flexShrink:0, transition:'all 0.2s' }}
-             onMouseEnter={e=>{e.currentTarget.style.boxShadow='0 0 0 2px rgba(168,85,247,0.4), 0 8px 28px rgba(30,27,75,0.15)';e.currentTarget.style.opacity='0.9'}}
-             onMouseLeave={e=>{e.currentTarget.style.boxShadow='none';e.currentTarget.style.opacity='1'}}>Let's talk</a>
-        </nav>
-      </div>
-    );
-  };
-
-  const Footer = () => {
-    const cols = [
-      { label:'Services', links:['AI roadmap & consulting','AI product development','AI agents','AI product features','Software development','DevOps & cloud','AI cost observability','Branding & design','Autopilot content engine'] },
-      { label:'Industries', links:['SaaS & technology','Fintech & financial services','Healthcare & life sciences','HR tech'] },
-      { label:'Resources', links:['Case studies','Blog','Contact us'] },
-      { label:'Company', links:['About','Careers','Privacy policy','Terms of service'] },
-    ];
-    return (
-      <footer style={{ borderTop:'1px solid #DDD8F0', background:'#F3F0FF', paddingTop:64, paddingBottom:40 }}>
-        <div style={{ maxWidth:1280, margin:'0 auto', padding:'0 28px' }}>
-          <div className="footer-grid" style={{ display:'grid', gridTemplateColumns:'180px 1fr 1fr 1fr 1fr', gap:52, marginBottom:64 }}>
-            <div>
-              <a href="index.html" style={{ display:'flex', alignItems:'center', gap:8, marginBottom:14 }}>
-                <img src="uploads/LOGO 2.png" alt="SlashLLM" style={{ width:28, height:28, objectFit:'contain' }} />
-                <span style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:700, fontSize:16, letterSpacing:'-0.03em', color:'#1E1B4B' }}>SlashLLM</span>
-              </a>
-              <p style={{ color:'rgba(30,27,75,0.45)', fontSize:13, lineHeight:1.6, marginBottom:20 }}>From prompt to production.</p>
-              <div style={{ display:'flex', gap:14 }}>
-                {[{l:'LinkedIn',fill:'none',sw:'1.5',p:'M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 4m-2 0a2 2 0 104 0 2 2 0 10-4 0'},{l:'X',fill:'currentColor',sw:'0',p:'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'},{l:'GitHub',fill:'none',sw:'1.5',p:'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22'}].map(({l,fill,sw,p})=>(
-                  <a key={l} href="#" style={{ color:'rgba(30,27,75,0.3)', transition:'color 0.15s' }} onMouseEnter={e=>e.currentTarget.style.color='#a855f7'} onMouseLeave={e=>e.currentTarget.style.color='rgba(30,27,75,0.3)'}>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill={fill} stroke={fill==='none'?'currentColor':'none'} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round"><path d={p}/></svg>
-                  </a>
-                ))}
               </div>
-            </div>
-            {cols.map(({ label, links }) => (
-              <div key={label}>
-                <p style={{ fontSize:11, fontWeight:600, color:'rgba(30,27,75,0.35)', letterSpacing:'0.12em', textTransform:'uppercase', fontFamily:'"JetBrains Mono",monospace', marginBottom:18 }}>{label}</p>
-                <div style={{ display:'flex', flexDirection:'column', gap:11 }}>
-                  {links.map(item => <a key={item} href="#" className="txt-lnk" style={{ color:'rgba(30,27,75,0.5)', fontSize:13.5 }}>{item}</a>)}
+
+              {/* Industries */}
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('industries')}
+                   onMouseLeave={handleMouseLeave}>
+                <button style={navLinkStyle} className={isIndustriesActive ? 'nav-link-active' : ''} onClick={() => setOpenDropdown(openDropdown === 'industries' ? null : 'industries')}>
+                  Industries <Icon name="chevronDown" size={11} color="var(--color-fog)" />
+                </button>
+                <div className={`nav-dropdown ${openDropdown === 'industries' ? 'is-open' : ''}`}
+                     style={{ left: '-40px', width: 560, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Industry Verticals</span>
+                    <a href="/Industries.html" className="link-editorial" style={{ fontSize: 12 }}>All Sectors →</a>
+                  </div>
+                  {industriesMenu.map((item, idx) => (
+                    <NavSubItem key={idx} item={item} />
+                  ))}
                 </div>
               </div>
-            ))}
+
+              {/* Products & Platforms */}
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('products')}
+                   onMouseLeave={handleMouseLeave}>
+                <button style={navLinkStyle} className={isProductsActive ? 'nav-link-active' : ''} onClick={() => setOpenDropdown(openDropdown === 'products' ? null : 'products')}>
+                  Products <Icon name="chevronDown" size={11} color="var(--color-fog)" />
+                </button>
+                <div className={`nav-dropdown ${openDropdown === 'products' ? 'is-open' : ''}`}
+                     style={{ left: '-40px', width: 520, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Proprietary Platforms</span>
+                    <a href="/Products.html" className="link-editorial" style={{ fontSize: 12 }}>Explore Suite →</a>
+                  </div>
+                  {productsMenu.map((item, idx) => (
+                    <NavSubItem key={idx} item={item} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Solutions */}
+              <div className="nav-item-wrap"
+                   onMouseEnter={() => handleMouseEnter('solutions')}
+                   onMouseLeave={handleMouseLeave}>
+                <button style={navLinkStyle} className={isSolutionsActive ? 'nav-link-active' : ''} onClick={() => setOpenDropdown(openDropdown === 'solutions' ? null : 'solutions')}>
+                  Solutions <Icon name="chevronDown" size={11} color="var(--color-fog)" />
+                </button>
+                <div className={`nav-dropdown ${openDropdown === 'solutions' ? 'is-open' : ''}`}
+                     style={{ left: '-40px', width: 520, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                  <div style={{ gridColumn: 'span 2', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="font-mono" style={{ fontSize: 10, color: 'var(--color-fog)' }}>Enterprise Solutions</span>
+                    <a href="/Solutions.html" className="link-editorial" style={{ fontSize: 12 }}>All Solutions →</a>
+                  </div>
+                  {solutionsMenu.map((item, idx) => (
+                    <NavSubItem key={idx} item={item} />
+                  ))}
+                </div>
+              </div>
+
+              <a href="/CaseStudies.html" style={navLinkStyle} className={isStoriesActive ? 'nav-link-active' : ''}>Stories</a>
+              <a href="/blog" style={navLinkStyle} className={isInsightsActive ? 'nav-link-active' : ''}>Insights</a>
+              <a href="/About.html" style={navLinkStyle} className={isCompanyActive ? 'nav-link-active' : ''}>Company</a>
+            </nav>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" className="btn-primary nav-cta-btn">
+                Talk to an AI Expert <Icon name="arrowRight" size={12} />
+              </a>
+
+              <button
+                className="hide-desktop"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Toggle Navigation Menu"
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: 8,
+                  background: mobileMenuOpen ? 'rgba(99, 91, 255, 0.1)' : '#f3f3f5',
+                  border: '1px solid var(--border-hairline)',
+                  color: mobileMenuOpen ? 'var(--color-iris-pulse)' : 'var(--color-obsidian-ink)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  padding: 0,
+                  flexShrink: 0,
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                <Icon name={mobileMenuOpen ? 'close' : 'menu'} size={18} />
+              </button>
+            </div>
+
           </div>
-          <div style={{ borderTop:'1px solid #DDD8F0', paddingTop:24 }}>
-            <p style={{ color:'rgba(30,27,75,0.35)', fontSize:13 }}>© 2026 SlashLLM. All rights reserved.</p>
+
+                    {/* Full-Screen Clean Drop-Down Overlay (Mobile Only) */}
+          {mobileMenuOpen && (
+            <div style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              width: '100vw',
+              height: '100vh',
+              background: '#ffffff',
+              zIndex: 100000,
+              overflowY: 'auto',
+              display: 'flex',
+              flexDirection: 'column',
+              boxSizing: 'border-box'
+            }}>
+              {/* Mobile Overlay Top Header with dedicated Close button */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '14px 20px',
+                borderBottom: '1px solid var(--border-hairline)',
+                background: '#ffffff',
+                position: 'sticky',
+                top: 0,
+                zIndex: 10
+              }}>
+                <a href="/" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', alignItems: 'center' }}>
+                  <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style={{ height: 26, width: 'auto', objectFit: 'contain' }} />
+                </a>
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  aria-label="Close Navigation Menu"
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: 8,
+                    background: '#f3f3f5',
+                    border: '1px solid var(--border-hairline)',
+                    color: 'var(--color-obsidian-ink)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    padding: 0
+                  }}
+                >
+                  <Icon name="close" size={18} />
+                </button>
+              </div>
+
+              <div style={{ padding: '20px 20px 40px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                
+                <div style={{ borderBottom: '1px solid var(--border-hairline)', paddingBottom: 10 }}>
+                  <button
+                    onClick={() => toggleMobileAccordion('services')}
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      background: 'none',
+                      border: 'none',
+                      padding: '8px 0',
+                      fontSize: 15.5,
+                      fontWeight: 600,
+                      color: 'var(--color-obsidian-ink)',
+                      cursor: 'pointer',
+                      textAlign: 'left'
+                    }}
+                  >
+                    What We Do
+                    <Icon name={mobileAccordion === 'services' ? 'chevronUp' : 'chevronDown'} size={15} color="var(--color-fog)" />
+                  </button>
+                  {mobileAccordion === 'services' && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 6, paddingLeft: 4 }}>
+                      {servicesMenu.map((item, idx) => (
+                        <a key={idx} href={item.href} onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 10px', borderRadius: 8, background: '#f8f8fa', textDecoration: 'none' }}>
+                          <div style={{ width: 28, height: 28, borderRadius: 6, background: item.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                            <Icon name={item.icon} size={14} color={item.color} />
+                          </div>
+                          <div>
+                            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-obsidian-ink)' }}>{item.title}</div>
+                            <div style={{ fontSize: 11, color: 'var(--color-fog)' }}>{item.desc}</div>
+                          </div>
+                        </a>
+                      ))}
+                      <a href="/Services.html" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--color-iris-pulse)', padding: '6px 10px' }}>
+                        View All Services →
+                      </a>
+                    </div>
+                  )}
+                </div>
+
+                <div style={{ borderBottom: '1px solid var(--border-hairline)', paddingBottom: 10 }}>
+                  <button
+                    onClick={() => toggleMobileAccordion('industries')}
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      background: 'none',
+                      border: 'none',
+                      padding: '8px 0',
+                      fontSize: 15.5,
+                      fontWeight: 600,
+                      color: 'var(--color-obsidian-ink)',
+                      cursor: 'pointer',
+                      textAlign: 'left'
+                    }}
+                  >
+                    Industries
+                    <Icon name={mobileAccordion === 'industries' ? 'chevronUp' : 'chevronDown'} size={15} color="var(--color-fog)" />
+                  </button>
+                  {mobileAccordion === 'industries' && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 6, paddingLeft: 4 }}>
+                      {industriesMenu.map((item, idx) => (
+                        <a key={idx} href={item.href} onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 10px', borderRadius: 8, background: '#f8f8fa', textDecoration: 'none' }}>
+                          <div style={{ width: 28, height: 28, borderRadius: 6, background: item.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                            <Icon name={item.icon} size={14} color={item.color} />
+                          </div>
+                          <div>
+                            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-obsidian-ink)' }}>{item.title}</div>
+                            <div style={{ fontSize: 11, color: 'var(--color-fog)' }}>{item.desc}</div>
+                          </div>
+                        </a>
+                      ))}
+                      <a href="/Industries.html" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--color-iris-pulse)', padding: '6px 10px' }}>
+                        All Sectors →
+                      </a>
+                    </div>
+                  )}
+                </div>
+
+                <div style={{ borderBottom: '1px solid var(--border-hairline)', paddingBottom: 10 }}>
+                  <button
+                    onClick={() => toggleMobileAccordion('products')}
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      background: 'none',
+                      border: 'none',
+                      padding: '8px 0',
+                      fontSize: 15.5,
+                      fontWeight: 600,
+                      color: 'var(--color-obsidian-ink)',
+                      cursor: 'pointer',
+                      textAlign: 'left'
+                    }}
+                  >
+                    Products
+                    <Icon name={mobileAccordion === 'products' ? 'chevronUp' : 'chevronDown'} size={15} color="var(--color-fog)" />
+                  </button>
+                  {mobileAccordion === 'products' && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 6, paddingLeft: 4 }}>
+                      {productsMenu.map((item, idx) => (
+                        <a key={idx} href={item.href} onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 10px', borderRadius: 8, background: '#f8f8fa', textDecoration: 'none' }}>
+                          <div style={{ width: 28, height: 28, borderRadius: 6, background: item.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                            <Icon name={item.icon} size={14} color={item.color} />
+                          </div>
+                          <div>
+                            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-obsidian-ink)' }}>{item.title}</div>
+                            <div style={{ fontSize: 11, color: 'var(--color-fog)' }}>{item.desc}</div>
+                          </div>
+                        </a>
+                      ))}
+                      <a href="/Products.html" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--color-iris-pulse)', padding: '6px 10px' }}>
+                        Explore Suite →
+                      </a>
+                    </div>
+                  )}
+                </div>
+
+                <div style={{ borderBottom: '1px solid var(--border-hairline)', paddingBottom: 10 }}>
+                  <button
+                    onClick={() => toggleMobileAccordion('solutions')}
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      background: 'none',
+                      border: 'none',
+                      padding: '8px 0',
+                      fontSize: 15.5,
+                      fontWeight: 600,
+                      color: 'var(--color-obsidian-ink)',
+                      cursor: 'pointer',
+                      textAlign: 'left'
+                    }}
+                  >
+                    Solutions
+                    <Icon name={mobileAccordion === 'solutions' ? 'chevronUp' : 'chevronDown'} size={15} color="var(--color-fog)" />
+                  </button>
+                  {mobileAccordion === 'solutions' && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 6, paddingLeft: 4 }}>
+                      {solutionsMenu.map((item, idx) => (
+                        <a key={idx} href={item.href} onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 10px', borderRadius: 8, background: '#f8f8fa', textDecoration: 'none' }}>
+                          <div style={{ width: 28, height: 28, borderRadius: 6, background: item.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                            <Icon name={item.icon} size={14} color={item.color} />
+                          </div>
+                          <div>
+                            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-obsidian-ink)' }}>{item.title}</div>
+                            <div style={{ fontSize: 11, color: 'var(--color-fog)' }}>{item.desc}</div>
+                          </div>
+                        </a>
+                      ))}
+                      <a href="/Solutions.html" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--color-iris-pulse)', padding: '6px 10px' }}>
+                        All Solutions →
+                      </a>
+                    </div>
+                  )}
+                </div>
+
+                <div style={{ borderBottom: '1px solid var(--border-hairline)', paddingBottom: 10 }}>
+                  <a href="/CaseStudies.html" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', fontSize: 15.5, fontWeight: 600, color: 'var(--color-obsidian-ink)', textDecoration: 'none' }}>
+                    Stories
+                    <Icon name="arrowRight" size={13} color="var(--color-fog)" />
+                  </a>
+                </div>
+                <div style={{ borderBottom: '1px solid var(--border-hairline)', paddingBottom: 10 }}>
+                  <a href="/blog" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', fontSize: 15.5, fontWeight: 600, color: 'var(--color-obsidian-ink)', textDecoration: 'none' }}>
+                    Insights
+                    <Icon name="arrowRight" size={13} color="var(--color-fog)" />
+                  </a>
+                </div>
+                <div style={{ borderBottom: '1px solid var(--border-hairline)', paddingBottom: 10 }}>
+                  <a href="/About.html" onClick={() => setMobileMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', fontSize: 15.5, fontWeight: 600, color: 'var(--color-obsidian-ink)', textDecoration: 'none' }}>
+                    Company
+                    <Icon name="arrowRight" size={13} color="var(--color-fog)" />
+                  </a>
+                </div>
+
+              </div>
+
+              <div style={{ paddingTop: 20, marginTop: 'auto' }}>
+                <a
+                  href="https://cal.com/mridhul-pax-jjhwct/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                  style={{
+                    width: '100%',
+                    justifyContent: 'center',
+                    padding: '12px 18px',
+                    fontSize: 14.5,
+                    display: 'flex'
+                  }}
+                >
+                  Schedule an AI Briefing <Icon name="arrowRight" size={15} />
+                </a>
+              </div>
+            </div>
+          )}
+        </header>
+      );
+    };
+
+    const GlobalFooter = () => (
+      <footer style={{ background: 'var(--color-canvas)', borderTop: '1px solid var(--border-hairline)', paddingTop: 72, paddingBottom: 48, position: 'relative' }}>
+        <div className="halftone-pattern" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 180, opacity: 0.25, pointerEvents: 'none' }}></div>
+        <div style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20, marginBottom: 40, borderBottom: '1px solid var(--border-hairline)', paddingBottom: 32 }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
+                <img src="/uploads/slashllm-logo-hd.png" alt="SlashLLM" style={{ height: 24, width: 'auto', objectFit: 'contain', display: 'block' }} />
+              </div>
+              <p style={{ fontSize: 13, color: 'var(--color-fog)' }}>Enterprise AI engineering, proprietary platforms, and dedicated transformation.</p>
+            </div>
+            <div style={{ display: 'flex', gap: 20 }}>
+              <a href="/Services.html" className="link-editorial" style={{ fontSize: 13 }}>Services</a>
+              <a href="/Industries.html" className="link-editorial" style={{ fontSize: 13 }}>Industries</a>
+              <a href="/Products.html" className="link-editorial" style={{ fontSize: 13 }}>Products</a>
+              <a href="/Solutions.html" className="link-editorial" style={{ fontSize: 13 }}>Solutions</a>
+            </div>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14 }}>
+            <p style={{ color: 'var(--color-fog)', fontSize: 12.5 }}>© 2026 SlashLLM Inc. All rights reserved. Restraint as authority.</p>
+
           </div>
         </div>
       </footer>
     );
-  };
 
-  Object.assign(window, { Nav, Footer });
-</script>
+    function AboutPage() {
+      const values = [
+        {
+          num: '01',
+          title: 'Production Rigor Over Proof-of-Concept Hype',
+          desc: 'We judge our success exclusively by software running live in production under strict SLAs, low latency, and deterministic output safety.'
+        },
+        {
+          num: '02',
+          title: 'Software Engineering First, Prompts Second',
+          desc: 'Reliable AI requires robust distributed systems, deterministic state machines, automated regression testing, and resilient fallback routing.'
+        },
+        {
+          num: '03',
+          title: 'Data Sovereignty & Enterprise Security',
+          desc: 'Enterprise AI must be secure by design. We build with client-side encryption, air-gapped private VPCs, and automated PII scrubbers that guarantee zero data leakage.'
+        },
+        {
+          num: '04',
+          title: 'Cost Transparency & Model Neutrality',
+          desc: 'We are vendor-agnostic. Whether OpenAI, Anthropic, AWS Bedrock, Google Vertex, or self-hosted open-weights on vLLM — we route workloads to the most cost-effective solution.'
+        }
+      ];
 
-<!-- ═══ SCRIPT 2 · Page Sections ═══ -->
-<script type="text/babel">
+      return (
+        <React.Fragment>
+          <GlobalNav />
+          <main>
+            {/* Editorial Hero */}
+            <section style={{ padding: '72px 24px 48px', textAlign: 'center', background: 'var(--color-canvas)', borderBottom: '1px solid var(--border-hairline)' }}>
+              <div style={{ maxWidth: 840, margin: '0 auto' }}>
+                <span className="font-mono" style={{ fontSize: 12, color: 'var(--color-obsidian-ink)', fontWeight: 600, display: 'block', marginBottom: 12 }}>
+                  Company Profile
+                </span>
+                <h1 className="font-display" style={{ fontSize: 'clamp(42px, 4.5vw, 64px)', fontWeight: 700, color: 'var(--color-obsidian-ink)', marginBottom: 18, lineHeight: 1.06 }}>
+                  Enterprise AI Engineering & <span className="gradient-text-purple">Transformation</span>
+                </h1>
+                <p style={{ fontSize: 17.5, color: 'var(--color-fog)', lineHeight: 1.65, maxWidth: 660, margin: '0 auto' }}>
+                  SlashLLM is the technology partner enterprises trust to build, deploy, optimize, and operate production AI systems at scale.
+                </p>
+              </div>
+            </section>
 
-  const BELIEFS = [
-    { num:'01', title:'Ship, don\'t slide', body:'The best strategy is a working prototype. We\'d rather show you a production system in 4 weeks than a 60-page deck in 6.' },
-    { num:'02', title:'Own the outcome', body:'We don\'t disappear after delivery. We build it, we deploy it, we monitor it, we optimize it. If it breaks at 3am, we\'re already looking at it.' },
-    { num:'03', title:'Stay small, go deep', body:'We\'re not trying to be a 500-person agency. We\'d rather do 15 things brilliantly than 50 things adequately.' },
-    { num:'04', title:'Be honest about what works', body:'If AI isn\'t the right answer, we\'ll tell you. If a simpler solution exists, we\'ll build that instead. Our job is results, not billable hours.' },
-  ];
-
-  /* ── Dark hero card: sprint → production timeline ── */
-  const ProjectCard = () => {
-    const phases = [
-      { week:'Week 01', label:'Discovery & architecture', pct:25,  delay:'0.25s', dur:'0.7s' },
-      { week:'Week 02', label:'Build & iteration',        pct:50,  delay:'0.55s', dur:'0.9s' },
-      { week:'Week 03', label:'Testing & integration',    pct:75,  delay:'0.85s', dur:'1.1s' },
-      { week:'Week 04', label:'Deploy to production',     pct:100, delay:'1.15s', dur:'1.3s' },
-    ];
-    return (
-      <div className="hero-card" style={{ background:'#100D2E', border:'1px solid rgba(255,255,255,0.06)', borderRadius:20, overflow:'hidden', width:'100%', maxWidth:460 }}>
-        {/* Chrome */}
-        <div style={{ padding:'12px 18px', borderBottom:'1px solid rgba(255,255,255,0.05)', display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-          <div style={{ display:'flex', gap:5 }}>
-            {['#FF5F57','#FFBD2E','#28C840'].map((c,i)=><div key={i} style={{ width:8, height:8, borderRadius:'50%', background:c }} />)}
-          </div>
-          <div style={{ display:'flex', alignItems:'center', gap:8 }}>
-            <span className="status-dot" style={{ width:6, height:6, borderRadius:'50%', background:'#4ade80', display:'block' }}></span>
-            <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'rgba(255,255,255,0.25)', letterSpacing:'0.08em' }}>sprint → production</span>
-          </div>
-        </div>
-
-        {/* Header */}
-        <div style={{ padding:'22px 20px 10px' }}>
-          <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9.5, color:'rgba(168,85,247,0.55)', letterSpacing:'0.16em', textTransform:'uppercase', marginBottom:4 }}>Project timeline</p>
-          <p style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:14, color:'rgba(255,255,255,0.6)', fontWeight:600, letterSpacing:'-0.02em' }}>From first call to production</p>
-        </div>
-
-        {/* Progress bars */}
-        <div style={{ padding:'10px 20px 20px' }}>
-          {phases.map(({ week, label, pct, delay, dur }) => (
-            <div key={week} style={{ marginBottom:18 }}>
-              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom:8 }}>
-                <div style={{ display:'flex', gap:10, alignItems:'baseline' }}>
-                  <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9, color:'rgba(168,85,247,0.5)', letterSpacing:'0.1em', flexShrink:0 }}>{week}</span>
-                  <span style={{ fontSize:12, color:'rgba(255,255,255,0.42)' }}>{label}</span>
+            {/* Story Grid */}
+            <section style={{ maxWidth: 'var(--page-max-width)', margin: '0 auto', padding: '56px 24px 96px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '52% 48%', gap: 48, alignItems: 'start' }} className="grid-2col">
+                <div>
+                  <span className="font-mono" style={{ fontSize: 11.5, color: 'var(--color-fog)', fontWeight: 600, display: 'block', marginBottom: 8 }}>Our Mission</span>
+                  <h2 className="font-display" style={{ fontSize: 32, fontWeight: 600, color: 'var(--color-obsidian-ink)', lineHeight: 1.15, marginBottom: 18 }}>
+                    Bridging the Gap Between AI Prototypes and Enterprise Operations
+                  </h2>
+                  <p style={{ fontSize: 15.5, color: 'var(--color-fog)', lineHeight: 1.65, marginBottom: 16 }}>
+                    Over 80% of enterprise AI proofs-of-concept stall before reaching production. Organizations struggle with unpredictable token bills, security concerns, brittle tool calling, and lack of specialized AI infrastructure expertise.
+                  </p>
+                  <p style={{ fontSize: 15.5, color: 'var(--color-fog)', lineHeight: 1.65, marginBottom: 32 }}>
+                    SlashLLM combines elite full-stack software engineering, deep machine learning research, and proprietary platforms (SlashLLM Gateway & Observability) to deliver deterministic business outcomes.
+                  </p>
+                  
+                  <div style={{ display: 'flex', gap: 36, borderTop: '1px solid var(--border-hairline)', paddingTop: 24 }}>
+                    <div>
+                      <p className="font-display" style={{ fontSize: 38, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>99.98%</p>
+                      <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-iris-pulse)', marginTop: 4, fontWeight: 600 }}>Production SLA</p>
+                    </div>
+                    <div>
+                      <p className="font-display" style={{ fontSize: 38, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>&lt;90 Days</p>
+                      <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-iris-pulse)', marginTop: 4, fontWeight: 600 }}>Time to Production</p>
+                    </div>
+                    <div>
+                      <p className="font-display" style={{ fontSize: 38, fontWeight: 700, color: 'var(--color-obsidian-ink)' }}>30–60%</p>
+                      <p className="font-mono" style={{ fontSize: 11, color: 'var(--color-iris-pulse)', marginTop: 4, fontWeight: 600 }}>Inference Saved</p>
+                    </div>
+                  </div>
                 </div>
-                <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:9, color: pct===100 ? '#4ade80' : 'rgba(255,255,255,0.28)', letterSpacing:'0.06em' }}>{pct}%</span>
+
+                <div style={{ background: '#fafafa', border: '1px solid var(--border-hairline)', borderRadius: 'var(--radius-cards)', padding: '38px 34px' }}>
+                  <h3 className="font-display" style={{ fontSize: 24, fontWeight: 600, color: 'var(--color-obsidian-ink)', marginBottom: 22 }}>
+                    Our Engineering Principles
+                  </h3>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                    {values.map((v, i) => (
+                      <div key={i} style={{ borderBottom: i < values.length - 1 ? '1px solid var(--border-hairline)' : 'none', paddingBottom: i < values.length - 1 ? 16 : 0 }}>
+                        <p style={{ fontSize: 15.5, fontWeight: 600, color: 'var(--color-obsidian-ink)', marginBottom: 5 }}>
+                          <span className="font-mono" style={{ fontSize: 12, color: 'var(--color-iris-pulse)', marginRight: 8, fontWeight: 600 }}>{v.num}.</span>
+                          {v.title}
+                        </p>
+                        <p style={{ fontSize: 14, color: 'var(--color-fog)', lineHeight: 1.6 }}>{v.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <div style={{ height:4, borderRadius:2, background:'rgba(255,255,255,0.05)', overflow:'hidden' }}>
-                <div style={{
-                  height:'100%', borderRadius:2,
-                  background: pct===100
-                    ? 'linear-gradient(90deg, #a855f7 0%, #4ade80 100%)'
-                    : 'linear-gradient(90deg, #a855f7 0%, #be38de 100%)',
-                  width:`${pct}%`,
-                  animationName:'bar-fill',
-                  animationDuration: dur,
-                  animationDelay: delay,
-                  animationTimingFunction:'cubic-bezier(0.16,1,0.3,1)',
-                  animationFillMode:'both',
-                }} />
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Terminal footer */}
-        <div style={{ padding:'14px 20px', borderTop:'1px solid rgba(255,255,255,0.05)', background:'rgba(0,0,0,0.18)', display:'flex', flexDirection:'column', gap:7 }}>
-          {[
-            { cmd:'/commit', val:'d4e92f1', msg:'"ship it"', c:'rgba(255,255,255,0.28)' },
-            { cmd:'/deploy', val:'✓',       msg:'live · production', c:'#4ade80' },
-            { cmd:'/monitor', val:'●',      msg:'99.98% uptime', c:'rgba(168,85,247,0.7)' },
-          ].map(({ cmd, val, msg, c }) => (
-            <div key={cmd} style={{ display:'flex', gap:8, alignItems:'center' }}>
-              <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'rgba(168,85,247,0.45)', flexShrink:0 }}>{cmd}</span>
-              <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:c }}>{val} {msg}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  /* ── Hero ── */
-  const AboutHero = () => (
-    <section style={{ background:'#FAFAFA', borderBottom:'1px solid #DDD8F0', position:'relative', overflow:'hidden' }}>
-      {/* BG grid */}
-      <div style={{ position:'absolute', inset:0, backgroundImage:'linear-gradient(rgba(168,85,247,0.032) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,0.032) 1px,transparent 1px)', backgroundSize:'64px 64px', pointerEvents:'none' }}></div>
-      {/* Ghost / */}
-      <div style={{ position:'absolute', right:'-4%', top:'-8%', fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, fontSize:'30vw', color:'transparent', WebkitTextStroke:'1px rgba(168,85,247,0.032)', lineHeight:1, pointerEvents:'none', userSelect:'none', letterSpacing:'-0.06em' }}>/</div>
-      {/* Bloom */}
-      <div style={{ position:'absolute', left:'28%', top:'8%', width:520, height:520, background:'radial-gradient(circle, rgba(168,85,247,0.05) 0%, transparent 65%)', pointerEvents:'none' }}></div>
-
-      <div style={{ maxWidth:1280, margin:'0 auto', padding:'148px 28px 88px', display:'grid', gridTemplateColumns:'54% 46%', gap:'0 64px', alignItems:'center', position:'relative', zIndex:1 }}>
-
-        {/* Left */}
-        <div className="hero-left" style={{ maxWidth:580 }}>
-          {/* Breadcrumb */}
-          <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:36 }}>
-            <a href="index.html" style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'rgba(30,27,75,0.32)', letterSpacing:'0.1em', transition:'color 0.15s' }} onMouseEnter={e=>e.currentTarget.style.color='#a855f7'} onMouseLeave={e=>e.currentTarget.style.color='rgba(30,27,75,0.32)'}>slashllm.com</a>
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(30,27,75,0.22)" strokeWidth="2.5" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
-            <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', letterSpacing:'0.1em' }}>about</span>
-          </div>
-
-          {/* Label */}
-          <div style={{ display:'flex', alignItems:'center', gap:14, marginBottom:28 }}>
-            <div style={{ width:32, height:1.5, background:'linear-gradient(90deg,#a855f7,#be38de)', borderRadius:2 }}></div>
-            <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', letterSpacing:'0.16em', textTransform:'uppercase' }}>About us</span>
-          </div>
-
-          {/* Headline */}
-          <h1 style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, letterSpacing:'-0.048em', marginBottom:28 }}>
-            <span style={{ display:'block', fontSize:'clamp(30px,3.4vw,50px)', color:'rgba(30,27,75,0.62)', lineHeight:1.18, fontWeight:700 }}>We're the team companies call</span>
-            <span style={{ display:'block', fontSize:'clamp(30px,3.4vw,50px)', color:'rgba(30,27,75,0.62)', lineHeight:1.18, fontWeight:700 }}>when they need</span>
-            <span className="gradient-text" style={{ display:'block', fontSize:'clamp(34px,3.8vw,56px)', lineHeight:1.1 }}>AI that actually ships.</span>
-          </h1>
-
-          <p style={{ fontSize:17.5, color:'rgba(30,27,75,0.52)', lineHeight:1.78, maxWidth:500, marginBottom:44, textWrap:'pretty' }}>
-            A small, fast, technical team. No talent marketplace. No layers of project managers. Just builders who go from prompt to production.
-          </p>
-
-          {/* Stat strip */}
-          <div className="hero-stats" style={{ display:'flex', gap:36, paddingTop:32, borderTop:'1px solid #DDD8F0' }}>
-            {[
-              { v:'Small', l:'by design' },
-              { v:'4 wks', l:'to production' },
-              { v:'4', l:'industries served' },
-            ].map(({ v, l }) => (
-              <div key={l}>
-                <p style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:22, fontWeight:800, color:'#1E1B4B', letterSpacing:'-0.04em', lineHeight:1 }}>{v}</p>
-                <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:10, color:'rgba(30,27,75,0.4)', letterSpacing:'0.1em', textTransform:'uppercase', marginTop:5 }}>{l}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Right */}
-        <div className="hero-right" style={{ display:'flex', justifyContent:'flex-end', alignItems:'center', paddingBottom:16 }}>
-          <ProjectCard />
-        </div>
-      </div>
-    </section>
-  );
-
-  /* ── Our Story ── */
-  const OurStory = () => (
-    <section style={{ background:'#F3F0FF', padding:'120px 28px 128px', position:'relative', overflow:'hidden' }}>
-      {/* Ghost letter */}
-      <div style={{ position:'absolute', right:'-2%', top:'5%', fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, fontSize:'28vw', color:'transparent', WebkitTextStroke:'1px rgba(168,85,247,0.04)', lineHeight:1, pointerEvents:'none', userSelect:'none', letterSpacing:'-0.06em' }}>S</div>
-      {/* Bloom */}
-      <div style={{ position:'absolute', left:'-5%', bottom:'10%', width:480, height:480, background:'radial-gradient(circle, rgba(168,85,247,0.04) 0%, transparent 65%)', pointerEvents:'none' }}></div>
-
-      <div style={{ maxWidth:1280, margin:'0 auto', position:'relative', zIndex:1 }}>
-
-        {/* Section label */}
-        <div className="reveal" style={{ display:'flex', alignItems:'center', gap:14, marginBottom:72 }}>
-          <div style={{ width:32, height:1.5, background:'linear-gradient(90deg,#a855f7,#be38de)', borderRadius:2 }}></div>
-          <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', letterSpacing:'0.16em', textTransform:'uppercase' }}>Our story</span>
-        </div>
-
-        {/* Pull quote */}
-        <div className="reveal" style={{ marginBottom:80, maxWidth:900 }}>
-          <blockquote style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, letterSpacing:'-0.048em', lineHeight:1.08 }}>
-            <span style={{ display:'block', fontSize:'clamp(32px,4vw,58px)', color:'#1E1B4B' }}>The gap wasn't in ideas —</span>
-            <span className="gradient-text" style={{ display:'block', fontSize:'clamp(34px,4.2vw,62px)' }}>it was in execution.</span>
-          </blockquote>
-        </div>
-
-        {/* Two-column body */}
-        <div className="story-grid reveal" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'0 80px', alignItems:'start' }}>
-
-          {/* Left: origin */}
-          <div>
-            <p style={{ fontSize:16.5, color:'rgba(30,27,75,0.58)', lineHeight:1.86, marginBottom:28, textWrap:'pretty' }}>
-              SlashLLM started with a frustration: too many companies spending months on AI "strategy" with nothing to show for it. Decks. Roadmaps. Proof-of-concepts that never left the sandbox.
-            </p>
-            <p style={{ fontSize:16.5, color:'rgba(30,27,75,0.58)', lineHeight:1.86, textWrap:'pretty' }}>
-              The world had plenty of AI consultants who could tell you what to build. It had very few teams that could build it, deploy it, and make it work at scale.
-            </p>
-          </div>
-
-          {/* Right: what we built + today */}
-          <div>
-            <p style={{ fontSize:16.5, color:'rgba(30,27,75,0.58)', lineHeight:1.86, marginBottom:28, textWrap:'pretty' }}>
-              So we built SlashLLM as the agency we wished existed: a small, fast, technical team that goes from prompt to production. No talent marketplace. No layers of project managers. Just builders who understand both the technology and the business problem — and who ship real systems into real production environments.
-            </p>
-            <p style={{ fontSize:16.5, color:'rgba(30,27,75,0.58)', lineHeight:1.86, marginBottom:36, textWrap:'pretty' }}>
-              Today, we work with growth-stage startups, SMBs, and mid-market enterprises across SaaS, fintech, healthcare, and HR tech — helping them build AI products, deploy intelligent agents, and optimize their AI infrastructure.
-            </p>
-            {/* Industry tags */}
-            <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
-              {['SaaS','Fintech','Healthcare','HR tech'].map(ind => (
-                <span key={ind} style={{ padding:'6px 14px', background:'rgba(168,85,247,0.07)', border:'1px solid rgba(168,85,247,0.18)', borderRadius:100, fontSize:12, color:'#a855f7', fontWeight:500, fontFamily:'"JetBrains Mono",monospace', letterSpacing:'0.04em' }}>{ind}</span>
-              ))}
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-  );
-
-  /* ── What we believe ── */
-  const WhatWeBelieve = () => (
-    <section style={{ background:'#FAFAFA', padding:'120px 28px 128px', position:'relative', overflow:'hidden' }}>
-      {/* Ghost word */}
-      <div style={{ position:'absolute', left:'-1%', bottom:'-4%', fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, fontSize:'17vw', color:'transparent', WebkitTextStroke:'1px rgba(168,85,247,0.03)', lineHeight:1, pointerEvents:'none', userSelect:'none', letterSpacing:'-0.06em' }}>believe</div>
-
-      <div style={{ maxWidth:1280, margin:'0 auto', position:'relative', zIndex:1 }}>
-
-        {/* Section label */}
-        <div className="reveal" style={{ display:'flex', alignItems:'center', gap:14, marginBottom:24 }}>
-          <div style={{ width:32, height:1.5, background:'linear-gradient(90deg,#a855f7,#be38de)', borderRadius:2 }}></div>
-          <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', letterSpacing:'0.16em', textTransform:'uppercase' }}>What we believe</span>
-        </div>
-
-        {/* Heading */}
-        <h2 className="reveal" style={{ fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, fontSize:'clamp(38px,4.2vw,64px)', letterSpacing:'-0.048em', color:'#1E1B4B', lineHeight:1.04, marginBottom:72 }}>
-          Four principles.<br/>
-          <span className="gradient-text">No exceptions.</span>
-        </h2>
-
-        {/* 2×2 grid */}
-        <div className="beliefs-grid" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:24 }}>
-          {BELIEFS.map(({ num, title, body }, i) => (
-            <div key={num} className="belief-card reveal" data-d={String(i+1)}
-              style={{
-                background: i===0||i===3 ? '#F3F0FF' : '#FAFAFA',
-                border:'1px solid #DDD8F0',
-                borderRadius:20, padding:'52px 52px 56px',
-                position:'relative', overflow:'hidden',
-              }}
-              onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-4px)';e.currentTarget.style.boxShadow='0 24px 64px rgba(168,85,247,0.1), 0 0 0 1px rgba(168,85,247,0.18)';}}
-              onMouseLeave={e=>{e.currentTarget.style.transform='';e.currentTarget.style.boxShadow='';}}
-            >
-              {/* Ghost number */}
-              <div style={{ position:'absolute', right:-10, bottom:-20, fontFamily:'"Space Grotesk",sans-serif', fontWeight:800, fontSize:160, color:'transparent', WebkitTextStroke:'1px rgba(168,85,247,0.07)', lineHeight:1, pointerEvents:'none', userSelect:'none', letterSpacing:'-0.06em' }}>{num}</div>
-              {/* Content */}
-              <span style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'#a855f7', opacity:0.65, letterSpacing:'0.14em', display:'block', marginBottom:20 }}>{num}</span>
-              <h3 style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:'clamp(22px,1.8vw,28px)', fontWeight:700, letterSpacing:'-0.04em', color:'#1E1B4B', lineHeight:1.18, marginBottom:18 }}>{title}</h3>
-              <p style={{ fontSize:15.5, color:'rgba(30,27,75,0.56)', lineHeight:1.84, textWrap:'pretty', position:'relative' }}>{body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-
-  /* ── CTA ── */
-  const AboutCTA = () => (
-    <section style={{ padding:'0 28px 100px', background:'#FAFAFA' }}>
-      <div style={{ maxWidth:1280, margin:'0 auto' }}>
-        <div style={{ background:'linear-gradient(135deg, #14112E 0%, #1E1B4B 45%, #16133A 100%)', border:'1px solid rgba(255,255,255,0.06)', borderRadius:24, padding:'90px 80px', textAlign:'center', position:'relative', overflow:'hidden' }}>
-          {/* Blooms */}
-          <div style={{ position:'absolute', top:-120, left:'50%', transform:'translateX(-50%)', width:800, height:360, borderRadius:'50%', background:'radial-gradient(circle, rgba(168,85,247,0.18) 0%, transparent 68%)', pointerEvents:'none' }}></div>
-          <div style={{ position:'absolute', bottom:-80, right:'10%', width:400, height:220, borderRadius:'50%', background:'radial-gradient(circle, rgba(190,56,222,0.12) 0%, transparent 68%)', pointerEvents:'none' }}></div>
-          {/* Grid */}
-          <div style={{ position:'absolute', inset:0, backgroundImage:'linear-gradient(rgba(168,85,247,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,0.05) 1px,transparent 1px)', backgroundSize:'48px 48px', pointerEvents:'none', borderRadius:24 }}></div>
-
-          <p style={{ fontFamily:'"JetBrains Mono",monospace', fontSize:11, color:'rgba(168,85,247,0.6)', letterSpacing:'0.18em', textTransform:'uppercase', marginBottom:22, position:'relative' }}>Want to work with us?</p>
-          <h2 style={{ fontFamily:'"Space Grotesk",sans-serif', fontSize:'clamp(28px,3.2vw,50px)', fontWeight:800, letterSpacing:'-0.048em', color:'#FAFAFA', marginBottom:20, position:'relative', lineHeight:1.1 }}>
-            Whether you've got a project in mind<br/>or just want to explore what's possible.
-          </h2>
-          <p style={{ fontSize:17, color:'rgba(255,255,255,0.44)', maxWidth:400, margin:'0 auto 52px', lineHeight:1.8, position:'relative', textWrap:'pretty' }}>
-            We'd love to hear from you.
-          </p>
-          <a href="https://cal.com/mridhul-pax-jjhwct/30min" target="_blank" rel="noopener noreferrer" style={{ display:'inline-flex', alignItems:'center', gap:9, background:'#FAFAFA', color:'#1E1B4B', padding:'14px 28px', borderRadius:9, fontSize:15, fontWeight:700, letterSpacing:'-0.01em', position:'relative', transition:'all 0.2s' }}
-             onMouseEnter={e=>{e.currentTarget.style.boxShadow='0 0 0 3px rgba(168,85,247,0.35)';e.currentTarget.style.opacity='0.92';}}
-             onMouseLeave={e=>{e.currentTarget.style.boxShadow='none';e.currentTarget.style.opacity='1';}}>
-            Let's talk
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-
-  Object.assign(window, { BELIEFS, ProjectCard, AboutHero, OurStory, WhatWeBelieve, AboutCTA });
-</script>
-
-<!-- ═══ SCRIPT 3 · App Mount ═══ -->
-<script type="text/babel">
-  function App() {
-    React.useEffect(() => {
-      const els = document.querySelectorAll('.reveal');
-      const obs = new IntersectionObserver(
-        entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }),
-        { threshold: 0.04 }
+            </section>
+          </main>
+          <GlobalFooter />
+        </React.Fragment>
       );
-      els.forEach(el => obs.observe(el));
-      return () => obs.disconnect();
-    }, []);
+    }
 
-    return (
-      <React.Fragment>
-        <Nav />
-        <main>
-          <AboutHero />
-          <OurStory />
-          <WhatWeBelieve />
-          <AboutCTA />
-        </main>
-        <Footer />
-      </React.Fragment>
-    );
-  }
-  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-</script>
+    ReactDOM.createRoot(document.getElementById('root')).render(<AboutPage />);
+  </script>
 </body>
 </html>

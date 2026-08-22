@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="none">
+  <!-- Slashboard Telemetry / AI Icon -->
+  <rect x="2" y="4" width="32" height="32" rx="8" fill="url(#sb-grad)"/>
+  <path d="M12 25L16 15L20 22L24 13" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="24" cy="13" r="2" fill="#38BDF8"/>
+  <!-- Typography -->
+  <text x="44" y="26" font-family="Plus Jakarta Sans, Inter, system-ui, sans-serif" font-weight="800" font-size="20" fill="#0F172A" letter-spacing="-0.03em">Slashboard</text>
+  <defs>
+    <linearGradient id="sb-grad" x1="2" y1="4" x2="34" y2="36" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4F46E5"/>
+      <stop offset="1" stop-color="#0284C7"/>
+    </linearGradient>
+  </defs>
+</svg>
